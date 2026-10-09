@@ -26,6 +26,7 @@ Read these before you start. If they disagree, follow them in this order:
 - Use jj for all history operations. Do not use `git commit`, `git rebase`, or similar commands.
 - One task is one jj change. Stack several changes if needed.
 - Describe changes in Conventional Commits form, for example `feat(lang): add for blocks`.
+- Name the branch (jj bookmark) of each PR as in `docs/development.md` 6.1, for example `feat/lang-for-blocks`. Do not use `jj git push -c`.
 - If you change behavior, update the documents and the tests in the same change.
 
 ## Dependencies and licenses

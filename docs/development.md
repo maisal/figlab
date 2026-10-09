@@ -103,7 +103,7 @@ Run with `mise run <task>`. A task always uses the tool versions pinned in 3.1. 
 | `mise run dev` | Starts the web app locally |
 | `mise run e2e` | End-to-end tests in browsers (Playwright) |
 | `mise run figures` | Exports the acceptance figures and compares them with the expected ones |
-| `mise run push [REV]` | Passes `check`, then pushes with `jj git push -c REV` (REV defaults to `@-`). Replaces a pre-push hook |
+| `mise run push <BOOKMARK>` | Passes `check`, then pushes the bookmark with `jj git push -b BOOKMARK`. Replaces a pre-push hook. Name bookmarks as in 6.1 |
 
 Example definitions:
 
@@ -138,11 +138,11 @@ outputs = ["web/src/wasm/**"]
 
 ```sh
 #!/usr/bin/env bash
-#MISE description="Run checks, then push a change with jj"
+#MISE description="Run checks, then push a bookmark with jj"
 #MISE depends=["check"]
 set -euo pipefail
-rev="${1:-@-}"
-jj git push -c "$rev"
+bookmark="${1:?usage: mise run push <bookmark>}"
+jj git push -b "$bookmark"
 ```
 
 ## 4. Using jj
@@ -215,8 +215,9 @@ jj new -m "test(lang): tests for for blocks"       # stack the next change on to
 jj split                          # split a change that mixes several things
 jj absorb                         # move fixups into the changes they belong to
 jj fix -s 'roots(stack())'        # format the whole stack
-mise run push @-                  # check, then push (creates a push-xxxx bookmark for the PR)
-gh pr create --head push-xxxx --fill
+jj bookmark create feat/lang-parse-for-blocks -r @-   # name the branch for the PR (6.1)
+mise run push feat/lang-parse-for-blocks              # check, then push
+gh pr create --head feat/lang-parse-for-blocks --fill
 ```
 
 - To undo a mistake, use `jj undo`. To go back further, inspect the operation log with `jj op log` and use `jj op restore`.
@@ -339,7 +340,7 @@ CI jobs (`ci.yml`):
 
 ## 6. Conventions
 
-### 6.1 Commit messages and PR titles
+### 6.1 Commit messages, PR titles, and branch names
 
 Use Conventional Commits. PRs are squash-merged, so the PR title becomes the subject line of the commit on main (5.1).
 
@@ -356,6 +357,24 @@ docs(spec): describe category axes
 - Written in English (6.4)
 - Changes made with AI help end with an `Assisted-by:` line that names the tool (for example `Assisted-by: Claude Code`). PR descriptions end with the same line, so it stays on main after a squash merge. The rule is in AGENTS.md.
 - Claude Code's own attribution and built-in git instructions are turned off in `.claude/settings.json` (`attribution.commit` and `attribution.pr` are empty, `includeGitInstructions` is `false`). This avoids two different attribution rules, and avoids git-based commit steps that conflict with jj. The file is committed, so it also applies to Claude Code sessions in the cloud.
+
+Branch names:
+
+One PR is one jj change (4.3). So each PR has its own branch, named after that change. In jj, the branch is a bookmark.
+
+```
+<type>/<area>-<summary>
+
+feat/lang-for-blocks
+fix/io-shift-jis-without-bom
+docs/spec-category-axes
+```
+
+- `<type>` and `<area>` are the same as in the PR title. If the title has no area, the name is `<type>/<summary>`.
+- `<summary>` is 2–5 words from the summary in the PR title. Leave out words that add nothing, such as "add", and words that repeat the area.
+- Use only lowercase ASCII letters, digits, and `-` after the `/`. Keep the whole name under 50 characters.
+- Create the bookmark yourself with `jj bookmark create <name> -r <change>`. Do not use `jj git push -c`. It makes names like `push-xxxx` that say nothing about the change.
+- Keep the name while the PR is open. GitHub cannot change the branch of an open PR. Do not reuse a name after its PR is merged or closed.
 
 ### 6.2 Updating documents and tests
 
