@@ -1,0 +1,14 @@
+# Pinned versions of development tools (see docs/development.md 3.1).
+# Upgrade all tools together and make sure CI passes.
+[tools]
+jj = "0.46.0"
+jjui = "0.10.11"
+rust = { version = "1.99.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
+node = "24.14.1"
+pnpm = "10.25.0"
+ripgrep = "15.1.0"
+# Add wasm-bindgen-cli with the same version as wasm-bindgen when it is added to Cargo.toml.
+
+[tasks."check:english"]
+description = "Fail if CJK text appears outside test fixtures"
+run = "rg -n '[\\p{Han}\\p{Hiragana}\\p{Katakana}\\p{Hangul}]' --glob '!tests/import/**' --glob '!tests/**/fixtures/**' . ; test $? -eq 1"   # rg exits 1 only when nothing matches

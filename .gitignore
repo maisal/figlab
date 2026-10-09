@@ -1,0 +1,8 @@
+# Local, untracked files (e.g. personal notes and Japanese reference copies of the docs)
+/local/
+
+# Personal mise settings
+/mise.local.toml
+
+# OS files
+.DS_Store
