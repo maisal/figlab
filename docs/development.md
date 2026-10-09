@@ -121,7 +121,7 @@ run = [
 
 [tasks."check:english"]
 description = "Fail if CJK text appears outside test fixtures"
-run = "rg -n '[\\p{Han}\\p{Hiragana}\\p{Katakana}\\p{Hangul}]' --glob '!tests/import/**' --glob '!tests/**/fixtures/**' . ; test $? -eq 1"   # rg exits 1 only when nothing matches
+run = "rg -n '[\\p{Han}\\p{Hiragana}\\p{Katakana}\\p{Hangul}]' --glob '!tests/import/**' --glob '!tests/**/fixtures/**' . && exit 1 || test $? -eq 1"   # rg exits 0 on a match, 1 on no match, 2 on an error. Tasks run with errexit, so use && and ||
 
 [tasks."check:deps"]
 description = "Check the licenses and sources of dependencies (6.6)"
