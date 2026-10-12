@@ -228,6 +228,8 @@ gh pr create --head feat/lang-parse-for-blocks --fill
 - **One PR is one logical change.** Large work is split into small stacked changes with jj, and each becomes a PR.
 - A stacked PR uses the bookmark of the change below it as its base. When the PR below is merged and its branch is deleted, GitHub retargets the PR above to main automatically.
 - After the PR below is merged, rebase the rest with `jj git fetch && jj sync` and push them all again with `jj git push --tracked`. This is safe. jj only overwrites the remote if it is still in the state last fetched (like `--force-with-lease`).
+- **Always do this before you merge the PR above.** A squash merge puts a new commit on main. The branch of the PR above still holds the original commits of the PR below. Until it is rebased and pushed, the PR shows those changes again or has conflicts.
+- GitHub retargets the PR above only when the branch below is deleted. So keep "Automatically delete head branches" turned on (5.1).
 
 ### 4.4 Merging
 
@@ -383,7 +385,7 @@ docs/spec-category-axes
 
 ### 6.3 Architecture decision records (ADR)
 
-Significant decisions are recorded one per file in `docs/adr/` (context, options, decision, rationale). Since the repository is public, anyone can later see why things are the way they are. The first records, from the decisions made so far:
+Significant decisions are recorded one per file in `docs/adr/` (context, options, decision, rationale). Since the repository is public, anyone can later see why things are the way they are. The rules and a template are in `docs/adr/README.md`. The first records, from the decisions made so far:
 
 | Number | Decision |
 |---|---|
