@@ -31,6 +31,7 @@ figlab/
 │   ├── spec.md            specification
 │   ├── language.md        command language definition
 │   ├── development.md     this document
+│   ├── roadmap.md         order of work up to the MVP
 │   └── adr/               architecture decision records (ADR, 6.3)
 ├── spec/                  machine-readable definitions (part of the formal language definition)
 │   ├── commands.json      definitions of commands, functions, and fit models
@@ -51,7 +52,7 @@ figlab/
 │   ├── lang/              language conformance tests (.figc and expected results)
 │   ├── numeric/           numerical verification (NIST StRD, etc.)
 │   ├── import/            test files for import detection (sources and licenses listed in README)
-│   └── figures/           acceptance figures (scripts and expected SVG/PNG)
+│   └── figures/           acceptance figures (data, specs, reference PDFs, scripts, expected SVG/PNG)
 ├── fuzz/                  fuzzing of the parser and CSV detection
 ├── .github/               workflows, Issue and PR templates, etc. (Section 5)
 ├── Cargo.toml             Rust workspace
@@ -312,7 +313,7 @@ CI jobs (`ci.yml`):
 
 ### 5.5 Issues, Projects, milestones, labels
 
-- **Milestones**: match the phases in spec.md Section 14 (MVP, v1).
+- **Milestones**: match the releases in roadmap.md (v0.1, v0.2, and v0.3, which completes the MVP), then v1.
 - **Projects**: a single board tracks Issues and PRs as "To do / In progress / In review / Done".
 - **Labels**:
   - Area: `area:lang`, `area:core`, `area:io`, `area:render`, `area:web`, `area:fit`, `area:docs`, `area:ci`
@@ -503,6 +504,8 @@ While designing this process, some places were found where spec.md did not fit. 
 5. Write `spec/commands.json`, its schema, and the first conformance tests in `tests/lang`. Then start implementing `figlab-lang`.
 6. Build a minimal `figlab-render` (xy lines and markers, axes, SVG) and add the first figure comparison test in `tests/figures`.
 7. Publish the web app with `pages.yml`.
+
+The work after these steps is planned in roadmap.md.
 
 ## 11. Open questions
 

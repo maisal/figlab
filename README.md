@@ -19,6 +19,7 @@ The documents below describe what will be built.
 - [Specification](docs/spec.md)
 - [Command language](docs/language.md)
 - [Development process](docs/development.md)
+- [Roadmap to the MVP](docs/roadmap.md)
 
 ## Contributing
 
