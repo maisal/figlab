@@ -851,7 +851,7 @@ The draft's requirements have no priorities yet, so this document proposes them.
 | 1 | Storage format: is this reading right? "Work in a folder. To make one file, export a zip." | As in 11.2 |
 | 2 | Does "10 GB per project" mean the total on disk? What is the upper limit on data drawn at once in one graph? | Total on disk. Up to 2 GB in memory at once |
 | 3 | Was "3D surface plots" removed from the non-goals because they are planned? | Not included in the phases either |
-| 4 | Open questions about the command language (language.md Section 11) | As in language.md |
+| 4 | Open questions about the command language | Decided. See language.md Section 11 |
 | 5 | Should source files be copied into the project (Section 10)? | No |
 | 6 | Which fonts can be used (9.2)? | Bundled fonts + fonts loaded by the user |
 | 7 | Acceptance figures and priorities of each requirement (draft) | The proposal in Section 14 |
