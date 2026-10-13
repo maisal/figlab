@@ -25,15 +25,17 @@ By specializing in plotting, the tool aims to be easier to use for plotting than
 - Cover the graphs needed for publication figures
     - The acceptance figures below make this concrete
 
-### Acceptance figures (v1 is complete when these can be reproduced)
+### Acceptance figures (the MVP is complete when these can be reproduced)
 
-Choose 3–5 figures made for past publications.
+Five figures with synthetic data are defined in `tests/figures/`. Each one tests a different set of features. The data, the exact specs, and the reference PDFs are in the figure folders.
 
-| # | Figure (source / file) | Main features (plot types, axes, annotations, etc.) |
+| # | Figure | Main features |
 |---|---|---|
-| 1 | TBD | TBD |
-| 2 | TBD | TBD |
-| 3 | TBD | TBD |
+| 1 | `fig01-peak-fit` | Markers with y error bars, fit curves, a per-point style override, legend |
+| 2 | `fig02-power-law` | Log–log axes, lines with markers, a NaN gap, a dashed guide line |
+| 3 | `fig03-dispersion-map` | Heatmap with coordinates, NaN pixels, color bar |
+| 4 | `fig04-twin-axes` | Left and right y axes, two data sets with different x |
+| 5 | `fig05-grouped-bars` | Category axis, grouped bars |
 
 ### Non-goals
 
