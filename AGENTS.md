@@ -31,6 +31,43 @@ Read these before you start. If they disagree, follow them in this order:
 - Name the branch (jj bookmark) of each PR as in `docs/development.md` 6.1, for example `feat/lang-for-blocks`. Do not use `jj git push -c`.
 - If you change behavior, update the documents and the tests in the same change.
 
+## Subagents
+
+Claude Code subagents are defined in `.claude/agents/`. Pick one by the kind of task. Each file sets its own model and effort.
+
+| Kind of task | Agent |
+|---|---|
+| Typos, links, and wording that keep the meaning | `doc-proofreader` |
+| Document updates checked against the code and the contracts | `doc-sync` |
+| Local implementation or tests, with fixed conditions and scope | `implementer-local` |
+| Normal implementation that follows the adopted contracts | `implementer` |
+| Hard implementation across workers, state transitions, stopping and restarting, or ownership of data | `implementer-hard` |
+| Review | `reviewer` and `critic` (see "Review") |
+
+- The contracts are the documents listed in "Documents" and the accepted ADRs in `docs/adr/`.
+- Give each subagent its goal, the files it owns, the scope it may change, and its done condition.
+- Subagents do not push and do not open PRs. The agent that started them does.
+- Subagents that write files at the same time each get their own jj workspace (`docs/development.md` 4.5).
+
+## Review
+
+Review changes to code, tests, `spec/`, or `docs/language.md` before you open the PR. Small document fixes do not need it.
+
+1. Fix the target. Pick the jj revisions to review and note their commit IDs. Do not change them during the review.
+2. The Reviewer (`reviewer`) reads the diff and writes provisional findings with evidence.
+3. The Critic (`critic`) checks each finding on its own. It also looks for problems the Reviewer missed.
+4. The Reviewer reads the Critic's results. It keeps, revises, or withdraws each finding.
+5. Fix the findings that are kept. If you do not fix one, say why in the PR description.
+
+The Reviewer and the Critic do not change files. Look at these points:
+
+- The change follows the documents in "Documents". The language matches `spec/*.json` and `docs/language.md`.
+- Boundary values, malformed input, and error codes.
+- Results are the same on native and wasm builds. Computing crates do not use the standard float functions (`docs/roadmap.md` M0).
+- Tests and documents change in the same change as the behavior.
+- New dependencies have allowed licenses.
+- Text follows "Language" and "Writing style".
+
 ## Dependencies and licenses
 
 - figlab is licensed under MIT OR Apache-2.0. Do not edit the license files.

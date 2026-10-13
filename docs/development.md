@@ -26,6 +26,7 @@ figlab/
 ├── AGENTS.md              working rules for AI agents (Section 8)
 ├── CLAUDE.md              a single line that imports AGENTS.md
 ├── .claude/settings.json  Claude Code project settings (6.1)
+├── .claude/agents/        Claude Code subagents (Section 8)
 ├── docs/
 │   ├── draft.md           requirements
 │   ├── spec.md            specification
@@ -476,6 +477,8 @@ Third-party notices:
   - Changes and PR descriptions made with AI help end with an `Assisted-by:` line that names the tool
   - When behavior changes, the documents and tests are updated in the same change
   - Everything written to the repository is in plain English (6.4, 6.5), even when instructions are given in another language. It also lists the writing style rules
+  - Which subagent to use for each kind of task, and how changes are reviewed (a Reviewer and a Critic)
+- **Subagents**: the Claude Code subagents are defined in `.claude/agents/`. Each file sets its model and effort. The files are committed, so every session uses the same agents.
 - **Workspaces**: each agent gets its own working copy with `jj workspace add` (4.5).
 - **Agents on GitHub**: the Claude Code GitHub Action can start work from Issues or PRs. If it is used, only repository maintainers can start it, because anyone can comment on a public repository. The API key is kept in Actions secrets [To confirm].
 - **Language verification**: commands and examples written by AI are checked with `figlab check` and the conformance tests. This is where the strict definition of the language pays off.
