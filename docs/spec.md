@@ -435,9 +435,9 @@ export fig1 "fig1.pdf"                         // the format is determined by th
 | xy | `plot` | Lines, markers, lines + markers, sticks, steps, bars | MVP |
 | Bars per category | `plot … style=bars` | Bar chart where x is a string column or an array with dimension labels (8.3.1) | MVP |
 | Histogram | `plot` | Draws an array made with `array h = histogram(w, bins=50)` as bars or steps | MVP |
-| image | `image` | Heatmap of a 2D array. Color map and color range (linear / log) can be set | MVP |
+| image | `image` | Heatmap of a 2D array. Color map and color range (linear / log) can be set. The default color map is viridis (CC0). Others, such as turbo (Apache-2.0, listed in the third-party notices) and gray, can be chosen | MVP |
 | Color bar | `colorbar` | Shows the color mapping of an image or of value-dependent colors | MVP |
-| Error bars | option of `plot` | ± given as separate arrays, a constant, or a percentage | v1 |
+| Error bars | option of `plot` | ± given as separate arrays, a constant, or a percentage | MVP (needed by the acceptance figures) |
 | Fill | option of `plot` | To zero, or to another trace | v1 |
 | Contours | | Contours of a 2D array | Future |
 | Waterfall | | Draws each row of a 2D array with an offset | Future |
@@ -459,7 +459,8 @@ Per-trace settings:
 - Scale: linear, log, category (MVP; category in 8.3.1), time (v1)
 - Range: automatic, manual, reversed
 - Ticks: automatic major and minor ticks, manual ticks (values and labels given as arrays), direction (in, out, both), length, width, mirroring on the opposite side
-- Tick labels: number of digits, exponent notation (`10^3` / `1e3` / a common `×10^3` moved into the axis label)
+- Tick labels: number of digits, exponent notation (`10^3` / `1e3` / a common `×10^3` moved into the axis label). Negative numbers use the minus sign "−" (U+2212)
+- Colors of the axis line, ticks, tick labels, and axis label (e.g. a right axis in the color of its trace)
 - Grid lines, zero line
 
 #### 8.3.1 Category axes
@@ -542,7 +543,8 @@ The screen has three layers:
 ### 9.2 Fonts
 
 - Measuring text exactly and embedding fonts in PDF requires the font files themselves. Browsers normally cannot read the files of fonts installed in the OS, so fonts are handled in two ways:
-  - [Proposal] Bundle freely redistributable fonts with the app, such as Arimo (metric-compatible with Arial/Helvetica, from the Liberation Sans family) and Tinos (metric-compatible with Times). Both use the Apache License 2.0, and their license files are shipped with them
+  - [Proposal] Bundle freely redistributable fonts with the app, such as Arimo (metric-compatible with Arial/Helvetica, from the Liberation Sans family) and Tinos (metric-compatible with Times). Both use the SIL Open Font License 1.1, and their license files are shipped with them
+  - [Proposal] Bundle a fallback font for symbols that the main font does not have (for example, Arimo has no "∝"). A candidate is Noto Sans Math (SIL Open Font License 1.1). A glyph missing from the chosen font is taken from the fallback font
   - The user loads font files they have. [To confirm] Also consider using installed fonts through Chrome's Local Font Access API
 - Only the glyphs used are embedded in PDF (subsetting).
 - The same font files are used for the screen, SVG, PDF, and PNG. Text on screen is also drawn from the glyphs produced by the render module, not by loading the font into the browser (9.1).
@@ -817,7 +819,7 @@ The draft's requirements have no priorities yet, so this document proposes them.
 - **Quick Plot**: plot on drop with automatic detection; the Quick Plot panel; zoom, pan, and log toggle; tooltips; showing and hiding series from the legend; Quick Fit (built-in models, automatic initial values, range selection, parameter display and copy); Quick Plot in Safari and Firefox
 - **Publication figures**: publication-ready default style; style templates; physical sizes; text formatting; legends; SVG/PDF/PNG export
 - **Data**: folders and arrays (1D/2D, coordinates); CSV/TSV/text/.npy import; tables (viewing, light edits, paste); saving and resuming in folder format
-- **Plots**: xy traces (lines, markers, per-point overrides); histograms; bar charts on category axes and `count`; heatmaps and color bars; left, right, bottom, and top axes (linear, log, category)
+- **Plots**: xy traces (lines, markers, per-point overrides, error bars); histograms; bar charts on category axes and `count`; heatmaps and color bars; left, right, bottom, and top axes (linear, log, category)
 - **Command language**: definitions, assignments, commands, built-in functions, user functions; the command line and history; the editor and language service (highlighting, completion, hover help, diagnostics); `figlab check`, `figlab fmt`, `figlab run`
 
 ### v1
@@ -825,7 +827,7 @@ The draft's requirements have no priorities yet, so this document proposes them.
 - `for` (its grammar is fixed in the MVP)
 - More language service features (signature help, formatting, go to definition, rename) and `figlab lsp`
 - All features of the `fit` command (user-function models, fixed parameters, bounds, weights, the fit dialog; 6.5)
-- Error bars, fills, value-dependent color and size, offsets and scale factors
+- Fills, value-dependent color and size, offsets and scale factors
 - Extra axes, time axes
 - Annotations (including turning pinned tooltips into annotations), pages (multi-panel figures), insets
 - Per-category aggregation (`groupmean`, etc.)
@@ -838,7 +840,7 @@ The draft's requirements have no priorities yet, so this document proposes them.
 - HDF5/NeXus import, display of 3D and higher arrays
 - Global fits, confidence bands, Quick Fit with several peaks and linear backgrounds
 
-- MVP completion is judged against the draft's acceptance figures (not yet chosen) and the Quick Plot speed targets (Section 13).
+- MVP completion is judged against the acceptance figures (`tests/figures/`) and the Quick Plot speed targets (Section 13).
 - In the MVP, everything from Quick Plot to export can be done in the GUI alone, without writing commands (1.2).
 - For the command language, language.md, `commands.json`, and the conformance tests are fixed at the very start of the MVP, before implementation.
 
