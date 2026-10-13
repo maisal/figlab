@@ -16,6 +16,8 @@ Read these before you start. If they disagree, follow them in this order:
 3. `docs/draft.md`: the requirements
 4. `docs/development.md`: how we work (layout, tools, jj, GitHub, tests)
 
+`docs/roadmap.md` says in which order the work is done. It does not change what to build.
+
 ## Commands
 
 - `mise run check`: run all checks. It must pass before you push.
