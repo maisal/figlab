@@ -1,8 +1,8 @@
-# figlab Command Language Definition (draft)
+# figlab Command Language Definition
 
 - Role: the formal definition behind spec.md Section 6. The language is defined by exactly two sources: this document and the command and function table (`spec/commands.json`, 10.1). The parser, completion, help, and checking tools are all generated from these two.
 - Principles: a custom syntax that is easy to write and read. Each statement can be read in only one way, so machines (including AI) can verify it. The main concepts are arrays, folders, and coordinates.
-- Status: Draft. Points that need the owner's confirmation are marked **[To confirm]** and collected in Section 11.
+- Status: Fixed for the MVP. The questions that were open are decided in Section 11. Change this document only together with `spec/*.json` and the conformance tests (10.4).
 
 ## 1. Design principles
 
@@ -27,7 +27,9 @@
 
 ### 2.1 Lines, indentation, and blocks
 
-- Source files are UTF-8. Line endings are LF or CRLF. Indentation uses spaces only; a tab at the start of a line is an error (E1002).
+- Source files are UTF-8. A byte order mark at the start of a file is ignored. Invalid UTF-8 is an error.
+- Line endings are LF or CRLF. A CR that is not followed by LF is an invalid character.
+- Indentation and the space between tokens use spaces only. A tab outside strings and comments is an error (E1002).
 - A statement consists of its first line and any continuation lines indented deeper than that first line.
 - The lines from `for … do` to `end` form a block. Statements in the body are indented exactly 4 spaces deeper than the `for` line.
 
@@ -60,7 +62,7 @@ From `//` to the end of the line (except inside strings). Lines starting with `/
 
 ### 2.3 Names
 
-- Form: a letter followed by letters, digits, and `_`. At most 255 characters.
+- Form: a letter followed by letters, digits, and `_`. At most 255 characters. Letters and digits are ASCII only (`A`–`Z`, `a`–`z`, `0`–`9`). Labels, strings, and comments may use any language.
 - **Names are case-sensitive.** But two names in the same folder cannot differ only in case. macOS file systems are case-insensitive, and this rule prevents clashes when saving.
 - Reserved words (2.4) and command names (those listed in `commands.json`) cannot be used as names of arrays, variables, folders, or functions.
 - An array may have the same name as a built-in function (e.g. `area`). Functions are always called as `name(`, so the two can be told apart.
@@ -81,6 +83,9 @@ string_lit  = '"' { character | '""' } '"' ;
 ```
 
 - Numbers: `.5` and `1.` cannot be written (write `0.5`, `1.0`). Signs are unary operators. `1..9` is three tokens: `1`, `..`, `9`.
+  - A single `.` directly followed by a digit is an invalid number (`.5`, `x = 1...5`).
+  - A number directly followed by a letter is an invalid number, unless the letters are an exponent or a length unit (`5px`, `2e`).
+  - A number that is too large for binary64 is an invalid number (write `inf`).
 - Lengths: written as `60mm` or `3pt`. Usable only as option values. Converted to pt internally.
 - Colors: written as `#d62728`. Named colors (`black`, `red`, etc.) are written as words in option values.
 - Strings:
@@ -135,7 +140,7 @@ mul_expr        = neg_expr { ( "*" | "/" ) neg_expr } ;
 neg_expr        = "-" neg_expr | pow_expr ;
 pow_expr        = postfix [ "^" neg_expr ] ;               (* right-associative; -2^2 is -(2^2) *)
 postfix         = primary [ index ] ;
-primary         = number_lit | string_lit | "true" | "false" | "nan" | "inf"
+primary         = number_lit | string_lit | "true" | "false" | "nan" | "inf" | "pi"
                 | call | ref | array_lit | "(" expr ")" ;
 call            = name "(" [ call_arg { "," call_arg } ] ")" ;
 call_arg        = expr | name "=" expr ;                   (* named arguments come after positional ones *)
@@ -155,12 +160,16 @@ ref             = "root" { "." name } | name { "." name } ;
 ### 3.1 Notes
 
 - **Kind of statement**: the first token decides it. `let`, `array`, and `for` start those statements. A command name starts a command. Anything else starts an assignment or an expression. Command names are reserved (2.3).
+- **Command names after the first token**: a command name is special only as the first token of a statement. Elsewhere it is an ordinary name token, so `help fit` is a command with one positional argument.
 - **Assignments and expressions**: an `assign_or_expr` with an `assign_op` is an assignment. Its left side must have the form `ref [ index ]` (otherwise E2xxx). Without an `assign_op`, it is an expression statement. It shows its value and does not change data (useful for checking values on the command line).
 - **Command arguments and options**: a `name` directly followed by `=` is an option; otherwise it is a positional argument. Positional arguments cannot follow options.
 - **Option values**: a word such as `markers`, `log`, or `true` can be an enum value, an array name, or a parameter name. The type of the option in `commands.json` decides which.
 - **`range` vs `expr`**: if `..` appears, it is a range; otherwise an expression.
 - **`record` vs parenthesized expression**: if `(` is directly followed by `name =`, it is a record.
 - **`array_lit` vs index**: a `[` after a value is an index; a `[` where a value is expected is an array literal. Expressions cannot place values side by side (an operator is required), so this is unambiguous.
+- **`list` vs `array_lit`**: when an option value starts with `[`, it is always a `list`. The type of the option in `commands.json` decides how the elements are read (names, strings, numbers, or an array).
+- **Coordinate index vs expression**: inside an index, `x`, `y`, `z`, or `t` directly followed by `=` selects by coordinate. Otherwise these are ordinary names.
+- **Ranges in `for`**: the range of a `for` must have both ends (`0..4`, not `0..`).
 - **`..` as a positional argument**: exists only for `cd ..` (move to the parent folder).
 - **`if`**: cannot be an operand of a binary operator without parentheses (`1 + (if a then b else c)`).
 - **`fn`**: can be written only in `.figf` files, not on the command line or in `.figc` files.
@@ -359,6 +368,7 @@ fn gauss_linbg(x | a, c, w, b0, b1) = a*exp(-((x - c)/w)^2) + b0 + b1*x
 ## 8. Errors
 
 - Format: `<file>:<line>:<column>: <code>: <message>` (`<file>` is left out on the command line). Lines and columns refer to physical lines, before joining.
+- Lines and columns start at 1. A column counts Unicode characters (code points), not bytes. A tab counts as one character.
 - Code classes:
 
 | Range | Kind |
@@ -481,11 +491,13 @@ The history is always saved in the canonical format. Formatting is idempotent (`
 - Semantics: definitions and assignments, shape and coordinate rules, indexing, name resolution
 - Numerics: values of built-in functions. Fits are compared with the certified values of the NIST Statistical Reference Datasets (StRD) for nonlinear regression
 
-## 11. Open questions
+## 11. Decisions
 
-| # | Question | Current answer |
-|---|---|---|
-| 1 | Handling of complex numbers (literals, arithmetic) | Not in the MVP (complex arrays can only be read, written, and displayed) |
-| 2 | File extensions | `.figc` for commands, `.figf` for functions |
-| 3 | Is it acceptable that commands that create names require `replace=true` to overwrite, while `array` / `let` replace? | Yes (`array` / `let` are statements for redefining) |
-| 4 | Should there be an `if … then … end` statement for executing statements conditionally inside a `for` body? | No (expression `if` can select values) |
+These questions were open in the draft. They were decided before implementation (roadmap.md D5).
+
+| # | Question | Decision | Reason |
+|---|---|---|---|
+| 1 | Handling of complex numbers (literals, arithmetic) | Not in the MVP. Complex arrays can only be read, written, and displayed | No acceptance figure needs complex arithmetic. Adding it later does not change existing syntax |
+| 2 | File extensions | `.figc` for commands, `.figf` for functions | Short, and they do not clash with common extensions |
+| 3 | Commands that create names need `replace=true` to overwrite, while `array` and `let` replace. Is this acceptable? | Yes | `array` and `let` are statements for (re)defining. A command such as `load` or `fit` can create many names at once, so overwriting them by accident costs more |
+| 4 | Should there be an `if … then … end` statement for running statements conditionally inside a `for` body? | No | The expression `if` can select values. A statement `if` would add a second kind of block |
