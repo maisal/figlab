@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:," />
+    <title>S2: decimate and draw 10 million points</title>
+    <style>
+      body { font: 13px/1.4 system-ui, sans-serif; margin: 12px; }
+      #plot { position: relative; width: 1600px; height: 600px; border: 1px solid #888; }
+      #plot canvas { position: absolute; left: 0; top: 0; width: 1600px; height: 600px; }
+      #gl { display: none; }
+      #controls button { margin-right: 6px; }
+      #status { white-space: pre-wrap; font-family: ui-monospace, monospace; }
+    </style>
+  </head>
+  <body>
+    <h1>S2: decimate and draw 10 million points</h1>
+    <p>
+      Data: 10,000,000 points in a worker (Rust/wasm). The main thread draws the
+      decimated line on Canvas 2D, or all points as WebGL markers. The buttons run
+      the same scripted zoom and pan as <code>pnpm run measure</code> and print the
+      numbers below.
+    </p>
+    <div id="controls">
+      <button data-run="load">Load data</button>
+      <button data-run="decimate">Decimation bench</button>
+      <button data-run="every-frame">Lines: every frame</button>
+      <button data-run="transform">Lines: transform, exact on pause</button>
+      <button data-run="hybrid">Lines: hybrid</button>
+      <button data-run="gl">Markers: WebGL</button>
+      <button data-run="precision">Markers: x precision against f64</button>
+      <button data-run="all">Run everything</button>
+    </div>
+    <div id="plot">
+      <canvas id="c2d" width="3200" height="1200"></canvas>
+      <canvas id="gl" width="3200" height="1200"></canvas>
+    </div>
+    <pre id="status">Press "Load data" first (about 1 second).</pre>
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>

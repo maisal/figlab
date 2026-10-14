@@ -539,7 +539,7 @@ The screen has three layers:
 
 | Layer | Content | Redrawn |
 |---|---|---|
-| Graph layer | Axes, series, and text drawn from the draw data. The result is kept as an image | Only when the figure changes |
+| Graph layer | Axes, series, and text drawn from the draw data. The result is kept as images, with the series apart from the axes and text, so that the series can be scaled and moved alone during zoom and pan (ADR 0011) | Only when the figure changes |
 | Overlay layer | Cursor, crosshair, selection, highlighted points | Every frame (cheap) |
 | HTML layer | Tooltips, input boxes for editing labels in place | When needed |
 
@@ -556,8 +556,8 @@ The screen has three layers:
 
 | Output | Method |
 |---|---|
-| Screen (lines) | Decimated to the minimum and maximum per pixel column (computed in the compute worker). The result looks the same as without decimation |
-| Screen (markers) | Traces with more than 100,000 points are drawn with WebGL. Points are sent to the GPU once, in data coordinates. Zoom, pan, and log transforms happen on the GPU, so the data is not sent again on every zoom. The whole trace crosses from the compute worker to the main thread once (ADR 0012). Its size depends on the point format chosen for the GPU (ADR 0011) |
+| Screen (lines) | Decimated to the first, minimum, maximum, and last point per pixel column (M4), computed in the compute worker. One point beyond each edge of the view is kept, so lines that cross the plot edges are drawn. A NaN in x or y breaks the line. Inside one column, the points between two breaks are drawn as one vertical line from their minimum to their maximum. Otherwise the line looks the same as without decimation. For each plotted y series, the worker builds a min/max pyramid when it is first needed (about 3 bytes per point) and drops it when the series is no longer plotted. With it, decimating 10 million points takes a few milliseconds at any zoom; data with a NaN in most blocks of the pyramid costs as much as a scan of the visible points (ADR 0011). [To confirm] Lines whose x is not ascending cannot be decimated by x column; how to draw them is open |
+| Screen (markers) | Traces with more than 100,000 points are drawn with WebGL. Points are sent to the GPU once, in data coordinates. Zoom and pan happen on the GPU, so the data is not sent again on every zoom. The whole trace crosses from the compute worker to the main thread once, in chunks (ADR 0012). x is stored on the GPU as integer fixed point (two 32-bit integer words), so that the positions match f64 at any zoom; f32 values, even split into a high and a low part, are not enough (ADR 0011). A log scale on y is applied on the GPU. For a log scale on x, the worker computes log(x) in f64 and the points are sent again, because log(x) in f32 on the GPU loses small steps |
 | SVG/PDF (lines) | The same decimation at the export resolution (e.g. the same as 1200 dpi) keeps file sizes small |
 | SVG/PDF (markers) | A trace with many points can be embedded as a raster image on its own (`plot … raster=true`). A warning is shown on export above a certain number of points |
 
@@ -747,8 +747,8 @@ Opens when a file is dropped and gathers the Quick Plot operations (1.2).
 | Move legends and annotations | Drag. Recorded as a command on release |
 | Edit labels | Double-click to edit in place |
 
-- While zooming or panning, TypeScript scales and moves the current image, so the screen responds at once. Series drawn with WebGL are transformed on the GPU. When the movement stops, the render module recomputes the ticks. The compute worker decimates the points again. Then the exact figure replaces the temporary one.
-- While zooming, tick labels update with a slight delay.
+- While zooming or panning, TypeScript scales and moves the current image of the series, so the screen responds at once. Axes and text are not scaled. At the same time, it asks the compute worker for the points of the current view, with at most one request in flight. Each reply goes through the render module (layout and draw data, Section 4), which also recomputes the ticks, and replaces the image. A reply that arrives after the view has moved on is shown moved to the current view. So the exact figure appears one reply after the movement stops, without detecting the end of the movement (ADR 0011). Series drawn with WebGL are transformed on the GPU.
+- Ticks and tick labels update with each reply, so they lag slightly behind the image while zooming.
 
 #### 12.3.1 View state
 
