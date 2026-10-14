@@ -55,6 +55,7 @@ figlab/
 │   ├── import/            test files for import detection (sources and licenses listed in README)
 │   └── figures/           acceptance figures (data, specs, reference PDFs, scripts, expected SVG/PNG)
 ├── fuzz/                  fuzzing of the parser and CSV detection
+├── experiments/           code of the M1 experiments, not part of the product (roadmap.md M1, experiments/README.md)
 ├── .github/               workflows, Issue and PR templates, etc. (Section 5)
 ├── Cargo.toml             Rust workspace
 ├── clippy.toml            forbids the standard float functions, for bit-identical results (language.md 10.2)
