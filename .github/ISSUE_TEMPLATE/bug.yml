@@ -1,0 +1,35 @@
+name: Bug report
+description: Something does not work as described in the documents.
+labels: ["kind:bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: figlab version
+      description: Shown in the About dialog, or by `figlab --version`.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      description: For example "Chrome 141 on macOS 26". Write "command line" for the figlab command.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands that reproduce the problem
+      description: Copy the lines from the history (history.figc). They work as reproduction steps.
+      render: text
+  - type: textarea
+    id: files
+    attributes:
+      label: Files that reproduce the problem
+      description: Attach files only if they may be published. This repository is public.
