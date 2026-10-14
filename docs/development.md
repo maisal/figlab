@@ -104,7 +104,7 @@ Run with `mise run <task>`. A task always uses the tool versions pinned in 3.1. 
 | Task | Description |
 |---|---|
 | `mise run check` | Must pass before opening a PR. Rust format check, clippy, tests; language conformance tests; English-only check (6.4); license check of dependencies (6.6); web type check, lint, unit tests |
-| `mise run fix` | Runs `jj fix` to format every change in the stack (4.1) |
+| `mise run fix` | Runs `jj fix` with `tools/jj-repo-config.toml` to format every change in the stack (4.1) |
 | `mise run wasm` | Builds the wasm modules |
 | `mise run dev` | Starts the web app locally |
 | `mise run install:web` | Installs the npm packages from `pnpm-lock.yaml`. `check:lang`, `check:web`, `check:deps`, and `dev` run it first |
@@ -142,14 +142,15 @@ outputs = ["web/src/wasm/**"]
 ```
 
 - Short tasks go in `[tasks]` in `mise.toml`; longer ones (such as `push`) go in `mise-tasks/` as scripts. A description and arguments written in the comments at the top of a script appear in the `mise tasks` list and in completion.
-- Example `mise-tasks/push`:
+- `mise-tasks/push`:
 
 ```sh
 #!/usr/bin/env bash
 #MISE description="Run checks, then push a bookmark with jj"
 #MISE depends=["check"]
+#USAGE arg "<bookmark>" help="The bookmark to push, named as in docs/development.md 6.1"
 set -euo pipefail
-bookmark="${1:?usage: mise run push <bookmark>}"
+bookmark="${usage_bookmark:?usage: mise run push <bookmark>}"
 jj git push -b "$bookmark"
 ```
 
@@ -185,7 +186,7 @@ sign-on-push = true    # sign only when pushing
 
 If changes were made before `user.name` and `user.email` were set, their author is empty. Fix them with `jj metaedit --update-author -r 'mutable()'`.
 
-Example repository configuration (`jj config edit --repo`). This configuration is not part of the repository, so a template is kept in `tools/jj-repo-config.toml` for each developer to copy.
+Repository configuration. jj does not read configuration from the repository itself, so it is kept in `tools/jj-repo-config.toml`. `mise run fix` passes it to jj with `--config-file`. To use the aliases in your own commands, copy it with `jj config edit --repo`.
 
 ```toml
 [revset-aliases]
@@ -200,9 +201,11 @@ sync = ["rebase", "-s", "roots(trunk()..mutable())", "-o", "trunk()", "--skip-em
 command = ["rustfmt", "--emit", "stdout", "--edition", "2024"]
 patterns = ["glob:'**/*.rs'"]
 
+# Only web/ is formatted with Prettier, the same files that check:web checks.
+# Prettier would also rewrite the tables and lists of the Markdown documents.
 [fix.tools.prettier]
 command = ["pnpm", "exec", "prettier", "--stdin-filepath=$path"]
-patterns = ["glob:'web/**/*.ts'", "glob:'web/**/*.css'", "glob:'**/*.json'", "glob:'**/*.md'"]
+patterns = ["glob:'web/**/*.ts'", "glob:'web/**/*.css'", "glob:'web/**/*.json'", "glob:'web/**/*.html'"]
 
 # Once figlab fmt exists, also format command and user function files
 # [fix.tools.figlab]

@@ -55,6 +55,11 @@ run = [
 description = "Install the npm packages from pnpm-lock.yaml"
 run = "pnpm install --frozen-lockfile"
 
+[tasks.fix]
+description = "Format every change in the stack with jj fix (docs/development.md 4.1)"
+depends = ["install:web"]
+run = "jj --config-file tools/jj-repo-config.toml fix -s 'roots(trunk()..@)'"
+
 [tasks.dev]
 description = "Start the web app locally"
 depends = ["install:web"]

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#MISE description="Run checks, then push a bookmark with jj"
+#MISE depends=["check"]
+#USAGE arg "<bookmark>" help="The bookmark to push, named as in docs/development.md 6.1"
+set -euo pipefail
+bookmark="${usage_bookmark:?usage: mise run push <bookmark>}"
+jj git push -b "$bookmark"
