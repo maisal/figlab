@@ -37,6 +37,7 @@ Status (2026-10-14): M0 is done. M1 (experiments) is next.
 ### M1 Experiments
 
 Each experiment answers one question and ends with an ADR.
+The code of the experiments is in `experiments/`. It is not part of the product (experiments/README.md).
 
 | # | Question |
 |---|---|

@@ -5,6 +5,12 @@
 /target/
 /web/dist/
 
+# Build output and downloads of the experiments (experiments/README.md)
+/experiments/*/target/
+/experiments/*/dist/
+/experiments/*/pkg/
+/experiments/*/downloads/
+
 # npm packages (pnpm) and tool caches inside them, at any depth
 node_modules/
 
