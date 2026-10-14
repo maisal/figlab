@@ -1,0 +1,11 @@
+{
+  "doc": "A positional argument after a named one in a call.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2008",
+      "line": 1,
+      "column": 25
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "doc": "Chained comparisons.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2005",
+      "line": 1,
+      "column": 15
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+let a = 0
+let b = 1.5
+let c = 1e-3
+let d = 2.5E+10
+let e = 12345678901234567890
+let f = "Intensity ""raw"" (counts)"
+let g = "\it{E} (meV)"
+let h = true
+let i = false
+let j = nan
+let k = inf
+let l = pi
+let m = "Å⁻¹ and ∝ q^{−4}"
+graph fig1 width=60mm height=1.5in fontsize=9pt
+plot fig1 w size=0.35cm color=#d62728
+plot fig1 v color=#d6272880 dash=dashed

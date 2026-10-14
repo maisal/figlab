@@ -1,0 +1,11 @@
+{
+  "doc": "A computed positional argument needs parentheses.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2001",
+      "line": 1,
+      "column": 20
+    }
+  ]
+}

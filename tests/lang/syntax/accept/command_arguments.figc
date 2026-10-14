@@ -1,0 +1,10 @@
+plot fig1 norm vs energy
+plot fig1 root.sample1.norm vs root.sample1.energy
+style fig1 norm[10] color=red
+style fig1 norm[20..29] marker=square
+export fig1 "fig1.pdf"
+help
+help fit
+help gauss
+cd ..
+rm old recursive=true

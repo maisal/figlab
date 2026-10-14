@@ -1,0 +1,11 @@
+{
+  "doc": "A single coordinate index cannot be assigned to.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2003",
+      "line": 1,
+      "column": 1
+    }
+  ]
+}

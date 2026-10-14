@@ -1,0 +1,11 @@
+{
+  "doc": "A statement in a .figf file.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2010",
+      "line": 2,
+      "column": 1
+    }
+  ]
+}

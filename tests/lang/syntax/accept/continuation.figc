@@ -1,0 +1,11 @@
+plot fig1 norm vs energy                 // first line of a statement
+    style=markers marker=circle          // a continuation
+axis fig1 bottom scale=log               // a new statement
+fit norm vs energy model=gauss2
+    // a comment-only line does not end the statement
+    init=(a1=1, c1=0.5, w1=0.1,
+          a2=0.5, c2=1.2, w2=0.1)
+    into=fit2
+let total = 1 +
+  2 +
+          3

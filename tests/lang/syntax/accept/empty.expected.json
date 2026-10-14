@@ -1,0 +1,5 @@
+{
+  "doc": "An empty file is a valid command file.",
+  "mode": "parse",
+  "errors": []
+}

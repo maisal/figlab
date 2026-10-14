@@ -1,0 +1,11 @@
+{
+  "doc": "A color needs 6 or 8 hexadecimal digits.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1006",
+      "line": 1,
+      "column": 19
+    }
+  ]
+}

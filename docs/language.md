@@ -29,7 +29,7 @@
 
 - Source files are UTF-8. A byte order mark at the start of a file is ignored. Invalid UTF-8 is an error.
 - Line endings are LF or CRLF. A CR that is not followed by LF is an invalid character.
-- Indentation and the space between tokens use spaces only. A tab outside strings and comments is an error (E1002).
+- Indentation and the space between tokens use spaces only. A tab outside strings and comments is an error (E1002). For a tab in the indentation, the depth of that line is not checked, so only E1002 is reported.
 - A statement consists of its first line and any continuation lines indented deeper than that first line.
 - The lines from `for … do` to `end` form a block. Statements in the body are indented exactly 4 spaces deeper than the `for` line.
 
@@ -38,7 +38,7 @@ Rules:
 1. Blank lines and comment-only lines do not count for indentation. But a blank line ends a statement. A statement cannot continue across a blank line.
 2. The first line of a statement must be indented exactly at the current block depth. The top-level depth is 0; the depth of a `for` body is the depth of the `for` line + 4.
 3. A line indented deeper than the first line of a statement continues that statement. The line break and the leading whitespace are treated as a single space. Continuation lines can be indented freely (they may be aligned inside parentheses).
-4. The header of a `for` ends at the line whose last token is `do`. The body starts on the next line.
+4. The header of a `for` ends at the line whose last token is `do`. The body starts on the next line. A line after the `do` line never continues the header. A token after `do` on the same line is an error (E2012).
 5. `end` is written at the same depth as its `for`.
 6. Indentation that matches no block depth is an error (E1001).
 
@@ -84,10 +84,11 @@ string_lit  = '"' { character | '""' } '"' ;
 
 - Numbers: `.5` and `1.` cannot be written (write `0.5`, `1.0`). Signs are unary operators. `1..9` is three tokens: `1`, `..`, `9`.
   - A single `.` directly followed by a digit is an invalid number (`.5`, `x = 1...5`).
+  - A number directly followed by a `.` that is not followed by a digit or another `.` is an invalid number (`1.`). So `1..9` is still three tokens.
   - A number directly followed by a letter is an invalid number, unless the letters are an exponent or a length unit (`5px`, `2e`).
   - A number that is too large for binary64 is an invalid number (write `inf`).
 - Lengths: written as `60mm` or `3pt`. Usable only as option values. Converted to pt internally.
-- Colors: written as `#d62728`. Named colors (`black`, `red`, etc.) are written as words in option values. The names and their values are listed under `colors` in `commands.json`. They are figlab's own palette, which matches the common style of the acceptance figures (`tests/figures/README.md`), not the CSS colors of the same names.
+- Colors: written as `#d62728`. A `#` that is not followed by exactly 6 or 8 hexadecimal digits is an invalid color (`#abc`). Named colors (`black`, `red`, etc.) are written as words in option values. The names and their values are listed under `colors` in `commands.json`. They are figlab's own palette, which matches the common style of the acceptance figures (`tests/figures/README.md`), not the CSS colors of the same names.
 - Strings:
   - A `"` inside a string is written as `""`
   - There are no other escapes; `\` is an ordinary character (so label formatting such as `"\it{E}"` can be written as is)
@@ -164,6 +165,7 @@ ref             = "root" { "." name } | name { "." name } ;
 - **Command names after the first token**: a command name is special only as the first token of a statement. Elsewhere it is an ordinary name token, so `help fit` is a command with one positional argument.
 - **Assignments and expressions**: an `assign_or_expr` with an `assign_op` is an assignment. Its left side must have the form `ref [ index ]` (otherwise E2002). Without an `assign_op`, it is an expression statement. It shows its value and does not change data (useful for checking values on the command line).
 - **Command arguments and options**: a `name` directly followed by `=` is an option; otherwise it is a positional argument. Positional arguments cannot follow options.
+- **Where an option value ends**: an option value never takes a following `name =` as its part. That starts the next option. So in `points=10.. into=fit4`, the range has no end, and in `yerr=err * 2 legend=false`, the expression is `err * 2`.
 - **Option values**: a word such as `markers`, `log`, or `true` can be an enum value, an array name, or a parameter name. The type of the option in `commands.json` decides which.
 - **`range` vs `expr`**: if `..` appears, it is a range; otherwise an expression.
 - **`record` vs parenthesized expression**: if `(` is directly followed by `name =`, it is a record.
@@ -371,7 +373,7 @@ fn gauss_linbg(x | a, c, w, b0, b1) = a*exp(-((x - c)/w)^2) + b0 + b1*x
 ## 8. Errors
 
 - Format: `<file>:<line>:<column>: <code>: <message>` (`<file>` is left out on the command line). Lines and columns refer to physical lines, before joining.
-- Lines and columns start at 1. A column counts Unicode characters (code points), not bytes. A tab counts as one character.
+- Lines and columns start at 1. A column counts Unicode characters (code points), not bytes. A tab counts as one character. A byte order mark is not counted.
 - Code classes:
 
 | Range | Kind |
@@ -387,6 +389,13 @@ fn gauss_linbg(x | a, c, w, b0, b1) = a*exp(-((x - c)/w)^2) + b0 + b1*x
 - E5xxx are usually found when running, because they depend on computed values or on files and folders at that time. `figlab check --project` may also report one when the project's data already shows the problem.
 - A fit that does not converge is not an error. Its results are stored with `converged` set to 0, and a warning is shown.
 - A statement with an error is not executed. Running a command file stops at the first error. When checking, every statement is checked and all errors are reported.
+- Blocks are found from the lines alone, before statements are parsed. A statement whose first token is `for` opens a block, and an `end` line at the same depth closes it (2.1). So an error inside a statement does not change the blocks.
+- For errors, the header of a `for` (from `for` to `do`) and each statement in its body are separate statements. Errors about blocks (E1009, E1010) are reported in addition to the errors of statements.
+- Each statement reports at most one lexical or syntax error (E1xxx, E2xxx): the first one in reading order. Checking then goes on with the next statement.
+- Where an error points is given for each code by `at` in `spec/errors.json`. In general:
+  - A lexical error points at the first character of the bad token (a number, a name, a string, or a color). An invalid character or a tab points at itself.
+  - E1004 points at the first invalid byte. Its column counts the characters before it on the line, plus 1.
+  - E2001 points at the first character of the first token that does not fit the grammar. If a statement ends too early, it points just after its last character. Spaces and a comment after the statement do not count.
 - Messages are written in English (spec.md Section 13). Example: `plot.figc:3:12: E3001: undefined name 'intensty' (did you mean 'intensity'?)`
 - The list of codes and their meanings is kept in `spec/errors.json`, next to `spec/commands.json`. Its format is defined by `spec/schema/errors.schema.json`. A code keeps its meaning once it is published, and codes are never reused.
 
@@ -497,7 +506,7 @@ The history is always saved in the canonical format. Formatting is idempotent (`
 
 ### 10.4 Conformance tests
 
-`tests/lang/` holds pairs of inputs (`.figc` / `.figf`) and expected results (values of the arrays created, or the expected error codes and positions). When the language specification changes, this document and the tests change together.
+`tests/lang/` holds pairs of inputs (`.figc` / `.figf`) and expected results (values of the arrays created, or the expected error codes and positions). The format is described in `tests/lang/README.md`. When the language specification changes, this document and the tests change together.
 
 - Grammar: examples that must be accepted and examples that must be rejected (wrong indentation, mixing `and`/`or`, chained comparisons, invalid assignment targets, etc.)
 - Loops: iteration order, evaluating the collection once at the start, behavior when an error occurs midway, nesting

@@ -1,0 +1,18 @@
+let a = -2^2
+let b = 2^-1
+let c = 2^3^2
+let d = not a > b
+let e = a and b and c
+let f = a or b or c
+let g = (a and b) or c
+let h = 1 + (if a then b else c)
+let i = if a > 0 then 1 else -1
+let j = "abc" + "def"
+let k = (a + b) * c / 2 - 1
+let l = a == b
+let m = a != b
+let n = a <= b
+let o = not not a
+let p = [1, 2, 3]
+let q = f2(1, 2, scale=3)
+let r = (a < b) < c

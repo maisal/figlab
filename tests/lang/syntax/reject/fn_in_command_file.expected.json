@@ -1,0 +1,11 @@
+{
+  "doc": "`fn` in a .figc file.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2009",
+      "line": 1,
+      "column": 1
+    }
+  ]
+}

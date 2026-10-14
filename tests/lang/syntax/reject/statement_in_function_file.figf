@@ -1,0 +1,2 @@
+fn f(x | a) = a*x
+let k = 1

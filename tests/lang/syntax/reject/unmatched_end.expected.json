@@ -1,0 +1,11 @@
+{
+  "doc": "`end` without a `for`.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1009",
+      "line": 2,
+      "column": 1
+    }
+  ]
+}

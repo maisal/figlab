@@ -1,0 +1,11 @@
+{
+  "doc": "A positional argument after an option.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2007",
+      "line": 1,
+      "column": 30
+    }
+  ]
+}

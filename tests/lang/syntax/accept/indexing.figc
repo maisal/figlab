@@ -1,0 +1,15 @@
+let a = w[3]
+array b = w[0..9]
+array c = w[10..]
+array d = w[..9]
+array e = m[2, ..]
+array f = m[.., 3]
+let g = w[x=1.5]
+array h = w[x=1.0..2.0]
+array i = m[x=0.5..1.0, 3]
+let j = w[x]
+let k = w[x + 1]
+array l = (w * 2)[0..4]
+let n = max(w)[0]
+w[x=1.0..2.0] = 0
+m[1, ..] = 0

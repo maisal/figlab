@@ -1,0 +1,11 @@
+{
+  "doc": "Columns count code points, not bytes (language.md 8).",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1003",
+      "line": 1,
+      "column": 14
+    }
+  ]
+}

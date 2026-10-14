@@ -1,0 +1,5 @@
+{
+  "doc": "Continuation lines and comment-only lines inside a statement (language.md 2.1).",
+  "mode": "parse",
+  "errors": []
+}

@@ -1,0 +1,15 @@
+for d in folders(root.scans) do
+    array d.norm = d.intensity / max(d.intensity)
+    fit d.norm vs d.energy model=gauss
+        init=(a=1, x0=0.5)
+        into=d.peakfit
+    plot fig1 d.norm vs d.energy as=nameof(d)
+end
+for i in 0..4 do
+    let t = 10 * i
+    for name in ["a", "b"] do
+        let s = name + str(i)
+    end
+end
+for w in arrays(root) do
+end

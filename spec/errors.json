@@ -5,6 +5,7 @@
       "code": "E1001",
       "name": "bad_indent",
       "message": "indentation does not match any block",
+      "at": "the first character of the line",
       "doc": "The first line of a statement must be indented exactly at the depth of the current block: 0 at the top level, and the depth of the `for` line + 4 in its body. A line after a blank line cannot continue the previous statement.",
       "section": "language.md 2.1"
     },
@@ -12,6 +13,7 @@
       "code": "E1002",
       "name": "tab",
       "message": "tab character outside a string or a comment",
+      "at": "the tab",
       "doc": "Indentation and the space between tokens use spaces only.",
       "section": "language.md 2.1"
     },
@@ -19,6 +21,7 @@
       "code": "E1003",
       "name": "invalid_character",
       "message": "invalid character {char}",
+      "at": "the character",
       "doc": "The character cannot start any token. A CR that is not followed by LF is also invalid.",
       "section": "language.md 2.1"
     },
@@ -26,6 +29,7 @@
       "code": "E1004",
       "name": "invalid_utf8",
       "message": "the file is not valid UTF-8",
+      "at": "the first invalid byte",
       "doc": "Source files are UTF-8. A byte order mark at the start is allowed.",
       "section": "language.md 2.1"
     },
@@ -33,6 +37,7 @@
       "code": "E1005",
       "name": "invalid_number",
       "message": "invalid number '{text}'",
+      "at": "the first character of the number",
       "doc": "Write `0.5`, not `.5`, and `1.0`, not `1.`. A number cannot be directly followed by a letter, unless the letters are an exponent or a length unit (`mm`, `cm`, `in`, `pt`). A number that is too large for binary64 is invalid; write `inf`.",
       "section": "language.md 2.5"
     },
@@ -40,6 +45,7 @@
       "code": "E1006",
       "name": "invalid_color",
       "message": "invalid color '{text}'; write #rrggbb or #rrggbbaa",
+      "at": "the #",
       "doc": "A color is `#` followed by 6 or 8 hexadecimal digits.",
       "section": "language.md 2.5"
     },
@@ -47,6 +53,7 @@
       "code": "E1007",
       "name": "unterminated_string",
       "message": "the string is not closed before the end of the line",
+      "at": "the opening quote",
       "doc": "Strings cannot span lines. Join long strings with `+`. A `\"` inside a string is written as `\"\"`.",
       "section": "language.md 2.5"
     },
@@ -54,6 +61,7 @@
       "code": "E1008",
       "name": "name_too_long",
       "message": "the name is longer than 255 characters",
+      "at": "the first character of the name",
       "doc": "Names have at most 255 characters.",
       "section": "language.md 2.3"
     },
@@ -61,6 +69,7 @@
       "code": "E1009",
       "name": "unmatched_end",
       "message": "`end` without a matching `for`",
+      "at": "the end",
       "doc": "`end` closes the `for` at the same depth.",
       "section": "language.md 2.1"
     },
@@ -68,6 +77,7 @@
       "code": "E1010",
       "name": "missing_end",
       "message": "`for` without a matching `end`",
+      "at": "the for",
       "doc": "Each `for` needs an `end` at the same depth.",
       "section": "language.md 2.1"
     },
@@ -75,6 +85,7 @@
       "code": "E2001",
       "name": "unexpected_token",
       "message": "expected {expected}, found {found}",
+      "at": "the first token that does not fit the grammar, or just after the last character of a statement that ends too early",
       "doc": "The statement does not match the grammar.",
       "section": "language.md 3"
     },
@@ -82,6 +93,7 @@
       "code": "E2002",
       "name": "invalid_assignment_target",
       "message": "cannot assign to this; the left side must be a name, optionally with an index",
+      "at": "the first character of the left side",
       "doc": "The left side of an assignment has the form `ref [ index ]`.",
       "section": "language.md 3.1"
     },
@@ -89,6 +101,7 @@
       "code": "E2003",
       "name": "assign_to_coordinate_point",
       "message": "cannot assign to a single coordinate index such as w[x=1.5]",
+      "at": "the first character of the left side",
       "doc": "A single-coordinate index reads an interpolated value. It cannot be the target of an assignment. A coordinate range such as `w[x=1.0..2.0]` can be.",
       "section": "language.md 5.2"
     },
@@ -96,6 +109,7 @@
       "code": "E2004",
       "name": "mixed_and_or",
       "message": "`and` and `or` cannot be mixed without parentheses",
+      "at": "the first and or or that mixes with the other",
       "doc": "Write `(a and b) or c`, or `a and (b or c)`.",
       "section": "language.md 4.1"
     },
@@ -103,6 +117,7 @@
       "code": "E2005",
       "name": "chained_comparison",
       "message": "comparisons cannot be chained; join them with `and`",
+      "at": "the second comparison operator",
       "doc": "Write `a < b and b < c`, not `a < b < c`.",
       "section": "language.md 4.1"
     },
@@ -110,6 +125,7 @@
       "code": "E2006",
       "name": "if_operand",
       "message": "`if` must be in parentheses when it is an operand",
+      "at": "the if",
       "doc": "Write `1 + (if a then b else c)`.",
       "section": "language.md 3.1"
     },
@@ -117,6 +133,7 @@
       "code": "E2007",
       "name": "argument_after_option",
       "message": "positional arguments must come before options",
+      "at": "the positional argument",
       "doc": "In a command, all `key=value` options come after the positional arguments.",
       "section": "language.md 3.1"
     },
@@ -124,6 +141,7 @@
       "code": "E2008",
       "name": "positional_after_named",
       "message": "positional arguments must come before named arguments",
+      "at": "the positional argument",
       "doc": "In a function call, named arguments such as `step=0.05` come after the positional ones.",
       "section": "language.md 3"
     },
@@ -131,6 +149,7 @@
       "code": "E2009",
       "name": "fn_outside_function_file",
       "message": "`fn` can only be written in a .figf file",
+      "at": "the fn",
       "doc": "Functions are defined in function files (`.figf`), not on the command line or in command files (`.figc`).",
       "section": "language.md 3.1"
     },
@@ -138,6 +157,7 @@
       "code": "E2010",
       "name": "statement_in_function_file",
       "message": "a .figf file can only contain `fn` definitions",
+      "at": "the first token of the statement",
       "doc": "Function files hold `fn` definitions and comments only.",
       "section": "language.md 3"
     },
@@ -145,6 +165,7 @@
       "code": "E2011",
       "name": "for_range_needs_ends",
       "message": "the range of a `for` needs both ends",
+      "at": "the ..",
       "doc": "Write `for i in 0..4 do`, not `for i in 0.. do`.",
       "section": "language.md 3.1"
     },
@@ -152,6 +173,7 @@
       "code": "E2012",
       "name": "text_after_do",
       "message": "the body of a `for` starts on the line after `do`",
+      "at": "the first token after do",
       "doc": "The header of a `for` ends at the line whose last token is `do`.",
       "section": "language.md 2.1"
     },
@@ -159,6 +181,7 @@
       "code": "E2013",
       "name": "option_only_literal",
       "message": "{kind} can only be an option value",
+      "at": "the first character of the literal",
       "doc": "Lengths such as `60mm` and colors such as `#d62728` can be written only as option values.",
       "section": "language.md 2.5"
     },

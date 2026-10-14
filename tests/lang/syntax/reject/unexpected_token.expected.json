@@ -1,0 +1,11 @@
+{
+  "doc": "`let` without a name.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2001",
+      "line": 1,
+      "column": 5
+    }
+  ]
+}

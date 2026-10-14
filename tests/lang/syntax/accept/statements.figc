@@ -1,0 +1,15 @@
+let k = 1
+let label = "Intensity (arb. units)"
+array w = ramp(10, start=0, step=0.5)
+array sample1.norm = w / max(w)
+w = w * 2
+w[0..4] = nan
+w += 1
+w -= 1
+w *= 2
+w /= 2
+k
+mkdir sample1
+cd sample1
+cd ..
+cd root

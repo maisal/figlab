@@ -1,0 +1,11 @@
+{
+  "doc": "The left side of an assignment is an expression.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2002",
+      "line": 1,
+      "column": 1
+    }
+  ]
+}

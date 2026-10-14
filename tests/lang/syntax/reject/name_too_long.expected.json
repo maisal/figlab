@@ -1,0 +1,11 @@
+{
+  "doc": "A name of 256 characters.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1008",
+      "line": 1,
+      "column": 5
+    }
+  ]
+}

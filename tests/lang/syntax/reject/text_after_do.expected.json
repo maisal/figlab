@@ -1,0 +1,11 @@
+{
+  "doc": "A statement on the same line as `do`.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2012",
+      "line": 1,
+      "column": 18
+    }
+  ]
+}

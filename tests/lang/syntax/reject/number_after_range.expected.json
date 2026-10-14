@@ -1,0 +1,11 @@
+{
+  "doc": "A dot followed by a digit after a range.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1005",
+      "line": 1,
+      "column": 14
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "doc": "A string must be closed on the same line.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1007",
+      "line": 1,
+      "column": 9
+    }
+  ]
+}

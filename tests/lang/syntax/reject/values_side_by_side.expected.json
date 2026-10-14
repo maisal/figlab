@@ -1,0 +1,11 @@
+{
+  "doc": "Two values without an operator.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2001",
+      "line": 1,
+      "column": 11
+    }
+  ]
+}

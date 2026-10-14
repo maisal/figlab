@@ -1,0 +1,12 @@
+fit intensity vs energy model=gauss2
+    init=(a1=1, c1=0.5, w1=0.1, a2=0.5, c2=1.2, w2=0.1)
+    fix=[c1] range=0.5..3.0 into=fit2
+fit decay vs time model=expdecay bounds=(tau=0..inf) sigma=err into=fit3
+fit decay model=expdecay points=10.. into=fit4
+axis fig1 bottom order=["Fe", "Co", "Ni"] ticklabel_angle=45
+axis fig1 left range=auto
+axis fig1 bottom range=..100
+load "scan01.csv" from=raw format=csv header=1 sep=comma comment="#"
+    encoding=shift_jis names=[energy, intensity, err] into=sample1
+style fig1 norm visible=false
+plot fig1 norm as=nameof(norm) yerr=err * 2

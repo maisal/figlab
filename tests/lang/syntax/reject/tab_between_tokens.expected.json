@@ -1,0 +1,11 @@
+{
+  "doc": "A tab between tokens.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1002",
+      "line": 1,
+      "column": 8
+    }
+  ]
+}
