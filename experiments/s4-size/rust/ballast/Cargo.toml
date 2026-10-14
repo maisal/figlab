@@ -1,0 +1,10 @@
+[package]
+name = "ballast"
+description = "Generated code that stands in for the size of figlab's own code (S4_BALLAST_FNS functions)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+libm.workspace = true

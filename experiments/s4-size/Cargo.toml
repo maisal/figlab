@@ -1,0 +1,42 @@
+# S4: stand-in wasm modules for measuring size (experiments/s4-size/README.md).
+# This is its own Cargo workspace. It is not part of the figlab workspace.
+[workspace]
+resolver = "3"
+members = ["rust/*"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.dependencies]
+standin = { path = "rust/standin" }
+wasm-bindgen = { version = "=0.2.129", default-features = false, features = ["std"] }
+libm = "=0.2.16"
+
+# The main profile: what we propose for the product.
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+debug = false
+# Keep the name section so that scripts/attribute.mjs can group code by crate.
+# wasm-opt removes it from the final files.
+strip = false
+
+[profile.release-s]
+inherits = "release"
+opt-level = "s"
+
+[profile.release-o3]
+inherits = "release"
+opt-level = 3
+
+# Cargo's default release profile, for comparison (no LTO, 16 codegen units).
+[profile.release-plain]
+inherits = "release"
+opt-level = 3
+lto = false
+codegen-units = 16

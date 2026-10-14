@@ -1,0 +1,10 @@
+[package]
+name = "standin"
+description = "Stand-ins for figlab's own code (parser, interpreter, layout, SVG writer)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+libm.workspace = true

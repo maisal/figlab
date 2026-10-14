@@ -25,6 +25,7 @@ The repository is public, so anyone can later see why things are the way they ar
 | [0008](0008-plain-english-repository.md) | Everything in the repository is written in plain English | Accepted |
 | [0009](0009-license.md) | The license is MIT OR Apache-2.0 | Accepted |
 | [0012](0012-data-transfer-between-workers.md) | Arrays move between threads by transfer, with one copy at each wasm boundary; no shared memory | Accepted |
+| [0013](0013-wasm-size-and-startup.md) | Three wasm modules at startup, export modules loaded on first use, and size budgets for the startup download | Accepted |
 
 ## Template
 

@@ -1,0 +1,437 @@
+{
+  "index.html": {
+    "files": [
+      {
+        "file": "index.html",
+        "when": "startup",
+        "kind": "html",
+        "raw": 1001,
+        "gzip": 593,
+        "brotli": 409
+      },
+      {
+        "file": "assets/index-DjZ1_cCO.js",
+        "when": "startup",
+        "kind": "js",
+        "raw": 538,
+        "gzip": 342,
+        "brotli": 280
+      },
+      {
+        "file": "assets/boot-CMUJNKc0.js",
+        "when": "startup",
+        "kind": "js",
+        "raw": 391263,
+        "gzip": 125120,
+        "brotli": 107194
+      },
+      {
+        "file": "assets/compute.worker-COgW2BW5.js",
+        "when": "startup",
+        "kind": "worker js",
+        "raw": 3265,
+        "gzip": 1523,
+        "brotli": 1348
+      },
+      {
+        "file": "assets/lang.worker-C_ebO9Zi.js",
+        "when": "startup",
+        "kind": "worker js",
+        "raw": 3619,
+        "gzip": 1561,
+        "brotli": 1388
+      },
+      {
+        "file": "assets/m_render_bg-CPzVs0IB.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 1065116,
+        "gzip": 452255,
+        "brotli": 367614
+      },
+      {
+        "file": "assets/m_compute_bg-CU_WAEgz.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 817754,
+        "gzip": 444478,
+        "brotli": 372596
+      },
+      {
+        "file": "assets/m_lang_bg-C_2dfraT.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 269183,
+        "gzip": 126898,
+        "brotli": 110799
+      },
+      {
+        "file": "assets/Arimo-Regular-nohint-DW6asTBM.ttf",
+        "when": "startup",
+        "kind": "font",
+        "raw": 279848,
+        "gzip": 170722,
+        "brotli": 141394
+      },
+      {
+        "file": "assets/m_export_pdf-ByxsbNj6.js",
+        "when": "later",
+        "kind": "js",
+        "raw": 3213,
+        "gzip": 1360,
+        "brotli": 1230
+      },
+      {
+        "file": "assets/m_export_pdf_bg-Blo3ihwH.wasm",
+        "when": "later",
+        "kind": "wasm",
+        "raw": 226652,
+        "gzip": 114408,
+        "brotli": 99457
+      },
+      {
+        "file": "assets/m_export_png-FCFvNC7W.js",
+        "when": "later",
+        "kind": "js",
+        "raw": 2532,
+        "gzip": 1099,
+        "brotli": 957
+      },
+      {
+        "file": "assets/m_export_png_bg-BU0vSc-J.wasm",
+        "when": "later",
+        "kind": "wasm",
+        "raw": 352724,
+        "gzip": 139442,
+        "brotli": 113990
+      }
+    ],
+    "startup": {
+      "js": {
+        "raw": 391801,
+        "gzip": 125462,
+        "brotli": 107474
+      },
+      "workerJs": {
+        "raw": 6884,
+        "gzip": 3084,
+        "brotli": 2736
+      },
+      "wasm": {
+        "raw": 2152053,
+        "gzip": 1023631,
+        "brotli": 851009
+      },
+      "font": {
+        "raw": 279848,
+        "gzip": 170722,
+        "brotli": 141394
+      },
+      "html": {
+        "raw": 1001,
+        "gzip": 593,
+        "brotli": 409
+      },
+      "total": {
+        "raw": 2831587,
+        "gzip": 1323492,
+        "brotli": 1103022
+      }
+    },
+    "later": {
+      "raw": 585121,
+      "gzip": 256309,
+      "brotli": 215634
+    }
+  },
+  "preact.html": {
+    "files": [
+      {
+        "file": "preact.html",
+        "when": "startup",
+        "kind": "html",
+        "raw": 1003,
+        "gzip": 591,
+        "brotli": 412
+      },
+      {
+        "file": "assets/preact-zQzLrRx9.js",
+        "when": "startup",
+        "kind": "js",
+        "raw": 20599,
+        "gzip": 8026,
+        "brotli": 7323
+      },
+      {
+        "file": "assets/boot-CMUJNKc0.js",
+        "when": "startup",
+        "kind": "js",
+        "raw": 391263,
+        "gzip": 125120,
+        "brotli": 107194
+      },
+      {
+        "file": "assets/compute.worker-COgW2BW5.js",
+        "when": "startup",
+        "kind": "worker js",
+        "raw": 3265,
+        "gzip": 1523,
+        "brotli": 1348
+      },
+      {
+        "file": "assets/lang.worker-C_ebO9Zi.js",
+        "when": "startup",
+        "kind": "worker js",
+        "raw": 3619,
+        "gzip": 1561,
+        "brotli": 1388
+      },
+      {
+        "file": "assets/m_render_bg-CPzVs0IB.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 1065116,
+        "gzip": 452255,
+        "brotli": 367614
+      },
+      {
+        "file": "assets/m_compute_bg-CU_WAEgz.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 817754,
+        "gzip": 444478,
+        "brotli": 372596
+      },
+      {
+        "file": "assets/m_lang_bg-C_2dfraT.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 269183,
+        "gzip": 126898,
+        "brotli": 110799
+      },
+      {
+        "file": "assets/Arimo-Regular-nohint-DW6asTBM.ttf",
+        "when": "startup",
+        "kind": "font",
+        "raw": 279848,
+        "gzip": 170722,
+        "brotli": 141394
+      },
+      {
+        "file": "assets/m_export_pdf-ByxsbNj6.js",
+        "when": "later",
+        "kind": "js",
+        "raw": 3213,
+        "gzip": 1360,
+        "brotli": 1230
+      },
+      {
+        "file": "assets/m_export_pdf_bg-Blo3ihwH.wasm",
+        "when": "later",
+        "kind": "wasm",
+        "raw": 226652,
+        "gzip": 114408,
+        "brotli": 99457
+      },
+      {
+        "file": "assets/m_export_png-FCFvNC7W.js",
+        "when": "later",
+        "kind": "js",
+        "raw": 2532,
+        "gzip": 1099,
+        "brotli": 957
+      },
+      {
+        "file": "assets/m_export_png_bg-BU0vSc-J.wasm",
+        "when": "later",
+        "kind": "wasm",
+        "raw": 352724,
+        "gzip": 139442,
+        "brotli": 113990
+      }
+    ],
+    "startup": {
+      "js": {
+        "raw": 411862,
+        "gzip": 133146,
+        "brotli": 114517
+      },
+      "workerJs": {
+        "raw": 6884,
+        "gzip": 3084,
+        "brotli": 2736
+      },
+      "wasm": {
+        "raw": 2152053,
+        "gzip": 1023631,
+        "brotli": 851009
+      },
+      "font": {
+        "raw": 279848,
+        "gzip": 170722,
+        "brotli": 141394
+      },
+      "html": {
+        "raw": 1003,
+        "gzip": 591,
+        "brotli": 412
+      },
+      "total": {
+        "raw": 2851650,
+        "gzip": 1331174,
+        "brotli": 1110068
+      }
+    },
+    "later": {
+      "raw": 585121,
+      "gzip": 256309,
+      "brotli": 215634
+    }
+  },
+  "react.html": {
+    "files": [
+      {
+        "file": "react.html",
+        "when": "startup",
+        "kind": "html",
+        "raw": 1001,
+        "gzip": 593,
+        "brotli": 415
+      },
+      {
+        "file": "assets/react-DX7Pt_MH.js",
+        "when": "startup",
+        "kind": "js",
+        "raw": 219295,
+        "gzip": 67562,
+        "brotli": 58245
+      },
+      {
+        "file": "assets/boot-CMUJNKc0.js",
+        "when": "startup",
+        "kind": "js",
+        "raw": 391263,
+        "gzip": 125120,
+        "brotli": 107194
+      },
+      {
+        "file": "assets/compute.worker-COgW2BW5.js",
+        "when": "startup",
+        "kind": "worker js",
+        "raw": 3265,
+        "gzip": 1523,
+        "brotli": 1348
+      },
+      {
+        "file": "assets/lang.worker-C_ebO9Zi.js",
+        "when": "startup",
+        "kind": "worker js",
+        "raw": 3619,
+        "gzip": 1561,
+        "brotli": 1388
+      },
+      {
+        "file": "assets/m_render_bg-CPzVs0IB.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 1065116,
+        "gzip": 452255,
+        "brotli": 367614
+      },
+      {
+        "file": "assets/m_compute_bg-CU_WAEgz.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 817754,
+        "gzip": 444478,
+        "brotli": 372596
+      },
+      {
+        "file": "assets/m_lang_bg-C_2dfraT.wasm",
+        "when": "startup",
+        "kind": "wasm",
+        "raw": 269183,
+        "gzip": 126898,
+        "brotli": 110799
+      },
+      {
+        "file": "assets/Arimo-Regular-nohint-DW6asTBM.ttf",
+        "when": "startup",
+        "kind": "font",
+        "raw": 279848,
+        "gzip": 170722,
+        "brotli": 141394
+      },
+      {
+        "file": "assets/m_export_pdf-ByxsbNj6.js",
+        "when": "later",
+        "kind": "js",
+        "raw": 3213,
+        "gzip": 1360,
+        "brotli": 1230
+      },
+      {
+        "file": "assets/m_export_pdf_bg-Blo3ihwH.wasm",
+        "when": "later",
+        "kind": "wasm",
+        "raw": 226652,
+        "gzip": 114408,
+        "brotli": 99457
+      },
+      {
+        "file": "assets/m_export_png-FCFvNC7W.js",
+        "when": "later",
+        "kind": "js",
+        "raw": 2532,
+        "gzip": 1099,
+        "brotli": 957
+      },
+      {
+        "file": "assets/m_export_png_bg-BU0vSc-J.wasm",
+        "when": "later",
+        "kind": "wasm",
+        "raw": 352724,
+        "gzip": 139442,
+        "brotli": 113990
+      }
+    ],
+    "startup": {
+      "js": {
+        "raw": 610558,
+        "gzip": 192682,
+        "brotli": 165439
+      },
+      "workerJs": {
+        "raw": 6884,
+        "gzip": 3084,
+        "brotli": 2736
+      },
+      "wasm": {
+        "raw": 2152053,
+        "gzip": 1023631,
+        "brotli": 851009
+      },
+      "font": {
+        "raw": 279848,
+        "gzip": 170722,
+        "brotli": 141394
+      },
+      "html": {
+        "raw": 1001,
+        "gzip": 593,
+        "brotli": 415
+      },
+      "total": {
+        "raw": 3050344,
+        "gzip": 1390712,
+        "brotli": 1160993
+      }
+    },
+    "later": {
+      "raw": 585121,
+      "gzip": 256309,
+      "brotli": 215634
+    }
+  }
+}

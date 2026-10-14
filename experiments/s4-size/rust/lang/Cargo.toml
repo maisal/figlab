@@ -1,0 +1,34 @@
+[package]
+name = "m-lang"
+description = "Stand-in for the language service module"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = ["parser", "spec-tables"]
+# figlab's own code: parser and checker stand-ins.
+parser = []
+# spec/commands.json embedded as text, unused except for its length.
+spec-raw = []
+# spec/commands.json embedded as text and read with serde_json at startup.
+spec-serde = ["dep:serde", "dep:serde_json"]
+# spec/commands.json compiled into Rust tables by build.rs.
+spec-tables = []
+# Generated code that stands in for the size of figlab's own code
+# (S4_BALLAST_FNS functions, see rust/ballast).
+ballast = ["dep:ballast"]
+
+[dependencies]
+ballast = { path = "../ballast", optional = true }
+wasm-bindgen.workspace = true
+standin.workspace = true
+serde = { version = "=1.0.229", optional = true, features = ["derive"] }
+serde_json = { version = "=1.0.154", optional = true }
+
+[build-dependencies]
+serde_json = "=1.0.154"
