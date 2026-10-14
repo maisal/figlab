@@ -1,0 +1,31 @@
+{
+  "name": "figlab",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Quick plots of measurement data and publication figures, in the browser",
+  "license": "MIT OR Apache-2.0",
+  "repository": "github:maisal/figlab",
+  "type": "module",
+  "packageManager": "pnpm@10.25.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite web",
+    "build": "vite build web",
+    "typecheck": "tsc -p web",
+    "lint": "eslint web",
+    "format:check": "prettier --check web",
+    "test": "vitest run --root web"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.12.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.4"
+  }
+}
