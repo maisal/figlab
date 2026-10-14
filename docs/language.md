@@ -51,7 +51,7 @@ for d in folders(root.scans) do          // start of a block
     fit d.norm vs d.energy model=gauss2  // statement in the body (depth 4)
         init=(a1=1, c1=0.5, w1=0.1,      // continuation of this statement (depth 8)
               a2=0.5, c2=1.2, w2=0.1)    // may be aligned inside parentheses
-        into=d.fit
+        into=d.peakfit
     plot fig1 d.norm vs d.energy as=nameof(d)   // next statement in the body (depth 4)
 end                                      // same depth as for
 ```
@@ -87,7 +87,7 @@ string_lit  = '"' { character | '""' } '"' ;
   - A number directly followed by a letter is an invalid number, unless the letters are an exponent or a length unit (`5px`, `2e`).
   - A number that is too large for binary64 is an invalid number (write `inf`).
 - Lengths: written as `60mm` or `3pt`. Usable only as option values. Converted to pt internally.
-- Colors: written as `#d62728`. Named colors (`black`, `red`, etc.) are written as words in option values.
+- Colors: written as `#d62728`. Named colors (`black`, `red`, etc.) are written as words in option values. The names and their values are listed under `colors` in `commands.json`. They are figlab's own palette, which matches the common style of the acceptance figures (`tests/figures/README.md`), not the CSS colors of the same names.
 - Strings:
   - A `"` inside a string is written as `""`
   - There are no other escapes; `\` is an ordinary character (so label formatting such as `"\it{E}"` can be written as is)
@@ -116,7 +116,8 @@ assign_or_expr  = expr [ assign_op expr ] ;                (* the left side must
 assign_op       = "=" | "+=" | "-=" | "*=" | "/=" ;
 
 command         = cmd_name { cmd_arg } { option } ;        (* options come after positional arguments *)
-cmd_arg         = target | "vs" target | string_lit | [ "-" ] number_lit | ".." ;
+cmd_arg         = target | "vs" target | string_lit | [ "-" ] number_lit | ".."
+                | "(" expr ")" ;                          (* a computed value, such as a file name *)
 target          = ref [ index ] ;
 option          = name "=" opt_value ;
 opt_value       = range | expr | length_lit | color_lit | record | list ;
@@ -161,7 +162,7 @@ ref             = "root" { "." name } | name { "." name } ;
 
 - **Kind of statement**: the first token decides it. `let`, `array`, and `for` start those statements. A command name starts a command. Anything else starts an assignment or an expression. Command names are reserved (2.3).
 - **Command names after the first token**: a command name is special only as the first token of a statement. Elsewhere it is an ordinary name token, so `help fit` is a command with one positional argument.
-- **Assignments and expressions**: an `assign_or_expr` with an `assign_op` is an assignment. Its left side must have the form `ref [ index ]` (otherwise E2xxx). Without an `assign_op`, it is an expression statement. It shows its value and does not change data (useful for checking values on the command line).
+- **Assignments and expressions**: an `assign_or_expr` with an `assign_op` is an assignment. Its left side must have the form `ref [ index ]` (otherwise E2002). Without an `assign_op`, it is an expression statement. It shows its value and does not change data (useful for checking values on the command line).
 - **Command arguments and options**: a `name` directly followed by `=` is an option; otherwise it is a positional argument. Positional arguments cannot follow options.
 - **Option values**: a word such as `markers`, `log`, or `true` can be an enum value, an array name, or a parameter name. The type of the option in `commands.json` decides which.
 - **`range` vs `expr`**: if `..` appears, it is a range; otherwise an expression.
@@ -171,6 +172,7 @@ ref             = "root" { "." name } | name { "." name } ;
 - **Coordinate index vs expression**: inside an index, `x`, `y`, `z`, or `t` directly followed by `=` selects by coordinate. Otherwise these are ordinary names.
 - **Ranges in `for`**: the range of a `for` must have both ends (`0..4`, not `0..`).
 - **`..` as a positional argument**: exists only for `cd ..` (move to the parent folder).
+- **Computed positional arguments**: a positional argument whose value must be computed is written as an expression in parentheses, for example `export fig1 ("fig_" + nameof(d) + ".svg")`. Without parentheses, a positional argument is a single name, string, or number.
 - **`if`**: cannot be an operand of a binary operator without parentheses (`1 + (if a then b else c)`).
 - **`fn`**: can be written only in `.figf` files, not on the command line or in `.figc` files.
 - **`for`**: can be written only on the command line and in `.figc` files, not in `.figf` files or in the body of an `fn`. On the command line, it runs after `end` has been entered.
@@ -217,7 +219,7 @@ Expressions are written as operations on whole arrays (there is no implicit per-
   - To use only the values, remove the coordinates with `values(w)`
 - **Coordinates and indices**: `xvalues(w)` (dimension 1; `yvalues`, etc. for later dimensions) gives the coordinates, and `index(w)` gives the point indices, as arrays of the same shape as w.
   ```
-  array model = exp(-axis(200, start=0, step=0.05, unit="meV") / 2.5)   // axis() makes an array whose values equal its coordinates
+  array model = exp(-ramp(200, start=0, step=0.05, unit="meV") / 2.5)   // ramp() makes an array whose values equal its coordinates
   array shifted = model - xvalues(model) * 0.1
   ```
 - **Conditional selection**: `if cond then a else b` selects element by element. The condition, a, and b must each be an array of the same shape or a scalar.
@@ -277,14 +279,15 @@ Expressions are written as operations on whole arrays (there is no implicit per-
 - Anything else is an error.
 - Giving the same option twice is an error.
 - The names a command creates (e.g. `fit2.curve` created by `fit … into=fit2`) are listed in `commands.json`. The checking tools use this for name resolution in later statements.
-- A command that creates names fails if the name already exists. Add `replace=true` to replace it.
+- A command that creates names fails if the name already exists (E3008). Add `replace=true` to replace it. Every command that creates arrays, variables, folders, graphs, or traces has this option.
+- Sources (`source`) are not names in folders. Running `source` again with a registered name keeps the stored access.
 
 ### 5.5 Loops (for)
 
 ```
 for d in folders(root.scans) do
     array d.norm = d.intensity / max(d.intensity)
-    fit d.norm vs d.energy model=gauss into=d.fit
+    fit d.norm vs d.energy model=gauss into=d.peakfit
 end
 for i in 0..4 do
     let t = 10 * i
@@ -302,12 +305,12 @@ Only these four kinds of collections can be iterated:
 
 - Name order is Unicode code point order.
 - The collection is evaluated once, when the loop starts. Creating folders or arrays in the body does not change what is iterated.
-- The loop variable is valid only inside the body. It cannot use (E3xxx):
+- The loop variable is valid only inside the body. It cannot use (E3005):
   - a name that exists in the current folder
   - the name of an enclosing loop variable
-- The loop variable cannot be assigned to.
+- The loop variable cannot be assigned to (E3006).
 - When the loop variable is a folder or an array, it refers to that object itself (not a copy). Names inside it can be followed, as in `d.norm`. `nameof(d)` gives its name as a string (e.g. for trace names).
-- `cd` cannot be used in the body (E4xxx), so that name resolution does not change in the middle of a loop.
+- `cd` cannot be used in the body (E4007), so that name resolution does not change in the middle of a loop.
 - `for` loops can be nested.
 - Errors: execution stops at the first error, and the results of earlier iterations remain. The error includes which iteration failed (the value of the loop variable).
 - Interruption: possible between iterations (spec.md Section 4). The results so far remain.
@@ -348,8 +351,8 @@ fn gauss_linbg(x | a, c, w, b0, b1) = a*exp(-((x - c)/w)^2) + b0 + b1*x
 ```
 
 - A line of the form `/// name: description` describes the input or parameter with that name. Other lines describe the function as a whole.
-- Writing, as `name:`, a name that is not an input or parameter of the function is an error (E3xxx).
-- Describing the same name twice is an error.
+- Writing, as `name:`, a name that is not an input or parameter of the function is an error (E3009).
+- Describing the same name twice is an error (E3010).
 - Inputs and parameters without a description are not an error. `figlab check` reports them as notes.
 
 ## 7. Name resolution
@@ -362,7 +365,7 @@ fn gauss_linbg(x | a, c, w, b0, b1) = a*exp(-((x - c)/w)^2) + b0 + b1*x
 | `root.a.b` | Absolute path |
 | `a.b` | Path relative to the current folder |
 
-- An `fn` cannot have the same name as a built-in function, so the lookup order never changes the result.
+- An `fn` cannot have the same name as a built-in function or a built-in fit model (E3013), so the lookup order never changes the result.
 - If a name is not found, it is an error. No folder other than the current one is searched implicitly.
 
 ## 8. Errors
@@ -376,13 +379,16 @@ fn gauss_linbg(x | a, c, w, b0, b1) = a*exp(-((x - c)/w)^2) + b0 + b1*x
 | E1xxx | Lexical and line errors (invalid characters; invalid numbers, lengths, or colors; wrong indentation; a tab at the start of a line; unmatched `end`) |
 | E2xxx | Syntax (does not match the EBNF; invalid assignment target) |
 | E3xxx | Names (undefined, duplicate, differing only in case, use of a reserved word) |
-| E4xxx | Types and arguments (type mismatch; unknown command or option; repeated option; wrong number of arguments; shape or coordinate conflicts that can be detected statically) |
-| E5xxx | Runtime (out of range, shape mismatch, numeric conversion, fit not converging) |
+| E4xxx | Types and arguments (type mismatch; unknown or repeated option; wrong number of arguments; wrong number of indices) |
+| E5xxx | Runtime (out of range, shape mismatch, coordinate conflicts, numeric conversion, invalid computed names, files that cannot be read or written) |
 
-- E1xxx to E4xxx can be detected without running. E5xxx need the project's data or appear only when running.
+- Each problem has exactly one code, whichever tool finds it.
+- E1xxx to E4xxx can be detected without running. Some need the project's data (`figlab check --project`).
+- E5xxx are usually found when running, because they depend on computed values or on files and folders at that time. `figlab check --project` may also report one when the project's data already shows the problem.
+- A fit that does not converge is not an error. Its results are stored with `converged` set to 0, and a warning is shown.
 - A statement with an error is not executed. Running a command file stops at the first error. When checking, every statement is checked and all errors are reported.
 - Messages are written in English (spec.md Section 13). Example: `plot.figc:3:12: E3001: undefined name 'intensty' (did you mean 'intensity'?)`
-- The list of codes and their meanings is kept in `spec/errors.json`, next to `spec/commands.json`.
+- The list of codes and their meanings is kept in `spec/errors.json`, next to `spec/commands.json`. Its format is defined by `spec/schema/errors.schema.json`. A code keeps its meaning once it is published, and codes are never reused.
 
 ## 9. Main commands (MVP proposal)
 
@@ -407,6 +413,13 @@ In `plot`, an axis becomes a category axis in two cases (spec.md 8.3.1). One is 
 
 For every command and built-in function, the name, arguments, options, names created, and descriptions are kept in machine-readable form. Parser checks, completion, help, documentation, and the checking tools all use this table.
 
+- The format is defined by `spec/schema/commands.schema.json`. `mise run check:lang` checks the table against it, and also checks rules that a schema cannot express (for example, that the names in a model formula exist).
+- Command names are reserved (2.3), so the table lists every command of the MVP from the start.
+- Options can be added later without breaking existing commands.
+- Built-in functions and fit models can be added until user functions are released (v0.2). After that, a new built-in name can clash with a user function (E3013), so adding one can break a `.figf` file.
+
+An excerpt of the entry for `plot` (most `doc` fields are left out):
+
 ```json
 {
   "name": "plot",
@@ -417,10 +430,10 @@ For every command and built-in function, the name, arguments, options, names cre
     { "name": "x", "type": "array", "dims": [1], "prefix": "vs", "optional": true }
   ],
   "options": [
-    { "name": "as", "type": "name", "doc": "Trace name. Defaults to the name of y." },
+    { "name": "as", "type": "string", "doc": "The name of the trace, as a string expression such as nameof(d). Defaults to the name of y." },
     { "name": "style", "type": "enum", "values": ["line", "markers", "lines_markers", "sticks", "steps", "bars"], "default": "line" },
     { "name": "marker", "type": "enum", "values": ["circle", "square", "triangle", "diamond", "cross", "plus"], "default": "circle" },
-    { "name": "size", "type": "length", "default": "3pt" },
+    { "name": "size", "type": "length", "default": "4pt" },
     { "name": "color", "type": "color", "default": "black" }
   ],
   "creates": [ { "kind": "trace", "name_from": ["as", "y"] } ]

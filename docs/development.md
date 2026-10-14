@@ -65,7 +65,7 @@ figlab/
 ├── eslint.config.js       lint settings for web/
 ├── mise.toml              pinned tool versions and task definitions (Section 3)
 ├── mise-tasks/            longer tasks as scripts (3.2)
-├── tools/                 helper files for developers: the npm license check (6.6) and the jj repository config template (4.1)
+├── tools/                 helper files for developers: the checks of spec/ (check:lang) and of npm licenses (6.6), and the jj repository config template (4.1)
 └── .gitignore             ignores local/ (personal, untracked files) and mise.local.toml
 ```
 
@@ -107,7 +107,7 @@ Run with `mise run <task>`. A task always uses the tool versions pinned in 3.1. 
 | `mise run fix` | Runs `jj fix` to format every change in the stack (4.1) |
 | `mise run wasm` | Builds the wasm modules |
 | `mise run dev` | Starts the web app locally |
-| `mise run install:web` | Installs the npm packages from `pnpm-lock.yaml`. `check:web`, `check:deps`, and `dev` run it first |
+| `mise run install:web` | Installs the npm packages from `pnpm-lock.yaml`. `check:lang`, `check:web`, `check:deps`, and `dev` run it first |
 | `mise run e2e` | End-to-end tests in browsers (Playwright) |
 | `mise run figures` | Exports the acceptance figures and compares them with the expected ones |
 | `mise run push <BOOKMARK>` | Passes `check`, then pushes the bookmark with `jj git push -b BOOKMARK`. Replaces a pre-push hook. Name bookmarks as in 6.1 |
@@ -293,7 +293,7 @@ CI jobs (`ci.yml`):
 | Job | Content |
 |---|---|
 | rust | Format check, clippy (warnings are errors), unit tests |
-| lang | Language conformance tests (`tests/lang`); runs the code examples in the documents (docs/) through `figlab check`; schema validation of `spec/*.json` |
+| lang | Language conformance tests (`tests/lang`); runs the code examples in the documents (docs/) through `figlab check`; schema validation of `spec/*.json` (`tools/check-spec.mjs`). Until `figlab` exists, only the schema checks run |
 | english | Fails if CJK text appears outside test fixtures (6.4) |
 | deps | `mise run check:deps`: the licenses of Rust and npm dependencies are on the allow list, and crates come only from crates.io (6.6) |
 | determinism | Runs the same conformance tests and acceptance figures on Linux (x86_64), macOS (arm64), and wasm (on Node). Checks that the result hashes match (spec.md Section 13, "Reproducibility") |
@@ -503,7 +503,7 @@ While designing this process, some places were found where spec.md did not fit. 
     - PDF export: krilla or pdf-writer
     - PNG export: tiny-skia
   - Making PNGs with tiny-skia instead of Canvas gives the same images in the browser and on the command line
-- **Location of documents**: the documents are in `docs/`. `commands.json` and `errors.json` will be in `spec/` when they are written.
+- **Location of documents**: the documents are in `docs/`. `commands.json` and `errors.json` are in `spec/`, with their JSON Schemas in `spec/schema/`.
 
 ## 10. First steps
 

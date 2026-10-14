@@ -1,0 +1,411 @@
+{
+  "$schema": "./schema/errors.schema.json",
+  "errors": [
+    {
+      "code": "E1001",
+      "name": "bad_indent",
+      "message": "indentation does not match any block",
+      "doc": "The first line of a statement must be indented exactly at the depth of the current block: 0 at the top level, and the depth of the `for` line + 4 in its body. A line after a blank line cannot continue the previous statement.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E1002",
+      "name": "tab",
+      "message": "tab character outside a string or a comment",
+      "doc": "Indentation and the space between tokens use spaces only.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E1003",
+      "name": "invalid_character",
+      "message": "invalid character {char}",
+      "doc": "The character cannot start any token. A CR that is not followed by LF is also invalid.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E1004",
+      "name": "invalid_utf8",
+      "message": "the file is not valid UTF-8",
+      "doc": "Source files are UTF-8. A byte order mark at the start is allowed.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E1005",
+      "name": "invalid_number",
+      "message": "invalid number '{text}'",
+      "doc": "Write `0.5`, not `.5`, and `1.0`, not `1.`. A number cannot be directly followed by a letter, unless the letters are an exponent or a length unit (`mm`, `cm`, `in`, `pt`). A number that is too large for binary64 is invalid; write `inf`.",
+      "section": "language.md 2.5"
+    },
+    {
+      "code": "E1006",
+      "name": "invalid_color",
+      "message": "invalid color '{text}'; write #rrggbb or #rrggbbaa",
+      "doc": "A color is `#` followed by 6 or 8 hexadecimal digits.",
+      "section": "language.md 2.5"
+    },
+    {
+      "code": "E1007",
+      "name": "unterminated_string",
+      "message": "the string is not closed before the end of the line",
+      "doc": "Strings cannot span lines. Join long strings with `+`. A `\"` inside a string is written as `\"\"`.",
+      "section": "language.md 2.5"
+    },
+    {
+      "code": "E1008",
+      "name": "name_too_long",
+      "message": "the name is longer than 255 characters",
+      "doc": "Names have at most 255 characters.",
+      "section": "language.md 2.3"
+    },
+    {
+      "code": "E1009",
+      "name": "unmatched_end",
+      "message": "`end` without a matching `for`",
+      "doc": "`end` closes the `for` at the same depth.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E1010",
+      "name": "missing_end",
+      "message": "`for` without a matching `end`",
+      "doc": "Each `for` needs an `end` at the same depth.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E2001",
+      "name": "unexpected_token",
+      "message": "expected {expected}, found {found}",
+      "doc": "The statement does not match the grammar.",
+      "section": "language.md 3"
+    },
+    {
+      "code": "E2002",
+      "name": "invalid_assignment_target",
+      "message": "cannot assign to this; the left side must be a name, optionally with an index",
+      "doc": "The left side of an assignment has the form `ref [ index ]`.",
+      "section": "language.md 3.1"
+    },
+    {
+      "code": "E2003",
+      "name": "assign_to_coordinate_point",
+      "message": "cannot assign to a single coordinate index such as w[x=1.5]",
+      "doc": "A single-coordinate index reads an interpolated value. It cannot be the target of an assignment. A coordinate range such as `w[x=1.0..2.0]` can be.",
+      "section": "language.md 5.2"
+    },
+    {
+      "code": "E2004",
+      "name": "mixed_and_or",
+      "message": "`and` and `or` cannot be mixed without parentheses",
+      "doc": "Write `(a and b) or c`, or `a and (b or c)`.",
+      "section": "language.md 4.1"
+    },
+    {
+      "code": "E2005",
+      "name": "chained_comparison",
+      "message": "comparisons cannot be chained; join them with `and`",
+      "doc": "Write `a < b and b < c`, not `a < b < c`.",
+      "section": "language.md 4.1"
+    },
+    {
+      "code": "E2006",
+      "name": "if_operand",
+      "message": "`if` must be in parentheses when it is an operand",
+      "doc": "Write `1 + (if a then b else c)`.",
+      "section": "language.md 3.1"
+    },
+    {
+      "code": "E2007",
+      "name": "argument_after_option",
+      "message": "positional arguments must come before options",
+      "doc": "In a command, all `key=value` options come after the positional arguments.",
+      "section": "language.md 3.1"
+    },
+    {
+      "code": "E2008",
+      "name": "positional_after_named",
+      "message": "positional arguments must come before named arguments",
+      "doc": "In a function call, named arguments such as `step=0.05` come after the positional ones.",
+      "section": "language.md 3"
+    },
+    {
+      "code": "E2009",
+      "name": "fn_outside_function_file",
+      "message": "`fn` can only be written in a .figf file",
+      "doc": "Functions are defined in function files (`.figf`), not on the command line or in command files (`.figc`).",
+      "section": "language.md 3.1"
+    },
+    {
+      "code": "E2010",
+      "name": "statement_in_function_file",
+      "message": "a .figf file can only contain `fn` definitions",
+      "doc": "Function files hold `fn` definitions and comments only.",
+      "section": "language.md 3"
+    },
+    {
+      "code": "E2011",
+      "name": "for_range_needs_ends",
+      "message": "the range of a `for` needs both ends",
+      "doc": "Write `for i in 0..4 do`, not `for i in 0.. do`.",
+      "section": "language.md 3.1"
+    },
+    {
+      "code": "E2012",
+      "name": "text_after_do",
+      "message": "the body of a `for` starts on the line after `do`",
+      "doc": "The header of a `for` ends at the line whose last token is `do`.",
+      "section": "language.md 2.1"
+    },
+    {
+      "code": "E2013",
+      "name": "option_only_literal",
+      "message": "{kind} can only be an option value",
+      "doc": "Lengths such as `60mm` and colors such as `#d62728` can be written only as option values.",
+      "section": "language.md 2.5"
+    },
+    {
+      "code": "E3001",
+      "name": "undefined_name",
+      "message": "undefined name '{name}'",
+      "doc": "The name is looked up in the current folder only. Write a path such as `root.a.b` for other folders. The message may suggest a similar name.",
+      "section": "language.md 7"
+    },
+    {
+      "code": "E3002",
+      "name": "kind_conflict",
+      "message": "'{name}' already exists as {kind}",
+      "doc": "The kind of a name never changes implicitly. For example, `let norm = 1` fails when an array `norm` exists.",
+      "section": "language.md 5.1"
+    },
+    {
+      "code": "E3003",
+      "name": "case_conflict",
+      "message": "'{name}' differs only in case from '{other}' in the same folder",
+      "doc": "Names are case-sensitive, but two names in the same folder cannot differ only in case.",
+      "section": "language.md 2.3"
+    },
+    {
+      "code": "E3004",
+      "name": "reserved_name",
+      "message": "'{name}' is a reserved word or a command name",
+      "doc": "Reserved words and command names cannot be names of arrays, variables, folders, or functions.",
+      "section": "language.md 2.3"
+    },
+    {
+      "code": "E3005",
+      "name": "loop_variable_conflict",
+      "message": "loop variable '{name}' clashes with {other}",
+      "doc": "A loop variable cannot use a name that exists in the current folder, or the name of an enclosing loop variable.",
+      "section": "language.md 5.5"
+    },
+    {
+      "code": "E3006",
+      "name": "assign_to_loop_variable",
+      "message": "cannot assign to loop variable '{name}'",
+      "doc": "Loop variables are read-only.",
+      "section": "language.md 5.5"
+    },
+    {
+      "code": "E3007",
+      "name": "assign_to_undefined",
+      "message": "'{name}' does not exist; define it with `array` or `let`",
+      "doc": "An assignment stores values in an existing array or variable. It does not create names.",
+      "section": "language.md 5.2"
+    },
+    {
+      "code": "E3008",
+      "name": "name_exists",
+      "message": "'{name}' already exists",
+      "doc": "A command that creates names fails if a name already exists. Add replace=true to replace it, if the command has that option. `array` and `let` replace without it. `source` can be run again with the same name.",
+      "section": "language.md 5.4"
+    },
+    {
+      "code": "E3009",
+      "name": "doc_unknown_name",
+      "message": "'{name}' is not an input or a parameter of '{function}'",
+      "doc": "A documentation comment `/// name: description` must name an input or a parameter of the function below it.",
+      "section": "language.md 6.1"
+    },
+    {
+      "code": "E3010",
+      "name": "doc_duplicate_name",
+      "message": "'{name}' is described twice",
+      "doc": "Each input or parameter can be described once.",
+      "section": "language.md 6.1"
+    },
+    {
+      "code": "E3011",
+      "name": "recursive_function",
+      "message": "'{function}' calls itself through {path}",
+      "doc": "Cycles in the call graph of functions are not allowed, so every statement finishes.",
+      "section": "language.md 6"
+    },
+    {
+      "code": "E3012",
+      "name": "function_refers_outside",
+      "message": "functions can refer only to their inputs and parameters, not to '{name}'",
+      "doc": "Functions are pure. They cannot refer to arrays or variables in folders.",
+      "section": "language.md 6"
+    },
+    {
+      "code": "E3013",
+      "name": "function_shadows_builtin",
+      "message": "'{name}' is a built-in function or fit model",
+      "doc": "A user function cannot have the name of a built-in function or a built-in fit model.",
+      "section": "language.md 7"
+    },
+    {
+      "code": "E3014",
+      "name": "duplicate_definition",
+      "message": "'{name}' is defined twice",
+      "doc": "A function, an input, or a parameter is defined twice.",
+      "section": "language.md 6"
+    },
+    {
+      "code": "E4001",
+      "name": "unknown_option",
+      "message": "unknown option '{option}' for '{command}'",
+      "doc": "The options of each command are listed in spec/commands.json and shown by `help`.",
+      "section": "language.md 5.4"
+    },
+    {
+      "code": "E4002",
+      "name": "repeated_option",
+      "message": "option '{option}' is given twice",
+      "doc": "Each option can be given once.",
+      "section": "language.md 5.4"
+    },
+    {
+      "code": "E4003",
+      "name": "wrong_argument_count",
+      "message": "'{command}' takes {expected} positional arguments, found {found}",
+      "doc": "The positional arguments of each command are listed in spec/commands.json.",
+      "section": "language.md 5.4"
+    },
+    {
+      "code": "E4004",
+      "name": "type_mismatch",
+      "message": "expected {expected}, found {found}",
+      "doc": "There is no implicit type conversion. Convert between numbers and strings with `str` and `num`.",
+      "section": "language.md 4.2"
+    },
+    {
+      "code": "E4005",
+      "name": "invalid_option_value",
+      "message": "invalid value for option '{option}': {reason}",
+      "doc": "The value is not one of the allowed words, or it is outside the allowed range. This also covers text with invalid figlab text notation (spec.md 8.4), and keys of init, fix, or bounds that are not parameters of the model.",
+      "section": "language.md 5.4"
+    },
+    {
+      "code": "E4006",
+      "name": "missing_option",
+      "message": "'{command}' needs the option '{option}'",
+      "doc": "The option is required.",
+      "section": "language.md 5.4"
+    },
+    {
+      "code": "E4007",
+      "name": "cd_in_loop",
+      "message": "`cd` cannot be used in the body of a `for`",
+      "doc": "Name resolution must not change in the middle of a loop.",
+      "section": "language.md 5.5"
+    },
+    {
+      "code": "E4008",
+      "name": "parent_folder_argument",
+      "message": "`..` can only be an argument of `cd`",
+      "doc": "`cd ..` moves to the parent folder. No other command takes `..`.",
+      "section": "language.md 3.1"
+    },
+    {
+      "code": "E4009",
+      "name": "index_count",
+      "message": "'{name}' has {dims} dimensions, but {count} indices were given",
+      "doc": "The number of indices must equal the number of dimensions of the array.",
+      "section": "language.md 4.4"
+    },
+    {
+      "code": "E4010",
+      "name": "wrong_function_arguments",
+      "message": "wrong arguments for '{function}': {reason}",
+      "doc": "The arguments of each built-in function are listed in spec/commands.json. User functions take their inputs and parameters, in order.",
+      "section": "language.md 6"
+    },
+    {
+      "code": "E4011",
+      "name": "not_a_model",
+      "message": "'{name}' cannot be a fit model; it needs exactly one input before `|`",
+      "doc": "A fit model is a built-in model or a user function with `|` and one input.",
+      "section": "language.md 6"
+    },
+    {
+      "code": "E5001",
+      "name": "index_out_of_range",
+      "message": "index {index} is out of range 0..{last}",
+      "doc": "Indices start at 0. A range that extends outside the array is an error.",
+      "section": "language.md 4.4"
+    },
+    {
+      "code": "E5002",
+      "name": "empty_coordinate_range",
+      "message": "no points have coordinates in {range}",
+      "doc": "A coordinate range must contain at least one point.",
+      "section": "language.md 4.4"
+    },
+    {
+      "code": "E5003",
+      "name": "shape_mismatch",
+      "message": "shapes {left} and {right} do not match",
+      "doc": "Operations between arrays need the same shape. Only scalars are applied to every element. Align other shapes explicitly, for example with `repeat`.",
+      "section": "language.md 4.3"
+    },
+    {
+      "code": "E5004",
+      "name": "coordinate_conflict",
+      "message": "the coordinates of {left} and {right} conflict; remove them with values()",
+      "doc": "Operations between arrays whose coordinates are set and differ are errors.",
+      "section": "language.md 4.3"
+    },
+    {
+      "code": "E5005",
+      "name": "integer_conversion",
+      "message": "cannot store {value} in an integer array; use round() or trunc()",
+      "doc": "Storing a non-integer value, NaN, or an out-of-range value in an integer array is an error.",
+      "section": "language.md 5.2"
+    },
+    {
+      "code": "E5006",
+      "name": "invalid_name",
+      "message": "'{text}' is not a valid name",
+      "doc": "A name computed from a string, such as as=nameof(d), must follow the rules for names: a letter followed by letters, digits, and _, and not a reserved word or a command name.",
+      "section": "language.md 2.3"
+    },
+    {
+      "code": "E5007",
+      "name": "cannot_access_file",
+      "message": "cannot read or write '{file}': {reason}",
+      "doc": "The file does not exist, cannot be opened or written, or is not in the expected format.",
+      "section": "spec.md 10"
+    },
+    {
+      "code": "E5008",
+      "name": "number_conversion",
+      "message": "cannot convert '{text}' to a number",
+      "doc": "num() needs text that is a number, such as \"1.5e3\".",
+      "section": "language.md 4.2"
+    },
+    {
+      "code": "E5009",
+      "name": "folder_not_empty",
+      "message": "folder '{name}' is not empty; add recursive=true to remove it with everything in it",
+      "doc": "rm removes a folder that is not empty only with recursive=true.",
+      "section": "language.md 9"
+    },
+    {
+      "code": "E5010",
+      "name": "category_axis",
+      "message": "{operation} is not possible on a category axis",
+      "doc": "Log scale, fitting, and coordinate ranges are not possible on a category axis.",
+      "section": "spec.md 8.3.1"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maisal/figlab/spec/schema/errors.schema.json",
+  "title": "figlab error codes",
+  "description": "The list of error codes of the command language (docs/language.md Section 8).",
+  "type": "object",
+  "required": ["errors"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "errors": {
+      "description": "Sorted by code. A code keeps its meaning once it is published. Codes are never reused.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/error" }
+    }
+  },
+  "$defs": {
+    "error": {
+      "type": "object",
+      "required": ["code", "name", "message", "doc", "section"],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "description": "E1xxx lexical and line, E2xxx syntax, E3xxx names, E4xxx types and arguments, E5xxx runtime.",
+          "type": "string",
+          "pattern": "^E[1-5][0-9]{3}$"
+        },
+        "name": {
+          "description": "A stable identifier for code, in snake_case.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "message": {
+          "description": "The message after the code, in English, starting with a lowercase letter. Words in braces, such as {name}, are filled in.",
+          "type": "string",
+          "pattern": "^[a-z`'{(]"
+        },
+        "doc": {
+          "description": "A longer explanation for the help and the reference.",
+          "type": "string",
+          "minLength": 1
+        },
+        "section": {
+          "description": "Where the rule is defined, for example \"language.md 2.1\".",
+          "type": "string",
+          "pattern": "^(language|spec)\\.md [0-9]+(\\.[0-9]+)*$"
+        }
+      }
+    }
+  }
+}

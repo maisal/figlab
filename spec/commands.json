@@ -1,0 +1,2263 @@
+{
+  "$schema": "./schema/commands.schema.json",
+  "colors": {
+    "black": "#000000",
+    "white": "#ffffff",
+    "blue": "#1f77b4",
+    "orange": "#ff7f0e",
+    "green": "#2ca02c",
+    "red": "#d62728",
+    "purple": "#9467bd",
+    "brown": "#8c564b",
+    "pink": "#e377c2",
+    "gray": "#7f7f7f",
+    "olive": "#bcbd22",
+    "cyan": "#17becf"
+  },
+  "entries": [
+    {
+      "name": "mkdir",
+      "kind": "command",
+      "doc": "Creates a folder.",
+      "args": [
+        {
+          "name": "folder",
+          "type": "name",
+          "doc": "The name of the new folder. A path such as a.b creates b inside the folder a."
+        }
+      ],
+      "options": [
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace a folder that already exists. Everything in it is removed.",
+          "default": false
+        }
+      ],
+      "creates": [
+        {
+          "kind": "folder",
+          "name_from": [
+            "folder"
+          ],
+          "doc": "The new folder."
+        }
+      ],
+      "examples": [
+        "mkdir sample1"
+      ]
+    },
+    {
+      "name": "cd",
+      "kind": "command",
+      "doc": "Makes a folder the current folder. Names in commands and expressions are looked up there (language.md 7). It cannot be used in the body of a for.",
+      "args": [
+        {
+          "name": "folder",
+          "type": "folder",
+          "doc": "The folder. `..` is the parent folder, and `root` is the top folder.",
+          "parent": true
+        }
+      ],
+      "options": [],
+      "examples": [
+        "cd sample1",
+        "cd .."
+      ]
+    },
+    {
+      "name": "rm",
+      "kind": "command",
+      "doc": "Removes an array, a variable, or a folder.",
+      "args": [
+        {
+          "name": "target",
+          "type": "ref",
+          "doc": "The array, variable, or folder to remove."
+        }
+      ],
+      "options": [
+        {
+          "name": "recursive",
+          "type": "bool",
+          "doc": "Also remove a folder that is not empty, with everything in it.",
+          "default": false
+        }
+      ],
+      "examples": [
+        "rm old recursive=true"
+      ]
+    },
+    {
+      "name": "mv",
+      "kind": "command",
+      "doc": "Moves or renames an array, a variable, or a folder.",
+      "args": [
+        {
+          "name": "target",
+          "type": "ref",
+          "doc": "The array, variable, or folder to move."
+        },
+        {
+          "name": "destination",
+          "type": "name",
+          "doc": "The new name, as a path. A path such as a.b moves it into the folder a with the name b."
+        }
+      ],
+      "options": [
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace an array, variable, or folder that already exists at the destination.",
+          "default": false
+        }
+      ],
+      "examples": [
+        "mv norm norm_old"
+      ]
+    },
+    {
+      "name": "source",
+      "kind": "command",
+      "doc": "Registers a folder on this computer as a source of data files, under a name. The first time, a folder picker opens, and the browser stores the access permission (spec.md 10). Running it again with the same name keeps the stored access, so commands from the history can run again. Sources are not names in folders.",
+      "args": [
+        {
+          "name": "name",
+          "type": "name",
+          "doc": "The name of the source."
+        }
+      ],
+      "options": [],
+      "creates": [
+        {
+          "kind": "source",
+          "name_from": [
+            "name"
+          ],
+          "doc": "The source, used with from= in load."
+        }
+      ],
+      "examples": [
+        "source raw"
+      ]
+    },
+    {
+      "name": "load",
+      "kind": "command",
+      "doc": "Imports a data file. Each column becomes an array, or the whole table becomes one 2D array (layout). Settings that are not given are detected automatically (spec.md 10.1). How a file name or a column label that is not a valid name becomes a name is an open question (spec.md Section 15).",
+      "args": [
+        {
+          "name": "file",
+          "type": "string",
+          "doc": "The file name in the source folder. `*` matches any characters. Each matching file is loaded into its own folder, named after the file without its extension."
+        }
+      ],
+      "options": [
+        {
+          "name": "from",
+          "type": "source",
+          "doc": "The source folder that holds the file.",
+          "required": true
+        },
+        {
+          "name": "format",
+          "type": "enum",
+          "doc": "The file format. csv is any delimited text table (comma, tab, semicolon, or whitespace, as given by sep). npy is the NumPy format.",
+          "values": [
+            "csv",
+            "npy"
+          ]
+        },
+        {
+          "name": "layout",
+          "type": "enum",
+          "doc": "How the table becomes arrays. columns: each column becomes a 1D array. matrix: the whole table becomes one 2D array, with the columns along dimension 1 (x) and the rows along dimension 2 (y).",
+          "values": [
+            "columns",
+            "matrix"
+          ],
+          "default": "columns"
+        },
+        {
+          "name": "header",
+          "type": "integer",
+          "doc": "The number of header rows: 0 (none), 1 (column names), or 2 (column names, then units).",
+          "min": 0,
+          "max": 2
+        },
+        {
+          "name": "skip",
+          "type": "integer",
+          "doc": "The number of lines to skip before the table, such as metadata lines.",
+          "min": 0
+        },
+        {
+          "name": "sep",
+          "type": "enum",
+          "doc": "The delimiter between fields.",
+          "values": [
+            "comma",
+            "tab",
+            "semicolon",
+            "whitespace"
+          ]
+        },
+        {
+          "name": "comment",
+          "type": "string",
+          "doc": "Lines that start with this text are comments, such as \"#\"."
+        },
+        {
+          "name": "encoding",
+          "type": "enum",
+          "doc": "The text encoding.",
+          "values": [
+            "utf8",
+            "shift_jis"
+          ]
+        },
+        {
+          "name": "missing",
+          "type": "list",
+          "doc": "Fields with these texts are missing values (NaN), such as [\"NA\", \"-\"]. Empty fields are always missing.",
+          "of": "string"
+        },
+        {
+          "name": "names",
+          "type": "list",
+          "doc": "The names of the arrays: one per column, or one for a matrix. If left out, the header row or the file name gives them.",
+          "of": "name"
+        },
+        {
+          "name": "into",
+          "type": "folder",
+          "doc": "The folder that receives the arrays. It is created if it does not exist. If left out, the current folder."
+        },
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace arrays that already exist.",
+          "default": false
+        }
+      ],
+      "creates": [
+        {
+          "kind": "array",
+          "doc": "One array per column, named by names or by the header row. With layout=matrix, one 2D array, named by names or by the file name."
+        },
+        {
+          "kind": "folder",
+          "name_from": [
+            "into"
+          ],
+          "doc": "The folder given by into, if it does not exist. With `*` in the file name, also one folder per file inside it."
+        }
+      ],
+      "examples": [
+        "load \"scan01.csv\" from=raw format=csv header=1",
+        "load \"scan*.csv\" from=raw format=csv header=1 into=root.scans"
+      ]
+    },
+    {
+      "name": "setcoord",
+      "kind": "command",
+      "doc": "Sets evenly spaced coordinates for one dimension of an array.",
+      "args": [
+        {
+          "name": "array",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "options": [
+        {
+          "name": "dim",
+          "type": "enum",
+          "doc": "The dimension.",
+          "values": [
+            "x",
+            "y",
+            "z",
+            "t"
+          ],
+          "default": "x"
+        },
+        {
+          "name": "start",
+          "type": "number",
+          "doc": "The coordinate of the first point.",
+          "required": true
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "doc": "The distance between points.",
+          "required": true
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "doc": "The unit of the coordinates, such as \"meV\"."
+        }
+      ],
+      "examples": [
+        "setcoord model dim=x start=0 step=0.05 unit=\"meV\""
+      ]
+    },
+    {
+      "name": "setunit",
+      "kind": "command",
+      "doc": "Sets the unit of the values of an array.",
+      "args": [
+        {
+          "name": "array",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "options": [
+        {
+          "name": "unit",
+          "type": "string",
+          "doc": "The unit, such as \"counts\". \"\" removes the unit.",
+          "required": true
+        }
+      ],
+      "examples": [
+        "setunit intensity unit=\"counts\""
+      ]
+    },
+    {
+      "name": "note",
+      "kind": "command",
+      "doc": "Sets the note of an array, a variable, or a folder. Imported arrays get a note with the source file and the import settings.",
+      "args": [
+        {
+          "name": "target",
+          "type": "ref",
+          "doc": "The array, variable, or folder."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "doc": "The note. \"\" removes it."
+        }
+      ],
+      "options": [],
+      "examples": [
+        "note norm \"normalized to the maximum\""
+      ]
+    },
+    {
+      "name": "graph",
+      "kind": "command",
+      "doc": "Creates a graph. Sizes are those of the plot area, the rectangle inside the axes (spec.md 8.1).",
+      "args": [
+        {
+          "name": "graph",
+          "type": "name",
+          "doc": "The name of the new graph."
+        }
+      ],
+      "options": [
+        {
+          "name": "width",
+          "type": "length",
+          "doc": "The width of the plot area."
+        },
+        {
+          "name": "height",
+          "type": "length",
+          "doc": "The height of the plot area."
+        },
+        {
+          "name": "font",
+          "type": "string",
+          "doc": "The font family.",
+          "default": "Arimo"
+        },
+        {
+          "name": "fontsize",
+          "type": "length",
+          "doc": "The font size of axis labels.",
+          "default": "9pt"
+        },
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace a graph that already exists.",
+          "default": false
+        }
+      ],
+      "creates": [
+        {
+          "kind": "graph",
+          "name_from": [
+            "graph"
+          ],
+          "doc": "The new graph."
+        }
+      ],
+      "examples": [
+        "graph fig1 width=60mm height=45mm font=\"Arimo\" fontsize=9pt"
+      ]
+    },
+    {
+      "name": "plot",
+      "kind": "command",
+      "doc": "Adds an xy trace to a graph. A string array as x, or an array with dimension labels without vs, gives a category axis (spec.md 8.3.1).",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "y",
+          "type": "array",
+          "doc": "The y values.",
+          "dims": [
+            1
+          ]
+        },
+        {
+          "name": "x",
+          "type": "array",
+          "doc": "The x values. If left out, the coordinates of y.",
+          "dims": [
+            1
+          ],
+          "prefix": "vs",
+          "optional": true
+        }
+      ],
+      "options": [
+        {
+          "name": "as",
+          "type": "string",
+          "doc": "The name of the trace, as a string expression such as nameof(d). It must be a valid name (language.md 2.3). Defaults to the name of y."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "doc": "The text in the legend, in figlab text notation (spec.md 8.4). Defaults to the name of the trace."
+        },
+        {
+          "name": "style",
+          "type": "enum",
+          "doc": "How the points are drawn.",
+          "values": [
+            "line",
+            "markers",
+            "lines_markers",
+            "sticks",
+            "steps",
+            "bars"
+          ],
+          "default": "line"
+        },
+        {
+          "name": "marker",
+          "type": "enum",
+          "doc": "The shape of the markers.",
+          "values": [
+            "circle",
+            "square",
+            "triangle",
+            "diamond",
+            "cross",
+            "plus"
+          ],
+          "default": "circle"
+        },
+        {
+          "name": "size",
+          "type": "length",
+          "doc": "The width of the markers, including the edge.",
+          "default": "4pt"
+        },
+        {
+          "name": "open",
+          "type": "bool",
+          "doc": "Draw open markers, with an edge and no fill.",
+          "default": false
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "doc": "The color of the lines and markers.",
+          "default": "black"
+        },
+        {
+          "name": "dash",
+          "type": "enum",
+          "doc": "The type of the line.",
+          "values": [
+            "solid",
+            "dashed",
+            "dotted"
+          ],
+          "default": "solid"
+        },
+        {
+          "name": "yerr",
+          "type": [
+            "array",
+            "number"
+          ],
+          "doc": "Error bars in y: ± this array, or ± this number for every point."
+        },
+        {
+          "name": "xerr",
+          "type": [
+            "array",
+            "number"
+          ],
+          "doc": "Error bars in x: ± this array, or ± this number for every point."
+        },
+        {
+          "name": "xaxis",
+          "type": "enum",
+          "doc": "The x axis of the trace.",
+          "values": [
+            "bottom",
+            "top"
+          ],
+          "default": "bottom"
+        },
+        {
+          "name": "yaxis",
+          "type": "enum",
+          "doc": "The y axis of the trace.",
+          "values": [
+            "left",
+            "right"
+          ],
+          "default": "left"
+        },
+        {
+          "name": "legend",
+          "type": "bool",
+          "doc": "Show the trace in the legend.",
+          "default": true
+        },
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace a trace with the same name.",
+          "default": false
+        }
+      ],
+      "creates": [
+        {
+          "kind": "trace",
+          "name_from": [
+            "as",
+            "y"
+          ],
+          "doc": "The new trace."
+        }
+      ],
+      "examples": [
+        "plot fig1 norm vs energy style=markers marker=circle size=3pt",
+        "plot fig1 model style=line color=gray dash=dashed"
+      ]
+    },
+    {
+      "name": "image",
+      "kind": "command",
+      "doc": "Adds a heatmap of a 2D array to a graph. Each value is drawn as a flat pixel centered on its coordinates. NaN pixels are not drawn.",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "z",
+          "type": "array",
+          "doc": "The values.",
+          "dims": [
+            2
+          ]
+        }
+      ],
+      "options": [
+        {
+          "name": "as",
+          "type": "string",
+          "doc": "The name of the trace, as a string expression such as nameof(d). It must be a valid name (language.md 2.3). Defaults to the name of z."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "doc": "The text in the legend, in figlab text notation (spec.md 8.4). Defaults to the name of the trace."
+        },
+        {
+          "name": "colormap",
+          "type": "enum",
+          "doc": "The color map.",
+          "values": [
+            "viridis",
+            "turbo",
+            "gray"
+          ],
+          "default": "viridis"
+        },
+        {
+          "name": "range",
+          "type": [
+            "range",
+            "enum"
+          ],
+          "doc": "The values mapped to the ends of the color map. Values outside get the color of the nearer end.",
+          "values": [
+            "auto"
+          ],
+          "default": "auto"
+        },
+        {
+          "name": "scale",
+          "type": "enum",
+          "doc": "How values are mapped to colors.",
+          "values": [
+            "linear",
+            "log"
+          ],
+          "default": "linear"
+        },
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace a trace with the same name.",
+          "default": false
+        }
+      ],
+      "creates": [
+        {
+          "kind": "trace",
+          "name_from": [
+            "as",
+            "z"
+          ],
+          "doc": "The new trace."
+        }
+      ],
+      "examples": [
+        "image fig3 sqw range=0..1"
+      ]
+    },
+    {
+      "name": "colorbar",
+      "kind": "command",
+      "doc": "Shows the color map of an image trace next to the plot area.",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "trace",
+          "type": "trace",
+          "doc": "The image trace."
+        }
+      ],
+      "options": [
+        {
+          "name": "label",
+          "type": "string",
+          "doc": "The label of the color bar."
+        }
+      ],
+      "examples": [
+        "colorbar fig3 sqw label=\"Intensity (arb. units)\""
+      ]
+    },
+    {
+      "name": "unplot",
+      "kind": "command",
+      "doc": "Removes a trace from a graph.",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "trace",
+          "type": "trace",
+          "doc": "A trace in the graph."
+        }
+      ],
+      "options": [],
+      "examples": [
+        "unplot fig1 model"
+      ]
+    },
+    {
+      "name": "style",
+      "kind": "command",
+      "doc": "Changes the style of a trace, or of some of its points. With an index, only those points change (spec.md 8.2).",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "trace",
+          "type": "trace",
+          "doc": "The trace. An index such as norm[10] or norm[20..29] selects points.",
+          "index": true
+        }
+      ],
+      "options": [
+        {
+          "name": "marker",
+          "type": "enum",
+          "doc": "The shape of the markers.",
+          "values": [
+            "circle",
+            "square",
+            "triangle",
+            "diamond",
+            "cross",
+            "plus"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "length",
+          "doc": "The width of the markers, including the edge."
+        },
+        {
+          "name": "open",
+          "type": "bool",
+          "doc": "Draw open markers, with an edge and no fill."
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "doc": "The color of the lines and markers."
+        },
+        {
+          "name": "dash",
+          "type": "enum",
+          "doc": "The type of the line.",
+          "values": [
+            "solid",
+            "dashed",
+            "dotted"
+          ]
+        },
+        {
+          "name": "visible",
+          "type": "bool",
+          "doc": "Draw the trace. A hidden trace stays in the graph."
+        }
+      ],
+      "examples": [
+        "style fig1 norm[10] color=red",
+        "style fig1 norm[20..29] marker=square",
+        "style fig1 norm visible=false"
+      ]
+    },
+    {
+      "name": "axis",
+      "kind": "command",
+      "doc": "Sets an axis of a graph.",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "position",
+          "type": "enum",
+          "doc": "The axis.",
+          "values": [
+            "left",
+            "right",
+            "bottom",
+            "top"
+          ]
+        }
+      ],
+      "options": [
+        {
+          "name": "scale",
+          "type": "enum",
+          "doc": "The scale. A category axis is chosen from the data (spec.md 8.3.1).",
+          "values": [
+            "linear",
+            "log"
+          ],
+          "default": "linear"
+        },
+        {
+          "name": "range",
+          "type": [
+            "range",
+            "enum"
+          ],
+          "doc": "The range of the axis. A range from a larger to a smaller value reverses the axis.",
+          "values": [
+            "auto"
+          ],
+          "default": "auto"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "doc": "The axis label, in figlab text notation (spec.md 8.4)."
+        },
+        {
+          "name": "tickdir",
+          "type": "enum",
+          "doc": "The direction of the ticks: into the plot area, out of it, both, or no ticks.",
+          "values": [
+            "inward",
+            "outward",
+            "both",
+            "none"
+          ],
+          "default": "inward"
+        },
+        {
+          "name": "order",
+          "type": [
+            "list",
+            "enum"
+          ],
+          "doc": "The order of the categories on a category axis: as in the data, by name, by value, or as listed.",
+          "values": [
+            "data",
+            "name",
+            "value"
+          ],
+          "of": "string",
+          "default": "data"
+        },
+        {
+          "name": "ticklabel_angle",
+          "type": "number",
+          "doc": "The angle of the tick labels, in degrees.",
+          "default": 0
+        }
+      ],
+      "examples": [
+        "axis fig1 bottom scale=log range=0.1..100 label=\"\\it{E} (meV)\"",
+        "axis fig1 left range=auto label=\"Intensity (arb. units)\" tickdir=inward"
+      ]
+    },
+    {
+      "name": "legend",
+      "kind": "command",
+      "doc": "Sets the legend of a graph.",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        }
+      ],
+      "options": [
+        {
+          "name": "position",
+          "type": "enum",
+          "doc": "The corner of the plot area.",
+          "values": [
+            "top_left",
+            "top_right",
+            "bottom_left",
+            "bottom_right"
+          ],
+          "default": "top_right"
+        },
+        {
+          "name": "frame",
+          "type": "bool",
+          "doc": "Draw a frame around the legend.",
+          "default": false
+        },
+        {
+          "name": "visible",
+          "type": "bool",
+          "doc": "Show the legend.",
+          "default": true
+        }
+      ],
+      "examples": [
+        "legend fig1 position=top_right frame=false"
+      ]
+    },
+    {
+      "name": "export",
+      "kind": "command",
+      "doc": "Writes a graph to a file. The format is chosen by the extension: .svg, .pdf, or .png. Only the graph settings are used, not the view state (spec.md 9.4).",
+      "args": [
+        {
+          "name": "graph",
+          "type": "graph",
+          "doc": "The graph."
+        },
+        {
+          "name": "file",
+          "type": "string",
+          "doc": "The file name. A computed name is written in parentheses (language.md 3.1)."
+        }
+      ],
+      "options": [
+        {
+          "name": "dpi",
+          "type": "number",
+          "doc": "The resolution of a PNG file.",
+          "default": 300,
+          "min": 1
+        },
+        {
+          "name": "transparent",
+          "type": "bool",
+          "doc": "Make the background of a PNG file transparent.",
+          "default": false
+        },
+        {
+          "name": "text_as_paths",
+          "type": "bool",
+          "doc": "Write the text of an SVG file as paths.",
+          "default": false
+        }
+      ],
+      "examples": [
+        "export fig1 \"fig1.pdf\"",
+        "export fig1 (\"fig_\" + nameof(d) + \".svg\")"
+      ]
+    },
+    {
+      "name": "fit",
+      "kind": "command",
+      "doc": "Fits a model to data (spec.md 6.5). The results go into the folder given by into. If the fit does not converge, the results are still stored, converged is 0, and a warning is shown.",
+      "args": [
+        {
+          "name": "y",
+          "type": "array",
+          "doc": "The data to fit.",
+          "dims": [
+            1
+          ]
+        },
+        {
+          "name": "x",
+          "type": "array",
+          "doc": "The independent variable. If left out, the coordinates of y.",
+          "dims": [
+            1
+          ],
+          "prefix": "vs",
+          "optional": true
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "model",
+          "doc": "A built-in model, or a user function with | and one input.",
+          "required": true
+        },
+        {
+          "name": "init",
+          "type": "record",
+          "doc": "Initial values of the parameters. Built-in models estimate the ones that are not given.",
+          "of": "number"
+        },
+        {
+          "name": "fix",
+          "type": "list",
+          "doc": "Parameters that are held fixed.",
+          "of": "name"
+        },
+        {
+          "name": "bounds",
+          "type": "record",
+          "doc": "Bounds of the parameters, as ranges such as tau=0..inf.",
+          "of": "range"
+        },
+        {
+          "name": "range",
+          "type": "range",
+          "doc": "The coordinate range of the points used for the fit."
+        },
+        {
+          "name": "points",
+          "type": "range",
+          "doc": "The range of point indices used for the fit."
+        },
+        {
+          "name": "sigma",
+          "type": "array",
+          "doc": "The standard deviation of each point, used as weights."
+        },
+        {
+          "name": "maxiter",
+          "type": "integer",
+          "doc": "The maximum number of iterations.",
+          "default": 200,
+          "min": 1
+        },
+        {
+          "name": "into",
+          "type": "name",
+          "doc": "The folder that receives the results.",
+          "required": true
+        },
+        {
+          "name": "replace",
+          "type": "bool",
+          "doc": "Replace a result folder that already exists.",
+          "default": false
+        }
+      ],
+      "creates": [
+        {
+          "kind": "folder",
+          "name_from": [
+            "into"
+          ],
+          "doc": "The results of the fit.",
+          "contents": [
+            {
+              "kind": "variable",
+              "name": "{param}",
+              "doc": "The value of each parameter."
+            },
+            {
+              "kind": "folder",
+              "name": "err",
+              "doc": "The errors of the parameters."
+            },
+            {
+              "kind": "variable",
+              "name": "err.{param}",
+              "doc": "The error of each parameter."
+            },
+            {
+              "kind": "array",
+              "name": "covar",
+              "doc": "The covariance matrix. Its dimension labels are the parameter names."
+            },
+            {
+              "kind": "array",
+              "name": "curve",
+              "doc": "The model curve, with the same number of points as y."
+            },
+            {
+              "kind": "array",
+              "name": "resid",
+              "doc": "The residuals. NaN outside the fit range."
+            },
+            {
+              "kind": "variable",
+              "name": "chisq",
+              "doc": "χ²."
+            },
+            {
+              "kind": "variable",
+              "name": "chisq_red",
+              "doc": "χ² divided by the degrees of freedom."
+            },
+            {
+              "kind": "variable",
+              "name": "npts",
+              "doc": "The number of points used."
+            },
+            {
+              "kind": "variable",
+              "name": "iterations",
+              "doc": "The number of iterations."
+            },
+            {
+              "kind": "variable",
+              "name": "converged",
+              "doc": "1 if the fit converged, 0 if not."
+            }
+          ]
+        }
+      ],
+      "examples": [
+        "fit intensity vs energy model=gauss into=fit1",
+        "fit decay vs time model=expdecay bounds=(tau=0..inf) sigma=err into=fit3"
+      ]
+    },
+    {
+      "name": "help",
+      "kind": "command",
+      "doc": "Shows the help of a command, a built-in function, a fit model, or a user function. Without a name, shows a list.",
+      "args": [
+        {
+          "name": "topic",
+          "type": "topic",
+          "doc": "The name.",
+          "optional": true
+        }
+      ],
+      "options": [],
+      "examples": [
+        "help",
+        "help gauss",
+        "help fit"
+      ]
+    },
+    {
+      "name": "exp",
+      "kind": "function",
+      "doc": "The exponential function. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The argument."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "e to the power x."
+      }
+    },
+    {
+      "name": "ln",
+      "kind": "function",
+      "doc": "The natural logarithm. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The argument."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "The natural logarithm of x. NaN for x < 0."
+      }
+    },
+    {
+      "name": "sqrt",
+      "kind": "function",
+      "doc": "The square root. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The argument."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "The square root of x. NaN for x < 0."
+      }
+    },
+    {
+      "name": "sin",
+      "kind": "function",
+      "doc": "The sine of an angle in radians. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The angle in radians."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "The sine of x."
+      }
+    },
+    {
+      "name": "round",
+      "kind": "function",
+      "doc": "Rounds to the nearest integer. Halves round away from zero. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The value."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "x rounded."
+      }
+    },
+    {
+      "name": "trunc",
+      "kind": "function",
+      "doc": "Drops the fractional part. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The value."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "x rounded toward zero."
+      }
+    },
+    {
+      "name": "max",
+      "kind": "function",
+      "doc": "The largest value of an array. NaN values are ignored. If all values are NaN, the result is NaN.",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "returns": {
+        "type": "number",
+        "doc": "The largest value."
+      },
+      "examples": [
+        "max(intensity[x=1.0..2.0])"
+      ]
+    },
+    {
+      "name": "ramp",
+      "kind": "function",
+      "doc": "Makes a 1D array whose values equal its coordinates: start, start + step, and so on.",
+      "args": [
+        {
+          "name": "n",
+          "type": "integer",
+          "doc": "The number of points."
+        },
+        {
+          "name": "start",
+          "type": "number",
+          "doc": "The first value.",
+          "named": true,
+          "optional": true,
+          "default": 0
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "doc": "The distance between values.",
+          "named": true,
+          "optional": true,
+          "default": 1
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "doc": "The unit of the values and the coordinates.",
+          "named": true,
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "The new array."
+      },
+      "examples": [
+        "ramp(200, start=0, step=0.05, unit=\"meV\")"
+      ]
+    },
+    {
+      "name": "sum",
+      "kind": "function",
+      "doc": "The sum of the values of an array. NaN values are ignored. The values are added in index order, so the result is the same on every platform (language.md 10.2).",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "returns": {
+        "type": "number",
+        "doc": "The sum."
+      }
+    },
+    {
+      "name": "zeros",
+      "kind": "function",
+      "doc": "Makes an array filled with 0.",
+      "args": [
+        {
+          "name": "n",
+          "type": "integer",
+          "doc": "The number of points along dimension 1."
+        },
+        {
+          "name": "m",
+          "type": "integer",
+          "doc": "The number of points along dimension 2, for a 2D array.",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "The new array, without coordinates."
+      },
+      "examples": [
+        "zeros(100)",
+        "zeros(151, 101)"
+      ]
+    },
+    {
+      "name": "fill",
+      "kind": "function",
+      "doc": "Makes an array filled with one value.",
+      "args": [
+        {
+          "name": "value",
+          "type": "number",
+          "doc": "The value of every point."
+        },
+        {
+          "name": "n",
+          "type": "integer",
+          "doc": "The number of points along dimension 1."
+        },
+        {
+          "name": "m",
+          "type": "integer",
+          "doc": "The number of points along dimension 2, for a 2D array.",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "The new array, without coordinates."
+      },
+      "examples": [
+        "fill(nan, 100)"
+      ]
+    },
+    {
+      "name": "repeat",
+      "kind": "function",
+      "doc": "Repeats a 1D array along a new dimension 2, to align shapes explicitly (language.md 4.3).",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The 1D array.",
+          "dims": [
+            1
+          ]
+        },
+        {
+          "name": "m",
+          "type": "integer",
+          "doc": "The number of copies along dimension 2."
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "A 2D array whose m columns along dimension 2 are copies of w. It keeps the coordinates of w along dimension 1."
+      }
+    },
+    {
+      "name": "values",
+      "kind": "function",
+      "doc": "The values of an array without its coordinates.",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "A copy of w whose coordinates are not set."
+      }
+    },
+    {
+      "name": "xvalues",
+      "kind": "function",
+      "doc": "The coordinates of dimension 1 (x), as an array.",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "An array of the same shape as w."
+      }
+    },
+    {
+      "name": "yvalues",
+      "kind": "function",
+      "doc": "The coordinates of dimension 2 (y), as an array.",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The array. It must have at least 2 dimensions."
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "An array of the same shape as w."
+      }
+    },
+    {
+      "name": "index",
+      "kind": "function",
+      "doc": "The point indices of dimension 1, as an array.",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The array."
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "An array of the same shape as w, with values 0, 1, 2, …"
+      }
+    },
+    {
+      "name": "histogram",
+      "kind": "function",
+      "doc": "Counts the values of an array in bins of equal width.",
+      "args": [
+        {
+          "name": "w",
+          "type": "array",
+          "doc": "The values."
+        },
+        {
+          "name": "bins",
+          "type": "integer",
+          "doc": "The number of bins.",
+          "named": true
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "The counts. The coordinates are the centers of the bins."
+      },
+      "examples": [
+        "histogram(w, bins=50)"
+      ]
+    },
+    {
+      "name": "count",
+      "kind": "function",
+      "doc": "Counts how often each string appears in a string array.",
+      "args": [
+        {
+          "name": "s",
+          "type": "array",
+          "doc": "A string array."
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "doc": "The counts, with the categories as dimension labels, in order of appearance (spec.md 8.3.1)."
+      }
+    },
+    {
+      "name": "str",
+      "kind": "function",
+      "doc": "Converts a number to a string.",
+      "args": [
+        {
+          "name": "x",
+          "type": "number",
+          "doc": "The number."
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "doc": "The shortest text that gives the same number."
+      }
+    },
+    {
+      "name": "num",
+      "kind": "function",
+      "doc": "Converts a string to a number.",
+      "args": [
+        {
+          "name": "s",
+          "type": "string",
+          "doc": "The text, such as \"1.5e3\"."
+        }
+      ],
+      "returns": {
+        "type": "number",
+        "doc": "The number. An error if the text is not a number."
+      }
+    },
+    {
+      "name": "nameof",
+      "kind": "function",
+      "doc": "The name of a folder or an array, for example of a loop variable.",
+      "args": [
+        {
+          "name": "o",
+          "type": "object",
+          "doc": "The folder or array."
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "doc": "The name, without the path."
+      }
+    },
+    {
+      "name": "folders",
+      "kind": "function",
+      "doc": "The direct subfolders of a folder, in name order. A for loop can iterate over them.",
+      "args": [
+        {
+          "name": "f",
+          "type": "folder",
+          "doc": "The folder."
+        }
+      ],
+      "returns": {
+        "type": "collection",
+        "doc": "The subfolders."
+      }
+    },
+    {
+      "name": "arrays",
+      "kind": "function",
+      "doc": "The arrays directly in a folder, in name order. A for loop can iterate over them.",
+      "args": [
+        {
+          "name": "f",
+          "type": "folder",
+          "doc": "The folder."
+        }
+      ],
+      "returns": {
+        "type": "collection",
+        "doc": "The arrays."
+      }
+    },
+    {
+      "name": "voigtpeak",
+      "kind": "function",
+      "doc": "The Voigt function, normalized to 1 at its center. It equals the Gaussian exp(-(x/wg)^2) as wl goes to 0, and the Lorentzian 1/(1 + (x/wl)^2) as wg goes to 0. Works element by element on arrays.",
+      "args": [
+        {
+          "name": "x",
+          "type": "value",
+          "doc": "The distance from the center."
+        },
+        {
+          "name": "wg",
+          "type": "number",
+          "doc": "The width of the Gaussian component, as w in gauss."
+        },
+        {
+          "name": "wl",
+          "type": "number",
+          "doc": "The half width at half maximum of the Lorentzian component."
+        }
+      ],
+      "returns": {
+        "type": "value",
+        "doc": "The value of the peak at x."
+      }
+    },
+    {
+      "name": "line",
+      "kind": "model",
+      "doc": "Straight line.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "a",
+          "doc": "Intercept.",
+          "unit": "y"
+        },
+        {
+          "name": "b",
+          "doc": "Slope.",
+          "unit": "y/x"
+        }
+      ],
+      "body": "a + b*x"
+    },
+    {
+      "name": "poly2",
+      "kind": "model",
+      "doc": "Polynomial of degree 2.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2"
+    },
+    {
+      "name": "poly3",
+      "kind": "model",
+      "doc": "Polynomial of degree 3.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3"
+    },
+    {
+      "name": "poly4",
+      "kind": "model",
+      "doc": "Polynomial of degree 4.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        },
+        {
+          "name": "c4",
+          "doc": "Coefficient of degree 4.",
+          "unit": "y/x^4"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3 + c4*x^4"
+    },
+    {
+      "name": "poly5",
+      "kind": "model",
+      "doc": "Polynomial of degree 5.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        },
+        {
+          "name": "c4",
+          "doc": "Coefficient of degree 4.",
+          "unit": "y/x^4"
+        },
+        {
+          "name": "c5",
+          "doc": "Coefficient of degree 5.",
+          "unit": "y/x^5"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3 + c4*x^4 + c5*x^5"
+    },
+    {
+      "name": "poly6",
+      "kind": "model",
+      "doc": "Polynomial of degree 6.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        },
+        {
+          "name": "c4",
+          "doc": "Coefficient of degree 4.",
+          "unit": "y/x^4"
+        },
+        {
+          "name": "c5",
+          "doc": "Coefficient of degree 5.",
+          "unit": "y/x^5"
+        },
+        {
+          "name": "c6",
+          "doc": "Coefficient of degree 6.",
+          "unit": "y/x^6"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3 + c4*x^4 + c5*x^5 + c6*x^6"
+    },
+    {
+      "name": "poly7",
+      "kind": "model",
+      "doc": "Polynomial of degree 7.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        },
+        {
+          "name": "c4",
+          "doc": "Coefficient of degree 4.",
+          "unit": "y/x^4"
+        },
+        {
+          "name": "c5",
+          "doc": "Coefficient of degree 5.",
+          "unit": "y/x^5"
+        },
+        {
+          "name": "c6",
+          "doc": "Coefficient of degree 6.",
+          "unit": "y/x^6"
+        },
+        {
+          "name": "c7",
+          "doc": "Coefficient of degree 7.",
+          "unit": "y/x^7"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3 + c4*x^4 + c5*x^5 + c6*x^6 + c7*x^7"
+    },
+    {
+      "name": "poly8",
+      "kind": "model",
+      "doc": "Polynomial of degree 8.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        },
+        {
+          "name": "c4",
+          "doc": "Coefficient of degree 4.",
+          "unit": "y/x^4"
+        },
+        {
+          "name": "c5",
+          "doc": "Coefficient of degree 5.",
+          "unit": "y/x^5"
+        },
+        {
+          "name": "c6",
+          "doc": "Coefficient of degree 6.",
+          "unit": "y/x^6"
+        },
+        {
+          "name": "c7",
+          "doc": "Coefficient of degree 7.",
+          "unit": "y/x^7"
+        },
+        {
+          "name": "c8",
+          "doc": "Coefficient of degree 8.",
+          "unit": "y/x^8"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3 + c4*x^4 + c5*x^5 + c6*x^6 + c7*x^7 + c8*x^8"
+    },
+    {
+      "name": "poly9",
+      "kind": "model",
+      "doc": "Polynomial of degree 9.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "c0",
+          "doc": "Coefficient of degree 0.",
+          "unit": "y"
+        },
+        {
+          "name": "c1",
+          "doc": "Coefficient of degree 1.",
+          "unit": "y/x"
+        },
+        {
+          "name": "c2",
+          "doc": "Coefficient of degree 2.",
+          "unit": "y/x^2"
+        },
+        {
+          "name": "c3",
+          "doc": "Coefficient of degree 3.",
+          "unit": "y/x^3"
+        },
+        {
+          "name": "c4",
+          "doc": "Coefficient of degree 4.",
+          "unit": "y/x^4"
+        },
+        {
+          "name": "c5",
+          "doc": "Coefficient of degree 5.",
+          "unit": "y/x^5"
+        },
+        {
+          "name": "c6",
+          "doc": "Coefficient of degree 6.",
+          "unit": "y/x^6"
+        },
+        {
+          "name": "c7",
+          "doc": "Coefficient of degree 7.",
+          "unit": "y/x^7"
+        },
+        {
+          "name": "c8",
+          "doc": "Coefficient of degree 8.",
+          "unit": "y/x^8"
+        },
+        {
+          "name": "c9",
+          "doc": "Coefficient of degree 9.",
+          "unit": "y/x^9"
+        }
+      ],
+      "body": "c0 + c1*x + c2*x^2 + c3*x^3 + c4*x^4 + c5*x^5 + c6*x^6 + c7*x^7 + c8*x^8 + c9*x^9"
+    },
+    {
+      "name": "gauss",
+      "kind": "model",
+      "doc": "Gaussian peak on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Peak height above the baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "x0",
+          "doc": "Peak center.",
+          "unit": "x"
+        },
+        {
+          "name": "w",
+          "doc": "Width (√2 times the standard deviation).",
+          "unit": "x",
+          "constraint": "w > 0"
+        }
+      ],
+      "body": "y0 + a*exp(-((x - x0)/w)^2)",
+      "display": "y_{0} + a exp(-((x - x_{0})/w)^{2})",
+      "derived": [
+        {
+          "name": "fwhm",
+          "doc": "Full width at half maximum.",
+          "expr": "2*sqrt(ln(2))*w",
+          "unit": "x"
+        },
+        {
+          "name": "area",
+          "doc": "Peak area above the baseline.",
+          "expr": "a*w*sqrt(pi)",
+          "unit": "x*y"
+        }
+      ],
+      "guess": "y0: median of the points at both ends. a: maximum minus y0. x0: position of the maximum. w: from the full width at half maximum.",
+      "examples": [
+        "fit intensity vs energy model=gauss into=fit1"
+      ]
+    },
+    {
+      "name": "lor",
+      "kind": "model",
+      "doc": "Lorentzian peak on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Peak height above the baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "x0",
+          "doc": "Peak center.",
+          "unit": "x"
+        },
+        {
+          "name": "w",
+          "doc": "Half width at half maximum.",
+          "unit": "x",
+          "constraint": "w > 0"
+        }
+      ],
+      "body": "y0 + a/(1 + ((x - x0)/w)^2)",
+      "derived": [
+        {
+          "name": "fwhm",
+          "doc": "Full width at half maximum.",
+          "expr": "2*w",
+          "unit": "x"
+        },
+        {
+          "name": "area",
+          "doc": "Peak area above the baseline.",
+          "expr": "pi*a*w",
+          "unit": "x*y"
+        }
+      ]
+    },
+    {
+      "name": "voigt",
+      "kind": "model",
+      "doc": "Voigt peak on a constant baseline: a Gaussian and a Lorentzian combined.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Peak height above the baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "x0",
+          "doc": "Peak center.",
+          "unit": "x"
+        },
+        {
+          "name": "wg",
+          "doc": "Width of the Gaussian component, as w in gauss.",
+          "unit": "x",
+          "constraint": "wg >= 0"
+        },
+        {
+          "name": "wl",
+          "doc": "Half width at half maximum of the Lorentzian component.",
+          "unit": "x",
+          "constraint": "wl >= 0"
+        }
+      ],
+      "body": "y0 + a*voigtpeak(x - x0, wg, wl)"
+    },
+    {
+      "name": "expdecay",
+      "kind": "model",
+      "doc": "Exponential decay on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Amplitude at x = 0.",
+          "unit": "y"
+        },
+        {
+          "name": "tau",
+          "doc": "Time constant.",
+          "unit": "x"
+        }
+      ],
+      "body": "y0 + a*exp(-x/tau)"
+    },
+    {
+      "name": "dblexp",
+      "kind": "model",
+      "doc": "Sum of two exponential decays on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a1",
+          "doc": "Amplitude of the first component.",
+          "unit": "y"
+        },
+        {
+          "name": "tau1",
+          "doc": "Time constant of the first component.",
+          "unit": "x"
+        },
+        {
+          "name": "a2",
+          "doc": "Amplitude of the second component.",
+          "unit": "y"
+        },
+        {
+          "name": "tau2",
+          "doc": "Time constant of the second component.",
+          "unit": "x"
+        }
+      ],
+      "body": "y0 + a1*exp(-x/tau1) + a2*exp(-x/tau2)"
+    },
+    {
+      "name": "power",
+      "kind": "model",
+      "doc": "Power law on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Prefactor."
+        },
+        {
+          "name": "p",
+          "doc": "Exponent.",
+          "unit": "1"
+        }
+      ],
+      "body": "y0 + a*x^p"
+    },
+    {
+      "name": "sine",
+      "kind": "model",
+      "doc": "Sine wave on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Amplitude.",
+          "unit": "y"
+        },
+        {
+          "name": "f",
+          "doc": "Frequency, in units of 1/x.",
+          "unit": "1/x"
+        },
+        {
+          "name": "phi",
+          "doc": "Phase, in radians.",
+          "unit": "1"
+        }
+      ],
+      "body": "y0 + a*sin(2*pi*f*x + phi)"
+    },
+    {
+      "name": "sigmoid",
+      "kind": "model",
+      "doc": "Logistic step on a constant baseline.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Height of the step.",
+          "unit": "y"
+        },
+        {
+          "name": "x0",
+          "doc": "Midpoint of the transition.",
+          "unit": "x"
+        },
+        {
+          "name": "w",
+          "doc": "Width of the transition.",
+          "unit": "x"
+        }
+      ],
+      "body": "y0 + a/(1 + exp(-(x - x0)/w))"
+    },
+    {
+      "name": "lognormal",
+      "kind": "model",
+      "doc": "Log-normal peak on a constant baseline. Only for x > 0.",
+      "inputs": [
+        "x"
+      ],
+      "params": [
+        {
+          "name": "y0",
+          "doc": "Baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "a",
+          "doc": "Peak height above the baseline.",
+          "unit": "y"
+        },
+        {
+          "name": "x0",
+          "doc": "Peak center.",
+          "unit": "x",
+          "constraint": "x0 > 0"
+        },
+        {
+          "name": "w",
+          "doc": "Width in log space.",
+          "unit": "1",
+          "constraint": "w > 0"
+        }
+      ],
+      "body": "y0 + a*exp(-(ln(x/x0)/w)^2)"
+    }
+  ]
+}

@@ -182,7 +182,7 @@ cd sample1
 source raw                                        // register the source folder (a folder picker opens the first time)
 load "scan01.csv" from=raw format=csv header=1    // create one array per column
 array norm = intensity / max(intensity)           // define an array
-array model = exp(-axis(200, start=0, step=0.05, unit="meV") / 2.5)
+array model = exp(-ramp(200, start=0, step=0.05, unit="meV") / 2.5)
 norm[0..9] = nan                                  // overwrite points 0 to 9 (both ends included)
 let peak = max(intensity[x=1.0..2.0])             // maximum where the coordinate is 1.0 to 2.0
 peak                                              // show the value
@@ -210,7 +210,7 @@ load "scan*.csv" from=raw format=csv header=1 into=root.scans   // one folder pe
 graph fig1 width=60mm height=45mm
 for d in folders(root.scans) do
     array d.norm = d.intensity / max(d.intensity)
-    fit d.norm vs d.energy model=gauss into=d.fit
+    fit d.norm vs d.energy model=gauss into=d.peakfit
     plot fig1 d.norm vs d.energy as=nameof(d)
 end
 ```
@@ -246,7 +246,7 @@ fit intensity vs energy model=gauss into=fit1
 fit intensity vs energy model=gauss2
     init=(a1=1, c1=0.5, w1=0.1, a2=0.5, c2=1.2, w2=0.1)
     fix=[c1] range=0.5..3.0 into=fit2
-fit decay vs time model=expdecay sigma=err bounds=(tau=0..inf) into=fit3
+fit decay vs time model=expdecay bounds=(tau=0..inf) sigma=err into=fit3
 plot fig1 fit2.curve vs energy style=line color=red
 let pos = fit2.c1
 ```
@@ -423,7 +423,7 @@ plot fig1 model style=line color=gray dash=dashed
 style fig1 norm[10] color=red                  // change the color of point 10 only
 style fig1 norm[20..29] marker=square          // change the marker of points 20 to 29
 axis fig1 bottom scale=log range=0.1..100 label="\it{E} (meV)"
-axis fig1 left range=auto label="Intensity (arb. units)" tickdir=in
+axis fig1 left range=auto label="Intensity (arb. units)" tickdir=inward
 legend fig1 position=top_right frame=false
 export fig1 "fig1.pdf"                         // the format is determined by the extension
 ```
@@ -578,7 +578,7 @@ The screen has three layers:
 
 ```
 source raw
-load "scan01.csv" from=raw format=csv header=1 sep="," comment="#" encoding=shift_jis
+load "scan01.csv" from=raw format=csv header=1 sep=comma comment="#" encoding=shift_jis
     names=[energy, intensity, err] into=sample1
 ```
 
@@ -855,3 +855,4 @@ The draft's requirements have no priorities yet, so this document proposes them.
 | 5 | Should source files be copied into the project (Section 10)? | No |
 | 6 | Which fonts can be used (9.2)? | Bundled fonts + fonts loaded by the user |
 | 7 | Acceptance figures and priorities of each requirement (draft) | The proposal in Section 14 |
+| 8 | How does a file name or a column label that is not a valid name (such as `2theta`, `fit`, `Energy (meV)`, or a Japanese label) become a folder or array name (language.md 2.3)? | To decide with the import code (roadmap.md M3). The original text is kept in the note |

@@ -78,6 +78,7 @@ Done when: the Quick Plot speed targets in spec.md Section 13 are met. Release v
 - `figlab check`, `figlab fmt`, `figlab run`, and the conformance tests
 - Language service: highlighting, completion, hover help, and diagnostics (CodeMirror 6). Help and the web reference are made from `commands.json`
 - Data: 2D arrays, table editing and paste, `.npy`, saving and opening projects (Chrome), and undo and redo
+- Complete the built-in functions and fit models in `spec/commands.json` before v0.2. After user functions are released, a new built-in name can clash with them (language.md 10.1)
 
 Done when: the conformance tests pass, and every GUI operation from M3 is recorded as a command that gives the same result when it runs again.
 
