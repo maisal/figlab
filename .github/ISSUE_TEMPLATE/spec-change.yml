@@ -1,0 +1,28 @@
+name: Specification change
+description: Propose a change to spec.md, language.md, or spec/*.json.
+labels: ["kind:spec"]
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Document and section
+      description: For example "language.md 2.1" or "spec.md 8.3".
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: The change
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: What else changes. For example other sections, commands.json, conformance tests, or saved projects.

@@ -1,0 +1,11 @@
+# Groups the generated release notes by label (docs/development.md 5.4, 5.5).
+changelog:
+  categories:
+    - title: Features
+      labels: ["kind:feature"]
+    - title: Bug fixes
+      labels: ["kind:bug"]
+    - title: Specification
+      labels: ["kind:spec"]
+    - title: Other changes
+      labels: ["*"]
