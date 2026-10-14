@@ -111,5 +111,5 @@ M0 → M1 → M2 → M3 (v0.1)
 | D1 | Where graph operations are applied | In Rust, so that the browser and `figlab run` share them. The graph model (JSON) stays on the main thread. Update spec.md Section 4 when this is decided | Before M2 |
 | D2 | UI framework | Decided by S5: Preact with `@preact/signals` ([ADR 0014](adr/0014-ui-framework.md)) | M1 |
 | D3 | PDF library and fallback font | Decided by S1: pdf-writer with subsetter, and Noto Sans Math. Text shaping uses harfrust with skrifa ([ADR 0010](adr/0010-text-shaping-pdf-and-fallback-font.md)) | M1 |
-| D4 | Fitting library | Decided by S6 | M1 |
+| D4 | Fitting library | Decided by S6: a fork of the `levenberg-marquardt` crate with cmpfit-style bounds ([ADR 0015](adr/0015-fitting-library.md)) | M1 |
 | D5 | Open questions in language.md Section 11 | Decided. See language.md Section 11 | M0 |

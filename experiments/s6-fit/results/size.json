@@ -1,0 +1,44 @@
+[
+ {
+  "module": "base",
+  "cargo": 19034,
+  "wasm_opt_oz": 16360,
+  "gzip": 7656,
+  "brotli": 6636
+ },
+ {
+  "module": "lm",
+  "cargo": 71886,
+  "wasm_opt_oz": 63673,
+  "gzip": 28075,
+  "brotli": 24935
+ },
+ {
+  "module": "lm-transform",
+  "cargo": 75320,
+  "wasm_opt_oz": 67009,
+  "gzip": 29676,
+  "brotli": 26290
+ },
+ {
+  "module": "lm-bounded",
+  "cargo": 74579,
+  "wasm_opt_oz": 66333,
+  "gzip": 29229,
+  "brotli": 25842
+ },
+ {
+  "module": "cmpfit",
+  "cargo": 56944,
+  "wasm_opt_oz": 51084,
+  "gzip": 22784,
+  "brotli": 20214
+ },
+ {
+  "module": "rmpfit",
+  "cargo": 95939,
+  "wasm_opt_oz": 85944,
+  "gzip": 37151,
+  "brotli": 32129
+ }
+]

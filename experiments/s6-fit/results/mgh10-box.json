@@ -1,0 +1,11 @@
+[
+{"cand":"lm-transform","bounds":"loose box","deriv":"analytic","maxiter":1000,"iterations":184,"status":"Converged(xtol)","min_lre_params":0.00},
+{"cand":"lm-bounded","bounds":"loose box","deriv":"analytic","maxiter":1000,"iterations":1000,"status":"MaxIter","min_lre_params":0.00},
+{"cand":"cmpfit","bounds":"loose box","deriv":"analytic","maxiter":1000,"iterations":1000,"status":"MAXITER","min_lre_params":0.00},
+{"cand":"rmpfit","bounds":"loose box","deriv":"analytic","maxiter":1000,"iterations":1000,"status":"MaxIter","min_lre_params":0.00},
+{"cand":"lm-transform","bounds":"loose box","deriv":"analytic","maxiter":20000,"iterations":184,"status":"Converged(xtol)","min_lre_params":0.00},
+{"cand":"lm-bounded","bounds":"loose box","deriv":"analytic","maxiter":20000,"iterations":6785,"status":"Converged(xtol)","min_lre_params":10.92},
+{"cand":"cmpfit","bounds":"loose box","deriv":"analytic","maxiter":20000,"iterations":6844,"status":"OK_PAR","min_lre_params":9.45},
+{"cand":"rmpfit","bounds":"loose box","deriv":"analytic","maxiter":20000,"iterations":6892,"status":"Par","min_lre_params":9.37},
+{"cand":"lm","bounds":"no bounds","deriv":"analytic","maxiter":20000,"iterations":253,"status":"Converged(xtol)","min_lre_params":10.92}
+]

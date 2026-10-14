@@ -1,0 +1,95 @@
+{
+ "platform": "wasm32 (Node v24.14.1)",
+ "points": 100000,
+ "note": "median_ms and p95_ms time the fit plus the error analysis",
+ "results": [
+  {
+   "cand": "lm",
+   "deriv": "analytic",
+   "median_ms": 69.035,
+   "p95_ms": 70.234,
+   "min_ms": 68.883,
+   "fit_only_median_ms": 63.674,
+   "fit_only_p95_ms": 65.103,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "lm",
+   "deriv": "forward",
+   "median_ms": 105.497,
+   "p95_ms": 107.186,
+   "min_ms": 105.193,
+   "fit_only_median_ms": 94.8,
+   "fit_only_p95_ms": 96.382,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "lm-bounded",
+   "deriv": "analytic",
+   "median_ms": 70.15,
+   "p95_ms": 70.97,
+   "min_ms": 69.817,
+   "fit_only_median_ms": 64.379,
+   "fit_only_p95_ms": 65.041,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "lm-bounded",
+   "deriv": "forward",
+   "median_ms": 106.608,
+   "p95_ms": 107.886,
+   "min_ms": 106.234,
+   "fit_only_median_ms": 95.444,
+   "fit_only_p95_ms": 97.783,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "cmpfit",
+   "deriv": "analytic",
+   "median_ms": 64.168,
+   "p95_ms": 65.456,
+   "min_ms": 63.644,
+   "fit_only_median_ms": 58.582,
+   "fit_only_p95_ms": 59.881,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "cmpfit",
+   "deriv": "forward",
+   "median_ms": 91.063,
+   "p95_ms": 93.275,
+   "min_ms": 90.469,
+   "fit_only_median_ms": 79.789,
+   "fit_only_p95_ms": 81.246,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "rmpfit",
+   "deriv": "analytic",
+   "median_ms": 69.293,
+   "p95_ms": 70.525,
+   "min_ms": 68.991,
+   "fit_only_median_ms": 63.855,
+   "fit_only_p95_ms": 65.441,
+   "runs": 21,
+   "iterations": 8
+  },
+  {
+   "cand": "rmpfit",
+   "deriv": "forward",
+   "median_ms": 99.626,
+   "p95_ms": 101.548,
+   "min_ms": 98.879,
+   "fit_only_median_ms": 88.304,
+   "fit_only_p95_ms": 89.893,
+   "runs": 21,
+   "iterations": 8
+  }
+ ]
+}

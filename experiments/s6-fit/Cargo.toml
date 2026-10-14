@@ -1,0 +1,34 @@
+# S6: fitting library experiment. Its own Cargo workspace (experiments/README.md).
+[workspace]
+resolver = "3"
+members = ["crates/s6fit", "crates/s6cli", "crates/s6wasm", "crates/s6size"]
+# downloads/lm-bounded is a path dependency, not a member.
+exclude = ["downloads"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+publish = false
+license = "MIT OR Apache-2.0"
+
+[workspace.dependencies]
+s6fit = { path = "crates/s6fit", default-features = false }
+libm = "=0.2.16"
+levenberg-marquardt = "=0.15.0"
+nalgebra = { version = "=0.34.2", default-features = false }
+rmpfit = "=2.0.0"
+# The fork of levenberg-marquardt 0.15.0 with cmpfit-style bounds (A2).
+# scripts/fetch.sh makes it from the crates.io source and patches/lm-bounded.patch.
+lm-bounded = { path = "downloads/lm-bounded" }
+cc = "=1.4.7"
+
+[profile.release]
+codegen-units = 1
+lto = true
+
+# The minimal wasm modules for the size measurement.
+[profile.size]
+inherits = "release"
+opt-level = "z"
+panic = "abort"
+strip = true

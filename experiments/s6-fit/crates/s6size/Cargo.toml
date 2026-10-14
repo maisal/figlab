@@ -1,0 +1,23 @@
+[package]
+name = "s6size"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+# Build with exactly one feature (scripts/size.sh). `base` has no fit: it
+# evaluates the model once, to show the size every module shares.
+[features]
+base = []
+default = ["base"]
+lm = []
+lm-transform = []
+lm-bounded = []
+cmpfit = ["s6fit/cmpfit"]
+rmpfit = []
+
+[dependencies]
+s6fit.workspace = true

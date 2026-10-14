@@ -1,0 +1,10 @@
+{"platform":"native aarch64 macos","points":100000,"note":"median_ms and p95_ms time the fit plus the error analysis","results":[
+{"cand":"lm","deriv":"analytic","median_ms":54.666,"p95_ms":57.288,"min_ms":53.944,"fit_only_median_ms":50.019,"fit_only_p95_ms":52.465,"runs":21,"iterations":8,"nfev":11,"status":"Converged(ftol, xtol)"},
+{"cand":"lm","deriv":"forward","median_ms":81.345,"p95_ms":82.747,"min_ms":80.184,"fit_only_median_ms":72.485,"fit_only_p95_ms":73.940,"runs":21,"iterations":8,"nfev":43,"status":"Converged(xtol)"},
+{"cand":"lm-bounded","deriv":"analytic","median_ms":54.490,"p95_ms":56.063,"min_ms":53.577,"fit_only_median_ms":49.260,"fit_only_p95_ms":51.735,"runs":21,"iterations":8,"nfev":11,"status":"Converged(ftol, xtol)"},
+{"cand":"lm-bounded","deriv":"forward","median_ms":80.660,"p95_ms":82.161,"min_ms":79.657,"fit_only_median_ms":72.181,"fit_only_p95_ms":74.324,"runs":21,"iterations":8,"nfev":43,"status":"Converged(xtol)"},
+{"cand":"cmpfit","deriv":"analytic","median_ms":52.502,"p95_ms":54.310,"min_ms":51.760,"fit_only_median_ms":47.485,"fit_only_p95_ms":48.789,"runs":21,"iterations":8,"nfev":19,"status":"OK_BOTH"},
+{"cand":"cmpfit","deriv":"forward","median_ms":72.356,"p95_ms":74.634,"min_ms":71.253,"fit_only_median_ms":63.598,"fit_only_p95_ms":66.760,"runs":21,"iterations":8,"nfev":43,"status":"OK_PAR"},
+{"cand":"rmpfit","deriv":"analytic","median_ms":54.212,"p95_ms":55.815,"min_ms":53.798,"fit_only_median_ms":49.658,"fit_only_p95_ms":51.013,"runs":21,"iterations":8,"nfev":19,"status":"Both"},
+{"cand":"rmpfit","deriv":"forward","median_ms":76.273,"p95_ms":79.240,"min_ms":75.665,"fit_only_median_ms":67.230,"fit_only_p95_ms":69.662,"runs":21,"iterations":8,"nfev":43,"status":"Par"}
+]}
