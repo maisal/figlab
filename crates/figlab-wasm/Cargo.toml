@@ -1,0 +1,18 @@
+[package]
+name = "figlab-wasm"
+description = "The boundary between figlab and the browser"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+figlab-core.workspace = true
+figlab-io.workspace = true
+figlab-lang.workspace = true
+figlab-render.workspace = true
+
+[lints]
+workspace = true

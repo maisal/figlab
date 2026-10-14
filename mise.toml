@@ -7,12 +7,27 @@ rust = { version = "1.99.0", components = "rustfmt,clippy", targets = "wasm32-un
 node = "24.14.1"
 pnpm = "10.25.0"
 ripgrep = "15.1.0"
+cargo-deny = "0.20.2"
+"github:EmbarkStudios/cargo-about" = "0.9.2"
 # Add wasm-bindgen-cli with the same version as wasm-bindgen when it is added to Cargo.toml.
 
 [tasks.check]
 description = "Checks to pass before opening a PR"
-depends = ["check:english"]   # add check:rust, check:lang, check:deps, and check:web when they exist (docs/development.md 3.2)
+depends = ["check:rust", "check:english", "check:deps"]   # add check:lang and check:web when they exist (docs/development.md 3.2)
+
+[tasks."check:rust"]
+description = "Rust format check, clippy, tests, and a wasm build check"
+run = [
+    "cargo fmt --all --check",
+    "cargo clippy --workspace --all-targets --locked -- -D warnings",
+    "cargo test --workspace --locked",
+    "cargo check -p figlab-wasm --target wasm32-unknown-unknown --locked",
+]
 
 [tasks."check:english"]
 description = "Fail if CJK text appears outside test fixtures"
 run = "rg -n --hidden --glob '!.git/' --glob '!.jj/' '[\\p{Han}\\p{Hiragana}\\p{Katakana}\\p{Hangul}]' --glob '!tests/import/**' --glob '!tests/**/fixtures/**' . && exit 1 || test $? -eq 1"   # rg exits 0 on a match, 1 on no match, 2 on an error. Tasks run with errexit, so use && and ||. --hidden also checks tracked dot folders such as .claude/ and .github/
+
+[tasks."check:deps"]
+description = "Check the licenses and sources of dependencies (docs/development.md 6.6)"
+run = "cargo deny --locked check licenses bans sources"
