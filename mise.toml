@@ -25,7 +25,7 @@ run = [
 ]
 
 [tasks."check:lang"]
-description = "Check spec/*.json and the conformance test files (docs/language.md 10)"
+description = "Check spec/*.json and the expected results of the conformance and import tests"
 depends = ["install:web"]
 run = "node tools/check-spec.mjs"
 

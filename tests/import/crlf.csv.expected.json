@@ -1,0 +1,25 @@
+{
+  "doc": "CRLF line endings.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 1,
+  "columns": [
+    {
+      "label": "x",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "y",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 15
+}

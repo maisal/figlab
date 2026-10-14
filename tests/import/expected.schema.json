@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maisal/figlab/tests/import/expected.schema.json",
+  "title": "Expected detection result of an import test file",
+  "description": "What automatic detection (docs/spec.md 10.1) must find in one file in tests/import. The settings use the words of the load options in spec/commands.json. bom is not an option, because a byte order mark is always skipped.",
+  "type": "object",
+  "required": [
+    "doc",
+    "encoding",
+    "bom",
+    "sep",
+    "decimal",
+    "skip",
+    "comment",
+    "header",
+    "columns",
+    "rows"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "doc": {
+      "description": "What the file tests, in one sentence.",
+      "type": "string",
+      "minLength": 1
+    },
+    "encoding": {
+      "description": "As the encoding option of load.",
+      "enum": [
+        "utf8",
+        "shift_jis"
+      ]
+    },
+    "bom": {
+      "description": "The file starts with a byte order mark.",
+      "type": "boolean"
+    },
+    "sep": {
+      "description": "As the sep option of load.",
+      "enum": [
+        "comma",
+        "tab",
+        "semicolon",
+        "whitespace"
+      ]
+    },
+    "decimal": {
+      "description": "As the decimal option of load.",
+      "enum": [
+        "point",
+        "comma"
+      ]
+    },
+    "skip": {
+      "description": "As the skip option of load: the number of metadata lines before the table, including blank lines. Comment lines are not counted.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "comment": {
+      "description": "The text that starts comment lines, or null if there are none.",
+      "enum": [
+        "#",
+        "%",
+        ";",
+        null
+      ]
+    },
+    "header": {
+      "description": "As the header option of load: 0 (none), 1 (column labels), or 2 (column labels, then units).",
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "columns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "unit",
+          "type",
+          "missing"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "description": "The text of the column in the header row, or null without a header row.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "description": "The text of the column in the unit row, or null without a unit row.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "enum": [
+              "number",
+              "datetime",
+              "string"
+            ]
+          },
+          "missing": {
+            "description": "The number of missing values (NaN) in the column.",
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "rows": {
+      "description": "The number of data rows.",
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

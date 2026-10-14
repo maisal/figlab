@@ -1,0 +1,31 @@
+{
+  "doc": "Comma-separated, UTF-8, one header row.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 1,
+  "columns": [
+    {
+      "label": "energy",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "intensity",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "error",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 51
+}

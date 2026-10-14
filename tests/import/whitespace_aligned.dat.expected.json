@@ -1,0 +1,31 @@
+{
+  "doc": "Columns aligned with spaces, after # comment lines.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "whitespace",
+  "decimal": "point",
+  "skip": 0,
+  "comment": "#",
+  "header": 1,
+  "columns": [
+    {
+      "label": "q",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "I",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "dI",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 30
+}

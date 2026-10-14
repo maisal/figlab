@@ -1,0 +1,25 @@
+{
+  "doc": "A string column with repeated categories.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 1,
+  "columns": [
+    {
+      "label": "material",
+      "unit": null,
+      "type": "string",
+      "missing": 0
+    },
+    {
+      "label": "hardness",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 15
+}

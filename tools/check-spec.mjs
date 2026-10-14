@@ -7,6 +7,8 @@
 // - Every error code written in the documents exists in spec/errors.json.
 // - The expected results of the conformance tests (tests/lang) match their
 //   schema and use only known error codes.
+// - The expected results of the import tests (tests/import) match their
+//   schema.
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -324,6 +326,36 @@ if (existsSync(testSchema)) {
   for (const path of [...filesUnder("tests/lang", ".figc"), ...filesUnder("tests/lang", ".figf")]) {
     if (!existsSync(path.replace(/\.fig[cf]$/, ".expected.json"))) {
       problem(path, "there is no matching .expected.json file");
+    }
+  }
+}
+
+// ---- Import tests ----------------------------------------------------------------
+
+if (existsSync("tests/import")) {
+  const importSchema = "tests/import/expected.schema.json";
+  if (!existsSync(importSchema)) problem("tests/import", `${importSchema} is missing`);
+  const check = existsSync(importSchema) ? ajv.compile(readJson(importSchema)) : () => true;
+  for (const path of filesUnder("tests/import", ".expected.json")) {
+    const data = readJson(path);
+    if (!check(data)) {
+      for (const e of check.errors ?? []) problem(path, `${e.instancePath || "/"} ${e.message ?? ""}`);
+    }
+    if (!existsSync(path.replace(/\.expected\.json$/, ""))) {
+      problem(path, "the data file is missing");
+    }
+    // Labels and units must match the header rows.
+    for (const c of data.columns ?? []) {
+      if ((data.header >= 1) !== (c.label !== null)) problem(path, `a label must be given exactly when header is 1 or 2`);
+      if ((data.header === 2) !== (c.unit !== null)) problem(path, `a unit must be given exactly when header is 2`);
+    }
+  }
+  // Every data file needs an expected result.
+  const skipped = new Set(["README.md", "generate_files.py", "expected.schema.json"]);
+  for (const entry of readdirSync("tests/import", { withFileTypes: true })) {
+    if (!entry.isFile() || skipped.has(entry.name) || entry.name.endsWith(".expected.json")) continue;
+    if (!existsSync(join("tests/import", `${entry.name}.expected.json`))) {
+      problem(join("tests/import", entry.name), "there is no matching .expected.json file");
     }
   }
 }

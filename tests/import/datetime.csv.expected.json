@@ -1,0 +1,31 @@
+{
+  "doc": "A date-time column in ISO 8601 form.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 1,
+  "columns": [
+    {
+      "label": "timestamp",
+      "unit": null,
+      "type": "datetime",
+      "missing": 0
+    },
+    {
+      "label": "temperature",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "pressure",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 24
+}

@@ -1,0 +1,25 @@
+{
+  "doc": "Numbers in E notation with leading spaces, ; comment lines, and no header row.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "whitespace",
+  "decimal": "point",
+  "skip": 0,
+  "comment": ";",
+  "header": 0,
+  "columns": [
+    {
+      "label": null,
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": null,
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 20
+}

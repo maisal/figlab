@@ -602,6 +602,17 @@ Whether a dropped file is read correctly with no further input determines how us
 | Column types | Number, date-time, or string. The decimal separator (`.` / `,`) is also detected |
 | Missing values | Empty fields, `NaN`, `NA`, `-`, etc. |
 
+Detection runs in this order. [Proposal] The rules are confirmed with the import code (roadmap.md M3) and the files in `tests/import/`.
+
+1. **Encoding**: a byte order mark means UTF-8, and the mark is skipped. Otherwise a file that is valid UTF-8 is UTF-8, and other files are tried as Shift_JIS.
+2. **Comment lines**: lines whose first non-space character is `#`, `%`, or `;` are comments. They are set aside before anything else, wherever they are.
+3. **Delimiter and table start**: for each candidate (tab, semicolon, comma, whitespace), find the longest run of lines at the end of the file in which every non-blank line splits into the same number of fields, and that number is 2 or more. Whitespace means runs of spaces and tabs, and leading and trailing whitespace is ignored. The candidate with the longest run wins. On a tie, the first in the order above wins. The run is the table.
+4. **Metadata lines**: the lines before the table, including blank lines but not comment lines, are metadata. Their number is `skip`.
+5. **Decimal separator**: a comma is the decimal separator only if the delimiter is not a comma, some fields have digits on both sides of a comma, and no field has digits on both sides of a point.
+6. **Column types**: each column is a number, a date-time, or a string: the type of most of its values, leaving out the first two lines of the table and missing values.
+7. **Header and unit rows**: the first line of the table is a header row if one of its fields does not fit the type of its column. If it is, the second line is a unit row if one of its fields does not fit either. Missing values fit every type.
+8. **Missing values**: empty fields, `NaN`, `nan`, `NA`, `N/A`, and `-`.
+
 - The result of detection is shown on one line in the Quick Plot panel (e.g. `UTF-8 · comma-separated · 12 metadata lines skipped · header row · unit row`).
 - Detection is tested with files actually produced by measurement instruments.
 - The compute worker reads large files in parts. Plotting starts before reading finishes.
@@ -855,4 +866,4 @@ The draft's requirements have no priorities yet, so this document proposes them.
 | 5 | Should source files be copied into the project (Section 10)? | No |
 | 6 | Which fonts can be used (9.2)? | Bundled fonts + fonts loaded by the user |
 | 7 | Acceptance figures and priorities of each requirement (draft) | The proposal in Section 14 |
-| 8 | How does a file name or a column label that is not a valid name (such as `2theta`, `fit`, `Energy (meV)`, or a Japanese label) become a folder or array name (language.md 2.3)? | To decide with the import code (roadmap.md M3). The original text is kept in the note |
+| 8 | How does a file name or a column label that is not a valid name (such as `2theta`, `fit`, `Energy (meV)`, or a Japanese label) become a folder or array name (language.md 2.3)? What are the names of the columns of a file without a header row? | To decide with the import code (roadmap.md M3). The original text is kept in the note |

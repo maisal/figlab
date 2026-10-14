@@ -1,0 +1,25 @@
+{
+  "doc": "Semicolon-separated, with decimal commas and a non-ASCII column name.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "semicolon",
+  "decimal": "comma",
+  "skip": 0,
+  "comment": null,
+  "header": 1,
+  "columns": [
+    {
+      "label": "Wellenlänge",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "Absorbanz",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 30
+}
