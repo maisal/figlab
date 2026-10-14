@@ -1,0 +1,22 @@
+{
+  "name": "figlab-s5-ui-harness",
+  "version": "0.0.0",
+  "private": true,
+  "description": "S5: smoke test, scoring, size, and timing scripts for the UI framework experiment",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "install-apps": "node harness/install-apps.mjs",
+    "sync": "node harness/sync-shared.mjs",
+    "score": "node harness/score.mjs",
+    "size": "node harness/size.mjs",
+    "measure": "node harness/measure.mjs",
+    "signals": "node harness/signals.mjs",
+    "variants": "node harness/variants.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0",
+    "source-map-js": "1.2.2"
+  }
+}

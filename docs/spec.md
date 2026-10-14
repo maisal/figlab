@@ -135,7 +135,7 @@ flowchart LR
 
 | Part | Candidates |
 |---|---|
-| UI and screen drawing | TypeScript, Vite. UI framework not decided. Screen drawing uses Canvas 2D and WebGL |
+| UI and screen drawing | TypeScript, Vite. UI framework: Preact with `@preact/signals` (ADR 0014). Screen drawing uses Canvas 2D and WebGL |
 | Render module | Rust (wasm). Runs on the main thread in the browser, natively on the command line |
 | Computational core | Rust. wasm-bindgen for the browser, a native build for the command line |
 | Command language | Hand-written recursive-descent parser (one-to-one with the EBNF in language.md Section 3). The same parser is used for checking, execution, the language service, and the command-line tool |

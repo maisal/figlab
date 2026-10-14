@@ -1,0 +1,190 @@
+{
+  "app": "trial/t1-svelte",
+  "framework": "svelte",
+  "date": "2026-10-14T06:16:23.579Z",
+  "ok": true,
+  "steps": [
+    {
+      "id": "install",
+      "ok": true,
+      "seconds": 0,
+      "detail": "already installed"
+    },
+    {
+      "id": "dependencies",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "template-files",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "licenses",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dev-licenses",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "typecheck",
+      "ok": true,
+      "seconds": 2.329421042,
+      "detail": ""
+    },
+    {
+      "id": "lint",
+      "ok": true,
+      "seconds": 4.093609542,
+      "detail": ""
+    },
+    {
+      "id": "build",
+      "ok": true,
+      "seconds": 1.0757594170000002,
+      "detail": ""
+    }
+  ],
+  "behaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "devBehaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "devPassed": 11,
+  "appCode": {
+    "lines": 182,
+    "files": [
+      {
+        "file": "App.svelte",
+        "lines": 90
+      },
+      {
+        "file": "Editor.svelte",
+        "lines": 33
+      },
+      {
+        "file": "Table.svelte",
+        "lines": 36
+      },
+      {
+        "file": "store.svelte.ts",
+        "lines": 23
+      }
+    ]
+  }
+}

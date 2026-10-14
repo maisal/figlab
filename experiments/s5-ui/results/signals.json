@@ -1,0 +1,359 @@
+{
+  "date": "2026-10-14",
+  "frameworks": [
+    {
+      "name": "react",
+      "latest": "19.3.0",
+      "published": "2026-09-09T17:21:30.071Z",
+      "firstOfMajor": "2024-12-05T18:10:21.804Z",
+      "yearsSinceMajor": 1.9,
+      "weeklyDownloads": 187962192,
+      "license": "MIT",
+      "ownTypes": false,
+      "peerDependencies": {},
+      "dependencies": []
+    },
+    {
+      "name": "react-dom",
+      "latest": "19.3.0",
+      "published": "2026-09-09T17:17:39.744Z",
+      "firstOfMajor": "2024-12-05T18:10:30.516Z",
+      "yearsSinceMajor": 1.9,
+      "weeklyDownloads": 176748870,
+      "license": "MIT",
+      "ownTypes": false,
+      "peerDependencies": {
+        "react": "^19.3.0"
+      },
+      "dependencies": [
+        "scheduler"
+      ]
+    },
+    {
+      "name": "preact",
+      "latest": "11.0.1",
+      "published": "2026-10-08T08:23:33.881Z",
+      "firstOfMajor": "2026-09-30T05:43:56.371Z",
+      "yearsSinceMajor": 0,
+      "weeklyDownloads": 38929126,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "preact-render-to-string": ">=6.7.0"
+      },
+      "dependencies": []
+    },
+    {
+      "name": "@preact/signals",
+      "latest": "2.11.3",
+      "published": "2026-09-30T06:23:48.995Z",
+      "firstOfMajor": "2024-12-17T07:47:09.641Z",
+      "yearsSinceMajor": 1.8,
+      "weeklyDownloads": 2780627,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "preact": ">= 10.25.0 || >=11.0.0-0"
+      },
+      "dependencies": [
+        "@preact/signals-core"
+      ]
+    },
+    {
+      "name": "solid-js",
+      "latest": "1.9.17",
+      "published": "2026-10-07T17:20:43.934Z",
+      "firstOfMajor": "2021-06-28T05:32:22.597Z",
+      "yearsSinceMajor": 5.3,
+      "weeklyDownloads": 7401381,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {},
+      "dependencies": [
+        "csstype",
+        "seroval",
+        "seroval-plugins"
+      ]
+    },
+    {
+      "name": "svelte",
+      "latest": "5.57.2",
+      "published": "2026-10-06T14:24:31.209Z",
+      "firstOfMajor": "2024-10-19T16:45:12.576Z",
+      "yearsSinceMajor": 2,
+      "weeklyDownloads": 6811932,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {},
+      "dependencies": [
+        "clsx",
+        "acorn",
+        "esrap",
+        "devalue",
+        "esm-env",
+        "aria-query",
+        "zimmerframe",
+        "is-reference",
+        "magic-string",
+        "@types/estree",
+        "axobject-query",
+        "locate-character",
+        "@jridgewell/remapping",
+        "@sveltejs/acorn-typescript",
+        "@jridgewell/sourcemap-codec"
+      ]
+    },
+    {
+      "name": "vue",
+      "latest": "3.5.44",
+      "published": "2026-10-13T07:45:32.806Z",
+      "firstOfMajor": "2020-09-18T15:28:56.011Z",
+      "yearsSinceMajor": 6.1,
+      "weeklyDownloads": 17643787,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "typescript": "*"
+      },
+      "dependencies": [
+        "@vue/shared",
+        "@vue/runtime-dom",
+        "@vue/compiler-dom",
+        "@vue/compiler-sfc",
+        "@vue/server-renderer"
+      ]
+    },
+    {
+      "name": "lit",
+      "latest": "3.3.3",
+      "published": "2026-05-14T03:55:58.007Z",
+      "firstOfMajor": "2023-10-10T05:15:48.036Z",
+      "yearsSinceMajor": 3,
+      "weeklyDownloads": 6954359,
+      "license": "BSD-3-Clause",
+      "ownTypes": true,
+      "peerDependencies": {},
+      "dependencies": [
+        "@lit/reactive-element",
+        "lit-element",
+        "lit-html"
+      ]
+    }
+  ],
+  "codemirror": [
+    {
+      "name": "codemirror",
+      "latest": "6.0.2",
+      "published": "2025-06-19T11:48:48.519Z",
+      "firstOfMajor": "2022-06-08T07:08:33.850Z",
+      "yearsSinceMajor": 4.3,
+      "weeklyDownloads": 11009978,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {},
+      "dependencies": [
+        "@codemirror/lint",
+        "@codemirror/view",
+        "@codemirror/state",
+        "@codemirror/search",
+        "@codemirror/commands",
+        "@codemirror/language",
+        "@codemirror/autocomplete"
+      ]
+    },
+    {
+      "name": "@codemirror/view",
+      "latest": "6.43.14",
+      "published": "2026-10-07T11:24:16.597Z",
+      "firstOfMajor": "2022-06-08T07:07:53.541Z",
+      "yearsSinceMajor": 4.3,
+      "weeklyDownloads": 15311321,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {},
+      "dependencies": [
+        "crelt",
+        "style-mod",
+        "w3c-keyname",
+        "@codemirror/state"
+      ]
+    }
+  ],
+  "wrappers": [
+    {
+      "name": "@uiw/react-codemirror",
+      "latest": "4.25.12",
+      "published": "2026-09-24T18:11:22.922Z",
+      "firstOfMajor": "2021-09-15T09:05:15.573Z",
+      "yearsSinceMajor": 5.1,
+      "weeklyDownloads": 4787011,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "react": ">=17.0.0",
+        "react-dom": ">=17.0.0",
+        "codemirror": ">=6.0.0",
+        "@babel/runtime": ">=7.11.0",
+        "@codemirror/view": ">=6.0.0",
+        "@codemirror/state": ">=6.0.0",
+        "@codemirror/theme-one-dark": ">=6.0.0"
+      },
+      "dependencies": [
+        "codemirror",
+        "@babel/runtime",
+        "@codemirror/state",
+        "@codemirror/commands",
+        "@codemirror/theme-one-dark",
+        "@uiw/codemirror-extensions-basic-setup"
+      ]
+    },
+    {
+      "name": "svelte-codemirror-editor",
+      "latest": "2.1.0",
+      "published": "2025-10-10T11:01:24.283Z",
+      "firstOfMajor": "2025-09-08T22:02:05.581Z",
+      "yearsSinceMajor": 1.1,
+      "weeklyDownloads": 40592,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "codemirror": "^6.0.0",
+        "svelte": "^5.0.0"
+      },
+      "dependencies": []
+    },
+    {
+      "name": "solid-codemirror",
+      "latest": "2.3.3",
+      "published": "2026-05-12T18:31:32.761Z",
+      "firstOfMajor": "2022-07-05T21:34:40.594Z",
+      "yearsSinceMajor": 4.3,
+      "weeklyDownloads": 11863,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "@codemirror/state": "^6.6.0",
+        "@codemirror/view": "^6.40.0",
+        "solid-js": "^1.7.0"
+      },
+      "dependencies": [
+        "@codemirror/state",
+        "@codemirror/view",
+        "solid-js"
+      ]
+    },
+    {
+      "name": "@solid-codemirror/codemirror",
+      "latest": "1.0.4",
+      "published": "2022-07-15T04:29:08.923Z",
+      "firstOfMajor": "2022-07-11T01:35:57.054Z",
+      "yearsSinceMajor": 4.3,
+      "weeklyDownloads": 38,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "@codemirror/state": "^6.0.0",
+        "@codemirror/view": "^6.0.0",
+        "solid-js": "^1.4.2"
+      },
+      "dependencies": [
+        "@solid-codemirror/core",
+        "@solid-primitives/refs"
+      ]
+    },
+    {
+      "name": "vue-codemirror",
+      "latest": "6.1.1",
+      "published": "2022-08-27T19:38:24.292Z",
+      "firstOfMajor": "2022-06-13T07:17:18.121Z",
+      "yearsSinceMajor": 4.3,
+      "weeklyDownloads": 119285,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "vue": "3.x",
+        "codemirror": "6.x"
+      },
+      "dependencies": [
+        "@codemirror/commands",
+        "@codemirror/language",
+        "@codemirror/state",
+        "@codemirror/view"
+      ]
+    }
+  ],
+  "testing": [
+    {
+      "name": "@testing-library/react",
+      "latest": "16.3.3",
+      "published": "2026-08-27T17:41:18.735Z",
+      "firstOfMajor": "2024-06-03T13:55:27.444Z",
+      "yearsSinceMajor": 2.4,
+      "weeklyDownloads": 70309317,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0",
+        "@types/react": "^18.0.0 || ^19.0.0",
+        "@types/react-dom": "^18.0.0 || ^19.0.0",
+        "@testing-library/dom": "^10.0.0"
+      },
+      "dependencies": [
+        "@babel/runtime"
+      ]
+    },
+    {
+      "name": "@testing-library/preact",
+      "latest": "3.2.4",
+      "published": "2024-05-27T13:59:47.668Z",
+      "firstOfMajor": "2022-05-19T07:17:20.508Z",
+      "yearsSinceMajor": 4.4,
+      "weeklyDownloads": 332984,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "preact": ">=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0"
+      },
+      "dependencies": [
+        "@testing-library/dom"
+      ]
+    },
+    {
+      "name": "@solidjs/testing-library",
+      "latest": "0.8.10",
+      "published": "2024-09-25T13:24:08.486Z",
+      "firstOfMajor": "2022-11-17T23:18:30.065Z",
+      "yearsSinceMajor": 3.9,
+      "weeklyDownloads": 340757,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "solid-js": ">=1.0.0",
+        "@solidjs/router": ">=0.9.0"
+      },
+      "dependencies": [
+        "@testing-library/dom"
+      ]
+    },
+    {
+      "name": "@testing-library/svelte",
+      "latest": "5.4.2",
+      "published": "2026-06-23T03:29:24.763Z",
+      "firstOfMajor": "2024-04-18T15:31:07.750Z",
+      "yearsSinceMajor": 2.5,
+      "weeklyDownloads": 956368,
+      "license": "MIT",
+      "ownTypes": true,
+      "peerDependencies": {
+        "vite": "*",
+        "svelte": "^3 || ^4 || ^5 || ^5.0.0-next.0",
+        "vitest": "*"
+      },
+      "dependencies": [
+        "@testing-library/dom",
+        "@testing-library/svelte-core"
+      ]
+    }
+  ]
+}

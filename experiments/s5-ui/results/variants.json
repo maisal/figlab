@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-14T06:19:25.197Z",
+  "builds": 5,
+  "preact": [
+    {
+      "name": "preact-10-vite-jsx",
+      "preact": "10.29.8",
+      "preset": null,
+      "size": {
+        "raw": 420430,
+        "gzip": 135517,
+        "brotli": 116293
+      },
+      "buildMs": {
+        "n": 5,
+        "median": 284,
+        "max": 778
+      },
+      "smokePassed": 11,
+      "smokeFailed": []
+    },
+    {
+      "name": "preact-10-preset",
+      "preact": "10.29.8",
+      "preset": "2.10.6",
+      "size": {
+        "raw": 420430,
+        "gzip": 135517,
+        "brotli": 116293
+      },
+      "buildMs": {
+        "n": 5,
+        "median": 566,
+        "max": 955
+      },
+      "smokePassed": 11,
+      "smokeFailed": []
+    },
+    {
+      "name": "preact-11-vite-jsx",
+      "preact": "11.0.1",
+      "preset": null,
+      "size": {
+        "raw": 420460,
+        "gzip": 135657,
+        "brotli": 116388
+      },
+      "buildMs": {
+        "n": 5,
+        "median": 253,
+        "max": 662
+      },
+      "smokePassed": 10,
+      "smokeFailed": [
+        {
+          "id": "table-virtual",
+          "ok": false,
+          "detail": "scroll height is 296"
+        }
+      ]
+    }
+  ],
+  "hooksLint": [
+    {
+      "target": "apps/preact",
+      "rules": "recommended",
+      "errors": {
+        "react-hooks/immutability": 2
+      }
+    },
+    {
+      "target": "apps/preact",
+      "rules": "classic",
+      "errors": {}
+    },
+    {
+      "target": "apps/react",
+      "rules": "recommended",
+      "errors": {}
+    },
+    {
+      "target": "apps/react",
+      "rules": "classic",
+      "errors": {}
+    },
+    {
+      "target": "trial t1-preact",
+      "rules": "recommended",
+      "errors": {
+        "react-hooks/refs": 1
+      }
+    },
+    {
+      "target": "trial t1-preact",
+      "rules": "classic",
+      "errors": {}
+    },
+    {
+      "target": "trial t1-react",
+      "rules": "recommended",
+      "errors": {}
+    },
+    {
+      "target": "trial t1-react",
+      "rules": "classic",
+      "errors": {}
+    }
+  ]
+}

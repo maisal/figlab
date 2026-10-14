@@ -1,0 +1,180 @@
+{
+  "app": "trial/t1-svelte",
+  "framework": "svelte",
+  "date": "2026-10-14T05:51:42.062Z",
+  "ok": false,
+  "steps": [
+    {
+      "id": "install",
+      "ok": true,
+      "seconds": 0,
+      "detail": "already installed"
+    },
+    {
+      "id": "dependencies",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "licenses",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "typecheck",
+      "ok": true,
+      "seconds": 7.720376583,
+      "detail": ""
+    },
+    {
+      "id": "lint",
+      "ok": true,
+      "seconds": 6.220214041000001,
+      "detail": ""
+    },
+    {
+      "id": "build",
+      "ok": true,
+      "seconds": 2.3214452500000005,
+      "detail": ""
+    }
+  ],
+  "behaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": false,
+      "detail": "locator.inputValue: Timeout 3000ms exceeded."
+    },
+    {
+      "id": "editor-to-store",
+      "ok": false,
+      "detail": "editorText after typing: got {\"series\":[{\"id\":\"s1\",\"name\":\"Beta\",\"visible\":true},{\"id\":\"s2\",\"name\":\"Series 2\",\"visible\":true},{\"id\":\"s3\",\"name\":\"Series 3\",\"visible\":true},{\"id\":\"s4\",\"name\":\"Series 4\",\"visible\":true}],\"plot\":{\"style\":\"line\",\"lineWidth\":1.5,\"logY\":false},\"editorText\":\"p\"}"
+    },
+    {
+      "id": "store-to-editor",
+      "ok": false,
+      "detail": "editorText after typing: got {\"series\":[{\"id\":\"s1\",\"name\":\"Beta\",\"visible\":true},{\"id\":\"s2\",\"name\":\"Series 2\",\"visible\":true},{\"id\":\"s3\",\"name\":\"Series 3\",\"visible\":true},{\"id\":\"s4\",\"name\":\"Series 4\",\"visible\":true}],\"plot\":{\"style\":\"line\",\"lineWidth\":1.5,\"logY\":false},\"editorText\":\"let a = 1\\nplot a\\nf\"}"
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": false,
+      "detail": "drawn only 5 times"
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "passed": 7,
+  "total": 11,
+  "devBehaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": false,
+      "detail": "locator.inputValue: Timeout 3000ms exceeded."
+    },
+    {
+      "id": "editor-to-store",
+      "ok": false,
+      "detail": "editorText after typing: got {\"series\":[{\"id\":\"s1\",\"name\":\"Beta\",\"visible\":true},{\"id\":\"s2\",\"name\":\"Series 2\",\"visible\":true},{\"id\":\"s3\",\"name\":\"Series 3\",\"visible\":true},{\"id\":\"s4\",\"name\":\"Series 4\",\"visible\":true}],\"plot\":{\"style\":\"line\",\"lineWidth\":1.5,\"logY\":false},\"editorText\":\"p\"}"
+    },
+    {
+      "id": "store-to-editor",
+      "ok": false,
+      "detail": "editorText after typing: got {\"series\":[{\"id\":\"s1\",\"name\":\"Beta\",\"visible\":true},{\"id\":\"s2\",\"name\":\"Series 2\",\"visible\":true},{\"id\":\"s3\",\"name\":\"Series 3\",\"visible\":true},{\"id\":\"s4\",\"name\":\"Series 4\",\"visible\":true}],\"plot\":{\"style\":\"line\",\"lineWidth\":1.5,\"logY\":false},\"editorText\":\"let a = 1\\nplot a\\nf\"}"
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": false,
+      "detail": "drawn only 5 times"
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "devPassed": 7,
+  "appCode": {
+    "lines": 184,
+    "files": [
+      {
+        "file": "App.svelte",
+        "lines": 93
+      },
+      {
+        "file": "Editor.svelte",
+        "lines": 32
+      },
+      {
+        "file": "Table.svelte",
+        "lines": 36
+      },
+      {
+        "file": "store.svelte.ts",
+        "lines": 23
+      }
+    ]
+  }
+}

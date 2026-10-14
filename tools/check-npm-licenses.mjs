@@ -25,6 +25,10 @@ const allowedForTools = new Set([
   // Weak copyleft that covers only the tool's own files. Allowed for build
   // tools only, which never ship (used by lightningcss, through Vite).
   "MPL-2.0",
+  // An attribution license for data. Used by caniuse-lite (browser support
+  // data), through Babel in @preact/preset-vite and eslint-plugin-react-hooks.
+  // Allowed for build tools only, which never ship (ADR 0014).
+  "CC-BY-4.0",
 ]);
 
 /** Licenses of the installed packages, keyed by SPDX expression. */
