@@ -60,10 +60,12 @@ figlab/
 ├── clippy.toml            forbids the standard float functions, for bit-identical results (language.md 10.2)
 ├── deny.toml              allowed licenses and sources of Rust dependencies (cargo-deny, 6.6)
 ├── about.toml             settings for the third-party license notices (cargo-about, 6.6)
-├── package.json           web dependencies (pnpm)
+├── package.json           web dependencies and scripts (pnpm)
+├── pnpm-lock.yaml         exact versions of the npm packages
+├── eslint.config.js       lint settings for web/
 ├── mise.toml              pinned tool versions and task definitions (Section 3)
 ├── mise-tasks/            longer tasks as scripts (3.2)
-├── tools/                 helper files for developers, such as the jj repository config template (4.1)
+├── tools/                 helper files for developers: the npm license check (6.6) and the jj repository config template (4.1)
 └── .gitignore             ignores local/ (personal, untracked files) and mise.local.toml
 ```
 
@@ -105,6 +107,7 @@ Run with `mise run <task>`. A task always uses the tool versions pinned in 3.1. 
 | `mise run fix` | Runs `jj fix` to format every change in the stack (4.1) |
 | `mise run wasm` | Builds the wasm modules |
 | `mise run dev` | Starts the web app locally |
+| `mise run install:web` | Installs the npm packages from `pnpm-lock.yaml`. `check:web`, `check:deps`, and `dev` run it first |
 | `mise run e2e` | End-to-end tests in browsers (Playwright) |
 | `mise run figures` | Exports the acceptance figures and compares them with the expected ones |
 | `mise run push <BOOKMARK>` | Passes `check`, then pushes the bookmark with `jj git push -b BOOKMARK`. Replaces a pre-push hook. Name bookmarks as in 6.1 |
@@ -444,7 +447,7 @@ Dependencies and bundled files:
 - Allowed licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, Zlib, Unicode-3.0, and OFL-1.1 (fonts only). Public domain data is also fine (e.g. NIST StRD in `tests/numeric`).
 - GPL, LGPL, AGPL, and other copyleft licenses are not allowed. Adding another license to the list needs a reason, written as a comment in `deny.toml`.
 - Rust: `deny.toml` holds the allow list. `cargo deny check licenses bans sources` runs in `mise run check` and in CI (5.2).
-- npm: the same list is checked against `pnpm licenses list --json` in `check:deps` [To confirm: a small script or an existing tool].
+- npm: `tools/check-npm-licenses.mjs` checks `pnpm licenses list --json` in `check:deps`. Packages that ship in the app (`dependencies`) must use a license on the list. Packages used only to build and test (`devDependencies`) never ship, so a few more licenses are allowed for them. The script lists them, each with a reason (for example MPL-2.0, used by a build tool).
 - Bundled fonts (spec.md 9.2) are shipped with their own license files.
 - Code copied from other projects must use an allowed license. A comment at the copied code names the source and the license.
 

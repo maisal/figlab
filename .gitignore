@@ -3,6 +3,10 @@
 
 # Build output
 /target/
+/web/dist/
+
+# npm packages (pnpm) and tool caches inside them, at any depth
+node_modules/
 
 # Personal mise settings
 /mise.local.toml

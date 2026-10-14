@@ -13,7 +13,7 @@ cargo-deny = "0.20.2"
 
 [tasks.check]
 description = "Checks to pass before opening a PR"
-depends = ["check:rust", "check:english", "check:deps"]   # add check:lang and check:web when they exist (docs/development.md 3.2)
+depends = ["check:rust", "check:english", "check:deps", "check:web"]   # add check:lang when it exists (docs/development.md 3.2)
 
 [tasks."check:rust"]
 description = "Rust format check, clippy, tests, and a wasm build check"
@@ -30,4 +30,27 @@ run = "rg -n --hidden --glob '!.git/' --glob '!.jj/' '[\\p{Han}\\p{Hiragana}\\p{
 
 [tasks."check:deps"]
 description = "Check the licenses and sources of dependencies (docs/development.md 6.6)"
-run = "cargo deny --locked check licenses bans sources"
+depends = ["install:web"]
+run = [
+    "cargo deny --locked check licenses bans sources",
+    "node tools/check-npm-licenses.mjs",
+]
+
+[tasks."check:web"]
+description = "Web type check, lint, format check, and unit tests"
+depends = ["install:web"]
+run = [
+    "pnpm run -s typecheck",
+    "pnpm run -s lint",
+    "pnpm run -s format:check",
+    "pnpm run -s test",
+]
+
+[tasks."install:web"]
+description = "Install the npm packages from pnpm-lock.yaml"
+run = "pnpm install --frozen-lockfile"
+
+[tasks.dev]
+description = "Start the web app locally"
+depends = ["install:web"]
+run = "pnpm run dev"
