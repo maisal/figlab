@@ -2,7 +2,7 @@
 
 - Purpose: the repository layout, workflow, and automation for implementing figlab with GitHub (public repository) and Jujutsu (jj).
 - Related documents: draft.md (requirements), spec.md (specification), language.md (command language definition)
-- Status: Draft. Points that need the owner's confirmation are marked **[To confirm]** and collected in Section 11. jj commands are written for jj 0.46.
+- Status: Draft. Points that need the owner's confirmation are marked **[To confirm]** and collected in Section 11. jj commands are written for jj 0.46. Steps 1 to 4 of Section 10 are done, and step 5 is done up to the start of `figlab-lang` (roadmap.md M0).
 
 ## 1. Principles
 
@@ -271,7 +271,8 @@ gh pr create --head feat/lang-parse-for-blocks --fill
 - The default message for squash merging is "Pull request title and description". The PR title becomes the subject line on main, and the description becomes the body. This keeps the `Assisted-by:` line (6.1).
 - Ruleset for main:
   - Changes must go through a PR
-  - CI (the required jobs of the `ci` workflow) must pass
+  - CI must pass. The required checks are the `rust`, `lang`, `deps`, and `web` jobs of `ci.yml`, and `title` of `pr-title.yml`
+  - `english` runs on every PR but is not required. A non-English word does not break main, `mise run check` runs it before every push, and agents merge only when every check passes (AGENTS.md). So the owner can still merge a deliberate exception
   - Force pushes and deletion are blocked
   - Linear history is required
   - Approvals (reviews) are not required, since there is a single developer

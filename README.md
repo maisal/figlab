@@ -10,8 +10,22 @@ A command line tool, `figlab`, gives the same results as the browser app.
 
 ## Status
 
-figlab is in the design stage. There is no code yet.
-The documents below describe what will be built.
+figlab is at the start of implementation. The foundation is done (roadmap.md M0):
+
+- The command language is fixed for the MVP: [language.md](docs/language.md), [spec/commands.json](spec/commands.json), [spec/errors.json](spec/errors.json), and the first [conformance tests](tests/lang).
+- The Rust workspace and the web app have empty skeletons. CI checks every pull request.
+
+The app does not do anything useful yet. The documents below describe what will be built.
+
+## Development
+
+The tools are pinned with [mise](https://mise.jdx.dev). History is managed with [jj](https://jj-vcs.github.io/jj/).
+
+```sh
+mise install       # install the pinned tools
+mise run check     # run all checks; they must pass before you push
+mise run dev       # start the web app locally
+```
 
 ## Documents
 
