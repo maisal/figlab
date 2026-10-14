@@ -1,0 +1,11 @@
+{
+  "doc": "A number cannot start with a dot.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1005",
+      "line": 1,
+      "column": 9
+    }
+  ]
+}

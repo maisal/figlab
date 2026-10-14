@@ -1,0 +1,11 @@
+{
+  "doc": "A statement that ends inside parentheses.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2001",
+      "line": 1,
+      "column": 15
+    }
+  ]
+}

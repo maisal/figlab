@@ -1,0 +1,11 @@
+{
+  "doc": "A number directly followed by letters that are not a unit.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1005",
+      "line": 1,
+      "column": 18
+    }
+  ]
+}

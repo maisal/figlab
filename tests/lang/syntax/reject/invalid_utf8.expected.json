@@ -1,0 +1,11 @@
+{
+  "doc": "Invalid UTF-8. The error points at the first invalid byte.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1004",
+      "line": 2,
+      "column": 10
+    }
+  ]
+}

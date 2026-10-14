@@ -1,0 +1,5 @@
+{
+  "doc": "A byte order mark is ignored, and CRLF line endings are allowed (language.md 2.1).",
+  "mode": "parse",
+  "errors": []
+}

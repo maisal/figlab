@@ -1,0 +1,6 @@
+for i in 0..2 do
+    for j in 0..2 do
+        let a = j
+      let b = i
+    end
+end

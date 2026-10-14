@@ -1,0 +1,7 @@
+// A comment line
+/// A documentation comment is an ordinary comment in a .figc file
+let k = 1 // a comment after a statement
+let s = "// not a comment"
+
+    // an indented comment-only line does not count for indentation
+let t = k

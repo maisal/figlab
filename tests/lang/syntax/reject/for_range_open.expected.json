@@ -1,0 +1,11 @@
+{
+  "doc": "A `for` range without an end.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2011",
+      "line": 1,
+      "column": 11
+    }
+  ]
+}

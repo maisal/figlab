@@ -1,0 +1,1 @@
+export fig1 "fig_" + nameof(d)

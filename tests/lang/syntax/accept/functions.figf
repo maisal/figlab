@@ -1,0 +1,10 @@
+/// Straight line
+/// a: intercept
+/// b: slope
+fn linbg(x | a, b) = a + b*x
+
+/// Sum of two Gaussian peaks
+fn gauss2(x | a1, c1, w1, a2, c2, w2) =
+    a1*exp(-((x - c1)/w1)^2) + a2*exp(-((x - c2)/w2)^2)
+
+fn ratio(a, b) = if b == 0 then nan else a / b

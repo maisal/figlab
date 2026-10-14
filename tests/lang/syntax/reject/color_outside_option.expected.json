@@ -1,0 +1,11 @@
+{
+  "doc": "A color outside an option value.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2013",
+      "line": 1,
+      "column": 9
+    }
+  ]
+}

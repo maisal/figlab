@@ -1,0 +1,11 @@
+{
+  "doc": "A body indented by 2 spaces instead of 4.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1001",
+      "line": 2,
+      "column": 3
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "doc": "A tab at the start of a line.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1002",
+      "line": 2,
+      "column": 1
+    }
+  ]
+}

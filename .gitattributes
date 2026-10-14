@@ -1,0 +1,2 @@
+# Conformance tests: keep the bytes exactly as written (CRLF, lone CR, BOM, invalid UTF-8).
+tests/lang/** -text

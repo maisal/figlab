@@ -300,12 +300,25 @@ if (existsSync(testSchema)) {
     if (!check(data)) {
       for (const e of check.errors ?? []) problem(path, `${e.instancePath || "/"} ${e.message ?? ""}`);
     }
-    for (const e of data.errors ?? []) {
+    const errorsList = data.errors ?? [];
+    for (const e of errorsList) {
       if (!codes.has(e.code)) problem(path, `${e.code} is not in spec/errors.json`);
+      if (data.mode === "parse" && !/^E[12]/.test(e.code)) {
+        problem(path, `${e.code} cannot occur in parse mode (only E1xxx and E2xxx)`);
+      }
     }
-    const source = path.replace(/\.expected\.json$/, "");
-    if (!existsSync(`${source}.figc`) && !existsSync(`${source}.figf`)) {
+    // The folder rules in tests/lang/README.md.
+    if (path.includes("/syntax/accept/") && errorsList.length !== 0) problem(path, "files in syntax/accept must have no errors");
+    if (path.includes("/syntax/reject/") && errorsList.length !== 1) problem(path, "files in syntax/reject must have exactly one error");
+    const base = path.replace(/\.expected\.json$/, "");
+    const source = [`${base}.figc`, `${base}.figf`].find((p) => existsSync(p));
+    if (!source) {
       problem(path, "there is no matching .figc or .figf file");
+    } else {
+      const lines = readFileSync(source, "latin1").split(/\r\n|\n/).length;
+      for (const e of errorsList) {
+        if (e.line > lines) problem(path, `line ${e.line} is past the end of ${source}`);
+      }
     }
   }
   for (const path of [...filesUnder("tests/lang", ".figc"), ...filesUnder("tests/lang", ".figf")]) {

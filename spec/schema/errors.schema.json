@@ -4,20 +4,32 @@
   "title": "figlab error codes",
   "description": "The list of error codes of the command language (docs/language.md Section 8).",
   "type": "object",
-  "required": ["errors"],
+  "required": [
+    "errors"
+  ],
   "additionalProperties": false,
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string"
+    },
     "errors": {
       "description": "Sorted by code. A code keeps its meaning once it is published. Codes are never reused.",
       "type": "array",
-      "items": { "$ref": "#/$defs/error" }
+      "items": {
+        "$ref": "#/$defs/error"
+      }
     }
   },
   "$defs": {
     "error": {
       "type": "object",
-      "required": ["code", "name", "message", "doc", "section"],
+      "required": [
+        "code",
+        "name",
+        "message",
+        "doc",
+        "section"
+      ],
       "additionalProperties": false,
       "properties": {
         "code": {
@@ -35,6 +47,11 @@
           "type": "string",
           "pattern": "^[a-z`'{(]"
         },
+        "at": {
+          "description": "Where the error points (docs/language.md 8). Required for E1xxx and E2xxx, which the conformance tests check by position.",
+          "type": "string",
+          "minLength": 1
+        },
         "doc": {
           "description": "A longer explanation for the help and the reference.",
           "type": "string",
@@ -45,7 +62,23 @@
           "type": "string",
           "pattern": "^(language|spec)\\.md [0-9]+(\\.[0-9]+)*$"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "pattern": "^E[12]"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "at"
+            ]
+          }
+        }
+      ]
     }
   }
 }

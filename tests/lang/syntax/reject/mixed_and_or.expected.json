@@ -1,0 +1,11 @@
+{
+  "doc": "`and` and `or` mixed without parentheses.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2004",
+      "line": 1,
+      "column": 17
+    }
+  ]
+}

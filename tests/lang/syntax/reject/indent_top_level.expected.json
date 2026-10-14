@@ -1,0 +1,11 @@
+{
+  "doc": "A statement indented at the top level.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1001",
+      "line": 3,
+      "column": 3
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maisal/figlab/tests/lang/expected.schema.json",
+  "title": "Expected result of a conformance test",
+  "description": "The expected result of one .figc or .figf file in tests/lang (see tests/lang/README.md).",
+  "type": "object",
+  "required": ["doc", "mode", "errors"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "doc": {
+      "description": "What the test checks, in one sentence.",
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "description": "parse: lexing and parsing only (docs/language.md Sections 2 and 3, errors E1xxx and E2xxx). check: also names and types, without running (E1xxx to E4xxx). run: run the file.",
+      "enum": ["parse", "check", "run"]
+    },
+    "errors": {
+      "description": "Every error the file must report, in the order of their positions. An empty list means the file must be accepted.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "line", "column"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "pattern": "^E[1-5][0-9]{3}$" },
+          "line": { "type": "integer", "minimum": 1 },
+          "column": { "type": "integer", "minimum": 1 }
+        }
+      }
+    }
+  }
+}

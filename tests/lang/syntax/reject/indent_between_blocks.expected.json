@@ -1,0 +1,11 @@
+{
+  "doc": "A line between the depths of two blocks.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E1001",
+      "line": 4,
+      "column": 7
+    }
+  ]
+}

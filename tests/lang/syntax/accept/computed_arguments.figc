@@ -1,0 +1,5 @@
+for d in folders(root.scans) do
+    export fig1 ("fig_" + nameof(d) + ".svg")
+end
+note norm ("scan " + str(1))
+load ("scan" + str(3) + ".csv") from=raw

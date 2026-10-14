@@ -1,0 +1,11 @@
+{
+  "doc": "An option without a value.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2001",
+      "line": 1,
+      "column": 22
+    }
+  ]
+}

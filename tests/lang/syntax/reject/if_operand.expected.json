@@ -1,0 +1,11 @@
+{
+  "doc": "`if` as an operand without parentheses.",
+  "mode": "parse",
+  "errors": [
+    {
+      "code": "E2006",
+      "line": 1,
+      "column": 13
+    }
+  ]
+}
