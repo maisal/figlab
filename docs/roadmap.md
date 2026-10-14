@@ -6,7 +6,7 @@ The scope of the MVP is in spec.md Section 14. This document only says in which 
 Progress is tracked with GitHub milestones and Issues (development.md 5.5).
 Update this document when the plan changes, not when a task is done.
 
-Status (2026-10-13): M0 is in progress. The repository, the rulesets, and the acceptance figures (`tests/figures/`) are done.
+Status (2026-10-14): M0 is done. M1 (experiments) is next.
 
 ## Approach
 
@@ -111,4 +111,4 @@ M0 → M1 → M2 → M3 (v0.1)
 | D2 | UI framework | Decided by S5 | M1 |
 | D3 | PDF library and fallback font | Decided by S1 | M1 |
 | D4 | Fitting library | Decided by S6 | M1 |
-| D5 | Open questions in language.md Section 11 | The current answers there | M0 |
+| D5 | Open questions in language.md Section 11 | Decided. See language.md Section 11 | M0 |
