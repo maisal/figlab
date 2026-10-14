@@ -1,0 +1,764 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maisal/figlab/spec/schema/commands.schema.json",
+  "title": "figlab command and function table",
+  "description": "Commands, built-in functions, and fit models of the command language (docs/language.md 10.1). The parser, the checker, completion, help, and the reference are made from this table.",
+  "type": "object",
+  "required": [
+    "colors",
+    "entries"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "colors": {
+      "description": "Named colors that option values of type color accept as words (docs/language.md 2.5). They are figlab's own palette, not the CSS colors of the same names.",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/name"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^#[0-9a-f]{6}$"
+      }
+    },
+    "entries": {
+      "description": "Names are unique across all entries. Command names are reserved (docs/language.md 2.3).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "maxLength": 255
+    },
+    "doc": {
+      "description": "Plain English, one or more sentences. Shown by help and in completion.",
+      "type": "string",
+      "minLength": 1
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "command",
+            "function",
+            "model"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "command"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/command"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "function"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/function"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "model"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/model"
+          }
+        }
+      ]
+    },
+    "command": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind",
+        "doc",
+        "args",
+        "options"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "kind": {
+          "const": "command"
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "args": {
+          "description": "Positional arguments, in order. Optional arguments come last.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arg"
+          }
+        },
+        "options": {
+          "description": "Options (key=value), in the order of the canonical format (docs/language.md 10.3).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          }
+        },
+        "creates": {
+          "description": "Names the command creates. The checker uses them to resolve names in later statements (docs/language.md 5.4).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/creates"
+          }
+        },
+        "examples": {
+          "$ref": "#/$defs/examples"
+        }
+      }
+    },
+    "arg": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "doc"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "type": {
+          "$ref": "#/$defs/argType"
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "values": {
+          "$ref": "#/$defs/values"
+        },
+        "dims": {
+          "$ref": "#/$defs/dims"
+        },
+        "prefix": {
+          "description": "A word written before the argument. Only `vs` is used.",
+          "const": "vs"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "index": {
+          "description": "The argument may have an index, as in `norm[10]` or `norm[20..29]`.",
+          "type": "boolean"
+        },
+        "parent": {
+          "description": "The argument may be `..`, the parent folder. Only `cd` uses this (docs/language.md 3.1).",
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/valuesIfEnum"
+        }
+      ]
+    },
+    "argType": {
+      "description": "What a positional argument is. Positional arguments are names (with paths and indices), strings, or numbers (docs/language.md 3).",
+      "oneOf": [
+        {
+          "const": "name",
+          "description": "A new name that the command creates"
+        },
+        {
+          "const": "ref",
+          "description": "An existing array, variable, or folder"
+        },
+        {
+          "const": "array",
+          "description": "An existing array"
+        },
+        {
+          "const": "folder",
+          "description": "An existing folder"
+        },
+        {
+          "const": "graph",
+          "description": "An existing graph"
+        },
+        {
+          "const": "trace",
+          "description": "A trace in the graph given before it"
+        },
+        {
+          "const": "enum",
+          "description": "One of the words in values"
+        },
+        {
+          "const": "topic",
+          "description": "The name of a command, built-in function, fit model, or user function"
+        },
+        {
+          "const": "string",
+          "description": "A string literal"
+        },
+        {
+          "const": "number",
+          "description": "A number literal"
+        }
+      ]
+    },
+    "option": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "doc"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "type": {
+          "description": "One type, or a list of types that the option accepts.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/optionType"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/optionType"
+              },
+              "minItems": 2,
+              "uniqueItems": true
+            }
+          ]
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "values": {
+          "$ref": "#/$defs/values"
+        },
+        "of": {
+          "description": "For list: the type of the elements. For record: the type of the values.",
+          "$ref": "#/$defs/optionType"
+        },
+        "dims": {
+          "$ref": "#/$defs/dims"
+        },
+        "default": {
+          "description": "The value when the option is not given, written as in the language (for example \"3pt\" or \"line\"), or a number or a boolean.",
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/valuesIfEnum"
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "list",
+                      "record"
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "enum": [
+                        "list",
+                        "record"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "of"
+            ]
+          }
+        },
+        {
+          "not": {
+            "required": [
+              "default",
+              "required"
+            ],
+            "properties": {
+              "required": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "optionType": {
+      "oneOf": [
+        {
+          "const": "number",
+          "description": "A number expression"
+        },
+        {
+          "const": "integer",
+          "description": "A number expression whose value is an integer"
+        },
+        {
+          "const": "bool",
+          "description": "true or false"
+        },
+        {
+          "const": "string",
+          "description": "A string expression"
+        },
+        {
+          "const": "length",
+          "description": "A length literal such as 60mm or 3pt"
+        },
+        {
+          "const": "color",
+          "description": "A color literal such as #d62728, or a named color from colors"
+        },
+        {
+          "const": "enum",
+          "description": "One of the words in values"
+        },
+        {
+          "const": "name",
+          "description": "A word that names something: a new array, folder, or result folder, or a parameter of the fit model"
+        },
+        {
+          "const": "ref",
+          "description": "An existing array, variable, or folder"
+        },
+        {
+          "const": "array",
+          "description": "An existing array, or an array expression"
+        },
+        {
+          "const": "folder",
+          "description": "A folder, as a path"
+        },
+        {
+          "const": "source",
+          "description": "A source folder registered with source"
+        },
+        {
+          "const": "model",
+          "description": "A built-in fit model, or a user function with | and one input"
+        },
+        {
+          "const": "range",
+          "description": "A range a..b. A missing end means the first or the last"
+        },
+        {
+          "const": "record",
+          "description": "(key=value, …). The keys are names, and the values have the type in of"
+        },
+        {
+          "const": "list",
+          "description": "[a, b, …]. The elements have the type in of"
+        }
+      ]
+    },
+    "values": {
+      "description": "The allowed words for type enum, in the order shown by help.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/name"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "valuesIfEnum": {
+      "if": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "const": "enum"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "enum"
+                }
+              }
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "values"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "values"
+          ]
+        }
+      }
+    },
+    "dims": {
+      "description": "The allowed numbers of dimensions of an array.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 4
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "creates": {
+      "type": "object",
+      "required": [
+        "kind",
+        "doc"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "array",
+            "variable",
+            "folder",
+            "graph",
+            "trace",
+            "source"
+          ]
+        },
+        "name_from": {
+          "description": "The argument or option that gives the name. If the first is not given, the next is used.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/name"
+          },
+          "minItems": 1
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "contents": {
+          "description": "For a folder: the names created inside it. {param} stands for each parameter of the fit model.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "name",
+              "doc"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "array",
+                  "variable",
+                  "folder"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^([a-z][a-z0-9_]*|\\{param\\})(\\.([a-z][a-z0-9_]*|\\{param\\}))*$"
+              },
+              "doc": {
+                "$ref": "#/$defs/doc"
+              }
+            }
+          }
+        }
+      }
+    },
+    "function": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind",
+        "doc",
+        "args",
+        "returns"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "kind": {
+          "const": "function"
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "args": {
+          "description": "Positional arguments first, then named ones (docs/language.md 3).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/functionArg"
+          }
+        },
+        "returns": {
+          "type": "object",
+          "required": [
+            "type",
+            "doc"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "$ref": "#/$defs/valueType"
+            },
+            "doc": {
+              "$ref": "#/$defs/doc"
+            }
+          }
+        },
+        "examples": {
+          "$ref": "#/$defs/examples"
+        }
+      }
+    },
+    "functionArg": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "doc"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "type": {
+          "$ref": "#/$defs/valueType"
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "named": {
+          "description": "The argument is given only by name, as in ramp(200, step=0.05).",
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "default": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "dims": {
+          "$ref": "#/$defs/dims"
+        }
+      }
+    },
+    "valueType": {
+      "oneOf": [
+        {
+          "const": "number",
+          "description": "A number"
+        },
+        {
+          "const": "integer",
+          "description": "A number whose value is an integer"
+        },
+        {
+          "const": "string",
+          "description": "A string"
+        },
+        {
+          "const": "array",
+          "description": "An array"
+        },
+        {
+          "const": "value",
+          "description": "A number or an array. Functions with value arguments work element by element, and the result has the shape of the array"
+        },
+        {
+          "const": "folder",
+          "description": "A folder"
+        },
+        {
+          "const": "object",
+          "description": "A folder or an array"
+        },
+        {
+          "const": "collection",
+          "description": "A collection that for can iterate (docs/language.md 5.5)"
+        }
+      ]
+    },
+    "model": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind",
+        "doc",
+        "inputs",
+        "params",
+        "body"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "kind": {
+          "const": "model"
+        },
+        "doc": {
+          "$ref": "#/$defs/doc"
+        },
+        "inputs": {
+          "description": "The independent variable. Fit models have exactly one.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/name"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "doc"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/name"
+              },
+              "doc": {
+                "$ref": "#/$defs/doc"
+              },
+              "unit": {
+                "$ref": "#/$defs/unit"
+              },
+              "constraint": {
+                "description": "A condition on the parameter, in the language, such as \"w > 0\".",
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "body": {
+          "description": "The formula in the language. The conformance tests check it against the implementation.",
+          "type": "string",
+          "minLength": 1
+        },
+        "display": {
+          "description": "The formula in figlab text notation (docs/spec.md 8.4), for help.",
+          "type": "string"
+        },
+        "derived": {
+          "description": "Quantities computed from the parameters, shown with the fit results.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "doc",
+              "expr"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/name"
+              },
+              "doc": {
+                "$ref": "#/$defs/doc"
+              },
+              "expr": {
+                "type": "string",
+                "minLength": 1
+              },
+              "unit": {
+                "$ref": "#/$defs/unit"
+              }
+            }
+          }
+        },
+        "guess": {
+          "description": "How initial values are estimated from the data.",
+          "type": "string"
+        },
+        "examples": {
+          "$ref": "#/$defs/examples"
+        }
+      }
+    },
+    "unit": {
+      "description": "The unit, in terms of the units of the fitted data: for example \"x\", \"y\", \"1/x\", \"x*y\", \"y/x\", \"y/x^2\", or \"1\" (no unit). Left out when the unit depends on other parameters.",
+      "type": "string",
+      "pattern": "^(1|1/x|[xy](\\^[2-9])?([*/][xy](\\^[2-9])?)?)$"
+    },
+    "examples": {
+      "description": "Statements in the canonical format. Shown by help.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  }
+}

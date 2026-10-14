@@ -13,7 +13,7 @@ cargo-deny = "0.20.2"
 
 [tasks.check]
 description = "Checks to pass before opening a PR"
-depends = ["check:rust", "check:english", "check:deps", "check:web"]   # add check:lang when it exists (docs/development.md 3.2)
+depends = ["check:rust", "check:lang", "check:english", "check:deps", "check:web"]
 
 [tasks."check:rust"]
 description = "Rust format check, clippy, tests, and a wasm build check"
@@ -23,6 +23,11 @@ run = [
     "cargo test --workspace --locked",
     "cargo check -p figlab-wasm --target wasm32-unknown-unknown --locked",
 ]
+
+[tasks."check:lang"]
+description = "Check spec/*.json and the conformance test files (docs/language.md 10)"
+depends = ["install:web"]
+run = "node tools/check-spec.mjs"
 
 [tasks."check:english"]
 description = "Fail if CJK text appears outside test fixtures"
