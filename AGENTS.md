@@ -30,6 +30,7 @@ Read these before you start. If they disagree, follow them in this order:
 - Describe changes in Conventional Commits form, for example `feat(lang): add for blocks`.
 - Name the branch (jj bookmark) of each PR as in `docs/development.md` 6.1, for example `feat/lang-for-blocks`. Do not use `jj git push -c`.
 - If you change behavior, update the documents and the tests in the same change.
+- Merge a PR only when every CI check passes, including checks that are not required.
 
 ## Subagents
 

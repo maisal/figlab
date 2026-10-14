@@ -303,6 +303,7 @@ CI jobs (`ci.yml`):
 | figures | Exports the acceptance figures and compares them with the expected SVG/PNG. On differences, diff images are kept as artifacts |
 
 - Actions are pinned by commit hash, not by version tag. A tag can be moved to other code, but a hash cannot.
+- Each job installs only the tools it needs (`install_args` of `jdx/mise-action`) and runs its task with `mise run --skip-tools`, so it does not install the other tools.
 
 ### 5.3 Pages
 

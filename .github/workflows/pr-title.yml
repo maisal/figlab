@@ -1,0 +1,27 @@
+# The PR title becomes the commit subject on main (squash merge), so it must
+# follow the conventions in docs/development.md 6.1.
+name: pr-title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions: {}
+
+jobs:
+  title:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check the PR title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          types='feat|fix|docs|test|refactor|perf|build|ci|chore'
+          areas='lang|core|io|render|web|fit|docs|ci'
+          pattern="^($types)(\(($areas)\))?!?: [^ ].*[^.]$"
+          if printf '%s\n' "$TITLE" | grep -Eq "$pattern"; then
+            echo "ok: $TITLE"
+          else
+            echo "::error::The PR title must look like 'feat(lang): add for blocks' (docs/development.md 6.1). Got: $TITLE"
+            exit 1
+          fi
