@@ -1,0 +1,17 @@
+{
+  "name": "figlab-experiment-s3-transfer",
+  "version": "0.0.0",
+  "private": true,
+  "description": "S3: passing large arrays between workers as transferable buffers",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "build": "cargo build --release --target wasm32-unknown-unknown --locked",
+    "measure": "pnpm run -s build && node measure.mjs",
+    "serve": "pnpm run -s build && node serve.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}

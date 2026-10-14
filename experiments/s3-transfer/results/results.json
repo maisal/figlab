@@ -1,0 +1,1183 @@
+{
+  "date": "2026-10-15T00:32:33.833Z",
+  "quick": false,
+  "machine": { "cpu": "Apple M1 Max", "cores": 10, "memoryGB": 64, "os": "27.0.1", "node": "v24.14.1", "playwright": "1.64.0" },
+  "browsers": [
+    {
+      "browser": "chrome",
+      "version": "155.0.8059.79",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "minSampleMs": 5,
+      "env": {
+        "crossOriginIsolated": false,
+        "isSecureContext": true,
+        "sharedArrayBufferGlobal": "undefined",
+        "timerResolutionMs": 0.09999990463256836,
+        "worker": { "crossOriginIsolated": false, "sab": "undefined" },
+        "postSharedArrayBuffer": { "ok": false, "error": "ReferenceError: SharedArrayBuffer is not defined" },
+        "newSharedWasmMemory": {
+          "ok": true,
+          "value": "created, buffer is [object SharedArrayBuffer]"
+        },
+        "postSharedWasmMemory": { "ok": false, "error": "DataCloneError: Failed to execute 'postMessage' on 'Worker': SharedArrayBuffer transfer requires self.crossOriginIsolated." },
+        "postWasmMemoryObject": { "ok": false, "error": "DataCloneError: Failed to execute 'postMessage' on 'Worker': #<Memory> could not be cloned." },
+        "transferWasmMemoryBuffer": { "ok": false, "error": "TypeError: Failed to execute 'postMessage' on 'Worker': ArrayBuffer at index 0 is not detachable and could not be transferred." },
+        "arrayBufferTransferMethod": { "ok": false, "error": "TypeError: ArrayBuffer is not detachable and could not be cloned." },
+        "structuredCloneWasmMemoryBuffer": { "ok": true, "value": "copied 1114112 bytes" },
+        "growDetachesOldBuffer": {
+          "ok": true,
+          "value": { "before": 1114112, "afterGrow": 0, "detached": true }
+        },
+        "cloneViewOnWasmMemory": {
+          "ok": true,
+          "value": {
+            "wasmMemoryBytes": 257359872,
+            "viewClone": {
+              "length": 12800,
+              "bufferBytes": 257359872,
+              "ms": { "n": 10, "median": 56.5, "p95": 78.9, "min": 52.7, "max": 78.9, "mean": 60.89 }
+            },
+            "sliceTransfer": {
+              "length": 12800,
+              "bufferBytes": 102400,
+              "ms": { "n": 10, "median": 0.05, "p95": 12, "min": 0, "max": 12, "mean": 1.24 }
+            }
+          }
+        }
+      },
+      "messaging": [
+        {
+          "bytes": 1000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.0207, "p95": 0.02682, "min": 0.01901, "max": 0.07813, "mean": 0.02294, "batch": 384 },
+          "rtWorkerWorker": { "n": 40, "median": 0.02604, "p95": 0.03299, "min": 0.0191, "max": 0.04444, "mean": 0.02648, "batch": 288 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.09985, "p95": 0.0002441, "min": -0.09985, "max": 0.0002441, "mean": -0.08235 },
+            "post": { "n": 40, "median": 0, "p95": 0.09985, "min": 0, "max": 0.1001, "mean": 0.01249 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.09985, "p95": 0.2, "min": 0.09985, "max": 0.2, "mean": 0.1149 },
+            "post": { "n": 40, "median": 0, "p95": 0.1001, "min": 0, "max": 0.1001, "mean": 0.007507 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0.09985, "min": -0.0002441, "max": 0.1001, "mean": 0.007397 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.002502 }
+          }
+        },
+        {
+          "bytes": 1000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.01777, "p95": 0.02188, "min": 0.01406, "max": 0.0418, "mean": 0.01845, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.01975, "p95": 0.03457, "min": 0.01605, "max": 0.1049, "mean": 0.02364, "batch": 81 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.09985, "p95": 0.0002441, "min": -0.09985, "max": 0.0002441, "mean": -0.08735 },
+            "post": { "n": 40, "median": 0, "p95": 0.09985, "min": 0, "max": 0.1001, "mean": 0.007495 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.09985, "p95": 0.1997, "min": 0.09985, "max": 0.2, "mean": 0.1074 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.004999 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0.09985, "min": -0.0002441, "max": 0.1001, "mean": 0.01241 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.004999 }
+          }
+        },
+        {
+          "bytes": 64000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.01914, "p95": 0.02305, "min": 0.01602, "max": 0.02617, "mean": 0.0195, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.02578, "p95": 0.03398, "min": 0.02031, "max": 0.03984, "mean": 0.02681, "batch": 256 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.09985, "p95": 0.0002441, "min": -0.09985, "max": 0.0002441, "mean": -0.08985 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.005005 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.09985, "p95": 0.2, "min": 0.09985, "max": 0.2, "mean": 0.1149 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.005005 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0.09985, "min": -0.0002441, "max": 0.1001, "mean": 0.01742 },
+            "post": { "n": 40, "median": 0, "p95": 0.09985, "min": 0, "max": 0.1001, "mean": 0.009991 }
+          }
+        },
+        {
+          "bytes": 64000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.05375, "p95": 0.08625, "min": 0.03875, "max": 0.1062, "mean": 0.05766, "batch": 80 },
+          "rtWorkerWorker": { "n": 40, "median": 0.05491, "p95": 0.07946, "min": 0.04375, "max": 0.1268, "mean": 0.05864, "batch": 112 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.09985, "p95": 0.0002441, "min": -0.09985, "max": 0.0002441, "mean": -0.07486 },
+            "post": { "n": 40, "median": 0, "p95": 0.1001, "min": 0, "max": 0.1001, "mean": 0.01749 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.09985, "p95": 0.2, "min": 0.09985, "max": 0.2, "mean": 0.1374 },
+            "post": { "n": 40, "median": 0, "p95": 0.1001, "min": 0, "max": 0.1001, "mean": 0.02 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0.1001, "min": -0.0002441, "max": 0.2, "mean": 0.02993 },
+            "post": { "n": 40, "median": 0, "p95": 0.09985, "min": 0, "max": 0.1001, "mean": 0.01249 }
+          }
+        },
+        {
+          "bytes": 1000000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.02031, "p95": 0.02422, "min": 0.01758, "max": 0.04141, "mean": 0.02133, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.02852, "p95": 0.03242, "min": 0.02031, "max": 0.05039, "mean": 0.02886, "batch": 256 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.09985, "p95": 0, "min": -0.09985, "max": 0.0002441, "mean": -0.08986 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.09985, "mean": 0.004993 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.09985, "p95": 0.2, "min": 0.09985, "max": 0.2, "mean": 0.1124 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.005005 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0.09985, "min": -0.0002441, "max": 0.1001, "mean": 0.0099 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.1001, "mean": 0.002502 }
+          }
+        },
+        {
+          "bytes": 1000000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.5875, "p95": 0.655, "min": 0.45, "max": 0.69, "mean": 0.5579, "batch": 20 },
+          "rtWorkerWorker": { "n": 40, "median": 0.5333, "p95": 0.6722, "min": 0.4611, "max": 0.7167, "mean": 0.5528, "batch": 18 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": 0.1501, "p95": 0.3003, "min": 0.0002441, "max": 3.2, "mean": 0.2302 },
+            "post": { "n": 40, "median": 0.1001, "p95": 0.2002, "min": 0, "max": 0.2002, "mean": 0.125 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.3, "p95": 0.3999, "min": 0.2, "max": 0.4998, "mean": 0.3424 },
+            "post": { "n": 40, "median": 0.1001, "p95": 0.2, "min": 0, "max": 0.2002, "mean": 0.13 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0.2998, "p95": 0.3999, "min": 0.09985, "max": 2.6, "mean": 0.3199 },
+            "post": { "n": 40, "median": 0.1001, "p95": 0.2, "min": 0, "max": 0.2002, "mean": 0.11 }
+          }
+        },
+        {
+          "bytes": 8000000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.02187, "p95": 0.02656, "min": 0.01875, "max": 0.02734, "mean": 0.02239, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.02437, "p95": 0.03125, "min": 0.01938, "max": 0.03687, "mean": 0.02476, "batch": 320 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.09985, "p95": 0, "min": -0.09985, "max": 0, "mean": -0.09236 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.09985, "mean": 0.004993 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 0.09985, "p95": 0.2, "min": 0.09985, "max": 0.2, "mean": 0.1174 },
+            "post": { "n": 40, "median": 0, "p95": 0.09985, "min": 0, "max": 0.1001, "mean": 0.007501 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0.09985, "min": -0.0002441, "max": 0.1001, "mean": 0.009924 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0.09985, "mean": 0.002496 }
+          }
+        },
+        {
+          "bytes": 8000000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 3.65, "p95": 4.3, "min": 3.3, "max": 4.4, "mean": 3.738, "batch": 2 },
+          "rtWorkerWorker": { "n": 40, "median": 3.875, "p95": 4.35, "min": 3.4, "max": 5.15, "mean": 3.92, "batch": 2 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": 1.7, "p95": 3, "min": 1.6, "max": 4.2, "mean": 1.873 },
+            "post": { "n": 40, "median": 0.8, "p95": 1, "min": 0.7, "max": 1.2, "mean": 0.8225 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 2, "p95": 4.2, "min": 1.6, "max": 4.3, "mean": 2.202 },
+            "post": { "n": 40, "median": 0.8999, "p95": 1.1, "min": 0.7, "max": 1.9, "mean": 0.9075 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 1.7, "p95": 3.1, "min": 1.4, "max": 3.3, "mean": 1.847 },
+            "post": { "n": 40, "median": 0.8, "p95": 1.1, "min": 0.5999, "max": 1.2, "mean": 0.7975 }
+          }
+        },
+        {
+          "bytes": 80000000,
+          "mode": "transfer",
+          "runs": 20,
+          "rtMainWorker": { "n": 20, "median": 0.02021, "p95": 0.6145, "min": 0.0168, "max": 0.6389, "mean": 0.1521, "batch": 512 },
+          "rtWorkerWorker": { "n": 20, "median": 0.02227, "p95": 0.02539, "min": 0.01797, "max": 0.03984, "mean": 0.02291, "batch": 256 },
+          "owMainToWorker": {
+            "oneway": { "n": 20, "median": 0.3, "p95": 0.5, "min": 0.1001, "max": 0.5, "mean": 0.2901 },
+            "post": { "n": 20, "median": 0.1001, "p95": 0.2002, "min": 0, "max": 0.2002, "mean": 0.14 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 20, "median": 0.6998, "p95": 0.8, "min": 0.3999, "max": 0.8999, "mean": 0.6649 },
+            "post": { "n": 20, "median": 0.09985, "p95": 0.1001, "min": 0, "max": 0.2, "mean": 0.075 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 20, "median": 0.09985, "p95": 0.2, "min": -0.0002441, "max": 0.2, "mean": 0.07987 },
+            "post": { "n": 20, "median": 0.09985, "p95": 0.2, "min": 0, "max": 0.2, "mean": 0.07496 }
+          }
+        },
+        {
+          "bytes": 80000000,
+          "mode": "clone",
+          "runs": 20,
+          "rtMainWorker": { "n": 20, "median": 39.45, "p95": 42.9, "min": 37.2, "max": 44.6, "mean": 39.65, "batch": 1 },
+          "rtWorkerWorker": { "n": 20, "median": 40.3, "p95": 45.2, "min": 38, "max": 52, "mean": 41.15, "batch": 1 },
+          "owMainToWorker": {
+            "oneway": { "n": 20, "median": 18.55, "p95": 20.6, "min": 15.9, "max": 21, "mean": 18.19 },
+            "post": { "n": 20, "median": 7.4, "p95": 8.4, "min": 6.7, "max": 8.7, "mean": 7.54 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 20, "median": 18.65, "p95": 21.5, "min": 16, "max": 22.1, "mean": 18.71 },
+            "post": { "n": 20, "median": 7.6, "p95": 8.8, "min": 7, "max": 9, "mean": 7.74 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 20, "median": 19.45, "p95": 21.4, "min": 15.6, "max": 23.7, "mean": 18.98 },
+            "post": { "n": 20, "median": 7.7, "p95": 9.4, "min": 6.7, "max": 9.6, "mean": 7.795 }
+          }
+        },
+        {
+          "bytes": 400000000,
+          "mode": "transfer",
+          "runs": 10,
+          "rtMainWorker": { "n": 10, "median": 0.4875, "p95": 0.525, "min": 0.465, "max": 0.525, "mean": 0.4935, "batch": 20 },
+          "rtWorkerWorker": { "n": 10, "median": 0.6687, "p95": 0.7, "min": 0.5875, "max": 0.7, "mean": 0.6638, "batch": 8 },
+          "owMainToWorker": {
+            "oneway": { "n": 10, "median": 0.2002, "p95": 0.4001, "min": -0.09985, "max": 0.4001, "mean": 0.2002 },
+            "post": { "n": 10, "median": 0.1001, "p95": 0.2, "min": 0, "max": 0.2, "mean": 0.12 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 10, "median": 0.7499, "p95": 0.8999, "min": 0.5999, "max": 0.8999, "mean": 0.7499 },
+            "post": { "n": 10, "median": 0.1001, "p95": 0.2, "min": 0, "max": 0.2, "mean": 0.12 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 10, "median": 0.2, "p95": 0.3, "min": 0.09985, "max": 0.3, "mean": 0.21 },
+            "post": { "n": 10, "median": 0.04993, "p95": 0.2, "min": 0, "max": 0.2, "mean": 0.06001 }
+          }
+        },
+        {
+          "bytes": 400000000,
+          "mode": "clone",
+          "runs": 10,
+          "rtMainWorker": { "n": 10, "median": 218.4, "p95": 400.6, "min": 194.4, "max": 400.6, "mean": 232.6, "batch": 1 },
+          "rtWorkerWorker": { "n": 10, "median": 212.5, "p95": 359.8, "min": 203.4, "max": 359.8, "mean": 226.9, "batch": 1 },
+          "owMainToWorker": {
+            "oneway": { "n": 10, "median": 90.2, "p95": 103, "min": 77.8, "max": 103, "mean": 90.44 },
+            "post": { "n": 10, "median": 37, "p95": 40.6, "min": 33.7, "max": 40.6, "mean": 37.15 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 10, "median": 101.5, "p95": 115.2, "min": 81.5, "max": 115.2, "mean": 100.9 },
+            "post": { "n": 10, "median": 39.45, "p95": 45.4, "min": 35.4, "max": 45.4, "mean": 39.91 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 10, "median": 92.7, "p95": 106.9, "min": 80.5, "max": 106.9, "mean": 93.34 },
+            "post": { "n": 10, "median": 38.75, "p95": 44.5, "min": 34.3, "max": 44.5, "mean": 39.19 }
+          }
+        }
+      ],
+      "wasmCopies": {
+        "results": {
+          "1000": {
+            "outSlice": { "n": 40, "median": 0.000415, "p95": 0.0005778, "min": 0.0003499, "max": 0.000765, "mean": 0.0004466, "batch": 12288 },
+            "outTypedSlice": { "n": 40, "median": 0.00059, "p95": 0.0007813, "min": 0.0003418, "max": 0.0008545, "mean": 0.0005798, "batch": 12288 },
+            "outNewSet": { "n": 40, "median": 0.0006378, "p95": 0.0008606, "min": 0.0002991, "max": 0.0009216, "mean": 0.0006113, "batch": 16384 },
+            "outPooled": { "n": 40, "median": 0.00004501, "p95": 0.00004654, "min": 0.00004272, "max": 0.00004807, "mean": 0.00004488, "batch": 131072 },
+            "newBuffer": { "n": 40, "median": 0.0004761, "p95": 0.0007715, "min": 0.000293, "max": 0.002187, "mean": 0.0005303, "batch": 20480 },
+            "newBufferFill": { "n": 40, "median": 0.0003662, "p95": 0.0004395, "min": 0.0003418, "max": 0.000708, "mean": 0.0003851, "batch": 8192 },
+            "pooledFill": { "n": 40, "median": 0.00007019, "p95": 0.00007172, "min": 0.00006714, "max": 0.00007248, "mean": 0.00007042, "batch": 131072 },
+            "inAllocSetFree": { "n": 40, "median": 0.00009359, "p95": 0.00009494, "min": 0.00008952, "max": 0.00009494, "mean": 0.00009288, "batch": 73728 },
+            "inSet": { "n": 40, "median": 0.0000473, "p95": 0.00004807, "min": 0.00004349, "max": 0.00006561, "mean": 0.00004721, "batch": 131072 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0.1, "min": 0, "max": 0.1, "mean": 0.02 },
+            "inFirstCopy": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "64000": {
+            "outSlice": { "n": 40, "median": 0.007031, "p95": 0.01133, "min": 0.005729, "max": 0.01328, "mean": 0.007695, "batch": 768 },
+            "outTypedSlice": { "n": 40, "median": 0.007178, "p95": 0.008203, "min": 0.006152, "max": 0.008203, "mean": 0.007234, "batch": 1024 },
+            "outNewSet": { "n": 40, "median": 0.007324, "p95": 0.008008, "min": 0.005957, "max": 0.008203, "mean": 0.007327, "batch": 1024 },
+            "outPooled": { "n": 40, "median": 0.001062, "p95": 0.001123, "min": 0.001025, "max": 0.001196, "mean": 0.001068, "batch": 8192 },
+            "newBuffer": { "n": 40, "median": 0.005313, "p95": 0.01055, "min": 0.004141, "max": 0.01664, "mean": 0.006615, "batch": 1280 },
+            "newBufferFill": { "n": 40, "median": 0.008545, "p95": 0.01113, "min": 0.006934, "max": 0.01211, "mean": 0.008933, "batch": 1024 },
+            "pooledFill": { "n": 40, "median": 0.002604, "p95": 0.002691, "min": 0.002517, "max": 0.003038, "mean": 0.00263, "batch": 2304 },
+            "inAllocSetFree": { "n": 40, "median": 0.001062, "p95": 0.001099, "min": 0.001025, "max": 0.001135, "mean": 0.001065, "batch": 8192 },
+            "inSet": { "n": 40, "median": 0.001038, "p95": 0.001099, "min": 0.001013, "max": 0.001111, "mean": 0.001048, "batch": 8192 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0.1, "min": 0, "max": 0.1, "mean": 0.04 },
+            "inFirstCopy": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "1000000": {
+            "outSlice": { "n": 40, "median": 0.1016, "p95": 0.1109, "min": 0.09375, "max": 0.1563, "mean": 0.1032, "batch": 64 },
+            "outTypedSlice": { "n": 40, "median": 0.09125, "p95": 0.1037, "min": 0.08375, "max": 0.1162, "mean": 0.09259, "batch": 80 },
+            "outNewSet": { "n": 40, "median": 0.09219, "p95": 0.09531, "min": 0.0875, "max": 0.1016, "mean": 0.09191, "batch": 64 },
+            "outPooled": { "n": 40, "median": 0.01758, "p95": 0.01973, "min": 0.0168, "max": 0.03496, "mean": 0.0181, "batch": 512 },
+            "newBuffer": { "n": 40, "median": 0.007878, "p95": 0.009896, "min": 0.005859, "max": 0.0138, "mean": 0.007992, "batch": 768 },
+            "newBufferFill": { "n": 40, "median": 0.1156, "p95": 0.1203, "min": 0.1094, "max": 0.1219, "mean": 0.1151, "batch": 64 },
+            "pooledFill": { "n": 40, "median": 0.03977, "p95": 0.04091, "min": 0.03864, "max": 0.04205, "mean": 0.03974, "batch": 176 },
+            "inAllocSetFree": { "n": 40, "median": 0.01953, "p95": 0.02292, "min": 0.01875, "max": 0.02448, "mean": 0.02001, "batch": 384 },
+            "inSet": { "n": 40, "median": 0.01937, "p95": 0.02229, "min": 0.0175, "max": 0.02521, "mean": 0.01964, "batch": 480 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 0.1, "p95": 0.2, "min": 0, "max": 0.2, "mean": 0.1 }
+          },
+          "8000000": {
+            "outSlice": { "n": 40, "median": 0.8857, "p95": 0.9857, "min": 0.7857, "max": 1.029, "mean": 0.8946, "batch": 7 },
+            "outTypedSlice": { "n": 40, "median": 0.8, "p95": 1.08, "min": 0.7, "max": 1.33, "mean": 0.8365, "batch": 10 },
+            "outNewSet": { "n": 40, "median": 0.7571, "p95": 0.8286, "min": 0.6571, "max": 0.8571, "mean": 0.7586, "batch": 7 },
+            "outPooled": { "n": 40, "median": 0.1625, "p95": 0.1917, "min": 0.1583, "max": 0.2042, "mean": 0.1677, "batch": 48 },
+            "newBuffer": { "n": 40, "median": 0.02344, "p95": 0.02969, "min": 0.01953, "max": 0.03203, "mean": 0.02447, "batch": 128 },
+            "newBufferFill": { "n": 40, "median": 0.8857, "p95": 1, "min": 0.8, "max": 1.157, "mean": 0.8954, "batch": 7 },
+            "pooledFill": { "n": 40, "median": 0.325, "p95": 0.3438, "min": 0.3063, "max": 0.3625, "mean": 0.3283, "batch": 16 },
+            "inAllocSetFree": { "n": 40, "median": 0.1906, "p95": 0.2594, "min": 0.1812, "max": 0.2625, "mean": 0.1988, "batch": 32 },
+            "inSet": { "n": 40, "median": 0.1813, "p95": 0.2437, "min": 0.1625, "max": 0.2563, "mean": 0.1885, "batch": 32 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 0.8, "p95": 0.8, "min": 0.7, "max": 0.8, "mean": 0.76 }
+          },
+          "80000000": {
+            "outSlice": { "n": 20, "median": 8.95, "p95": 11.6, "min": 7.6, "max": 14.6, "mean": 9.39, "batch": 1 },
+            "outTypedSlice": { "n": 20, "median": 6.7, "p95": 8.2, "min": 6.4, "max": 8.6, "mean": 6.92, "batch": 1 },
+            "outNewSet": { "n": 20, "median": 7.3, "p95": 8, "min": 6.5, "max": 8, "mean": 7.325, "batch": 1 },
+            "outPooled": { "n": 20, "median": 1.788, "p95": 1.95, "min": 1.7, "max": 2, "mean": 1.803, "batch": 4 },
+            "newBuffer": { "n": 20, "median": 0.09609, "p95": 0.1031, "min": 0.0875, "max": 0.1125, "mean": 0.09664, "batch": 64 },
+            "newBufferFill": { "n": 20, "median": 8.7, "p95": 9.4, "min": 8.2, "max": 9.5, "mean": 8.75, "batch": 1 },
+            "pooledFill": { "n": 20, "median": 3.6, "p95": 4.7, "min": 3.25, "max": 15.95, "mean": 4.29, "batch": 2 },
+            "inAllocSetFree": { "n": 20, "median": 2.133, "p95": 2.5, "min": 1.9, "max": 2.533, "mean": 2.127, "batch": 3 },
+            "inSet": { "n": 20, "median": 2.1, "p95": 3.4, "min": 1.925, "max": 4.7, "mean": 2.289, "batch": 4 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0.5, "p95": 0.6, "min": 0.3, "max": 0.6, "mean": 0.48 },
+            "inFirstCopy": { "n": 5, "median": 7.7, "p95": 9.2, "min": 6.5, "max": 9.2, "mean": 7.64 }
+          },
+          "400000000": {
+            "outSlice": { "n": 10, "median": 42.9, "p95": 48.9, "min": 40, "max": 48.9, "mean": 43.4, "batch": 1 },
+            "outTypedSlice": { "n": 10, "median": 36.5, "p95": 75.5, "min": 32.8, "max": 75.5, "mean": 39.66, "batch": 1 },
+            "outNewSet": { "n": 10, "median": 38.9, "p95": 80.8, "min": 35.3, "max": 80.8, "mean": 48.03, "batch": 1 },
+            "outPooled": { "n": 10, "median": 8.6, "p95": 9.9, "min": 8.4, "max": 9.9, "mean": 8.83, "batch": 1 },
+            "newBuffer": { "n": 10, "median": 0.09063, "p95": 0.1062, "min": 0.075, "max": 0.1062, "mean": 0.09062, "batch": 16 },
+            "newBufferFill": { "n": 10, "median": 41.55, "p95": 50.5, "min": 39, "max": 50.5, "mean": 42.91, "batch": 1 },
+            "pooledFill": { "n": 10, "median": 15.6, "p95": 16, "min": 15.5, "max": 16, "mean": 15.67, "batch": 1 },
+            "inAllocSetFree": { "n": 10, "median": 8.45, "p95": 10.7, "min": 8.3, "max": 10.7, "mean": 8.72, "batch": 1 },
+            "inSet": { "n": 10, "median": 8.4, "p95": 9.1, "min": 8.3, "max": 9.1, "mean": 8.46, "batch": 1 },
+            "ok": true,
+            "inFirstGrow": { "n": 3, "median": 0.5, "p95": 0.6, "min": 0.4, "max": 0.6, "mean": 0.5 },
+            "inFirstCopy": { "n": 3, "median": 38, "p95": 43, "min": 36.5, "max": 43, "mean": 39.17 }
+          }
+        },
+        "memoryBytes": 979566592
+      },
+      "e2e": {
+        "outSliceTransfer": {
+          "total": { "n": 20, "median": 8.15, "p95": 15.8, "min": 7.5, "max": 17.4, "mean": 9.165 },
+          "workerCopy": { "n": 22, "median": 8, "p95": 9.7, "min": 7.3, "max": 11.8, "mean": 8.355 }
+        },
+        "outPooledTransfer": {
+          "total": { "n": 20, "median": 2.225, "p95": 3.05, "min": 1.95, "max": 4.95, "mean": 2.418 },
+          "workerCopy": { "n": 44, "median": 2, "p95": 3.3, "min": 1.7, "max": 9.1, "mean": 2.405 }
+        },
+        "outSliceClone": {
+          "total": { "n": 20, "median": 32.2, "p95": 37.6, "min": 26.4, "max": 42.1, "mean": 32.2 },
+          "workerCopy": { "n": 22, "median": 9.7, "p95": 14.3, "min": 7.9, "max": 17.4, "mean": 10.23 }
+        },
+        "inTransfer": {
+          "total": { "n": 20, "median": 2.163, "p95": 2.45, "min": 1.9, "max": 3.65, "mean": 2.232 },
+          "workerCopy": { "n": 86, "median": 2, "p95": 3.3, "min": 1.7, "max": 4.5, "mean": 2.109 }
+        },
+        "inClone": {
+          "total": { "n": 20, "median": 23.15, "p95": 29.3, "min": 19, "max": 37.1, "mean": 24.63 },
+          "workerCopy": { "n": 22, "median": 3.8, "p95": 7.7, "min": 2.1, "max": 7.9, "mean": 4.377 }
+        }
+      },
+      "display": {
+        "f64": {
+          "bytes": 102400,
+          "latency": { "n": 40, "median": 0.07969, "p95": 0.1016, "min": 0.06563, "max": 0.1906, "mean": 0.08617 },
+          "copyIntoPageWasm": { "n": 40, "median": 0.001693, "p95": 0.001855, "min": 0.001628, "max": 0.001953, "mean": 0.001704 },
+          "bursts": {
+            "1": {
+              "total": { "n": 40, "median": 0.07619, "p95": 0.09762, "min": 0.04286, "max": 0.1107, "mean": 0.07577 },
+              "perMessageMs": 0.0762
+            },
+            "4": {
+              "total": { "n": 40, "median": 0.1302, "p95": 0.2167, "min": 0.07917, "max": 0.2562, "mean": 0.1368 },
+              "perMessageMs": 0.0326
+            },
+            "16": {
+              "total": { "n": 40, "median": 0.3312, "p95": 0.6187, "min": 0.2938, "max": 0.8, "mean": 0.3659 },
+              "perMessageMs": 0.0207
+            },
+            "64": {
+              "total": { "n": 40, "median": 1.1, "p95": 2.82, "min": 0.98, "max": 3.44, "mean": 1.362 },
+              "perMessageMs": 0.0172
+            },
+            "256": {
+              "total": { "n": 40, "median": 4.125, "p95": 8.35, "min": 3.85, "max": 10.05, "mean": 4.791 },
+              "perMessageMs": 0.0161
+            }
+          }
+        },
+        "f32": {
+          "bytes": 51200,
+          "latency": { "n": 40, "median": 0.0725, "p95": 0.09375, "min": 0.0275, "max": 0.2787, "mean": 0.07016 },
+          "copyIntoPageWasm": { "n": 40, "median": 0.0008972, "p95": 0.0009644, "min": 0.0008179, "max": 0.001172, "mean": 0.000903 },
+          "bursts": {
+            "1": {
+              "total": { "n": 40, "median": 0.03906, "p95": 0.06313, "min": 0.02562, "max": 0.07938, "mean": 0.04167 },
+              "perMessageMs": 0.0391
+            },
+            "4": {
+              "total": { "n": 40, "median": 0.09167, "p95": 0.2177, "min": 0.06979, "max": 0.2896, "mean": 0.1094 },
+              "perMessageMs": 0.0229
+            },
+            "16": {
+              "total": { "n": 40, "median": 0.2563, "p95": 0.6281, "min": 0.2219, "max": 0.7031, "mean": 0.3028 },
+              "perMessageMs": 0.016
+            },
+            "64": {
+              "total": { "n": 40, "median": 0.9857, "p95": 2.471, "min": 0.8571, "max": 2.786, "mean": 1.105 },
+              "perMessageMs": 0.0154
+            },
+            "256": {
+              "total": { "n": 40, "median": 3.75, "p95": 6.95, "min": 2.95, "max": 10.45, "mean": 4.188 },
+              "perMessageMs": 0.0146
+            }
+          }
+        }
+      },
+      "files": {
+        "files": [
+          {
+            "name": "data-8MB.bin",
+            "bytes": 8000000,
+            "runs": 10,
+            "worker_stream": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0.09985, "min": 0, "max": 0.09985, "mean": 0.009985 },
+              "oneWay": { "n": 10, "median": 0, "p95": 0.1001, "min": -0.09985, "max": 0.1001, "mean": -0.02986 },
+              "total": { "n": 10, "median": 6.1, "p95": 15.5, "min": 4.4, "max": 15.5, "mean": 6.92 }
+            },
+            "worker_arrayBuffer": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0.1001, "min": 0, "max": 0.1001, "mean": 0.02 },
+              "oneWay": { "n": 10, "median": 0, "p95": 0.1003, "min": -0.09985, "max": 0.1003, "mean": -0.01985 },
+              "total": { "n": 10, "median": 5.65, "p95": 8.2, "min": 4.1, "max": 8.2, "mean": 5.86 }
+            },
+            "mainArrayBufferTransfer": {
+              "mainRead": { "n": 10, "median": 7.1, "p95": 8.2, "min": 4.3, "max": 8.2, "mean": 6.75 },
+              "total": { "n": 10, "median": 7.45, "p95": 8.6, "min": 4.7, "max": 8.6, "mean": 7.16 }
+            }
+          },
+          {
+            "name": "data-80MB.bin",
+            "bytes": 80000000,
+            "runs": 10,
+            "worker_stream": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0.1001, "min": 0, "max": 0.1001, "mean": 0.02998 },
+              "oneWay": { "n": 10, "median": -0.04993, "p95": 0.1001, "min": -0.09985, "max": 0.1001, "mean": -0.03987 },
+              "total": { "n": 10, "median": 46.15, "p95": 61.1, "min": 43.3, "max": 61.1, "mean": 50.11 }
+            },
+            "worker_arrayBuffer": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "oneWay": { "n": 10, "median": -0.09985, "p95": 0.8, "min": -0.09985, "max": 0.8, "mean": 0.02017 },
+              "total": { "n": 10, "median": 45.85, "p95": 58.2, "min": 39.6, "max": 58.2, "mean": 46.52 }
+            },
+            "mainArrayBufferTransfer": {
+              "mainRead": { "n": 10, "median": 42.8, "p95": 58, "min": 38.1, "max": 58, "mean": 43.99 },
+              "total": { "n": 10, "median": 46.45, "p95": 61.9, "min": 41.4, "max": 61.9, "mean": 47.7 }
+            }
+          },
+          {
+            "name": "data-400MB.bin",
+            "bytes": 400000000,
+            "runs": 5,
+            "worker_stream": {
+              "postMessage": { "n": 5, "median": 0, "p95": 0.09985, "min": 0, "max": 0.09985, "mean": 0.01997 },
+              "oneWay": { "n": 5, "median": 0, "p95": 0.0002441, "min": -0.09985, "max": 0.0002441, "mean": -0.01992 },
+              "total": { "n": 5, "median": 231.9, "p95": 352.6, "min": 217.5, "max": 352.6, "mean": 256.5 }
+            },
+            "worker_arrayBuffer": {
+              "postMessage": { "n": 5, "median": 0.09985, "p95": 0.1001, "min": 0, "max": 0.1001, "mean": 0.05996 },
+              "oneWay": { "n": 5, "median": 0, "p95": 0.3, "min": 0, "max": 0.3, "mean": 0.06006 },
+              "total": { "n": 5, "median": 233.9, "p95": 243.8, "min": 220.4, "max": 243.8, "mean": 232.7 }
+            },
+            "mainArrayBufferTransfer": {
+              "mainRead": { "n": 5, "median": 197.2, "p95": 233, "min": 177.7, "max": 233, "mean": 200.6 },
+              "total": { "n": 5, "median": 222.5, "p95": 269, "min": 207.9, "max": 269, "mean": 226.7 }
+            }
+          }
+        ],
+        "blob80MB": {
+          "postMessage": { "n": 10, "median": 0, "p95": 0.09985, "min": 0, "max": 0.09985, "mean": 0.02996 },
+          "total": { "n": 10, "median": 13.75, "p95": 20.1, "min": 12, "max": 20.1, "mean": 14.44 }
+        }
+      },
+      "envWithCoopCoep": {
+        "crossOriginIsolated": true,
+        "isSecureContext": true,
+        "sharedArrayBufferGlobal": "function",
+        "timerResolutionMs": 0.004999876022338867,
+        "worker": { "crossOriginIsolated": true, "sab": "function" },
+        "postSharedArrayBuffer": { "ok": true, "value": "posted" },
+        "newSharedWasmMemory": {
+          "ok": true,
+          "value": "created, buffer is [object SharedArrayBuffer]"
+        },
+        "postSharedWasmMemory": { "ok": true, "value": "posted; the page reads 42 written by the worker" },
+        "postWasmMemoryObject": { "ok": false, "error": "DataCloneError: Failed to execute 'postMessage' on 'Worker': #<Memory> could not be cloned." },
+        "transferWasmMemoryBuffer": { "ok": false, "error": "TypeError: Failed to execute 'postMessage' on 'Worker': ArrayBuffer at index 0 is not detachable and could not be transferred." },
+        "arrayBufferTransferMethod": { "ok": false, "error": "TypeError: ArrayBuffer is not detachable and could not be cloned." },
+        "structuredCloneWasmMemoryBuffer": { "ok": true, "value": "copied 1114112 bytes" },
+        "growDetachesOldBuffer": {
+          "ok": true,
+          "value": { "before": 1114112, "afterGrow": 0, "detached": true }
+        },
+        "cloneViewOnWasmMemory": {
+          "ok": true,
+          "value": {
+            "wasmMemoryBytes": 257359872,
+            "viewClone": {
+              "length": 12800,
+              "bufferBytes": 257359872,
+              "ms": { "n": 10, "median": 65.25, "p95": 93.92, "min": 51.91, "max": 93.92, "mean": 68.72 }
+            },
+            "sliceTransfer": {
+              "length": 12800,
+              "bufferBytes": 102400,
+              "ms": { "n": 10, "median": 0.035, "p95": 13.58, "min": 0.03, "max": 13.58, "mean": 1.398 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "browser": "webkit",
+      "version": "27.2",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Safari/605.1.15",
+      "minSampleMs": 20,
+      "env": {
+        "crossOriginIsolated": false,
+        "isSecureContext": true,
+        "sharedArrayBufferGlobal": "undefined",
+        "timerResolutionMs": 1,
+        "worker": { "crossOriginIsolated": false, "sab": "undefined" },
+        "postSharedArrayBuffer": { "ok": false, "error": "ReferenceError: Can't find variable: SharedArrayBuffer" },
+        "newSharedWasmMemory": {
+          "ok": true,
+          "value": "created, buffer is [object SharedArrayBuffer]"
+        },
+        "postSharedWasmMemory": { "ok": false, "error": "DataCloneError: The object can not be cloned." },
+        "postWasmMemoryObject": { "ok": false, "error": "DataCloneError: The object can not be cloned." },
+        "transferWasmMemoryBuffer": { "ok": false, "error": "TypeError: Cannot transfer a WebAssembly.Memory" },
+        "arrayBufferTransferMethod": { "ok": false, "error": "TypeError: Receiver cannot be detached because it is WebAssembly.Memory" },
+        "structuredCloneWasmMemoryBuffer": { "ok": true, "value": "copied 1114112 bytes" },
+        "growDetachesOldBuffer": {
+          "ok": true,
+          "value": { "before": 1114112, "afterGrow": 0, "detached": true }
+        },
+        "cloneViewOnWasmMemory": {
+          "ok": true,
+          "value": {
+            "wasmMemoryBytes": 257359872,
+            "viewClone": {
+              "length": 12800,
+              "bufferBytes": 257359872,
+              "ms": { "n": 10, "median": 34, "p95": 95, "min": 18, "max": 95, "mean": 38.5 }
+            },
+            "sliceTransfer": {
+              "length": 12800,
+              "bufferBytes": 102400,
+              "ms": { "n": 10, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.2 }
+            }
+          }
+        }
+      },
+      "messaging": [
+        {
+          "bytes": 1000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.04688, "p95": 0.05729, "min": 0.03646, "max": 0.1042, "mean": 0.04961, "batch": 192 },
+          "rtWorkerWorker": { "n": 40, "median": 0.1836, "p95": 0.2109, "min": 0.1641, "max": 0.2266, "mean": 0.1855, "batch": 128 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.55 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.6 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 1, "mean": 0.025 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 1000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.04688, "p95": 0.05078, "min": 0.03125, "max": 0.05469, "mean": 0.04731, "batch": 512 },
+          "rtWorkerWorker": { "n": 40, "median": 0.1719, "p95": 0.1927, "min": 0.1563, "max": 0.1979, "mean": 0.1723, "batch": 192 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.65 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.575 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.125 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 64000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.04688, "p95": 0.05208, "min": 0.03906, "max": 0.05469, "mean": 0.04733, "batch": 384 },
+          "rtWorkerWorker": { "n": 40, "median": 0.168, "p95": 0.1953, "min": 0.1563, "max": 0.2109, "mean": 0.1707, "batch": 128 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.425 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.6 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.1 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 64000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.06445, "p95": 0.07422, "min": 0.05469, "max": 0.07422, "mean": 0.06445, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.1797, "p95": 0.2031, "min": 0.1641, "max": 0.2109, "mean": 0.1814, "batch": 128 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.575 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.575 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.05 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 1000000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.05469, "p95": 0.07031, "min": 0.04688, "max": 0.07813, "mean": 0.05801, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.1823, "p95": 0.2292, "min": 0.1667, "max": 0.3177, "mean": 0.1895, "batch": 192 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -0.5, "p95": 0, "min": -1, "max": 0, "mean": -0.5 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.6 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 1, "mean": 0.025 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.075 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 1000000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.3281, "p95": 0.3906, "min": 0.25, "max": 0.3906, "mean": 0.3172, "batch": 64 },
+          "rtWorkerWorker": { "n": 40, "median": 0.4219, "p95": 0.5, "min": 0.375, "max": 0.9219, "mean": 0.4453, "batch": 64 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.425 },
+            "post": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.1 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.7 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 1, "mean": 0.025 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.075 },
+            "post": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.1 }
+          }
+        },
+        {
+          "bytes": 8000000,
+          "mode": "transfer",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 0.1016, "p95": 0.1602, "min": 0.08984, "max": 0.1758, "mean": 0.1137, "batch": 256 },
+          "rtWorkerWorker": { "n": 40, "median": 0.2813, "p95": 0.3646, "min": 0.2396, "max": 0.3646, "mean": 0.2833, "batch": 96 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.525 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.65 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 0, "min": -1, "max": 1, "mean": -0.025 },
+            "post": { "n": 40, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 8000000,
+          "mode": "clone",
+          "runs": 40,
+          "rtMainWorker": { "n": 40, "median": 1.688, "p95": 2.25, "min": 1.563, "max": 2.313, "mean": 1.792, "batch": 16 },
+          "rtWorkerWorker": { "n": 40, "median": 1.844, "p95": 1.938, "min": 1.688, "max": 2, "mean": 1.841, "batch": 16 },
+          "owMainToWorker": {
+            "oneway": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.275 },
+            "post": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.425 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 40, "median": 1, "p95": 2, "min": 1, "max": 2, "mean": 1.325 },
+            "post": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.475 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 40, "median": 1, "p95": 1, "min": 0, "max": 2, "mean": 0.65 },
+            "post": { "n": 40, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.45 }
+          }
+        },
+        {
+          "bytes": 80000000,
+          "mode": "transfer",
+          "runs": 20,
+          "rtMainWorker": { "n": 20, "median": 0.1465, "p95": 0.1641, "min": 0.1289, "max": 0.1641, "mean": 0.1459, "batch": 256 },
+          "rtWorkerWorker": { "n": 20, "median": 0.325, "p95": 0.3625, "min": 0.275, "max": 0.375, "mean": 0.3212, "batch": 80 },
+          "owMainToWorker": {
+            "oneway": { "n": 20, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.35 },
+            "post": { "n": 20, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 20, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.6 },
+            "post": { "n": 20, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 20, "median": 0, "p95": 0, "min": -1, "max": 1, "mean": 0 },
+            "post": { "n": 20, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 80000000,
+          "mode": "clone",
+          "runs": 20,
+          "rtMainWorker": { "n": 20, "median": 12.5, "p95": 20.5, "min": 11.5, "max": 23.5, "mean": 15.05, "batch": 2 },
+          "rtWorkerWorker": { "n": 20, "median": 12.5, "p95": 16.5, "min": 11.5, "max": 17.5, "mean": 13.35, "batch": 2 },
+          "owMainToWorker": {
+            "oneway": { "n": 20, "median": 6, "p95": 8, "min": 5, "max": 9, "mean": 6.35 },
+            "post": { "n": 20, "median": 4, "p95": 5, "min": 4, "max": 5, "mean": 4.2 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 20, "median": 7, "p95": 13, "min": 6, "max": 13, "mean": 8.9 },
+            "post": { "n": 20, "median": 4, "p95": 5, "min": 3, "max": 5, "mean": 3.9 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 20, "median": 5, "p95": 6, "min": 5, "max": 6, "mean": 5.45 },
+            "post": { "n": 20, "median": 4, "p95": 4, "min": 3, "max": 4, "mean": 3.6 }
+          }
+        },
+        {
+          "bytes": 400000000,
+          "mode": "transfer",
+          "runs": 10,
+          "rtMainWorker": { "n": 10, "median": 0.2292, "p95": 0.25, "min": 0.1875, "max": 0.25, "mean": 0.226, "batch": 96 },
+          "rtWorkerWorker": { "n": 10, "median": 0.375, "p95": 0.4688, "min": 0.3438, "max": 0.4688, "mean": 0.3891, "batch": 64 },
+          "owMainToWorker": {
+            "oneway": { "n": 10, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.6 },
+            "post": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 10, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.2 },
+            "post": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 10, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.2 },
+            "post": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          }
+        },
+        {
+          "bytes": 400000000,
+          "mode": "clone",
+          "runs": 10,
+          "rtMainWorker": { "n": 10, "median": 55.5, "p95": 86, "min": 53, "max": 86, "mean": 64.7, "batch": 1 },
+          "rtWorkerWorker": { "n": 10, "median": 82.5, "p95": 451, "min": 54, "max": 451, "mean": 123.3, "batch": 1 },
+          "owMainToWorker": {
+            "oneway": { "n": 10, "median": 28.5, "p95": 69, "min": 26, "max": 69, "mean": 36 },
+            "post": { "n": 10, "median": 19, "p95": 27, "min": 18, "max": 27, "mean": 19.7 }
+          },
+          "owWorkerToMain": {
+            "oneway": { "n": 10, "median": 28, "p95": 57, "min": 27, "max": 57, "mean": 38.4 },
+            "post": { "n": 10, "median": 18, "p95": 19, "min": 17, "max": 19, "mean": 17.7 }
+          },
+          "owWorkerToWorker": {
+            "oneway": { "n": 10, "median": 27, "p95": 28, "min": 25, "max": 28, "mean": 26.6 },
+            "post": { "n": 10, "median": 17, "p95": 19, "min": 16, "max": 19, "mean": 17.3 }
+          }
+        }
+      ],
+      "wasmCopies": {
+        "results": {
+          "1000": {
+            "outSlice": { "n": 40, "median": 0.0001984, "p95": 0.0002696, "min": 0.0001272, "max": 0.0004934, "mean": 0.0002076, "batch": 196608 },
+            "outTypedSlice": { "n": 40, "median": 0.0001068, "p95": 0.0001119, "min": 0.0001017, "max": 0.0001119, "mean": 0.0001062, "batch": 196608 },
+            "outNewSet": { "n": 40, "median": 0.0001373, "p95": 0.0001475, "min": 0.0001322, "max": 0.0001526, "mean": 0.0001378, "batch": 196608 },
+            "outPooled": { "n": 40, "median": 0.00006358, "p95": 0.00006866, "min": 0.00005595, "max": 0.00007121, "mean": 0.00006396, "batch": 393216 },
+            "newBuffer": { "n": 40, "median": 0.000206, "p95": 0.0002213, "min": 0.0001831, "max": 0.0002441, "mean": 0.0002058, "batch": 131072 },
+            "newBufferFill": { "n": 40, "median": 0.000117, "p95": 0.0001322, "min": 0.00009664, "max": 0.0001577, "mean": 0.0001167, "batch": 196608 },
+            "pooledFill": { "n": 40, "median": 0.00002925, "p95": 0.00003052, "min": 0.0000267, "max": 0.00004705, "mean": 0.00002937, "batch": 786432 },
+            "inAllocSetFree": { "n": 40, "median": 0.0001289, "p95": 0.0001492, "min": 0.0001153, "max": 0.0002441, "mean": 0.0001333, "batch": 147456 },
+            "inSet": { "n": 40, "median": 0.00006714, "p95": 0.00007324, "min": 0.00005798, "max": 0.00007629, "mean": 0.00006668, "batch": 327680 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "64000": {
+            "outSlice": { "n": 40, "median": 0.00236, "p95": 0.002848, "min": 0.002035, "max": 0.003743, "mean": 0.002454, "batch": 12288 },
+            "outTypedSlice": { "n": 40, "median": 0.002197, "p95": 0.002686, "min": 0.002035, "max": 0.003337, "mean": 0.002305, "batch": 12288 },
+            "outNewSet": { "n": 40, "median": 0.002767, "p95": 0.003255, "min": 0.002496, "max": 0.003364, "mean": 0.00281, "batch": 9216 },
+            "outPooled": { "n": 40, "median": 0.001245, "p95": 0.001367, "min": 0.001025, "max": 0.001465, "mean": 0.001218, "batch": 20480 },
+            "newBuffer": { "n": 40, "median": 0.001872, "p95": 0.002116, "min": 0.001546, "max": 0.002197, "mean": 0.001874, "batch": 12288 },
+            "newBufferFill": { "n": 40, "median": 0.00293, "p95": 0.003364, "min": 0.002496, "max": 0.004991, "mean": 0.00303, "batch": 9216 },
+            "pooledFill": { "n": 40, "median": 0.00119, "p95": 0.001404, "min": 0.001038, "max": 0.001404, "mean": 0.001204, "batch": 16384 },
+            "inAllocSetFree": { "n": 40, "median": 0.001123, "p95": 0.001318, "min": 0.001123, "max": 0.001514, "mean": 0.001169, "batch": 20480 },
+            "inSet": { "n": 40, "median": 0.001099, "p95": 0.001221, "min": 0.001017, "max": 0.001302, "mean": 0.001111, "batch": 24576 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 }
+          },
+          "1000000": {
+            "outSlice": { "n": 40, "median": 0.03299, "p95": 0.03646, "min": 0.02951, "max": 0.03819, "mean": 0.0332, "batch": 1152 },
+            "outTypedSlice": { "n": 40, "median": 0.02995, "p95": 0.03255, "min": 0.02734, "max": 0.03255, "mean": 0.02975, "batch": 768 },
+            "outNewSet": { "n": 40, "median": 0.03776, "p95": 0.04036, "min": 0.03516, "max": 0.04167, "mean": 0.03783, "batch": 768 },
+            "outPooled": { "n": 40, "median": 0.01797, "p95": 0.02031, "min": 0.01719, "max": 0.02031, "mean": 0.0183, "batch": 1280 },
+            "newBuffer": { "n": 40, "median": 0.01888, "p95": 0.02148, "min": 0.01823, "max": 0.02344, "mean": 0.01935, "batch": 1536 },
+            "newBufferFill": { "n": 40, "median": 0.03385, "p95": 0.03906, "min": 0.03255, "max": 0.04557, "mean": 0.03457, "batch": 768 },
+            "pooledFill": { "n": 40, "median": 0.01628, "p95": 0.01693, "min": 0.01563, "max": 0.01693, "mean": 0.01626, "batch": 1536 },
+            "inAllocSetFree": { "n": 40, "median": 0.01875, "p95": 0.01953, "min": 0.01797, "max": 0.02031, "mean": 0.01893, "batch": 1280 },
+            "inSet": { "n": 40, "median": 0.01875, "p95": 0.02109, "min": 0.01797, "max": 0.02187, "mean": 0.0193, "batch": 1280 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.4 }
+          },
+          "8000000": {
+            "outSlice": { "n": 40, "median": 0.2083, "p95": 0.25, "min": 0.1875, "max": 0.2604, "mean": 0.2156, "batch": 96 },
+            "outTypedSlice": { "n": 40, "median": 0.2083, "p95": 0.2604, "min": 0.1875, "max": 0.3542, "mean": 0.219, "batch": 96 },
+            "outNewSet": { "n": 40, "median": 0.3125, "p95": 0.3281, "min": 0.2813, "max": 0.3438, "mean": 0.3113, "batch": 64 },
+            "outPooled": { "n": 40, "median": 0.1563, "p95": 0.1719, "min": 0.1563, "max": 0.1875, "mean": 0.1594, "batch": 128 },
+            "newBuffer": { "n": 40, "median": 0.1094, "p95": 0.1354, "min": 0.09375, "max": 0.1458, "mean": 0.1115, "batch": 192 },
+            "newBufferFill": { "n": 40, "median": 0.2396, "p95": 0.2604, "min": 0.2188, "max": 0.3021, "mean": 0.2422, "batch": 96 },
+            "pooledFill": { "n": 40, "median": 0.1289, "p95": 0.1328, "min": 0.1289, "max": 0.1328, "mean": 0.1301, "batch": 256 },
+            "inAllocSetFree": { "n": 40, "median": 0.1875, "p95": 0.25, "min": 0.1563, "max": 0.25, "mean": 0.1982, "batch": 96 },
+            "inSet": { "n": 40, "median": 0.1641, "p95": 0.1875, "min": 0.1563, "max": 0.2031, "mean": 0.1654, "batch": 128 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 1, "p95": 1, "min": 0, "max": 1, "mean": 0.6 }
+          },
+          "80000000": {
+            "outSlice": { "n": 20, "median": 1.833, "p95": 4.167, "min": 1.667, "max": 8.333, "mean": 2.475, "batch": 6 },
+            "outTypedSlice": { "n": 20, "median": 1.833, "p95": 2.333, "min": 1.75, "max": 2.583, "mean": 1.942, "batch": 12 },
+            "outNewSet": { "n": 20, "median": 3, "p95": 3.125, "min": 2.875, "max": 3.125, "mean": 3.031, "batch": 8 },
+            "outPooled": { "n": 20, "median": 1.75, "p95": 1.833, "min": 1.667, "max": 1.917, "mean": 1.779, "batch": 12 },
+            "newBuffer": { "n": 20, "median": 1.156, "p95": 1.188, "min": 1.125, "max": 1.188, "mean": 1.152, "batch": 32 },
+            "newBufferFill": { "n": 20, "median": 2.563, "p95": 2.75, "min": 2.375, "max": 2.75, "mean": 2.556, "batch": 8 },
+            "pooledFill": { "n": 20, "median": 1.292, "p95": 1.292, "min": 1.292, "max": 1.417, "mean": 1.298, "batch": 24 },
+            "inAllocSetFree": { "n": 20, "median": 1.719, "p95": 2.063, "min": 1.625, "max": 2.188, "mean": 1.8, "batch": 16 },
+            "inSet": { "n": 20, "median": 1.667, "p95": 1.75, "min": 1.667, "max": 1.75, "mean": 1.696, "batch": 12 },
+            "ok": true,
+            "inFirstGrow": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 5, "median": 7, "p95": 8, "min": 7, "max": 8, "mean": 7.4 }
+          },
+          "400000000": {
+            "outSlice": { "n": 10, "median": 36, "p95": 84, "min": 21, "max": 84, "mean": 44.6, "batch": 1 },
+            "outTypedSlice": { "n": 10, "median": 10, "p95": 117, "min": 10, "max": 117, "mean": 38.3, "batch": 1 },
+            "outNewSet": { "n": 10, "median": 43, "p95": 64, "min": 14, "max": 64, "mean": 41.2, "batch": 1 },
+            "outPooled": { "n": 10, "median": 9, "p95": 10.33, "min": 8.333, "max": 10.33, "mean": 9.167, "batch": 3 },
+            "newBuffer": { "n": 10, "median": 5.5, "p95": 6.25, "min": 4.75, "max": 6.25, "mean": 5.575, "batch": 4 },
+            "newBufferFill": { "n": 10, "median": 12.5, "p95": 23.5, "min": 12, "max": 23.5, "mean": 14.15, "batch": 2 },
+            "pooledFill": { "n": 10, "median": 6.5, "p95": 7.25, "min": 6.5, "max": 7.25, "mean": 6.675, "batch": 4 },
+            "inAllocSetFree": { "n": 10, "median": 9.333, "p95": 10.67, "min": 8.667, "max": 10.67, "mean": 9.467, "batch": 3 },
+            "inSet": { "n": 10, "median": 9.833, "p95": 10.33, "min": 9.333, "max": 10.33, "mean": 9.833, "batch": 3 },
+            "ok": true,
+            "inFirstGrow": { "n": 3, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+            "inFirstCopy": { "n": 3, "median": 36, "p95": 37, "min": 32, "max": 37, "mean": 35 }
+          }
+        },
+        "memoryBytes": 979566592
+      },
+      "e2e": {
+        "outSliceTransfer": {
+          "total": { "n": 20, "median": 2.188, "p95": 2.875, "min": 2, "max": 5.875, "mean": 2.406 },
+          "workerCopy": { "n": 170, "median": 2, "p95": 8, "min": 1, "max": 18, "mean": 2.453 }
+        },
+        "outPooledTransfer": {
+          "total": { "n": 20, "median": 2.375, "p95": 2.875, "min": 2.125, "max": 2.875, "mean": 2.441 },
+          "workerCopy": { "n": 346, "median": 2, "p95": 3, "min": 1, "max": 3, "mean": 2.211 }
+        },
+        "outSliceClone": {
+          "total": { "n": 20, "median": 19, "p95": 24, "min": 10, "max": 24, "mean": 17.4 },
+          "workerCopy": { "n": 22, "median": 8, "p95": 9, "min": 3, "max": 10, "mean": 6.591 }
+        },
+        "inTransfer": {
+          "total": { "n": 20, "median": 2.583, "p95": 2.917, "min": 2.25, "max": 2.917, "mean": 2.6 },
+          "workerCopy": { "n": 254, "median": 2, "p95": 3, "min": 1, "max": 3, "mean": 2.339 }
+        },
+        "inClone": {
+          "total": { "n": 20, "median": 15, "p95": 16.67, "min": 9.333, "max": 17, "mean": 14.08 },
+          "workerCopy": { "n": 65, "median": 2, "p95": 4, "min": 1, "max": 5, "mean": 2.692 }
+        }
+      },
+      "display": {
+        "f64": {
+          "bytes": 102400,
+          "latency": { "n": 40, "median": 0.08203, "p95": 0.09375, "min": 0.04688, "max": 0.1094, "mean": 0.0791 },
+          "copyIntoPageWasm": { "n": 40, "median": 0.00177, "p95": 0.001892, "min": 0.001709, "max": 0.003235, "mean": 0.001834 },
+          "bursts": {
+            "1": {
+              "total": { "n": 40, "median": 0.05859, "p95": 0.06641, "min": 0.03906, "max": 0.08203, "mean": 0.05488 },
+              "perMessageMs": 0.0586
+            },
+            "4": {
+              "total": { "n": 40, "median": 0.1035, "p95": 0.1523, "min": 0.08594, "max": 0.1875, "mean": 0.1095 },
+              "perMessageMs": 0.0259
+            },
+            "16": {
+              "total": { "n": 40, "median": 0.25, "p95": 0.4479, "min": 0.1979, "max": 0.5417, "mean": 0.2766 },
+              "perMessageMs": 0.0156
+            },
+            "64": {
+              "total": { "n": 40, "median": 0.9688, "p95": 1.156, "min": 0.7188, "max": 1.469, "mean": 0.9734 },
+              "perMessageMs": 0.0151
+            },
+            "256": {
+              "total": { "n": 40, "median": 3.625, "p95": 4, "min": 2.875, "max": 4.5, "mean": 3.587 },
+              "perMessageMs": 0.0142
+            }
+          }
+        },
+        "f32": {
+          "bytes": 51200,
+          "latency": { "n": 40, "median": 0.05957, "p95": 0.07227, "min": 0.05078, "max": 0.1367, "mean": 0.06211 },
+          "copyIntoPageWasm": { "n": 40, "median": 0.0008545, "p95": 0.0008952, "min": 0.0008138, "max": 0.0009359, "mean": 0.0008657 },
+          "bursts": {
+            "1": {
+              "total": { "n": 40, "median": 0.08854, "p95": 0.09896, "min": 0.04167, "max": 0.09896, "mean": 0.08268 },
+              "perMessageMs": 0.0885
+            },
+            "4": {
+              "total": { "n": 40, "median": 0.1198, "p95": 0.1354, "min": 0.09375, "max": 0.1406, "mean": 0.1206 },
+              "perMessageMs": 0.03
+            },
+            "16": {
+              "total": { "n": 40, "median": 0.2708, "p95": 0.3542, "min": 0.2396, "max": 0.3958, "mean": 0.2846 },
+              "perMessageMs": 0.0169
+            },
+            "64": {
+              "total": { "n": 40, "median": 0.8438, "p95": 1.219, "min": 0.7188, "max": 1.781, "mean": 0.8898 },
+              "perMessageMs": 0.0132
+            },
+            "256": {
+              "total": { "n": 40, "median": 2.875, "p95": 3.667, "min": 2.583, "max": 4.25, "mean": 2.946 },
+              "perMessageMs": 0.0112
+            }
+          }
+        }
+      },
+      "files": {
+        "files": [
+          {
+            "name": "data-8MB.bin",
+            "bytes": 8000000,
+            "runs": 10,
+            "worker_stream": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "oneWay": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "total": { "n": 10, "median": 5, "p95": 5, "min": 5, "max": 5, "mean": 5 }
+            },
+            "worker_arrayBuffer": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "oneWay": { "n": 10, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.3 },
+              "total": { "n": 10, "median": 5, "p95": 6, "min": 4, "max": 6, "mean": 4.8 }
+            },
+            "mainArrayBufferTransfer": {
+              "mainRead": { "n": 10, "median": 2, "p95": 3, "min": 2, "max": 3, "mean": 2.3 },
+              "total": { "n": 10, "median": 3, "p95": 4, "min": 3, "max": 4, "mean": 3.1 }
+            }
+          },
+          {
+            "name": "data-80MB.bin",
+            "bytes": 80000000,
+            "runs": 10,
+            "worker_stream": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "oneWay": { "n": 10, "median": 0, "p95": 0, "min": -1, "max": 0, "mean": -0.3 },
+              "total": { "n": 10, "median": 25.5, "p95": 28, "min": 24, "max": 28, "mean": 25.8 }
+            },
+            "worker_arrayBuffer": {
+              "postMessage": { "n": 10, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "oneWay": { "n": 10, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.6 },
+              "total": { "n": 10, "median": 26, "p95": 27, "min": 25, "max": 27, "mean": 25.9 }
+            },
+            "mainArrayBufferTransfer": {
+              "mainRead": { "n": 10, "median": 24, "p95": 26, "min": 22, "max": 26, "mean": 23.8 },
+              "total": { "n": 10, "median": 26, "p95": 28, "min": 24, "max": 28, "mean": 25.9 }
+            }
+          },
+          {
+            "name": "data-400MB.bin",
+            "bytes": 400000000,
+            "runs": 5,
+            "worker_stream": {
+              "postMessage": { "n": 5, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.2 },
+              "oneWay": { "n": 5, "median": -1, "p95": 0, "min": -1, "max": 0, "mean": -0.6 },
+              "total": { "n": 5, "median": 125, "p95": 132, "min": 117, "max": 132, "mean": 125.2 }
+            },
+            "worker_arrayBuffer": {
+              "postMessage": { "n": 5, "median": 0, "p95": 0, "min": 0, "max": 0, "mean": 0 },
+              "oneWay": { "n": 5, "median": 0, "p95": 1, "min": -1, "max": 1, "mean": -0.2 },
+              "total": { "n": 5, "median": 132, "p95": 135, "min": 128, "max": 135, "mean": 131.8 }
+            },
+            "mainArrayBufferTransfer": {
+              "mainRead": { "n": 5, "median": 115, "p95": 121, "min": 105, "max": 121, "mean": 113.2 },
+              "total": { "n": 5, "median": 125, "p95": 130, "min": 115, "max": 130, "mean": 123.2 }
+            }
+          }
+        ],
+        "blob80MB": {
+          "postMessage": { "n": 10, "median": 0, "p95": 1, "min": 0, "max": 1, "mean": 0.1 },
+          "total": { "n": 10, "median": 19.5, "p95": 25, "min": 19, "max": 25, "mean": 20.6 }
+        }
+      },
+      "envWithCoopCoep": {
+        "crossOriginIsolated": true,
+        "isSecureContext": true,
+        "sharedArrayBufferGlobal": "function",
+        "timerResolutionMs": 0.01999999999998181,
+        "worker": { "crossOriginIsolated": true, "sab": "function" },
+        "postSharedArrayBuffer": { "ok": true, "value": "posted" },
+        "newSharedWasmMemory": {
+          "ok": true,
+          "value": "created, buffer is [object SharedArrayBuffer]"
+        },
+        "postSharedWasmMemory": { "ok": true, "value": "posted; the page reads 42 written by the worker" },
+        "postWasmMemoryObject": { "ok": false, "error": "DataCloneError: The object can not be cloned." },
+        "transferWasmMemoryBuffer": { "ok": false, "error": "TypeError: Cannot transfer a WebAssembly.Memory" },
+        "arrayBufferTransferMethod": { "ok": false, "error": "TypeError: Receiver cannot be detached because it is WebAssembly.Memory" },
+        "structuredCloneWasmMemoryBuffer": { "ok": true, "value": "copied 1114112 bytes" },
+        "growDetachesOldBuffer": {
+          "ok": true,
+          "value": { "before": 1114112, "afterGrow": 0, "detached": true }
+        },
+        "cloneViewOnWasmMemory": {
+          "ok": true,
+          "value": {
+            "wasmMemoryBytes": 257359872,
+            "viewClone": {
+              "length": 12800,
+              "bufferBytes": 257359872,
+              "ms": { "n": 10, "median": 19.86, "p95": 83.4, "min": 18.34, "max": 83.4, "mean": 31.03 }
+            },
+            "sliceTransfer": {
+              "length": 12800,
+              "bufferBytes": 102400,
+              "ms": { "n": 10, "median": 0.1, "p95": 0.22, "min": 0.06, "max": 0.22, "mean": 0.106 }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "memory": {
+    "browser": "chrome",
+    "version": "155.0.8059.79",
+    "arrayMB": 400,
+    "copyOut": [
+      {
+        "step": "baseline",
+        "beforeMB": 987,
+        "peakMB": 988,
+        "afterMB": 988,
+        "result": {}
+      },
+      {
+        "step": "alloc",
+        "beforeMB": 988,
+        "peakMB": 1372,
+        "afterMB": 1372,
+        "result": { "memoryBytes": 401145856, "gc": true }
+      },
+      {
+        "step": "copyOut",
+        "beforeMB": 1372,
+        "peakMB": 1754,
+        "afterMB": 1754,
+        "result": { "memoryBytes": 401145856, "gc": true }
+      },
+      {
+        "step": "transfer",
+        "beforeMB": 1756,
+        "peakMB": 1758,
+        "afterMB": 1758,
+        "result": { "memoryBytes": 401145856, "mainHolds": 400000000 }
+      },
+      {
+        "step": "free",
+        "beforeMB": 1758,
+        "peakMB": 1758,
+        "afterMB": 1758,
+        "result": { "memoryBytes": 401145856, "gc": true }
+      },
+      {
+        "step": "gc",
+        "beforeMB": 1758,
+        "peakMB": 1760,
+        "afterMB": 1760,
+        "result": { "memoryBytes": 401145856, "gc": true }
+      },
+      {
+        "step": "dropMain",
+        "beforeMB": 1761,
+        "peakMB": 1761,
+        "afterMB": 1382,
+        "result": { "gc": true }
+      },
+      {
+        "step": "alloc",
+        "beforeMB": 1383,
+        "peakMB": 1383,
+        "afterMB": 1383,
+        "result": { "memoryBytes": 401145856, "gc": true }
+      }
+    ],
+    "copyIn": [
+      {
+        "step": "readStream",
+        "fileMB": 400,
+        "beforeMB": 1015,
+        "peakMB": 1539,
+        "afterMB": 1539,
+        "result": { "postToRecvMs": 0.300048828125, "totalMs": 261.7000000476837, "chunks": 5726 },
+        "increaseMB": 524
+      },
+      {
+        "step": "readArrayBuffer",
+        "fileMB": 400,
+        "beforeMB": 1016,
+        "peakMB": 1780,
+        "afterMB": 1780,
+        "result": { "postToRecvMs": 0.39990234375, "readMs": 228, "totalMs": 262.2000000476837, "chunks": 1 },
+        "increaseMB": 764
+      },
+      {
+        "step": "mainReadTransfer",
+        "fileMB": 400,
+        "beforeMB": 1019,
+        "peakMB": 1784,
+        "afterMB": 1784,
+        "result": { "copyMs": 33.90000009536743 },
+        "increaseMB": 765
+      }
+    ]
+  }
+}
