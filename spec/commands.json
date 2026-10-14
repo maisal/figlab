@@ -188,7 +188,7 @@
         {
           "name": "skip",
           "type": "integer",
-          "doc": "The number of lines to skip before the table, such as metadata lines.",
+          "doc": "The number of metadata lines before the table. Comment lines are not counted (spec.md 10.1).",
           "min": 0
         },
         {
@@ -201,6 +201,16 @@
             "semicolon",
             "whitespace"
           ]
+        },
+        {
+          "name": "decimal",
+          "type": "enum",
+          "doc": "The decimal separator of the numbers. comma is possible only when sep is not comma.",
+          "values": [
+            "point",
+            "comma"
+          ],
+          "default": "point"
         },
         {
           "name": "comment",
@@ -219,7 +229,7 @@
         {
           "name": "missing",
           "type": "list",
-          "doc": "Fields with these texts are missing values (NaN), such as [\"NA\", \"-\"]. Empty fields are always missing.",
+          "doc": "Fields with these texts are missing values (NaN), such as [\"NA\", \"-\"]. If left out, the markers in spec.md 10.1 are used. Empty fields are always missing.",
           "of": "string"
         },
         {

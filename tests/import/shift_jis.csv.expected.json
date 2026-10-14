@@ -1,0 +1,25 @@
+{
+  "doc": "Shift_JIS with Japanese column names, then a unit row.",
+  "encoding": "shift_jis",
+  "bom": false,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 2,
+  "columns": [
+    {
+      "label": "温度",
+      "unit": "K",
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "電圧",
+      "unit": "mV",
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 25
+}

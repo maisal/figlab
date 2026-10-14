@@ -1,0 +1,25 @@
+{
+  "doc": "Tab-separated, with a header row and a unit row.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "tab",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 2,
+  "columns": [
+    {
+      "label": "Temperature",
+      "unit": "K",
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "Resistance",
+      "unit": "Ohm",
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 30
+}

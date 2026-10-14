@@ -1,0 +1,25 @@
+{
+  "doc": "UTF-8 with a byte order mark.",
+  "encoding": "utf8",
+  "bom": true,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 0,
+  "comment": null,
+  "header": 1,
+  "columns": [
+    {
+      "label": "time",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "signal",
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 20
+}

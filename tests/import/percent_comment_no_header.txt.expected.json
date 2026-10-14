@@ -1,0 +1,31 @@
+{
+  "doc": "% comment lines, tab-separated, and no header row.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "tab",
+  "decimal": "point",
+  "skip": 0,
+  "comment": "%",
+  "header": 0,
+  "columns": [
+    {
+      "label": null,
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": null,
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": null,
+      "unit": null,
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 20
+}

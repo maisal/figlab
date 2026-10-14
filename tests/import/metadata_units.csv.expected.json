@@ -1,0 +1,25 @@
+{
+  "doc": "Nine metadata lines (the last is blank), then a header row and a unit row.",
+  "encoding": "utf8",
+  "bom": false,
+  "sep": "comma",
+  "decimal": "point",
+  "skip": 9,
+  "comment": null,
+  "header": 2,
+  "columns": [
+    {
+      "label": "2theta",
+      "unit": "deg",
+      "type": "number",
+      "missing": 0
+    },
+    {
+      "label": "counts",
+      "unit": "cps",
+      "type": "number",
+      "missing": 0
+    }
+  ],
+  "rows": 40
+}

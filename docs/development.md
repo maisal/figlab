@@ -296,7 +296,7 @@ CI jobs (`ci.yml`):
 | Job | Content |
 |---|---|
 | rust | Format check, clippy (warnings are errors), unit tests |
-| lang | Language conformance tests (`tests/lang`); runs the code examples in the documents (docs/) through `figlab check`; schema validation of `spec/*.json` (`tools/check-spec.mjs`). Until `figlab` exists, only the schema checks run |
+| lang | Language conformance tests (`tests/lang`); runs the code examples in the documents (docs/) through `figlab check`; schema validation of `spec/*.json` and of the expected results in `tests/lang` and `tests/import` (`tools/check-spec.mjs`). Until `figlab` exists, only these checks run |
 | english | Fails if CJK text appears outside test fixtures (6.4) |
 | deps | `mise run check:deps`: the licenses of Rust and npm dependencies are on the allow list, and crates come only from crates.io (6.6) |
 | determinism | Runs the same conformance tests and acceptance figures on Linux (x86_64), macOS (arm64), and wasm (on Node). Checks that the result hashes match (spec.md Section 13, "Reproducibility") |
