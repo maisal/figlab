@@ -1,0 +1,26 @@
+# Repository settings for jj (docs/development.md 4.1).
+# `mise run fix` uses this file directly. To use the aliases in your own
+# commands, copy it into the repository config: `jj config edit --repo`.
+
+[revset-aliases]
+"trunk()" = "main@origin"
+"stack()" = "trunk()..@"              # the changes currently stacked
+
+[aliases]
+# Rebase all work in progress onto the latest main, dropping changes that have already been merged
+sync = ["rebase", "-s", "roots(trunk()..mutable())", "-o", "trunk()", "--skip-emptied"]
+
+[fix.tools.rustfmt]
+command = ["rustfmt", "--emit", "stdout", "--edition", "2024"]
+patterns = ["glob:'**/*.rs'"]
+
+# Only web/ is formatted with Prettier, the same files that check:web checks.
+# Prettier would also rewrite the tables and lists of the Markdown documents.
+[fix.tools.prettier]
+command = ["pnpm", "exec", "prettier", "--stdin-filepath=$path"]
+patterns = ["glob:'web/**/*.ts'", "glob:'web/**/*.css'", "glob:'web/**/*.json'", "glob:'web/**/*.html'"]
+
+# Once figlab fmt exists, also format command and user function files
+# [fix.tools.figlab]
+# command = ["figlab", "fmt", "--stdin-filepath=$path", "-"]
+# patterns = ["glob:'**/*.figc'", "glob:'**/*.figf'"]
