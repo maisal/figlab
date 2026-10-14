@@ -1,0 +1,18 @@
+[package]
+name = "s1-native"
+description = "Native tools of S1: shaping comparison, font coverage, PDF output, timing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+s1-core.workspace = true
+s1-rb.workspace = true
+s1-hr.workspace = true
+s1-hr08.workspace = true
+s1-pdf-krilla.workspace = true
+s1-pdf-writer.workspace = true
+ttf-parser.workspace = true
+subsetter.workspace = true
+miniz_oxide.workspace = true

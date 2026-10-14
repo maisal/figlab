@@ -1,0 +1,50 @@
+# S1 experiment: its own Cargo workspace (experiments/README.md).
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.dependencies]
+s1-core = { path = "crates/s1-core" }
+s1-rb = { path = "crates/s1-rb" }
+s1-hr = { path = "crates/s1-hr" }
+s1-hr08 = { path = "crates/s1-hr08" }
+s1-pdf-krilla = { path = "crates/s1-pdf-krilla" }
+s1-pdf-writer = { path = "crates/s1-pdf-writer" }
+# Shaping candidate 1 (named in docs/roadmap.md M1).
+rustybuzz = { version = "=0.20.1", default-features = false, features = ["std"] }
+ttf-parser = { version = "=0.25.1", default-features = false, features = ["std", "opentype-layout", "apple-layout", "glyph-names", "variable-fonts"] }
+# Shaping candidate 2 (HarfBuzz project's Rust port) with skrifa for outlines.
+# Default features off and `libm` on: with `std`, skrifa and read-fonts call the
+# platform `f32::hypot` for some composite glyphs, which may differ between
+# native and wasm. With `libm` only, they use core_maths (libm) instead.
+harfrust = { version = "=0.14.0", default-features = false, features = ["libm"] }
+skrifa = { version = "=0.48.0", default-features = false, features = ["libm"] }
+# The older harfrust and skrifa that match krilla 0.8.2 (both on read-fonts 0.39).
+# Used only to measure a wasm module with one shared font stack.
+harfrust08 = { package = "harfrust", version = "=0.8.4", default-features = false, features = ["std"] }
+skrifa042 = { package = "skrifa", version = "=0.42.1", default-features = false, features = ["std"] }
+# PDF candidate 1.
+krilla = { version = "=0.8.2", default-features = false }
+# PDF candidate 2.
+pdf-writer = "=0.15.0"
+subsetter = { version = "=0.2.6", default-features = false }
+miniz_oxide = { version = "=0.9.1", default-features = false, features = ["with-alloc"] }
+
+[profile.release]
+opt-level = 3
+
+# Profile for the wasm size and browser builds.
+[profile.wasm]
+inherits = "release"
+opt-level = "z"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true

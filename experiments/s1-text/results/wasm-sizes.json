@@ -1,0 +1,11 @@
+[
+{"name":"base","features":"","contents":"allocator and layout code only, no shaper","raw":22780,"opt":19618,"gzip":9137,"brotli":7792},
+{"name":"rb","features":"rb","contents":"rustybuzz 0.20 + ttf-parser 0.25 (shaping, outlines, draw data)","raw":595362,"opt":544057,"gzip":232162,"brotli":179481},
+{"name":"hr","features":"hr","contents":"harfrust 0.14 + skrifa 0.48 (shaping, outlines, draw data)","raw":961520,"opt":807975,"gzip":321290,"brotli":255739},
+{"name":"hr08","features":"hr08","contents":"harfrust 0.8.4 + skrifa 0.42 (shaping, outlines, draw data)","raw":808389,"opt":666328,"gzip":265308,"brotli":213678},
+{"name":"rb+krilla","features":"rb,krilla","contents":"rustybuzz + krilla 0.8.2","raw":1728492,"opt":1484661,"gzip":616044,"brotli":478046},
+{"name":"hr+krilla","features":"hr,krilla","contents":"harfrust 0.14 + krilla 0.8.2 (two font stacks: read-fonts 0.45 and 0.39)","raw":2100944,"opt":1745134,"gzip":711586,"brotli":534979},
+{"name":"hr08+krilla","features":"hr08,krilla","contents":"harfrust 0.8.4 + krilla 0.8.2 (one font stack: read-fonts 0.39)","raw":1710009,"opt":1430629,"gzip":588173,"brotli":455199},
+{"name":"rb+pdfw","features":"rb,pdfw","contents":"rustybuzz + pdf-writer 0.15 + subsetter 0.2.6 + skrifa 0.48","raw":796275,"opt":720546,"gzip":316137,"brotli":255157},
+{"name":"hr+pdfw","features":"hr,pdfw","contents":"harfrust 0.14 + pdf-writer 0.15 + subsetter 0.2.6 (one font stack: read-fonts 0.45)","raw":1161369,"opt":984611,"gzip":416445,"brotli":332519}
+]
