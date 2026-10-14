@@ -1,0 +1,27 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/maisal/figlab"
+publish = false
+
+[workspace.dependencies]
+figlab-core = { path = "crates/figlab-core" }
+figlab-io = { path = "crates/figlab-io" }
+figlab-lang = { path = "crates/figlab-lang" }
+figlab-render = { path = "crates/figlab-render" }
+# Pure Rust math functions. They give the same bits on native builds and wasm
+# (docs/language.md 10.2). See clippy.toml.
+libm = "0.2.16"
+
+[workspace.lints.rust]
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"

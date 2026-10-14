@@ -1,0 +1,11 @@
+# Settings for the third-party license notices made by cargo-about
+# (docs/development.md 6.6). Keep the list the same as in deny.toml.
+accepted = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Zlib",
+    "Unicode-3.0",
+]

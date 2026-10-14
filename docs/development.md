@@ -57,6 +57,7 @@ figlab/
 ├── fuzz/                  fuzzing of the parser and CSV detection
 ├── .github/               workflows, Issue and PR templates, etc. (Section 5)
 ├── Cargo.toml             Rust workspace
+├── clippy.toml            forbids the standard float functions, for bit-identical results (language.md 10.2)
 ├── deny.toml              allowed licenses and sources of Rust dependencies (cargo-deny, 6.6)
 ├── about.toml             settings for the third-party license notices (cargo-about, 6.6)
 ├── package.json           web dependencies (pnpm)
@@ -89,8 +90,9 @@ rust = { version = "1.99.0", components = "rustfmt,clippy", targets = "wasm32-un
 node = "24.14.1"       # LTS
 pnpm = "10.25.0"
 ripgrep = "15.1.0"     # used by check:english (6.4)
+cargo-deny = "0.20.2"  # used by check:deps (6.6)
+"github:EmbarkStudios/cargo-about" = "0.9.2"   # third-party notices (6.6)
 # wasm-bindgen-cli is added with the same version as wasm-bindgen when it is added to Cargo.toml
-# cargo-deny and cargo-about are added together with the Cargo workspace (6.6)
 ```
 
 ### 3.2 Tasks (mise run)
@@ -117,8 +119,9 @@ depends = ["check:rust", "check:lang", "check:english", "check:deps", "check:web
 [tasks."check:rust"]
 run = [
   "cargo fmt --all --check",
-  "cargo clippy --workspace --all-targets -- -D warnings",
-  "cargo test --workspace",
+  "cargo clippy --workspace --all-targets --locked -- -D warnings",
+  "cargo test --workspace --locked",
+  "cargo check -p figlab-wasm --target wasm32-unknown-unknown --locked",
 ]
 
 [tasks."check:english"]
@@ -127,7 +130,7 @@ run = "rg -n --hidden --glob '!.git/' --glob '!.jj/' '[\\p{Han}\\p{Hiragana}\\p{
 
 [tasks."check:deps"]
 description = "Check the licenses and sources of dependencies (6.6)"
-run = "cargo deny check licenses bans sources"
+run = "cargo deny --locked check licenses bans sources"
 
 [tasks.wasm]
 run = "wasm-bindgen …"

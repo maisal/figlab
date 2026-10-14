@@ -1,6 +1,9 @@
 # Local, untracked files (e.g. personal notes and Japanese reference copies of the docs)
 /local/
 
+# Build output
+/target/
+
 # Personal mise settings
 /mise.local.toml
 
