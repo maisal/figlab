@@ -1,0 +1,286 @@
+--- a/src/lm.rs
++++ b/src/lm.rs
+@@ -1,7 +1,7 @@
+ use crate::LeastSquaresProblem;
+ use crate::qr::{LinearLeastSquaresDiagonalProblem, PivotedQR};
+ use crate::trust_region::{LMParameter, determine_lambda_and_parameter_update};
+-use crate::utils::{enorm, epsmch};
++use crate::utils::{enorm, epsmch, sq};
+ use nalgebra::{
+     DefaultAllocator, Dim, DimMax, DimMaximum, DimMin, Matrix, OVector, RealField, Vector,
+     allocator::{Allocator, Reallocator},
+@@ -268,12 +268,30 @@
+         loop {
+             // Build linear least squares problem used for the trust-region subproblem
+             let mut lls = {
+-                let jacobian = match lm.jacobian() {
++                #[allow(unused_mut)]
++                let mut jacobian = match lm.jacobian() {
+                     Err(reason) => return lm.into_report(reason),
+                     Ok(jacobian) => jacobian,
+                 };
+                 if jacobian.ncols() != n || jacobian.nrows() != lm.m {
+                     return lm.into_report(TerminationReason::WrongDimensions("jacobian"));
++                }
++                // Fork: a parameter at a bound whose gradient points out of
++                // the box is held there: zero its column (as cmpfit does).
++                if let Some((lower, upper)) = &lm.bounds {
++                    for j in 0..n {
++                        let at_lower = lm.x[j] == lower[j];
++                        let at_upper = lm.x[j] == upper[j];
++                        if at_lower || at_upper {
++                            let mut sum = F::zero();
++                            for i in 0..lm.m {
++                                sum += jacobian[(i, j)] * residuals[i];
++                            }
++                            if (at_lower && sum > F::zero()) || (at_upper && sum < F::zero()) {
++                                jacobian.column_mut(j).fill(F::zero());
++                            }
++                        }
++                    }
+                 }
+ 
+                 let qr = PivotedQR::new(jacobian);
+@@ -334,6 +352,12 @@
+     first_update: bool,
+     max_fev: usize,
+     m: usize,
++    /// Fork: lower and upper bounds of the parameters, if any.
++    #[allow(clippy::type_complexity)]
++    bounds: Option<(
++        Vector<F, N, O::ParameterStorage>,
++        Vector<F, N, O::ParameterStorage>,
++    )>,
+ }
+ 
+ impl<'a, F, N, M, O> LM<'a, F, N, M, O>
+@@ -404,6 +428,32 @@
+                     ..report
+                 },
+             ));
++        }
++
++        // Fork: the bounds must be valid and the start must be inside them.
++        // This is checked before the early return for zero residuals.
++        let bounds = target.bounds();
++        if let Some((lower, upper)) = &bounds {
++            let k = n.value();
++            let reason = if lower.nrows() != k
++                || upper.nrows() != k
++                || (0..k).any(|j| !(lower[j] < upper[j]))
++            {
++                Some("invalid bounds")
++            } else if (0..k).any(|j| !(lower[j] <= x[j] && x[j] <= upper[j])) {
++                Some("parameters outside the bounds")
++            } else {
++                None
++            };
++            if let Some(reason) = reason {
++                return Err((
++                    target,
++                    MinimizationReport {
++                        termination: TerminationReason::User(reason),
++                        ..report
++                    },
++                ));
++            }
+         }
+ 
+         if residuals_norm <= Float::min_positive_value() && !cfg!(feature = "minpack-compat") {
+@@ -428,6 +478,7 @@
+                 first_update: true,
+                 max_fev: config.patience * (n.value() + 1),
+                 m,
++                bounds,
+             },
+             residuals,
+         ))
+@@ -516,19 +567,64 @@
+         const P0001: f64 = 1.0e-4;
+ 
+         self.lambda = param.lambda;
+-        let pnorm = param.dp_norm;
++        #[allow(unused_mut)]
++        let mut pnorm = param.dp_norm;
+         if !pnorm.is_finite() && !cfg!(feature = "minpack-compat") {
+             return Err(TerminationReason::Numerical("subproblem ||Dp||"));
+         }
+ 
++        // Fork: keep the step inside the bounds. Moves of pegged parameters
++        // out of the box are dropped. Then the step is shortened by `alpha`
++        // so that it stops at the first bound it meets (as cmpfit does).
++        let mut step = param.step;
++        let mut alpha = F::one();
++        if let Some((lower, upper)) = &self.bounds {
++            let eps = epsmch::<F>();
++            for j in 0..step.nrows() {
++                let x = self.x[j];
++                // The parameter moves by `-step[j]`.
++                let mut mv = -step[j];
++                let big = Float::abs(mv) > eps;
++                if (x <= lower[j] && mv < F::zero()) || (x >= upper[j] && mv > F::zero()) {
++                    mv = F::zero();
++                }
++                if big && x + mv < lower[j] {
++                    alpha = Float::min(alpha, (lower[j] - x) / mv);
++                }
++                if big && x + mv > upper[j] {
++                    alpha = Float::min(alpha, (upper[j] - x) / mv);
++                }
++                step[j] = -mv;
++            }
++            step *= alpha;
++            self.tmp.cmpy(F::one(), &self.diag, &step, F::zero());
++            pnorm = enorm(&self.tmp);
++        }
++
+         let predicted_reduction;
+         let dir_der;
+-        {
+-            let temp1 = Float::powi(lls.a_x_norm(&param.step) / self.residuals_norm, 2);
++        if self.bounds.is_some() {
++            // Fork: the predicted reduction of the linear model for the
++            // step `alpha * p` actually taken.
++            let t1 = sq(lls.a_x_norm(&step) / self.residuals_norm);
++            let t2 = sq((Float::sqrt(self.lambda) * pnorm) / self.residuals_norm);
++            if !(t1.is_finite() && t2.is_finite()) {
++                return Err(TerminationReason::Numerical("trust-region reduction"));
++            }
++            let two: F = convert(2.0);
++            if alpha > F::zero() {
++                predicted_reduction = ((two - alpha) * t1 + two * t2) / alpha;
++                dir_der = -(t1 + t2) / alpha;
++            } else {
++                predicted_reduction = F::zero();
++                dir_der = F::zero();
++            }
++        } else {
++            let temp1 = sq(lls.a_x_norm(&step) / self.residuals_norm);
+             if !temp1.is_finite() && !cfg!(feature = "minpack-compat") {
+                 return Err(TerminationReason::Numerical("trust-region reduction"));
+             }
+-            let temp2 = Float::powi((Float::sqrt(self.lambda) * pnorm) / self.residuals_norm, 2);
++            let temp2 = sq((Float::sqrt(self.lambda) * pnorm) / self.residuals_norm);
+             if !temp2.is_finite() && !cfg!(feature = "minpack-compat") {
+                 return Err(TerminationReason::Numerical("trust-region reduction"));
+             }
+@@ -543,7 +639,24 @@
+ 
+         // Compute new parameters: x - p
+         self.tmp.copy_from(&self.x);
+-        self.tmp.axpy(-F::one(), &param.step, F::one());
++        self.tmp.axpy(-F::one(), &step, F::one());
++        // Fork: a parameter that ends next to a bound is put exactly on it.
++        if let Some((lower, upper)) = &self.bounds {
++            let eps = epsmch::<F>();
++            for j in 0..self.tmp.nrows() {
++                let (lo, hi) = (lower[j], upper[j]);
++                let sgnu = if hi >= F::zero() { F::one() } else { -F::one() };
++                let sgnl = if lo >= F::zero() { F::one() } else { -F::one() };
++                let hi1 = hi * (F::one() - sgnu * eps) - if hi.is_zero() { eps } else { F::zero() };
++                let lo1 = lo * (F::one() + sgnl * eps) + if lo.is_zero() { eps } else { F::zero() };
++                if self.tmp[j] >= hi1 {
++                    self.tmp[j] = hi;
++                }
++                if self.tmp[j] <= lo1 {
++                    self.tmp[j] = lo;
++                }
++            }
++        }
+ 
+         // Evaluate
+         self.target.set_params(&self.tmp);
+@@ -562,7 +675,7 @@
+ 
+         // Compute predicted and actual reduction
+         let actual_reduction = if new_residuals_norm * convert(P1) < self.residuals_norm {
+-            F::one() - Float::powi(new_residuals_norm / self.residuals_norm, 2)
++            F::one() - sq(new_residuals_norm / self.residuals_norm)
+         } else {
+             -F::one()
+         };
+--- a/src/problem.rs
++++ b/src/problem.rs
+@@ -31,4 +31,17 @@
+ 
+     /// Compute the Jacobian of the residual vector.
+     fn jacobian(&self) -> Option<Matrix<F, M, N, Self::JacobianStorage>>;
++
++    /// Lower and upper bounds of the parameters (fork: cmpfit-style bounds).
++    ///
++    /// Use `-inf` and `inf` for parameters without a bound. The default
++    /// is `None`: no bounds, and the algorithm is the original one.
++    fn bounds(
++        &self,
++    ) -> Option<(
++        Vector<F, N, Self::ParameterStorage>,
++        Vector<F, N, Self::ParameterStorage>,
++    )> {
++        None
++    }
+ }
+--- a/src/qr.rs
++++ b/src/qr.rs
+@@ -16,7 +16,7 @@
+ };
+ use num_traits::Float;
+ 
+-use crate::utils::{dot, enorm, epsmch};
++use crate::utils::{dot, enorm, epsmch, sq};
+ 
+ /// Pivoted QR decomposition.
+ ///
+@@ -105,11 +105,11 @@
+                 }
+                 let r_diagk = unsafe { r_diag.vget_unchecked_mut(k) };
+                 *r_diagk *= {
+-                    let temp = Float::powi(col[0] / *r_diagk, 2);
++                    let temp = sq(col[0] / *r_diagk);
+                     Float::sqrt(Float::max(F::one() - temp, F::zero()))
+                 };
+                 let z05: F = convert(0.05f64);
+-                if z05 * Float::powi(*r_diagk / work[k], 2) <= epsmch() {
++                if z05 * sq(*r_diagk / work[k]) <= epsmch() {
+                     *r_diagk = enorm(&col.view_range(1.., ..));
+                     work[k] = *r_diagk;
+                 }
+--- a/src/utils.rs
++++ b/src/utils.rs
+@@ -242,7 +242,14 @@
+     Some(jacobian)
+ }
+ 
++/// Fork: `x * x`. It replaces `Float::powi(x, 2)`, whose result can depend
++/// on how the compiler expands it (figlab's clippy.toml forbids `powi`).
+ #[inline]
++pub(crate) fn sq<F: Copy + core::ops::Mul<Output = F>>(x: F) -> F {
++    x * x
++}
++
++#[inline]
+ #[allow(clippy::unreadable_literal)]
+ pub(crate) fn epsmch<F: RealField>() -> F {
+     if cfg!(feature = "minpack-compat") {
+@@ -303,18 +310,18 @@
+             if xabs > rdwarf {
+                 // sum for large components
+                 if xabs > x1max {
+-                    s1 = F::one() + s1 * Float::powi(x1max / xabs, 2);
++                    s1 = F::one() + s1 * sq(x1max / xabs);
+                     x1max = xabs;
+                 } else {
+-                    s1 += Float::powi(xabs / x1max, 2);
++                    s1 += sq(xabs / x1max);
+                 }
+             } else {
+                 // sum for small components
+                 if xabs > x3max {
+-                    s3 = F::one() + s3 * Float::powi(x3max / xabs, 2);
++                    s3 = F::one() + s3 * sq(x3max / xabs);
+                     x3max = xabs;
+                 } else if xabs != F::zero() {
+-                    s3 += Float::powi(xabs / x3max, 2);
++                    s3 += sq(xabs / x3max);
+                 }
+             }
+         } else {

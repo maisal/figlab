@@ -1,0 +1,16 @@
+[package]
+name = "s6wasm"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = ["cmpfit"]
+cmpfit = ["s6fit/cmpfit"]
+
+[dependencies]
+s6fit.workspace = true

@@ -451,6 +451,7 @@ figlab is dual-licensed under MIT OR Apache-2.0, like most Rust projects. Users 
 Dependencies and bundled files:
 
 - Allowed licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, Zlib, Unicode-3.0, and OFL-1.1 (fonts only). Public domain data is also fine (e.g. NIST StRD in `tests/numeric`).
+- The Minpack license (SPDX `Minpack`) is allowed only for code ported from MINPACK and copied into figlab, such as the fitting code (ADR 0015). The full Minpack notice is kept next to the copied code and in the third-party notices.
 - GPL, LGPL, AGPL, and other copyleft licenses are not allowed. Adding another license to the list needs a reason, written as a comment in `deny.toml`.
 - Rust: `deny.toml` holds the allow list. `cargo deny check licenses bans sources` runs in `mise run check` and in CI (5.2).
 - npm: `tools/check-npm-licenses.mjs` checks `pnpm licenses list --json` in `check:deps`. Packages that ship in the app (`dependencies`) must use a license on the list. Packages used only to build and test (`devDependencies`) never ship, so a few more licenses are allowed for them. The script lists them, each with a reason (for example MPL-2.0, used by a build tool).

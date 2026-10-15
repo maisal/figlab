@@ -1,0 +1,29 @@
+# Cargo.toml of the fork of levenberg-marquardt 0.15.0 with bounds (A2).
+# scripts/fetch.sh copies it into downloads/lm-bounded. The dependencies are
+# those of the original crate, pinned.
+# Its own workspace, so Cargo does not look for one in the folders above.
+[workspace]
+
+[package]
+name = "lm-bounded"
+version = "0.15.0"
+edition = "2024"
+license = "MIT"
+publish = false
+build = "build.rs"
+
+[lib]
+name = "lm_bounded"
+path = "src/lib.rs"
+
+[features]
+default = []
+minpack-compat = []
+
+[dependencies]
+cfg-if = "=1.0.5"
+nalgebra = { version = "=0.34.2", default-features = false }
+num-traits = { version = "=0.2.19", default-features = false, features = ["libm"] }
+
+[build-dependencies]
+rustc_version = "=0.4.1"

@@ -141,7 +141,7 @@ flowchart LR
 | Command language | Hand-written recursive-descent parser (one-to-one with the EBNF in language.md Section 3). The same parser is used for checking, execution, the language service, and the command-line tool |
 | Command line and editor | CodeMirror 6 (lightweight and easy to extend with a custom language. Monaco, used by VS Code, is several MB and conflicts with the 2-second startup target) |
 | Language service protocol | Follows LSP (Language Server Protocol). In the browser, it is used through worker messages. External editors use it through `figlab lsp` |
-| Numerics | Math functions: the `libm` crate (so the browser and command-line versions give identical results). Fitting: Levenberg–Marquardt (the Rust `levenberg-marquardt` crate with bounds added, or the C implementation cmpfit compiled to wasm) |
+| Numerics | Math functions: the `libm` crate (so the browser and command-line versions give identical results). Fitting: Levenberg–Marquardt, a fork of the Rust `levenberg-marquardt` crate 0.15 (a port of MINPACK `lmder`) with cmpfit-style bounds, kept in figlab-core (ADR 0015) |
 | Text shaping | harfrust (the HarfBuzz project's Rust port), with skrifa for font data and glyph outlines (ADR 0010) |
 | Export | PDF: pdf-writer, with font subsetting by subsetter (ADR 0010). SVG: written by figlab. PNG: tiny-skia. All are pure Rust and work both in wasm and natively |
 | Import | CSV: the `csv` crate + `encoding_rs` (Shift_JIS support). Parquet: the `parquet` crate or a JavaScript reader |
@@ -298,6 +298,8 @@ The folder given by `into` receives:
   - Choose the model, data, range, and weights
   - Edit initial values, fixed parameters, and bounds in a table
   - Overlay the model curve at the initial values on the graph to check it
+- A parameter that ends on a bound stays exactly on it, and its error is 0. The degrees of freedom are the number of points minus the number of free parameters that are not on a bound (ADR 0015).
+- [To confirm] With `sigma`, whether the parameter errors are absolute or scaled by √χ²_red.
 - Numerical correctness is checked against the certified values of the NIST Statistical Reference Datasets (StRD) for nonlinear regression.
 - Out of scope: global fits that share parameters across data sets, and confidence bands of the fitted curve, are left for future consideration.
 

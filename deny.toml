@@ -7,7 +7,9 @@ all-features = true
 [licenses]
 # The allow list in docs/development.md 6.6. Adding a license needs a reason,
 # written as a comment here. OFL-1.1 is allowed for fonts only, and fonts are
-# not crates, so it is not listed.
+# not crates, so it is not listed. The Minpack license is allowed only for
+# code ported from MINPACK and copied into figlab (ADR 0015). That code is not
+# a crate, so Minpack is not listed either.
 allow = [
     "MIT",
     "Apache-2.0",
