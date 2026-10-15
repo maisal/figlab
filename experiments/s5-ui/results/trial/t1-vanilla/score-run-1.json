@@ -1,0 +1,172 @@
+{
+  "app": "trial/t1-vanilla",
+  "framework": "vanilla",
+  "date": "2026-10-14T05:51:20.807Z",
+  "ok": true,
+  "steps": [
+    {
+      "id": "install",
+      "ok": true,
+      "seconds": 0,
+      "detail": "already installed"
+    },
+    {
+      "id": "dependencies",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "licenses",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "typecheck",
+      "ok": true,
+      "seconds": 1.7848352919999997,
+      "detail": ""
+    },
+    {
+      "id": "lint",
+      "ok": true,
+      "seconds": 8.247914000000002,
+      "detail": ""
+    },
+    {
+      "id": "build",
+      "ok": true,
+      "seconds": 1.5442621249999993,
+      "detail": ""
+    }
+  ],
+  "behaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "devBehaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "devPassed": 11,
+  "appCode": {
+    "lines": 240,
+    "files": [
+      {
+        "file": "main.ts",
+        "lines": 201
+      },
+      {
+        "file": "store.ts",
+        "lines": 39
+      }
+    ]
+  }
+}

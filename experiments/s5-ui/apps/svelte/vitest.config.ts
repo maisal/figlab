@@ -1,0 +1,9 @@
+// Unit test settings (S5: check that vitest works with the framework).
+import { svelteTesting } from "@testing-library/svelte/vite";
+import { defineConfig, mergeConfig } from "vitest/config";
+import viteConfig from "./vite.config.ts";
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({ plugins: [svelteTesting()], test: { environment: "jsdom", setupFiles: ["./src/test-setup.ts"] } }),
+);

@@ -1,0 +1,190 @@
+{
+  "app": "apps/vanilla",
+  "framework": "vanilla",
+  "date": "2026-10-14T06:16:41.302Z",
+  "ok": true,
+  "steps": [
+    {
+      "id": "install",
+      "ok": true,
+      "seconds": 0,
+      "detail": "already installed"
+    },
+    {
+      "id": "dependencies",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "template-files",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "licenses",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dev-licenses",
+      "ok": true,
+      "detail": "known dev-only exceptions: MIT-0: @csstools/color-helpers, @csstools/css-syntax-patches-for-csstree; CC0-1.0: mdn-data"
+    },
+    {
+      "id": "typecheck",
+      "ok": true,
+      "seconds": 0.960952917,
+      "detail": ""
+    },
+    {
+      "id": "lint",
+      "ok": true,
+      "seconds": 2.827189459,
+      "detail": ""
+    },
+    {
+      "id": "build",
+      "ok": true,
+      "seconds": 0.5750554170000005,
+      "detail": ""
+    }
+  ],
+  "behaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "devBehaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "devPassed": 11,
+  "appCode": {
+    "lines": 260,
+    "files": [
+      {
+        "file": "dom.ts",
+        "lines": 46
+      },
+      {
+        "file": "editor.ts",
+        "lines": 39
+      },
+      {
+        "file": "main.ts",
+        "lines": 153
+      },
+      {
+        "file": "store.ts",
+        "lines": 22
+      }
+    ]
+  }
+}

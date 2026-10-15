@@ -1,0 +1,172 @@
+{
+  "app": "trial/t1-preact",
+  "framework": "preact",
+  "date": "2026-10-14T05:51:27.161Z",
+  "ok": false,
+  "steps": [
+    {
+      "id": "install",
+      "ok": true,
+      "seconds": 0,
+      "detail": "already installed"
+    },
+    {
+      "id": "dependencies",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "licenses",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "typecheck",
+      "ok": true,
+      "seconds": 2.064634,
+      "detail": ""
+    },
+    {
+      "id": "lint",
+      "ok": true,
+      "seconds": 7.474559874999999,
+      "detail": ""
+    },
+    {
+      "id": "build",
+      "ok": true,
+      "seconds": 1.3598797080000005,
+      "detail": ""
+    }
+  ],
+  "behaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": false,
+      "detail": "locator.inputValue: Timeout 3000ms exceeded."
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "passed": 10,
+  "total": 11,
+  "devBehaviors": [
+    {
+      "id": "loads",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-toggle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "series-rename",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "plot-controls",
+      "ok": false,
+      "detail": "locator.inputValue: Timeout 3000ms exceeded."
+    },
+    {
+      "id": "editor-to-store",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "store-to-editor",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "editor-lint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "table-virtual",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "canvas-stable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "no-errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "devPassed": 10,
+  "appCode": {
+    "lines": 245,
+    "files": [
+      {
+        "file": "App.tsx",
+        "lines": 217
+      },
+      {
+        "file": "store.ts",
+        "lines": 28
+      }
+    ]
+  }
+}

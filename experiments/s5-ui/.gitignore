@@ -1,0 +1,5 @@
+# Build output of the candidate apps and templates (each folder has its own dist/)
+dist/
+dist-*/
+# Copies of templates made for the agent trial (the evidence is kept in results/trial/)
+/trial/
