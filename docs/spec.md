@@ -108,12 +108,15 @@ flowchart LR
   UI <-- "commands, data requests, change notifications" --> Interp
   Interp -- "graph operations" --> Ops
   Num -- "decimated points, nearest points" --> Layout
-  FileIO <-- "file contents" --> Store
+  FileIO -- "File objects, file handles<br/>(the worker reads and writes the contents)" --> Store
   UI <-- "text being typed, completions, errors" --> Lang
   Store -- "changes to names, types, shapes" --> Index
 ```
 
 - **The compute worker is the single owner of the data** (in Rust memory). The UI requests only what it needs for display (the visible rows of a table, points decimated to the drawing resolution for a graph).
+- **Data moves between threads only by `postMessage`, with every ArrayBuffer in the transfer list** (ADR 0012). The page is not cross-origin isolated (Section 13, Distribution), so no memory is shared. Data is copied once at each wasm boundary: out of the wasm memory of the sender, and into the wasm memory of the receiver if it uses the data in wasm. Big arrays stay in the compute worker. Data crosses only when the main thread needs it:
+  - display data for most views: decimated points, visible table rows, nearest points, and fit results
+  - the whole trace for WebGL markers (9.3) and for export of marker traces
 - **The graph model on the main thread (JSON) is the single owner of each graph.** GUI operations and commands both change a graph through the same "graph operations". A graph operation has a fixed kind and typed arguments. This gives three benefits:
   - GUI operations can be recorded in the history as matching commands
   - Undo/Redo can be built from inverse operations
@@ -529,7 +532,7 @@ Graph model → layout (in pt) → draw data (a list of lines, markers, text, an
 - Screen display and SVG/PDF/PNG export are produced from the same draw data, so exports look exactly as on screen.
 - Text on screen is drawn from the glyph positions and outlines made by the render module. The browser's own text rendering is not used. So text on screen sits exactly where it does in exported figures.
 - The draw data also contains hit-test information (where each element is on screen), used for tooltips and for selecting elements (12.3).
-- Point coordinates are read by TypeScript directly from arrays in wasm memory, without copying.
+- The compute worker copies decimated points out of its wasm memory into an ArrayBuffer and transfers it to the main thread. The render module copies them into its own wasm memory. TypeScript reads the draw data from the render module's memory without copying, because both are on the main thread. The main thread cannot read the compute worker's memory (ADR 0012).
 - The draw data format is versioned and documented as the contract between Rust and TypeScript.
 
 The screen has three layers:
@@ -554,7 +557,7 @@ The screen has three layers:
 | Output | Method |
 |---|---|
 | Screen (lines) | Decimated to the minimum and maximum per pixel column (computed in the compute worker). The result looks the same as without decimation |
-| Screen (markers) | Traces with more than 100,000 points are drawn with WebGL. Points are sent to the GPU once, in data coordinates. Zoom, pan, and log transforms happen on the GPU, so the data is not sent again on every zoom |
+| Screen (markers) | Traces with more than 100,000 points are drawn with WebGL. Points are sent to the GPU once, in data coordinates. Zoom, pan, and log transforms happen on the GPU, so the data is not sent again on every zoom. The whole trace crosses from the compute worker to the main thread once (ADR 0012). Its size depends on the point format chosen for the GPU (ADR 0011) |
 | SVG/PDF (lines) | The same decimation at the export resolution (e.g. the same as 1200 dpi) keeps file sizes small |
 | SVG/PDF (markers) | A trace with many points can be embedded as a raster image on its own (`plot … raster=true`). A warning is shown on export above a certain number of points |
 
@@ -585,6 +588,7 @@ load "scan01.csv" from=raw format=csv header=1 sep=comma comment="#" encoding=sh
 - Source folders are registered with a name by `source` and referred to with `from=<name>`. Access to registered folders is stored in the browser, so commands in the history can be re-run as they are.
 - A wildcard in the file name (`"scan*.csv"`) imports each matching file into its own folder, named after the file (without extension), under the `into` folder. Combined with `for d in folders(…)`, the same processing can be repeated.
 - If an array with the same name already exists, it is an error. Add `replace=true` to replace it.
+- Files are passed to the compute worker as `File` objects. The compute worker reads them in parts: as a stream, or in slices with `File.slice()` for formats that need random access, such as Parquet. The main thread does not read file contents (ADR 0012).
 - Dropping a file imports it with the detected settings and plots it immediately (1.2). To correct the settings, open the import panel with a preview. The chosen settings are recorded in the history as the matching command.
 - The note of each imported array records the source file name, its modification time, and the import settings. [To confirm] The source file itself is not copied into the project.
 
@@ -657,6 +661,7 @@ Always working on a single zip file would mean rewriting the whole file on every
 ### 11.3 Saving
 
 - Saving is explicit (⌘S). Only changed arrays and graphs are written.
+- The compute worker writes arrays to the file itself, in chunks. It gets the file or folder handle from the main thread, so array contents do not cross to the main thread (ADR 0012). [To confirm] Writing from the worker, with `createWritable()` or an OPFS sync access handle, is not tested yet.
 - [Proposal] v1: unsaved changes are kept temporarily in browser storage (OPFS) for crash recovery.
 - The format version is stored in `manifest.json`, and projects in older versions are converted automatically when opened.
 
@@ -812,7 +817,7 @@ Either way, the exported figure can be reproduced from the history and the graph
 | Startup | Usable within 2 seconds of opening the page (from the second visit, with the cache in effect) |
 | Offline | After the first visit, works without a network (Service Worker caches the whole app). Never sends data anywhere |
 | Distribution | GitHub Pages. No special HTTP headers are required. The command-line tool `figlab` is distributed as binaries on GitHub Releases |
-| Memory | Arrays held in memory during work are kept to about 2 GB in total; unchanged arrays not in use are unloaded first. Raising this limit with 64-bit wasm (memory64) may be considered in the future |
+| Memory | Arrays held in memory during work are kept to about 2 GB in total; unchanged arrays not in use are unloaded first. The limit is on the compute worker's wasm memory, plus the ArrayBuffers in flight outside it. wasm memory never shrinks; pages freed by one array are reused by later arrays (ADR 0012). Raising this limit with 64-bit wasm (memory64) may be considered in the future |
 | Quick Plot speed | [Proposal] A 100,000-row CSV is plotted within 1 second of being dropped. A 100 MB CSV starts plotting while still being read, with the first drawing within 2 seconds. Re-plotting after switching columns within 0.2 seconds. Quick Fit gives results within 0.2 seconds for ranges of up to 100,000 points. While the range is being dragged, the fit runs again when the movement stops |
 | Interaction | [Proposal] Zoom and pan respond at 60 frames per second. The exact figure replaces the temporary one within 50 ms after movement stops. Tooltips appear within 16 ms of cursor movement (except the first time for large series whose x is not ascending, when the index is built). Toggling series from the legend and redrawing after a style change within 50 ms |
 | Performance targets | [Proposal] Redrawing a 10-million-point trace within 0.2 seconds (once decimated), re-decimation on zoom within 0.5 seconds, arithmetic between two 10-million-point arrays in about 0.1 seconds, smooth table scrolling. The time to import a 10-million-row CSV is set after measurement |
