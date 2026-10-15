@@ -26,6 +26,7 @@ The repository is public, so anyone can later see why things are the way they ar
 | [0009](0009-license.md) | The license is MIT OR Apache-2.0 | Accepted |
 | [0011](0011-drawing-large-traces.md) | Large traces: M4 decimation from a min/max pyramid in the compute worker, redraw with a transform while the next view is decimated, and WebGL markers with x as integer fixed point | Accepted |
 | [0012](0012-data-transfer-between-workers.md) | Arrays move between threads by transfer, with one copy at each wasm boundary; no shared memory | Accepted |
+| [0013](0013-wasm-size-and-startup.md) | Three wasm modules at startup, export modules loaded on first use, and size budgets for the startup download | Accepted |
 
 ## Template
 

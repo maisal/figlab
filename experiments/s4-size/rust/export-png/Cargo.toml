@@ -1,0 +1,23 @@
+[package]
+name = "m-export-png"
+description = "Stand-in for the PNG export module (loaded later)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+# PNG encoding (the png crate). Without it, export_png returns raw RGBA pixels:
+# the module is then only the rasterizer, as a PDF or SVG export of raster content could use it.
+png-format = ["tiny-skia/png-format"]
+# tiny-skia with its default features (std, simd, png-format), for comparison.
+tiny-skia-default = ["png-format", "tiny-skia/default"]
+
+[dependencies]
+wasm-bindgen.workspace = true
+standin.workspace = true
+tiny-skia = { version = "=0.12.0", default-features = false, features = ["std"] }

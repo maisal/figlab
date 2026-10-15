@@ -1,0 +1,3686 @@
+{
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "nightly": "rustc 1.99.0-nightly (6f72b5dd5 2026-07-22)",
+  "wasmBindgen": "0.2.129",
+  "wasmOpt": "binaryen 133",
+  "ballast": {
+    "compute": 900,
+    "render": 450,
+    "lang": 250
+  },
+  "results": [
+    {
+      "id": "baseline",
+      "group": "baseline",
+      "note": "wasm-bindgen, one function, no allocation",
+      "features": [],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 17432,
+        "gzip": 6996,
+        "brotli": 5977
+      },
+      "js": {
+        "raw": 4053,
+        "gzip": 1236,
+        "brotli": 1061
+      }
+    },
+    {
+      "id": "baseline",
+      "group": "baseline",
+      "note": "wasm-bindgen, one function, no allocation",
+      "features": [],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1024,
+        "gzip": 668,
+        "brotli": 613
+      },
+      "js": {
+        "raw": 4053,
+        "gzip": 1236,
+        "brotli": 1061
+      },
+      "crates": {
+        "(data)": 642,
+        "(other sections)": 465,
+        "(module exports)": 8
+      }
+    },
+    {
+      "id": "baseline-alloc",
+      "group": "baseline",
+      "note": "+ Vec (allocator)",
+      "features": [
+        "alloc"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 17775,
+        "gzip": 7150,
+        "brotli": 6092
+      },
+      "js": {
+        "raw": 4880,
+        "gzip": 1486,
+        "brotli": 1303
+      }
+    },
+    {
+      "id": "baseline-alloc",
+      "group": "baseline",
+      "note": "+ Vec (allocator)",
+      "features": [
+        "alloc"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 12728,
+        "gzip": 5743,
+        "brotli": 4916
+      },
+      "js": {
+        "raw": 4880,
+        "gzip": 1486,
+        "brotli": 1303
+      },
+      "crates": {
+        "std (allocator)": 6908,
+        "std/core/alloc": 3978,
+        "(data)": 642,
+        "(other sections)": 597,
+        "wasm-bindgen": 443,
+        "(module exports)": 248
+      }
+    },
+    {
+      "id": "baseline-fmt",
+      "group": "baseline",
+      "note": "+ format! of a float (core::fmt)",
+      "features": [
+        "fmt"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 40567,
+        "gzip": 17172,
+        "brotli": 14691
+      },
+      "js": {
+        "raw": 6216,
+        "gzip": 1826,
+        "brotli": 1631
+      }
+    },
+    {
+      "id": "baseline-fmt",
+      "group": "baseline",
+      "note": "+ format! of a float (core::fmt)",
+      "features": [
+        "fmt"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 31430,
+        "gzip": 14956,
+        "brotli": 12847
+      },
+      "js": {
+        "raw": 6216,
+        "gzip": 1826,
+        "brotli": 1631
+      },
+      "crates": {
+        "std/core/alloc": 18019,
+        "std (allocator)": 6901,
+        "(data)": 3989,
+        "__rustc": 861,
+        "(other sections)": 707,
+        "(module exports)": 483,
+        "wasm-bindgen": 457,
+        "std (builtins, libm)": 99
+      }
+    },
+    {
+      "id": "compute-csv",
+      "group": "compute",
+      "note": "csv only",
+      "features": [
+        "csv"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 58858,
+        "gzip": 31165,
+        "brotli": 27804
+      },
+      "js": {
+        "raw": 5470,
+        "gzip": 1649,
+        "brotli": 1433
+      }
+    },
+    {
+      "id": "compute-csv",
+      "group": "compute",
+      "note": "csv only",
+      "features": [
+        "csv"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 46312,
+        "gzip": 28371,
+        "brotli": 25491
+      },
+      "js": {
+        "raw": 5470,
+        "gzip": 1649,
+        "brotli": 1433
+      },
+      "crates": {
+        "(data)": 14554,
+        "std/core/alloc": 8743,
+        "std (allocator)": 7292,
+        "(module exports)": 6913,
+        "csv": 5213,
+        "csv_core": 1652,
+        "__rustc": 1020,
+        "(other sections)": 755,
+        "std (builtins, libm)": 99,
+        "(unnamed)": 92,
+        "wasm-bindgen": 65
+      }
+    },
+    {
+      "id": "compute-sjis",
+      "group": "compute",
+      "note": "encoding_rs (Shift_JIS) only",
+      "features": [
+        "sjis"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 181972,
+        "gzip": 134593,
+        "brotli": 104472
+      },
+      "js": {
+        "raw": 5470,
+        "gzip": 1649,
+        "brotli": 1433
+      }
+    },
+    {
+      "id": "compute-sjis",
+      "group": "compute",
+      "note": "encoding_rs (Shift_JIS) only",
+      "features": [
+        "sjis"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 169495,
+        "gzip": 132021,
+        "brotli": 102138
+      },
+      "js": {
+        "raw": 5470,
+        "gzip": 1649,
+        "brotli": 1433
+      },
+      "crates": {
+        "(data)": 119220,
+        "encoding_rs": 31407,
+        "std (allocator)": 7292,
+        "std/core/alloc": 5782,
+        "(module exports)": 4004,
+        "__rustc": 1020,
+        "(other sections)": 722,
+        "std (builtins, libm)": 68,
+        "wasm-bindgen": 65
+      }
+    },
+    {
+      "id": "compute-rmpfit-only",
+      "group": "compute",
+      "note": "rmpfit only",
+      "features": [
+        "fit-rmpfit"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 78916,
+        "gzip": 30765,
+        "brotli": 26646
+      },
+      "js": {
+        "raw": 6337,
+        "gzip": 1780,
+        "brotli": 1553
+      }
+    },
+    {
+      "id": "compute-rmpfit-only",
+      "group": "compute",
+      "note": "rmpfit only",
+      "features": [
+        "fit-rmpfit"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 65373,
+        "gzip": 28015,
+        "brotli": 24162
+      },
+      "js": {
+        "raw": 6337,
+        "gzip": 1780,
+        "brotli": 1553
+      },
+      "crates": {
+        "std/core/alloc": 22348,
+        "(module exports)": 18745,
+        "(data)": 11404,
+        "std (allocator)": 7285,
+        "rmpfit": 2733,
+        "__rustc": 1020,
+        "m_compute": 829,
+        "(other sections)": 812,
+        "wasm_bindgen": 118,
+        "std (builtins, libm)": 99,
+        "wasm-bindgen": 65
+      }
+    },
+    {
+      "id": "compute-empty",
+      "group": "compute",
+      "note": "import() without csv, sjis, fit, or stand-in",
+      "features": [],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 21803,
+        "gzip": 8647,
+        "brotli": 7431
+      },
+      "js": {
+        "raw": 5470,
+        "gzip": 1649,
+        "brotli": 1433
+      }
+    },
+    {
+      "id": "compute-empty",
+      "group": "compute",
+      "note": "import() without csv, sjis, fit, or stand-in",
+      "features": [],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 15429,
+        "gzip": 6991,
+        "brotli": 6050
+      },
+      "js": {
+        "raw": 5470,
+        "gzip": 1649,
+        "brotli": 1433
+      },
+      "crates": {
+        "std (allocator)": 7292,
+        "std/core/alloc": 4283,
+        "(module exports)": 1382,
+        "__rustc": 1008,
+        "(data)": 838,
+        "(other sections)": 648,
+        "wasm-bindgen": 65
+      }
+    },
+    {
+      "id": "render-app",
+      "group": "app",
+      "note": "render (rustybuzz) + allowance for own code",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 945164,
+        "gzip": 383214,
+        "brotli": 304646
+      },
+      "js": {
+        "raw": 10005,
+        "gzip": 2600,
+        "brotli": 2297
+      }
+    },
+    {
+      "id": "render-app",
+      "group": "app",
+      "note": "render (rustybuzz) + allowance for own code",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 803987,
+        "gzip": 365692,
+        "brotli": 290761
+      },
+      "js": {
+        "raw": 10005,
+        "gzip": 2600,
+        "brotli": 2297
+      },
+      "crates": {
+        "ballast": 237905,
+        "(data)": 207135,
+        "rustybuzz": 110837,
+        "ttf_parser": 99662,
+        "m_render": 50430,
+        "std/core/alloc": 41861,
+        "(module exports)": 25068,
+        "libm": 8561,
+        "std (allocator)": 7298,
+        "standin": 6344,
+        "(other sections)": 3348,
+        "smallvec": 2947,
+        "(unnamed)": 1038,
+        "__rustc": 1033,
+        "std (builtins, libm)": 236,
+        "unicode_properties": 175,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 77
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 2686158,
+        "gzip": 565347,
+        "brotli": 420730
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1222366,
+        "gzip": 459223,
+        "brotli": 359340
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 1235172,
+        "gzip": 458512,
+        "brotli": 357874
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 1248699,
+        "gzip": 460066,
+        "brotli": 358510
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 1220682,
+        "gzip": 458405,
+        "brotli": 358092
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      },
+      "crates": {
+        "skrifa": 266611,
+        "read_fonts": 213384,
+        "(data)": 145348,
+        "krilla": 134143,
+        "subsetter": 95184,
+        "write_fonts": 84534,
+        "std/core/alloc": 82904,
+        "(module exports)": 63972,
+        "pdf_writer": 38905,
+        "font_types": 19494,
+        "tiny_skia_path": 18842,
+        "miniz_oxide": 8799,
+        "xmp_writer": 8645,
+        "(unnamed)": 7954,
+        "std (allocator)": 7421,
+        "flate2": 5763,
+        "(other sections)": 5015,
+        "memchr": 4128,
+        "ryu": 1884,
+        "siphasher": 1353,
+        "smallvec": 1241,
+        "bumpalo": 1071,
+        "__rustc": 1035,
+        "rustc_hash": 1015,
+        "kurbo": 949,
+        "base64": 843,
+        "itoa": 510,
+        "std (builtins, libm)": 474,
+        "log": 230,
+        "simd_adler32": 209,
+        "indexmap": 207,
+        "float_cmp": 127,
+        "wasm-bindgen": 113,
+        "standin": 75,
+        "wasm_bindgen": 65
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1354026,
+        "gzip": 504252,
+        "brotli": 386557
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1500795,
+        "gzip": 561175,
+        "brotli": 424327
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1681342,
+        "gzip": 603470,
+        "brotli": 444819
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla-default",
+      "group": "export",
+      "note": "krilla 0.8, default features on",
+      "features": [
+        "krilla-default"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 2953649,
+        "gzip": 636384,
+        "brotli": 475284
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla-default",
+      "group": "export",
+      "note": "krilla 0.8, default features on",
+      "features": [
+        "krilla-default"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1396191,
+        "gzip": 522773,
+        "brotli": 410946
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      },
+      "crates": {
+        "skrifa": 292776,
+        "read_fonts": 258858,
+        "(data)": 179252,
+        "krilla": 144617,
+        "subsetter": 95352,
+        "std/core/alloc": 85986,
+        "write_fonts": 84580,
+        "(module exports)": 64299,
+        "png": 42109,
+        "pdf_writer": 37451,
+        "font_types": 19709,
+        "tiny_skia_path": 18879,
+        "fdeflate": 9722,
+        "(unnamed)": 9717,
+        "miniz_oxide": 8799,
+        "xmp_writer": 8651,
+        "std (allocator)": 7421,
+        "flate2": 5719,
+        "(other sections)": 5373,
+        "memchr": 4128,
+        "ryu": 1884,
+        "siphasher": 1353,
+        "smallvec": 1337,
+        "bumpalo": 1071,
+        "__rustc": 1037,
+        "rustc_hash": 1015,
+        "crc32fast": 958,
+        "kurbo": 925,
+        "base64": 847,
+        "itoa": 510,
+        "std (builtins, libm)": 474,
+        "wasm_bindgen": 394,
+        "simd_adler32": 267,
+        "log": 230,
+        "indexmap": 173,
+        "float_cmp": 127,
+        "wasm-bindgen": 113,
+        "standin": 75,
+        "zune_core": 72,
+        "zune_jpeg": 12
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 1849097,
+        "gzip": 394502,
+        "brotli": 303486
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 856221,
+        "gzip": 332173,
+        "brotli": 266752
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 863529,
+        "gzip": 331378,
+        "brotli": 265401
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 870392,
+        "gzip": 332540,
+        "brotli": 266348
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 855023,
+        "gzip": 330533,
+        "brotli": 264794
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      },
+      "crates": {
+        "skrifa": 211267,
+        "read_fonts": 166656,
+        "(data)": 99598,
+        "subsetter": 93635,
+        "write_fonts": 85140,
+        "std/core/alloc": 68707,
+        "(module exports)": 52792,
+        "font_types": 18214,
+        "miniz_oxide": 15271,
+        "ttf_parser": 12357,
+        "pdf_writer": 10262,
+        "std (allocator)": 7421,
+        "(unnamed)": 5132,
+        "(other sections)": 3179,
+        "ryu": 1884,
+        "std (builtins, libm)": 1570,
+        "__rustc": 1035,
+        "kurbo": 961,
+        "itoa": 510,
+        "log": 230,
+        "rustc_hash": 189,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 65,
+        "m_export_pdf": 63,
+        "standin": 51
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 888329,
+        "gzip": 343935,
+        "brotli": 273557
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 775068,
+        "gzip": 313106,
+        "brotli": 250521
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1062477,
+        "gzip": 396281,
+        "brotli": 305322
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-krilla",
+      "group": "export",
+      "note": "krilla 0.8, default features off",
+      "features": [
+        "krilla"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1066214,
+        "gzip": 405399,
+        "brotli": 321067
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer",
+      "group": "export",
+      "note": "pdf-writer + subsetter (variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 742351,
+        "gzip": 291634,
+        "brotli": 236256
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 163566,
+        "gzip": 59582,
+        "brotli": 51159
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 123260,
+        "gzip": 53993,
+        "brotli": 46265
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 123378,
+        "gzip": 53984,
+        "brotli": 46188
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 123492,
+        "gzip": 53880,
+        "brotli": 46143
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 123099,
+        "gzip": 53790,
+        "brotli": 46058
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      },
+      "crates": {
+        "std/core/alloc": 38407,
+        "(data)": 37186,
+        "standin": 28319,
+        "(module exports)": 9260,
+        "std (allocator)": 7286,
+        "__rustc": 1026,
+        "(other sections)": 984,
+        "m_lang": 215,
+        "std (builtins, libm)": 167,
+        "(unnamed)": 160,
+        "wasm_bindgen": 127,
+        "wasm-bindgen": 112,
+        "libm": 94
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 127629,
+        "gzip": 55368,
+        "brotli": 47030
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 158674,
+        "gzip": 64715,
+        "brotli": 53798
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 157838,
+        "gzip": 65854,
+        "brotli": 55065
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-serde",
+      "group": "lang",
+      "note": "parser stand-in + commands.json read by serde_json",
+      "features": [
+        "parser",
+        "spec-serde"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 265520,
+        "gzip": 82647,
+        "brotli": 70621
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-serde",
+      "group": "lang",
+      "note": "parser stand-in + commands.json read by serde_json",
+      "features": [
+        "parser",
+        "spec-serde"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 205170,
+        "gzip": 74892,
+        "brotli": 63764
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      },
+      "crates": {
+        "(data)": 78333,
+        "std/core/alloc": 40824,
+        "standin": 28867,
+        "serde_json": 21517,
+        "m_lang": 13612,
+        "(module exports)": 9713,
+        "std (allocator)": 7286,
+        "serde_core": 1209,
+        "(other sections)": 1174,
+        "__rustc": 1026,
+        "zmij": 964,
+        "(unnamed)": 272,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113,
+        "libm": 94,
+        "wasm_bindgen": 81
+      }
+    },
+    {
+      "id": "lang-raw",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as raw text",
+      "features": [
+        "parser",
+        "spec-raw"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 195080,
+        "gzip": 58921,
+        "brotli": 50344
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-raw",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as raw text",
+      "features": [
+        "parser",
+        "spec-raw"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 155540,
+        "gzip": 53287,
+        "brotli": 45527
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      },
+      "crates": {
+        "(data)": 72062,
+        "std/core/alloc": 37577,
+        "standin": 26979,
+        "(module exports)": 9060,
+        "std (allocator)": 7286,
+        "__rustc": 1026,
+        "(other sections)": 973,
+        "std (builtins, libm)": 167,
+        "(unnamed)": 160,
+        "wasm_bindgen": 127,
+        "wasm-bindgen": 112,
+        "libm": 94
+      }
+    },
+    {
+      "id": "lang-none",
+      "group": "lang",
+      "note": "parser stand-in, no commands.json",
+      "features": [
+        "parser"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 138673,
+        "gzip": 50501,
+        "brotli": 43625
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "lang-none",
+      "group": "lang",
+      "note": "parser stand-in, no commands.json",
+      "features": [
+        "parser"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 99133,
+        "gzip": 45031,
+        "brotli": 38730
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      },
+      "crates": {
+        "std/core/alloc": 37577,
+        "standin": 26979,
+        "(data)": 15653,
+        "(module exports)": 9063,
+        "std (allocator)": 7286,
+        "__rustc": 1026,
+        "(other sections)": 973,
+        "std (builtins, libm)": 167,
+        "(unnamed)": 160,
+        "wasm_bindgen": 127,
+        "wasm-bindgen": 112,
+        "libm": 94
+      }
+    },
+    {
+      "id": "lang-app",
+      "group": "app",
+      "note": "lang (tables) + allowance for own code",
+      "features": [
+        "parser",
+        "spec-tables",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 321890,
+        "gzip": 133530,
+        "brotli": 116554
+      },
+      "js": {
+        "raw": 8598,
+        "gzip": 2304,
+        "brotli": 2037
+      }
+    },
+    {
+      "id": "lang-app",
+      "group": "app",
+      "note": "lang (tables) + allowance for own code",
+      "features": [
+        "parser",
+        "spec-tables",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 269185,
+        "gzip": 126914,
+        "brotli": 110845
+      },
+      "js": {
+        "raw": 8598,
+        "gzip": 2304,
+        "brotli": 2037
+      },
+      "crates": {
+        "ballast": 135188,
+        "(data)": 38877,
+        "std/core/alloc": 38707,
+        "standin": 28566,
+        "(module exports)": 9005,
+        "libm": 8084,
+        "std (allocator)": 7298,
+        "(other sections)": 1723,
+        "__rustc": 1031,
+        "m_lang": 216,
+        "std (builtins, libm)": 167,
+        "(unnamed)": 162,
+        "wasm_bindgen": 129,
+        "wasm-bindgen": 113
+      }
+    },
+    {
+      "id": "lang-tables",
+      "group": "lang",
+      "note": "parser stand-in + commands.json as Rust tables",
+      "features": [
+        "parser",
+        "spec-tables"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 90969,
+        "gzip": 41437,
+        "brotli": 36144
+      },
+      "js": {
+        "raw": 8365,
+        "gzip": 2233,
+        "brotli": 1977
+      }
+    },
+    {
+      "id": "compute-standin",
+      "group": "compute",
+      "note": "stand-in only (interpreter, CSV detection)",
+      "features": [
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 156043,
+        "gzip": 60500,
+        "brotli": 52265
+      },
+      "js": {
+        "raw": 8044,
+        "gzip": 2312,
+        "brotli": 2039
+      }
+    },
+    {
+      "id": "compute-standin",
+      "group": "compute",
+      "note": "stand-in only (interpreter, CSV detection)",
+      "features": [
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 120619,
+        "gzip": 54889,
+        "brotli": 47587
+      },
+      "js": {
+        "raw": 8044,
+        "gzip": 2312,
+        "brotli": 2039
+      },
+      "crates": {
+        "standin": 42676,
+        "std/core/alloc": 30580,
+        "(data)": 17049,
+        "libm": 11297,
+        "(module exports)": 9213,
+        "std (allocator)": 7286,
+        "(other sections)": 1042,
+        "__rustc": 1026,
+        "(unnamed)": 189,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 112,
+        "wasm_bindgen": 64
+      }
+    },
+    {
+      "id": "pdf-writer-min",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer-min"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 404004,
+        "gzip": 136366,
+        "brotli": 117349
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-min",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + ttf-parser + miniz_oxide",
+      "features": [
+        "pdf-writer-min"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 242533,
+        "gzip": 122124,
+        "brotli": 105613
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      },
+      "crates": {
+        "subsetter": 50661,
+        "std/core/alloc": 50123,
+        "(module exports)": 46456,
+        "(data)": 43692,
+        "miniz_oxide": 15242,
+        "ttf_parser": 12333,
+        "pdf_writer": 10248,
+        "std (allocator)": 7409,
+        "ryu": 1880,
+        "(other sections)": 1469,
+        "__rustc": 1030,
+        "(unnamed)": 913,
+        "itoa": 510,
+        "rustc_hash": 189,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 65,
+        "m_export_pdf": 63,
+        "standin": 51
+      }
+    },
+    {
+      "id": "compute-rmpfit",
+      "group": "compute",
+      "note": "csv + encoding_rs + rmpfit + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-rmpfit",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 385792,
+        "gzip": 217796,
+        "brotli": 176373
+      },
+      "js": {
+        "raw": 8911,
+        "gzip": 2442,
+        "brotli": 2164
+      }
+    },
+    {
+      "id": "compute-rmpfit",
+      "group": "compute",
+      "note": "csv + encoding_rs + rmpfit + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-rmpfit",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 334753,
+        "gzip": 210226,
+        "brotli": 170449
+      },
+      "js": {
+        "raw": 8911,
+        "gzip": 2442,
+        "brotli": 2164
+      },
+      "crates": {
+        "(data)": 156156,
+        "standin": 41945,
+        "std/core/alloc": 39577,
+        "(module exports)": 34580,
+        "encoding_rs": 31501,
+        "libm": 11320,
+        "std (allocator)": 7286,
+        "csv": 4701,
+        "rmpfit": 2800,
+        "csv_core": 1656,
+        "(other sections)": 1239,
+        "__rustc": 1026,
+        "(unnamed)": 384,
+        "m_compute": 199,
+        "wasm_bindgen": 185,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113
+      }
+    },
+    {
+      "id": "compute-nofit",
+      "group": "compute",
+      "note": "csv + encoding_rs + stand-in (no fitting)",
+      "features": [
+        "csv",
+        "sjis",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 347600,
+        "gzip": 204642,
+        "brotli": 172990
+      },
+      "js": {
+        "raw": 8044,
+        "gzip": 2312,
+        "brotli": 2039
+      }
+    },
+    {
+      "id": "compute-nofit",
+      "group": "compute",
+      "note": "csv + encoding_rs + stand-in (no fitting)",
+      "features": [
+        "csv",
+        "sjis",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 301140,
+        "gzip": 197486,
+        "brotli": 160038
+      },
+      "js": {
+        "raw": 8044,
+        "gzip": 2312,
+        "brotli": 2039
+      },
+      "crates": {
+        "(data)": 148393,
+        "standin": 41925,
+        "std/core/alloc": 34913,
+        "encoding_rs": 31483,
+        "(module exports)": 16745,
+        "libm": 11316,
+        "std (allocator)": 7286,
+        "csv": 4699,
+        "csv_core": 1656,
+        "(other sections)": 1153,
+        "__rustc": 1026,
+        "(unnamed)": 282,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 65
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 1181817,
+        "gzip": 360155,
+        "brotli": 286251
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 817883,
+        "gzip": 322127,
+        "brotli": 259365
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 825485,
+        "gzip": 321479,
+        "brotli": 259159
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 828574,
+        "gzip": 321902,
+        "brotli": 259361
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 816587,
+        "gzip": 321578,
+        "brotli": 258870
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      },
+      "crates": {
+        "harfrust": 220805,
+        "read_fonts": 169172,
+        "(data)": 142763,
+        "m_render": 103271,
+        "skrifa": 93689,
+        "std/core/alloc": 38256,
+        "(module exports)": 14106,
+        "std (allocator)": 7298,
+        "standin": 6585,
+        "libm": 4604,
+        "font_types": 4145,
+        "(unnamed)": 3717,
+        "smallvec": 3441,
+        "(other sections)": 2995,
+        "once_cell": 1609,
+        "__rustc": 1033,
+        "std (builtins, libm)": 173,
+        "wasm_bindgen": 170,
+        "wasm-bindgen": 113,
+        "spin": 19
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 894978,
+        "gzip": 350875,
+        "brotli": 275684
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1129617,
+        "gzip": 412471,
+        "brotli": 314685
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1163609,
+        "gzip": 423785,
+        "brotli": 324132
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 674256,
+        "gzip": 254207,
+        "brotli": 194363
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 554426,
+        "gzip": 240302,
+        "brotli": 183786
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 555623,
+        "gzip": 240111,
+        "brotli": 183024
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 562827,
+        "gzip": 240406,
+        "brotli": 182837
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 553905,
+        "gzip": 239938,
+        "brotli": 182616
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      },
+      "crates": {
+        "(data)": 204633,
+        "rustybuzz": 110761,
+        "ttf_parser": 99621,
+        "m_render": 50407,
+        "std/core/alloc": 41797,
+        "(module exports)": 24989,
+        "std (allocator)": 7296,
+        "standin": 6703,
+        "smallvec": 2947,
+        "(other sections)": 1977,
+        "(unnamed)": 1038,
+        "__rustc": 1029,
+        "libm": 708,
+        "std (builtins, libm)": 236,
+        "unicode_properties": 175,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 77
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 609922,
+        "gzip": 256210,
+        "brotli": 199971
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 714346,
+        "gzip": 285978,
+        "brotli": 213889
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 741939,
+        "gzip": 289968,
+        "brotli": 214391
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb-only",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser only",
+      "features": [
+        "shape-rustybuzz"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 635501,
+        "gzip": 237847,
+        "brotli": 182304
+      },
+      "js": {
+        "raw": 7377,
+        "gzip": 2092,
+        "brotli": 1840
+      }
+    },
+    {
+      "id": "render-rb-only",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser only",
+      "features": [
+        "shape-rustybuzz"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 525034,
+        "gzip": 224195,
+        "brotli": 171868
+      },
+      "js": {
+        "raw": 7377,
+        "gzip": 2092,
+        "brotli": 1840
+      },
+      "crates": {
+        "(data)": 200796,
+        "rustybuzz": 110770,
+        "ttf_parser": 99603,
+        "(module exports)": 74305,
+        "std/core/alloc": 24487,
+        "std (allocator)": 7296,
+        "smallvec": 2924,
+        "(other sections)": 1796,
+        "(unnamed)": 1038,
+        "__rustc": 1027,
+        "m_render": 329,
+        "std (builtins, libm)": 236,
+        "unicode_properties": 175,
+        "standin": 143,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 77
+      }
+    },
+    {
+      "id": "render-hr-only",
+      "group": "render",
+      "note": "harfrust + skrifa (libm) only",
+      "features": [
+        "shape-harfrust"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 1143763,
+        "gzip": 345011,
+        "brotli": 273849
+      },
+      "js": {
+        "raw": 7377,
+        "gzip": 2092,
+        "brotli": 1840
+      }
+    },
+    {
+      "id": "render-hr-only",
+      "group": "render",
+      "note": "harfrust + skrifa (libm) only",
+      "features": [
+        "shape-harfrust"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 788208,
+        "gzip": 307984,
+        "brotli": 247709
+      },
+      "js": {
+        "raw": 7377,
+        "gzip": 2092,
+        "brotli": 1840
+      },
+      "crates": {
+        "harfrust": 220806,
+        "read_fonts": 169263,
+        "(data)": 138911,
+        "(module exports)": 116111,
+        "skrifa": 93679,
+        "std/core/alloc": 20602,
+        "std (allocator)": 7298,
+        "font_types": 4145,
+        "libm": 4035,
+        "(unnamed)": 3622,
+        "smallvec": 3420,
+        "(other sections)": 2808,
+        "once_cell": 1609,
+        "__rustc": 1033,
+        "m_render": 329,
+        "std (builtins, libm)": 173,
+        "wasm_bindgen": 170,
+        "standin": 143,
+        "wasm-bindgen": 113,
+        "spin": 19
+      }
+    },
+    {
+      "id": "render-standin",
+      "group": "render",
+      "note": "stand-in only (layout, SVG, no shaping)",
+      "features": [
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 65971,
+        "gzip": 26790,
+        "brotli": 23115
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-standin",
+      "group": "render",
+      "note": "stand-in only (layout, SVG, no shaping)",
+      "features": [
+        "standin"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 49308,
+        "gzip": 23284,
+        "brotli": 19988
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      },
+      "crates": {
+        "std/core/alloc": 23650,
+        "std (allocator)": 7285,
+        "standin": 6629,
+        "(data)": 5254,
+        "(module exports)": 2506,
+        "m_render": 1041,
+        "__rustc": 1020,
+        "(other sections)": 913,
+        "libm": 708,
+        "wasm-bindgen": 111,
+        "(unnamed)": 101,
+        "std (builtins, libm)": 99,
+        "wasm_bindgen": 75
+      }
+    },
+    {
+      "id": "render-hr-app",
+      "group": "app",
+      "note": "render (harfrust) + allowance for own code",
+      "features": [
+        "shape-harfrust",
+        "standin",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 1450527,
+        "gzip": 493523,
+        "brotli": 397011
+      },
+      "js": {
+        "raw": 10005,
+        "gzip": 2600,
+        "brotli": 2297
+      }
+    },
+    {
+      "id": "render-hr-app",
+      "group": "app",
+      "note": "render (harfrust) + allowance for own code",
+      "features": [
+        "shape-harfrust",
+        "standin",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1065116,
+        "gzip": 452255,
+        "brotli": 367614
+      },
+      "js": {
+        "raw": 10005,
+        "gzip": 2600,
+        "brotli": 2297
+      },
+      "crates": {
+        "ballast": 238002,
+        "harfrust": 220811,
+        "read_fonts": 169204,
+        "(data)": 144698,
+        "m_render": 103278,
+        "skrifa": 93693,
+        "std/core/alloc": 38261,
+        "(module exports)": 14182,
+        "libm": 10577,
+        "std (allocator)": 7298,
+        "standin": 6377,
+        "(other sections)": 4391,
+        "font_types": 4145,
+        "(unnamed)": 3717,
+        "smallvec": 3445,
+        "once_cell": 1609,
+        "__rustc": 1033,
+        "std (builtins, libm)": 173,
+        "wasm_bindgen": 170,
+        "wasm-bindgen": 114,
+        "spin": 19
+      }
+    },
+    {
+      "id": "render-rb-app",
+      "group": "app",
+      "note": "render (rustybuzz) + allowance for own code",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 945164,
+        "gzip": 383208,
+        "brotli": 304782
+      },
+      "js": {
+        "raw": 10005,
+        "gzip": 2600,
+        "brotli": 2297
+      }
+    },
+    {
+      "id": "render-rb-app",
+      "group": "app",
+      "note": "render (rustybuzz) + allowance for own code",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 803987,
+        "gzip": 365689,
+        "brotli": 290892
+      },
+      "js": {
+        "raw": 10005,
+        "gzip": 2600,
+        "brotli": 2297
+      },
+      "crates": {
+        "ballast": 237905,
+        "(data)": 207135,
+        "rustybuzz": 110837,
+        "ttf_parser": 99662,
+        "m_render": 50430,
+        "std/core/alloc": 41861,
+        "(module exports)": 25068,
+        "libm": 8561,
+        "std (allocator)": 7298,
+        "standin": 6344,
+        "(other sections)": 3348,
+        "smallvec": 2947,
+        "(unnamed)": 1038,
+        "__rustc": 1033,
+        "std (builtins, libm)": 236,
+        "unicode_properties": 175,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 77
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 401806,
+        "gzip": 131343,
+        "brotli": 113643
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 226652,
+        "gzip": 114408,
+        "brotli": 99457
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 227475,
+        "gzip": 114355,
+        "brotli": 99248
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 228372,
+        "gzip": 114410,
+        "brotli": 99368
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 226332,
+        "gzip": 114130,
+        "brotli": 98975
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      },
+      "crates": {
+        "subsetter": 54375,
+        "std/core/alloc": 47251,
+        "(data)": 46055,
+        "m_export_pdf": 29943,
+        "miniz_oxide": 15242,
+        "pdf_writer": 10244,
+        "read_fonts": 7909,
+        "std (allocator)": 7409,
+        "ryu": 1880,
+        "(other sections)": 1470,
+        "__rustc": 1030,
+        "skrifa": 943,
+        "(unnamed)": 798,
+        "(module exports)": 677,
+        "itoa": 510,
+        "font_types": 412,
+        "rustc_hash": 189,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113,
+        "wasm_bindgen": 65,
+        "standin": 51
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 234635,
+        "gzip": 114508,
+        "brotli": 98542
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 263300,
+        "gzip": 119120,
+        "brotli": 100994
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 273365,
+        "gzip": 121963,
+        "brotli": 103011
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "render-hr+pdfwriter+png",
+      "group": "combined",
+      "note": "render (harfrust) + pdf-writer (skrifa) + tiny-skia in one module",
+      "features": [
+        "shape-harfrust",
+        "standin",
+        "with-pdf-writer-skrifa",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 1774331,
+        "gzip": 580351,
+        "brotli": 451408
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      }
+    },
+    {
+      "id": "render-hr+pdfwriter+png",
+      "group": "combined",
+      "note": "render (harfrust) + pdf-writer (skrifa) + tiny-skia in one module",
+      "features": [
+        "shape-harfrust",
+        "standin",
+        "with-pdf-writer-skrifa",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1284814,
+        "gzip": 521568,
+        "brotli": 412756
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      },
+      "crates": {
+        "tiny_skia": 223912,
+        "harfrust": 220849,
+        "(data)": 211520,
+        "read_fonts": 170436,
+        "m_render": 103376,
+        "skrifa": 93635,
+        "std/core/alloc": 62407,
+        "(module exports)": 51252,
+        "subsetter": 47447,
+        "tiny_skia_path": 19397,
+        "miniz_oxide": 14113,
+        "pdf_writer": 9750,
+        "standin": 8392,
+        "std (allocator)": 7298,
+        "png": 5891,
+        "(unnamed)": 4883,
+        "(other sections)": 4701,
+        "libm": 4604,
+        "fdeflate": 4335,
+        "font_types": 4082,
+        "smallvec": 3297,
+        "flate2": 2216,
+        "ryu": 1860,
+        "once_cell": 1610,
+        "__rustc": 1079,
+        "crc32fast": 958,
+        "arrayvec": 294,
+        "bytemuck": 240,
+        "simd_adler32": 209,
+        "m_export_png": 176,
+        "std (builtins, libm)": 173,
+        "strict_num": 125,
+        "wasm_bindgen": 120,
+        "wasm-bindgen": 114,
+        "m_export_pdf": 63,
+        "rustc_hash": 62,
+        "spin": 19
+      }
+    },
+    {
+      "id": "render-rb+krilla+png",
+      "group": "combined",
+      "note": "render (rustybuzz) + krilla + tiny-skia in one module",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "with-pdf-krilla",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 2549622,
+        "gzip": 792704,
+        "brotli": 602158
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      }
+    },
+    {
+      "id": "render-rb+krilla+png",
+      "group": "combined",
+      "note": "render (rustybuzz) + krilla + tiny-skia in one module",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "with-pdf-krilla",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1775307,
+        "gzip": 716449,
+        "brotli": 554144
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      },
+      "crates": {
+        "(data)": 319254,
+        "tiny_skia": 223553,
+        "skrifa": 223521,
+        "read_fonts": 146036,
+        "krilla": 113794,
+        "rustybuzz": 110650,
+        "(module exports)": 99590,
+        "ttf_parser": 96143,
+        "std/core/alloc": 87957,
+        "subsetter": 75829,
+        "write_fonts": 74115,
+        "m_render": 50006,
+        "pdf_writer": 34096,
+        "tiny_skia_path": 25203,
+        "font_types": 15763,
+        "standin": 8600,
+        "miniz_oxide": 7908,
+        "flate2": 7638,
+        "(unnamed)": 7413,
+        "std (allocator)": 7296,
+        "xmp_writer": 6750,
+        "(other sections)": 6381,
+        "png": 5891,
+        "fdeflate": 4335,
+        "memchr": 3705,
+        "smallvec": 3671,
+        "ryu": 1860,
+        "__rustc": 1097,
+        "crc32fast": 958,
+        "kurbo": 947,
+        "siphasher": 909,
+        "libm": 708,
+        "rustc_hash": 700,
+        "base64": 527,
+        "bumpalo": 514,
+        "std (builtins, libm)": 474,
+        "arrayvec": 294,
+        "bytemuck": 240,
+        "simd_adler32": 209,
+        "indexmap": 180,
+        "m_export_png": 176,
+        "unicode_properties": 175,
+        "wasm_bindgen": 120,
+        "wasm-bindgen": 114,
+        "float_cmp": 72,
+        "strict_num": 16
+      }
+    },
+    {
+      "id": "render-hr+krilla+png",
+      "group": "combined",
+      "note": "render (harfrust) + krilla + tiny-skia in one module",
+      "features": [
+        "shape-harfrust",
+        "standin",
+        "with-pdf-krilla",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 3047433,
+        "gzip": 896017,
+        "brotli": 668151
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      }
+    },
+    {
+      "id": "render-hr+krilla+png",
+      "group": "combined",
+      "note": "render (harfrust) + krilla + tiny-skia in one module",
+      "features": [
+        "shape-harfrust",
+        "standin",
+        "with-pdf-krilla",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 2036598,
+        "gzip": 793025,
+        "brotli": 610842
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      },
+      "crates": {
+        "skrifa": 305448,
+        "read_fonts": 304779,
+        "(data)": 268957,
+        "tiny_skia": 223594,
+        "harfrust": 221013,
+        "krilla": 113776,
+        "m_render": 103184,
+        "(module exports)": 88725,
+        "std/core/alloc": 86717,
+        "subsetter": 78453,
+        "write_fonts": 74130,
+        "pdf_writer": 34090,
+        "tiny_skia_path": 25252,
+        "font_types": 17418,
+        "(unnamed)": 12312,
+        "standin": 8508,
+        "miniz_oxide": 7908,
+        "flate2": 7638,
+        "std (allocator)": 7298,
+        "(other sections)": 7205,
+        "xmp_writer": 6750,
+        "png": 5891,
+        "fdeflate": 4335,
+        "libm": 4291,
+        "smallvec": 4266,
+        "memchr": 3705,
+        "ryu": 1860,
+        "once_cell": 1610,
+        "__rustc": 1097,
+        "crc32fast": 958,
+        "kurbo": 947,
+        "siphasher": 909,
+        "rustc_hash": 700,
+        "base64": 527,
+        "bumpalo": 514,
+        "std (builtins, libm)": 474,
+        "arrayvec": 294,
+        "bytemuck": 240,
+        "simd_adler32": 209,
+        "indexmap": 180,
+        "m_export_png": 176,
+        "wasm_bindgen": 120,
+        "wasm-bindgen": 114,
+        "float_cmp": 72,
+        "spin": 19,
+        "strict_num": 16
+      }
+    },
+    {
+      "id": "render-rb+pdfwriter+png",
+      "group": "combined",
+      "note": "render (rustybuzz) + pdf-writer + tiny-skia in one module",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "with-pdf-writer",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 1893465,
+        "gzip": 615047,
+        "brotli": 466485
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      }
+    },
+    {
+      "id": "render-rb+pdfwriter+png",
+      "group": "combined",
+      "note": "render (rustybuzz) + pdf-writer + tiny-skia in one module",
+      "features": [
+        "shape-rustybuzz",
+        "standin",
+        "with-pdf-writer",
+        "with-png"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 1347680,
+        "gzip": 555653,
+        "brotli": 426856
+      },
+      "js": {
+        "raw": 11473,
+        "gzip": 2790,
+        "brotli": 2483
+      },
+      "crates": {
+        "(data)": 277421,
+        "tiny_skia": 223822,
+        "ttf_parser": 117157,
+        "skrifa": 114474,
+        "rustybuzz": 110698,
+        "subsetter": 79183,
+        "read_fonts": 77660,
+        "write_fonts": 74453,
+        "std/core/alloc": 72178,
+        "m_render": 50097,
+        "(module exports)": 45328,
+        "tiny_skia_path": 19338,
+        "font_types": 14945,
+        "miniz_oxide": 14113,
+        "pdf_writer": 9765,
+        "standin": 8553,
+        "std (allocator)": 7298,
+        "png": 5891,
+        "(other sections)": 4712,
+        "fdeflate": 4334,
+        "(unnamed)": 3693,
+        "smallvec": 2802,
+        "flate2": 2216,
+        "ryu": 1860,
+        "__rustc": 1097,
+        "kurbo": 961,
+        "crc32fast": 958,
+        "libm": 708,
+        "std (builtins, libm)": 468,
+        "arrayvec": 294,
+        "bytemuck": 240,
+        "simd_adler32": 209,
+        "m_export_png": 176,
+        "unicode_properties": 175,
+        "strict_num": 125,
+        "wasm_bindgen": 120,
+        "wasm-bindgen": 114,
+        "m_export_pdf": 63,
+        "rustc_hash": 62
+      }
+    },
+    {
+      "id": "render-hr",
+      "group": "render",
+      "note": "harfrust + skrifa (libm, no std) + stand-in",
+      "features": [
+        "shape-harfrust",
+        "standin"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 692465,
+        "gzip": 279014,
+        "brotli": 227807
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "render-rb",
+      "group": "render",
+      "note": "rustybuzz + ttf-parser + stand-in",
+      "features": [
+        "shape-rustybuzz",
+        "standin"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 470381,
+        "gzip": 209340,
+        "brotli": 161496
+      },
+      "js": {
+        "raw": 9772,
+        "gzip": 2532,
+        "brotli": 2235
+      }
+    },
+    {
+      "id": "pdf-writer-skrifa",
+      "group": "export",
+      "note": "pdf-writer + subsetter (no variable-fonts) + skrifa (libm) + miniz_oxide",
+      "features": [
+        "pdf-writer-skrifa"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 167809,
+        "gzip": 90675,
+        "brotli": 81014
+      },
+      "js": {
+        "raw": 7238,
+        "gzip": 2033,
+        "brotli": 1799
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 410295,
+        "gzip": 220307,
+        "brotli": 186016
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 334262,
+        "gzip": 210942,
+        "brotli": 171459
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 334432,
+        "gzip": 210903,
+        "brotli": 172109
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 335014,
+        "gzip": 210778,
+        "brotli": 171814
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 334004,
+        "gzip": 210676,
+        "brotli": 171633
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      },
+      "crates": {
+        "(data)": 152572,
+        "standin": 41955,
+        "std/core/alloc": 37680,
+        "(module exports)": 36295,
+        "encoding_rs": 31501,
+        "libm": 11326,
+        "std (allocator)": 7286,
+        "csv": 4701,
+        "nalgebra": 3554,
+        "levenberg_marquardt": 1901,
+        "csv_core": 1656,
+        "(other sections)": 1302,
+        "__rustc": 1026,
+        "m_compute": 744,
+        "(unnamed)": 341,
+        "wasm_bindgen": 185,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113,
+        "num_traits": 39
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 337668,
+        "gzip": 212507,
+        "brotli": 172556
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 391377,
+        "gzip": 228097,
+        "brotli": 190418
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 391227,
+        "gzip": 231251,
+        "brotli": 192661
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "compute-deps",
+      "group": "compute",
+      "note": "libraries only (no stand-in)",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 282111,
+        "gzip": 171882,
+        "brotli": 138350
+      },
+      "js": {
+        "raw": 6350,
+        "gzip": 1791,
+        "brotli": 1564
+      }
+    },
+    {
+      "id": "compute-deps",
+      "group": "compute",
+      "note": "libraries only (no stand-in)",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 233555,
+        "gzip": 166194,
+        "brotli": 133976
+      },
+      "js": {
+        "raw": 6350,
+        "gzip": 1791,
+        "brotli": 1564
+      },
+      "crates": {
+        "(data)": 137302,
+        "encoding_rs": 31410,
+        "(module exports)": 28340,
+        "std/core/alloc": 13144,
+        "std (allocator)": 7293,
+        "csv": 4673,
+        "nalgebra": 3540,
+        "levenberg_marquardt": 1891,
+        "csv_core": 1655,
+        "m_compute": 1349,
+        "__rustc": 1026,
+        "(other sections)": 993,
+        "libm": 479,
+        "std (builtins, libm)": 167,
+        "(unnamed)": 152,
+        "wasm_bindgen": 118,
+        "wasm-bindgen": 66,
+        "num_traits": 39
+      }
+    },
+    {
+      "id": "compute-lm",
+      "group": "compute",
+      "note": "levenberg-marquardt + nalgebra only",
+      "features": [
+        "fit-lm"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 88650,
+        "gzip": 26563,
+        "brotli": 23267
+      },
+      "js": {
+        "raw": 6350,
+        "gzip": 1791,
+        "brotli": 1564
+      }
+    },
+    {
+      "id": "compute-lm",
+      "group": "compute",
+      "note": "levenberg-marquardt + nalgebra only",
+      "features": [
+        "fit-lm"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 51511,
+        "gzip": 23006,
+        "brotli": 19979
+      },
+      "js": {
+        "raw": 6350,
+        "gzip": 1791,
+        "brotli": 1564
+      },
+      "crates": {
+        "(module exports)": 20394,
+        "std/core/alloc": 8756,
+        "std (allocator)": 7292,
+        "(data)": 5670,
+        "nalgebra": 3501,
+        "levenberg_marquardt": 1881,
+        "m_compute": 1343,
+        "__rustc": 1020,
+        "(other sections)": 879,
+        "libm": 479,
+        "wasm_bindgen": 118,
+        "std (builtins, libm)": 99,
+        "wasm-bindgen": 65,
+        "(unnamed)": 58,
+        "num_traits": 39
+      }
+    },
+    {
+      "id": "compute-app",
+      "group": "app",
+      "note": "compute + allowance for own code",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 935033,
+        "gzip": 458671,
+        "brotli": 390672
+      },
+      "js": {
+        "raw": 9157,
+        "gzip": 2516,
+        "brotli": 2224
+      }
+    },
+    {
+      "id": "compute-app",
+      "group": "app",
+      "note": "compute + allowance for own code",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp",
+        "ballast"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 817754,
+        "gzip": 444478,
+        "brotli": 372596
+      },
+      "js": {
+        "raw": 9157,
+        "gzip": 2516,
+        "brotli": 2224
+      },
+      "crates": {
+        "ballast": 474423,
+        "(data)": 156196,
+        "standin": 42080,
+        "std/core/alloc": 37784,
+        "(module exports)": 36454,
+        "encoding_rs": 31521,
+        "libm": 13658,
+        "std (allocator)": 7298,
+        "csv": 4726,
+        "(other sections)": 3948,
+        "nalgebra": 3555,
+        "levenberg_marquardt": 1912,
+        "csv_core": 1656,
+        "__rustc": 1031,
+        "m_compute": 745,
+        "(unnamed)": 344,
+        "wasm_bindgen": 185,
+        "std (builtins, libm)": 167,
+        "wasm-bindgen": 113,
+        "num_traits": 39
+      }
+    },
+    {
+      "id": "compute",
+      "group": "compute",
+      "note": "csv + encoding_rs + levenberg-marquardt + stand-in",
+      "features": [
+        "csv",
+        "sjis",
+        "fit-lm",
+        "interp"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 293254,
+        "gzip": 196601,
+        "brotli": 160180
+      },
+      "js": {
+        "raw": 8924,
+        "gzip": 2452,
+        "brotli": 2170
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 500158,
+        "gzip": 158008,
+        "brotli": 127951
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 352724,
+        "gzip": 139442,
+        "brotli": 113990
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release",
+      "opt": "Os",
+      "wasm": {
+        "raw": 353426,
+        "gzip": 139274,
+        "brotli": 113829
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release",
+      "opt": "O3",
+      "wasm": {
+        "raw": 355336,
+        "gzip": 139308,
+        "brotli": 113787
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release",
+      "opt": "Oz-converge",
+      "wasm": {
+        "raw": 352377,
+        "gzip": 139166,
+        "brotli": 113545
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      },
+      "crates": {
+        "tiny_skia": 176316,
+        "(data)": 49034,
+        "(module exports)": 32573,
+        "std/core/alloc": 28579,
+        "tiny_skia_path": 24295,
+        "miniz_oxide": 8814,
+        "flate2": 8042,
+        "std (allocator)": 7421,
+        "png": 6367,
+        "fdeflate": 4410,
+        "(other sections)": 2317,
+        "__rustc": 1035,
+        "crc32fast": 941,
+        "(unnamed)": 847,
+        "arrayvec": 467,
+        "simd_adler32": 285,
+        "bytemuck": 229,
+        "log": 227,
+        "m_export_png": 211,
+        "standin": 139,
+        "strict_num": 122,
+        "std (builtins, libm)": 67,
+        "wasm-bindgen": 67
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release-s",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 509240,
+        "gzip": 184360,
+        "brotli": 135760
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release-o3",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 474311,
+        "gzip": 188417,
+        "brotli": 141119
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "release-plain",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 489678,
+        "gzip": 192915,
+        "brotli": 144060
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png-raster",
+      "group": "export",
+      "note": "tiny-skia only, no PNG encoder (returns raw pixels)",
+      "features": [],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 357739,
+        "gzip": 98312,
+        "brotli": 78081
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png-raster",
+      "group": "export",
+      "note": "tiny-skia only, no PNG encoder (returns raw pixels)",
+      "features": [],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 256603,
+        "gzip": 86158,
+        "brotli": 68085
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      },
+      "crates": {
+        "tiny_skia": 176376,
+        "tiny_skia_path": 24395,
+        "std/core/alloc": 16329,
+        "(data)": 14083,
+        "(module exports)": 12847,
+        "std (allocator)": 7419,
+        "(other sections)": 2037,
+        "__rustc": 1033,
+        "(unnamed)": 741,
+        "arrayvec": 457,
+        "log": 227,
+        "m_export_png": 211,
+        "bytemuck": 190,
+        "standin": 139,
+        "strict_num": 134,
+        "wasm-bindgen": 67
+      }
+    },
+    {
+      "id": "png-encoder",
+      "group": "baseline",
+      "note": "the png crate alone (encode an RGBA image)",
+      "features": [
+        "png-encode"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 109456,
+        "gzip": 52387,
+        "brotli": 46702
+      },
+      "js": {
+        "raw": 6018,
+        "gzip": 1728,
+        "brotli": 1523
+      }
+    },
+    {
+      "id": "png-encoder",
+      "group": "baseline",
+      "note": "the png crate alone (encode an RGBA image)",
+      "features": [
+        "png-encode"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 86758,
+        "gzip": 48221,
+        "brotli": 43215
+      },
+      "js": {
+        "raw": 6018,
+        "gzip": 1728,
+        "brotli": 1523
+      },
+      "crates": {
+        "(data)": 30394,
+        "std/core/alloc": 17472,
+        "miniz_oxide": 7790,
+        "(module exports)": 7643,
+        "std (allocator)": 7286,
+        "flate2": 6246,
+        "png": 5085,
+        "fdeflate": 1565,
+        "__rustc": 1066,
+        "crc32fast": 953,
+        "(other sections)": 901,
+        "simd_adler32": 209,
+        "(unnamed)": 165,
+        "wasm-bindgen": 65
+      }
+    },
+    {
+      "id": "png-default",
+      "group": "export",
+      "note": "tiny-skia default features (adds simd)",
+      "features": [
+        "tiny-skia-default"
+      ],
+      "profile": "release",
+      "opt": "none",
+      "wasm": {
+        "raw": 500158,
+        "gzip": 158005,
+        "brotli": 127885
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    },
+    {
+      "id": "png-default",
+      "group": "export",
+      "note": "tiny-skia default features (adds simd)",
+      "features": [
+        "tiny-skia-default"
+      ],
+      "profile": "release",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 352724,
+        "gzip": 139439,
+        "brotli": 114140
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      },
+      "crates": {
+        "tiny_skia": 176316,
+        "(data)": 49034,
+        "(module exports)": 32573,
+        "std/core/alloc": 28579,
+        "tiny_skia_path": 24295,
+        "miniz_oxide": 8814,
+        "flate2": 8042,
+        "std (allocator)": 7421,
+        "png": 6367,
+        "fdeflate": 4410,
+        "(other sections)": 2317,
+        "__rustc": 1035,
+        "crc32fast": 941,
+        "(unnamed)": 847,
+        "arrayvec": 467,
+        "simd_adler32": 285,
+        "bytemuck": 229,
+        "log": 227,
+        "m_export_png": 211,
+        "standin": 139,
+        "strict_num": 122,
+        "std (builtins, libm)": 67,
+        "wasm-bindgen": 67
+      }
+    },
+    {
+      "id": "png",
+      "group": "export",
+      "note": "tiny-skia (std, png-format)",
+      "features": [
+        "png-format"
+      ],
+      "profile": "nightly-immediate-abort",
+      "opt": "Oz",
+      "wasm": {
+        "raw": 305649,
+        "gzip": 123691,
+        "brotli": 101428
+      },
+      "js": {
+        "raw": 5430,
+        "gzip": 1632,
+        "brotli": 1460
+      }
+    }
+  ]
+}

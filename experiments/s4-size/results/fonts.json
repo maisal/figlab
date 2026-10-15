@@ -1,0 +1,68 @@
+[
+  {
+    "file": "Arimo-Regular.ttf",
+    "note": "Arimo Regular, static (googlefonts/Arimo)",
+    "url": "https://raw.githubusercontent.com/googlefonts/Arimo/4a6255f269916ae7ad3fc2706b0935e7621396b8/fonts/ttf/Arimo-Regular.ttf",
+    "sha256": "41b22bc8f0b51f932825d37bc55b5eb6ba67dfe599a626e4aff2b43b624f9f8c",
+    "raw": 478712,
+    "gzip": 266286,
+    "brotli": 209197
+  },
+  {
+    "file": "Arimo-VF.ttf",
+    "note": "Arimo variable (wght 400-700), as in google/fonts",
+    "url": "https://raw.githubusercontent.com/google/fonts/903d46673260c1f4c7f7ef67f5190fb03eab5042/ofl/arimo/Arimo%5Bwght%5D.ttf",
+    "sha256": "e43898b143ec826ac8cb4034816458a7047fbe0836558de2a1f8c6223ae3e0ca",
+    "raw": 496268,
+    "gzip": 307213,
+    "brotli": 246574
+  },
+  {
+    "file": "Tinos-Regular.ttf",
+    "note": "Tinos Regular (google/fonts)",
+    "url": "https://raw.githubusercontent.com/google/fonts/ba95515f1333efe9342c2ad988b9c2f6bef6dbad/ofl/tinos/Tinos-Regular.ttf",
+    "sha256": "60a0e8ef0c04dd5dd69ffe91025fa2ae5836cbd35600a82ba031977557e2cb61",
+    "raw": 521588,
+    "gzip": 277912,
+    "brotli": 212744
+  },
+  {
+    "file": "NotoSansMath-Regular.ttf",
+    "note": "Noto Sans Math Regular (google/fonts), the fallback for symbols",
+    "url": "https://raw.githubusercontent.com/google/fonts/823468bd7825152bce2b8fd2cf740432ad2fce8d/ofl/notosansmath/NotoSansMath-Regular.ttf",
+    "sha256": "3f495fe933c06786e4d5f6d86b8ee70b6753a68ee3b9d87528726de0f6e2c47d",
+    "raw": 1015396,
+    "gzip": 488285,
+    "brotli": 404086
+  },
+  {
+    "file": "Arimo-Regular-nohint.ttf",
+    "from": "Arimo-Regular.ttf",
+    "unicodes": "*",
+    "note": "Arimo Regular without hinting",
+    "sha256": "ad7dddc3a21b7521fc51a6b4292568712a86ed2a3272e63b9f02c4c521fd52da",
+    "raw": 279848,
+    "gzip": 170722,
+    "brotli": 141394
+  },
+  {
+    "file": "Arimo-Regular-sub.ttf",
+    "from": "Arimo-Regular.ttf",
+    "unicodes": "U+0000-024F,U+02B0-02FF,U+0370-03FF,U+2000-206F,U+2070-209F,U+20A0-20CF,U+2100-214F,U+2150-218F,U+2190-21FF,U+2200-22FF,U+2300-23FF,U+25A0-25FF",
+    "note": "Arimo Regular without hinting, Latin, Greek, and symbol blocks only",
+    "sha256": "c8fbf8b31a8ebe55ef0d34d4f40e5a565222e1abd39ee66f41785399c646779e",
+    "raw": 95032,
+    "gzip": 61647,
+    "brotli": 55065
+  },
+  {
+    "file": "NotoSansMath-nohint.ttf",
+    "from": "NotoSansMath-Regular.ttf",
+    "unicodes": "*",
+    "note": "Noto Sans Math without hinting",
+    "sha256": "8706da079ba7a0617e29d2ac1349e4da11b2d27b9ad6baa460e1c97c420953e5",
+    "raw": 597088,
+    "gzip": 329270,
+    "brotli": 284184
+  }
+]

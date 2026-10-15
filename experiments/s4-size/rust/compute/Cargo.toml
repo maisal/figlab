@@ -1,0 +1,38 @@
+[package]
+name = "m-compute"
+description = "Stand-in for the compute worker module"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = ["csv", "sjis", "fit-lm", "interp"]
+# The csv crate.
+csv = ["dep:csv"]
+# Shift_JIS decoding with encoding_rs.
+sjis = ["dep:encoding_rs"]
+# Fitting with levenberg-marquardt and nalgebra (default features off, `alloc`
+# and `libm`, as S6 recommends in ADR 0015).
+fit-lm = ["dep:levenberg-marquardt", "dep:nalgebra"]
+# Fitting with rmpfit (a Rust port of cmpfit).
+fit-rmpfit = ["dep:rmpfit"]
+# figlab's own code: interpreter and CSV detection stand-ins.
+interp = []
+# Generated code that stands in for the size of figlab's own code
+# (S4_BALLAST_FNS functions, see rust/ballast).
+ballast = ["dep:ballast"]
+
+[dependencies]
+ballast = { path = "../ballast", optional = true }
+wasm-bindgen.workspace = true
+standin.workspace = true
+libm.workspace = true
+csv = { version = "=1.4.0", optional = true }
+encoding_rs = { version = "=0.8.42", optional = true }
+levenberg-marquardt = { version = "=0.15.0", optional = true }
+nalgebra = { version = "=0.34.2", optional = true, default-features = false, features = ["alloc", "libm"] }
+rmpfit = { version = "=2.0.0", optional = true }

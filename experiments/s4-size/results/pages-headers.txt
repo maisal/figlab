@@ -1,0 +1,26 @@
+# Content-Encoding of files on GitHub Pages, checked 2026-10-15 with:
+#   curl -sI -H 'Accept-Encoding: gzip, br' <url>
+
+== https://webassembly.github.io/wabt/demo/libwabt.wasm
+HTTP/2 200 
+server: GitHub.com
+content-type: application/wasm
+etag: W/"6aceb235-997fb"
+cache-control: max-age=600
+content-encoding: gzip
+
+== https://webassembly.github.io/wabt/demo/libwabt.js
+HTTP/2 200 
+server: GitHub.com
+content-type: application/javascript; charset=utf-8
+etag: W/"6aceb235-68f5"
+cache-control: max-age=600
+content-encoding: gzip
+
+== https://mozilla.github.io/pdf.js/web/standard_fonts/LiberationSans-Regular.ttf
+HTTP/2 200 
+server: GitHub.com
+content-type: font/ttf
+etag: W/"6acfeb5c-220f8"
+cache-control: max-age=600
+content-encoding: gzip

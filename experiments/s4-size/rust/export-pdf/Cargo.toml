@@ -1,0 +1,35 @@
+[package]
+name = "m-export-pdf"
+description = "Stand-in for the PDF export module (loaded later)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["krilla"]
+# krilla without its default features (no raster images, no rustybuzz).
+krilla = ["dep:krilla"]
+# krilla with its default features, for comparison.
+krilla-default = ["krilla", "krilla/default"]
+# pdf-writer + subsetter (no `variable-fonts`) + skrifa (default features off,
+# `libm`) for the font metrics + miniz_oxide. This is what S1 (ADR 0010) recommends.
+pdf-writer-skrifa = ["dep:pdf-writer", "dep:subsetter", "dep:skrifa", "dep:miniz_oxide"]
+# pdf-writer + subsetter (with its default feature `variable-fonts`),
+# ttf-parser for the font metrics, and miniz_oxide to compress streams.
+pdf-writer = ["pdf-writer-min", "subsetter/variable-fonts"]
+# The same without subsetter's `variable-fonts` (drops skrifa, write-fonts, kurbo).
+pdf-writer-min = ["dep:pdf-writer", "dep:subsetter", "dep:ttf-parser", "dep:miniz_oxide"]
+
+[dependencies]
+wasm-bindgen.workspace = true
+standin.workspace = true
+krilla = { version = "=0.8.2", optional = true, default-features = false }
+pdf-writer = { version = "=0.15.0", optional = true }
+subsetter = { version = "=0.2.6", optional = true, default-features = false }
+miniz_oxide = { version = "=0.9.1", optional = true }
+ttf-parser = { version = "=0.25.1", optional = true }
+skrifa = { version = "=0.48.0", optional = true, default-features = false, features = ["libm"] }

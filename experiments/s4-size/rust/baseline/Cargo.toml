@@ -1,0 +1,23 @@
+[package]
+name = "m-baseline"
+description = "The smallest wasm-bindgen module, to see the fixed cost of each module"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+# Pass a Vec (pulls in the allocator).
+alloc = []
+# Format a float into a String (pulls in core::fmt and float formatting).
+fmt = ["alloc"]
+
+# The png crate alone: encode an RGBA image to PNG.
+png-encode = ["alloc", "dep:png"]
+
+[dependencies]
+wasm-bindgen.workspace = true
+png = { version = "=0.18.1", optional = true }

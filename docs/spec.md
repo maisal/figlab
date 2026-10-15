@@ -563,9 +563,10 @@ The screen has three layers:
 
 ### 9.4 Formats
 
+- SVG is written by the render module. PDF and PNG are written by two separate wasm modules, export-pdf and export-png. They are loaded the first time the user exports, and they take the draw data and the font bytes from the render module (ADR 0013).
 - SVG: text is written as `<text>`. An option converts text to paths.
 - PDF: fonts are embedded and text stays text. Colors are RGB only (no CMYK).
-- PNG: drawn by the render module (tiny-skia) at the chosen resolution (dpi). Canvas is not used, so the browser and the command line produce the same image. An option makes the background transparent.
+- PNG: drawn by the export-png module (tiny-skia) at the chosen resolution (dpi). Canvas is not used, so the browser and the command line produce the same image. An option makes the background transparent.
 - Exports are produced from the graph settings (the graph model) only; the view state (12.3.1) is not used. When the view state differs from the settings, see 12.3.4.
 
 ## 10. Import
@@ -814,7 +815,7 @@ Either way, the exported figure can be reproduced from the history and the graph
 | Item | Requirement |
 |---|---|
 | Supported browsers | All features including saving: the latest desktop Chrome / Edge. Quick Plot (1.2) and export also work in the latest Safari / Firefox |
-| Startup | Usable within 2 seconds of opening the page (from the second visit, with the cache in effect) |
+| Startup | Usable within 2 seconds of opening the page (from the second visit, with the cache in effect). "Usable" means that the UI is painted, the three startup wasm modules are instantiated, and the compute worker and the language service worker have each answered a first request. The bundled font is not part of it. The download has size budgets per module and in total, checked in CI (ADR 0013) |
 | Offline | After the first visit, works without a network (Service Worker caches the whole app). Never sends data anywhere |
 | Distribution | GitHub Pages. No special HTTP headers are required. The command-line tool `figlab` is distributed as binaries on GitHub Releases |
 | Memory | Arrays held in memory during work are kept to about 2 GB in total; unchanged arrays not in use are unloaded first. The limit is on the compute worker's wasm memory, plus the ArrayBuffers in flight outside it. wasm memory never shrinks; pages freed by one array are reused by later arrays (ADR 0012). Raising this limit with 64-bit wasm (memory64) may be considered in the future |
