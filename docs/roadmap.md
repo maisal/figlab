@@ -6,7 +6,7 @@ The scope of the MVP is in spec.md Section 14. This document only says in which 
 Progress is tracked with GitHub milestones and Issues (development.md 5.5).
 Update this document when the plan changes, not when a task is done.
 
-Status (2026-10-14): M0 is done. M1 (experiments) is next.
+Status (2026-10-15): M0 and M1 are done. M2 (thin slice) is next.
 
 ## Approach
 
@@ -39,14 +39,14 @@ Status (2026-10-14): M0 is done. M1 (experiments) is next.
 Each experiment answers one question and ends with an ADR.
 The code of the experiments is in `experiments/`. It is not part of the product (experiments/README.md).
 
-| # | Question |
-|---|---|
-| S1 | Text: can rustybuzz and ttf-parser shape text in wasm, and can the glyphs be drawn on Canvas from the draw data? Choose the PDF library (krilla or pdf-writer) and the fallback font for symbols (spec.md 9.2) |
-| S2 | Drawing speed: can 10 million points be decimated and panned and zoomed at 60 frames per second? |
-| S3 | Data transfer between workers: GitHub Pages cannot use SharedArrayBuffer. How long does it take to pass large arrays as transferable buffers? |
-| S4 | Size and startup: how large are the three wasm modules (compute, render, language service)? Can PDF and PNG export be loaded later? Can the app start within 2 seconds? |
-| S5 | UI framework: choose by download size, how well it works with CodeMirror 6, and how well AI agents know it |
-| S6 | Fitting: compare the `levenberg-marquardt` crate with bounds added and cmpfit on a few NIST StRD problems |
+| # | Question | Decision |
+|---|---|---|
+| S1 | Text: can rustybuzz and ttf-parser shape text in wasm, and can the glyphs be drawn on Canvas from the draw data? Choose the PDF library (krilla or pdf-writer) and the fallback font for symbols (spec.md 9.2) | [ADR 0010](adr/0010-text-shaping-pdf-and-fallback-font.md) |
+| S2 | Drawing speed: can 10 million points be decimated and panned and zoomed at 60 frames per second? | [ADR 0011](adr/0011-drawing-large-traces.md) |
+| S3 | Data transfer between workers: GitHub Pages cannot use SharedArrayBuffer. How long does it take to pass large arrays as transferable buffers? | [ADR 0012](adr/0012-data-transfer-between-workers.md) |
+| S4 | Size and startup: how large are the three wasm modules (compute, render, language service)? Can PDF and PNG export be loaded later? Can the app start within 2 seconds? | [ADR 0013](adr/0013-wasm-size-and-startup.md) |
+| S5 | UI framework: choose by download size, how well it works with CodeMirror 6, and how well AI agents know it | [ADR 0014](adr/0014-ui-framework.md) |
+| S6 | Fitting: compare the `levenberg-marquardt` crate with bounds added and cmpfit on a few NIST StRD problems | [ADR 0015](adr/0015-fitting-library.md) |
 
 ### M2 Thin slice
 
@@ -58,6 +58,8 @@ The code of the experiments is in `experiments/`. It is not part of the product 
 - web: drop a file, draw it, and save it as SVG
 - cli: `figlab run` writes the same SVG
 - CI: the first determinism test and the first figure comparison test. Publish the web app on Pages
+- wasm build: the compute and render modules, each in its own boundary package (development.md Section 2). Use the build settings of [ADR 0013](adr/0013-wasm-size-and-startup.md): a wasm-only Cargo profile (the native `figlab` command keeps opt-level 3), `wasm-bindgen --target web`, and `wasm-opt -Oz`. Pin wasm-bindgen-cli and binaryen in `mise.toml`
+- Measure the speed of fitting and decimation in the compute module with opt-level "z" and with 3, and fix its level (ADR 0013)
 
 Done when: on the published page, a dropped CSV can be saved as SVG, and the SVG is the same as the one from `figlab run`.
 
@@ -88,7 +90,11 @@ Done when: the conformance tests pass, and every GUI operation from M3 is record
 - The default publication style (the common style in `tests/figures/README.md`), physical sizes, fonts and the fallback font, text formatting, legends, axes on all four sides with their colors, error bars, per-point overrides, and heatmaps with color bars
 - PDF export with embedded fonts, PNG export, and style templates
 - The five acceptance figures, with `figure.figc` and `expected.svg` in each folder
-- Finishing: offline use, start within 2 seconds, a CI check of the first download size, third-party notices, and releases of the command-line tool
+- Export modules: export-pdf and export-png load the first time the user exports ([ADR 0013](adr/0013-wasm-size-and-startup.md)). Decide with real figures:
+  - whether export runs on the main thread or in a worker (a worker is recommended for export-png)
+  - where raster content in SVG and PDF is made (`raster=true` markers and heatmaps). The plan is to load export-png for it. Then update spec.md 9.3 and 9.4
+- The fallback font: lay out a label again when the font arrives after the layout was made (ADR 0010, ADR 0013)
+- Finishing: offline use, start within 2 seconds, a CI check of the download size against the budgets in [ADR 0013](adr/0013-wasm-size-and-startup.md) (development.md 5.2), third-party notices, and releases of the command-line tool. Optional: fetch the font after the wasm modules, which saves about 0.14 s on the first visit
 
 Done when: all acceptance figures are reproduced and approved, and the speed targets are met. This completes the MVP.
 

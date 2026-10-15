@@ -80,7 +80,7 @@ flowchart LR
     subgraph Render["Render module (Rust → wasm)"]
       Layout["Layout<br/>(pt units, text placement)"]
       Scene["Draw data<br/>(list of lines, text, etc. and hit-test data)"]
-      Export["Export<br/>SVG / PDF / PNG"]
+      SVG["SVG export"]
     end
     Screen["Screen drawing (TypeScript)<br/>Canvas / WebGL, overlay, tooltips"]
     FileIO["File I/O<br/>(File System Access API)"]
@@ -88,8 +88,12 @@ flowchart LR
     View --> Layout
     Layout --> Scene
     Scene --> Screen
-    Scene --> Export
+    Scene --> SVG
     Screen -- "mouse and key input" --> UI
+  end
+  subgraph Export["Export modules (Rust → wasm)<br/>loaded on first export"]
+    PDF["PDF export"]
+    PNG["PNG export"]
   end
   subgraph Worker["Compute worker (Rust → wasm)"]
     Interp["Command language checking and execution"]
@@ -111,6 +115,8 @@ flowchart LR
   FileIO -- "File objects, file handles<br/>(the worker reads and writes the contents)" --> Store
   UI <-- "text being typed, completions, errors" --> Lang
   Store -- "changes to names, types, shapes" --> Index
+  Scene -- "a copy of the draw data<br/>and the font bytes" --> PDF
+  Scene -- "a copy of the draw data<br/>and the font bytes" --> PNG
 ```
 
 - **The compute worker is the single owner of the data** (in Rust memory). The UI requests only what it needs for display (the visible rows of a table, points decimated to the drawing resolution for a graph).
@@ -123,7 +129,9 @@ flowchart LR
   - Graphs can be edited while calculations run
 - Operations that change data (import, calculation, table edits) are all executed as commands in the compute worker. When done from the GUI, the generated command is recorded in the history.
 - **Drawing is split between the Rust render module and TypeScript** (9.1).
-  - The Rust render module (wasm) decides what to draw and where: layout, text placement, building the draw data, and SVG/PDF/PNG export. The command-line tool `figlab run` uses the same module, so the browser and the command line produce the same figures
+  - The Rust render module (wasm) decides what to draw and where: layout, text placement, and building the draw data. It also writes SVG
+  - PDF and PNG are written by two more Rust wasm modules, export-pdf and export-png. They load the first time the user exports, and they take a copy of the draw data and the font bytes (ADR 0013)
+  - The command-line tool `figlab run` uses the same Rust code for rendering and export, so the browser and the command line produce the same figures
   - TypeScript draws the draw data on Canvas / WebGL. It also handles mouse and key input, the overlay (cursor, selection, highlights), and tooltips (12.3)
   - The render module runs on the main thread, not in the compute worker. Laying out a single graph is cheap, so the screen stays responsive while fits or imports are running
 - **The computational core is a Rust library.** It is built for the browser (wasm) and for the command line (native). Both give bit-identical results (language.md 10.2).
@@ -131,20 +139,21 @@ flowchart LR
 - **Every statement finishes.** The only loop is `for` over a collection of known size, and there is no recursion. Fitting has an iteration limit.
 - **A `for` loop can be stopped between iterations.** The compute worker runs `for` one iteration at a time. Between iterations, it checks for stop requests. A single statement is never stopped halfway. If the compute worker stops responding, a new worker is started. The state is then restored from the last save (from v1, from the crash-recovery snapshot).
 
-### 4.1 Technology [Proposal]
+### 4.1 Technology
 
-| Part | Candidates |
+| Part | Choice |
 |---|---|
 | UI and screen drawing | TypeScript, Vite. UI framework: Preact with `@preact/signals` (ADR 0014). Screen drawing uses Canvas 2D and WebGL |
-| Render module | Rust (wasm). Runs on the main thread in the browser, natively on the command line |
+| Render module | Rust (wasm). Runs on the main thread in the browser, natively on the command line. Makes the layout and the draw data, and writes SVG (ADR 0007, ADR 0013) |
 | Computational core | Rust. wasm-bindgen for the browser, a native build for the command line |
+| wasm modules | Five modules. Loaded at startup: compute (in the compute worker), render (on the main thread), and language service (in the language service worker). Loaded the first time the user exports: export-pdf and export-png. Each module and the whole startup download have a size budget, checked in CI (ADR 0013) |
 | Command language | Hand-written recursive-descent parser (one-to-one with the EBNF in language.md Section 3). The same parser is used for checking, execution, the language service, and the command-line tool |
 | Command line and editor | CodeMirror 6 (lightweight and easy to extend with a custom language. Monaco, used by VS Code, is several MB and conflicts with the 2-second startup target) |
 | Language service protocol | Follows LSP (Language Server Protocol). In the browser, it is used through worker messages. External editors use it through `figlab lsp` |
 | Numerics | Math functions: the `libm` crate (so the browser and command-line versions give identical results). Fitting: Levenberg–Marquardt, a fork of the Rust `levenberg-marquardt` crate 0.15 (a port of MINPACK `lmder`) with cmpfit-style bounds, kept in figlab-core (ADR 0015) |
 | Text shaping | harfrust (the HarfBuzz project's Rust port), with skrifa for font data and glyph outlines (ADR 0010) |
-| Export | PDF: pdf-writer, with font subsetting by subsetter (ADR 0010). SVG: written by figlab. PNG: tiny-skia. All are pure Rust and work both in wasm and natively |
-| Import | CSV: the `csv` crate + `encoding_rs` (Shift_JIS support). Parquet: the `parquet` crate or a JavaScript reader |
+| Export | SVG: written by figlab, in the render module. PDF: pdf-writer, with font subsetting by subsetter (ADR 0010), in the export-pdf module. PNG: tiny-skia, in the export-png module. export-pdf and export-png are separate wasm modules (ADR 0013). All are pure Rust and work both in wasm and natively |
+| Import | CSV: the `csv` crate + `encoding_rs` (Shift_JIS support). Parquet (v1): [To confirm] the `parquet` crate or a JavaScript reader |
 
 ## 5. Data model
 
@@ -529,13 +538,14 @@ Text in labels, legends, and annotations is written in a simple LaTeX-like notat
 
 ### 9.1 Pipeline
 
-Graph model → layout (in pt) → draw data (a list of lines, markers, text, and images) → each output. Everything up to this point, including export, is done by the Rust render module; only drawing on the screen is done by TypeScript (Section 4).
+Graph model → layout (in pt) → draw data (a list of lines, markers, text, and images) → each output. The Rust render module makes the layout and the draw data, and writes SVG. PDF and PNG are written by the Rust export modules (9.4). Only drawing on the screen is done by TypeScript (Section 4).
 
 - Screen display and SVG/PDF/PNG export are produced from the same draw data, so exports look exactly as on screen.
 - Text on screen is drawn from the glyph positions and outlines made by the render module. The browser's own text rendering is not used. So text on screen sits exactly where it does in exported figures.
 - Text in the draw data is a list of glyph runs: per run, the font, the size, the text of the run, the glyph ids and their positions in pt, and for each glyph the range of the text it shows (its cluster). PDF ToUnicode and SVG `<text>` need the text and the ranges. Each glyph outline is included once, in font units (ADR 0010).
 - The draw data also contains hit-test information (where each element is on screen), used for tooltips and for selecting elements (12.3).
 - The compute worker copies decimated points out of its wasm memory into an ArrayBuffer and transfers it to the main thread. The render module copies them into its own wasm memory. TypeScript reads the draw data from the render module's memory without copying, because both are on the main thread. The main thread cannot read the compute worker's memory (ADR 0012).
+- Reading without copying is only for the screen. The export modules for PDF and PNG get a copy of the draw data and the font bytes (ADR 0013).
 - The draw data format is versioned and documented as the contract between Rust and TypeScript.
 
 The screen has three layers:
@@ -550,8 +560,10 @@ The screen has three layers:
 
 - Measuring text exactly and embedding fonts in PDF requires the font files themselves. Browsers normally cannot read the files of fonts installed in the OS, so fonts are handled in two ways:
   - [Proposal] Bundle freely redistributable fonts with the app, such as Arimo (metric-compatible with Arial/Helvetica, from the Liberation Sans family) and Tinos (metric-compatible with Times). Both use the SIL Open Font License 1.1, and their license files are shipped with them
-  - Bundle a fallback font for symbols that the main font does not have (for example, Arimo has no "∝"): Noto Sans Math (SIL Open Font License 1.1, ADR 0010). A glyph missing from the chosen font is taken from the fallback font. It is shipped as a subset of its symbol blocks and loaded the first time a label needs it. [To confirm] The build-time subsetting tool (it must keep the cmap, OS/2, GSUB, GPOS, and GDEF tables) and the list of Unicode blocks in the subset
+  - Bundle a fallback font for symbols that the main font does not have (for example, Arimo has no "∝"): Noto Sans Math (SIL Open Font License 1.1, ADR 0010). A glyph missing from the chosen font is taken from the fallback font. It is shipped as a subset of its symbol blocks and loaded the first time a label needs it. The Service Worker precaches it, so it is also there offline (ADR 0013). A label laid out before the font arrives must be laid out again. How this is done is decided in M5 (roadmap.md). [To confirm] The build-time subsetting tool (it must keep the cmap, OS/2, GSUB, GPOS, and GDEF tables) and the list of Unicode blocks in the subset
   - The user loads font files they have. [To confirm] Also consider using installed fonts through Chrome's Local Font Access API
+- Bundled fonts are stored without TrueType hinting. figlab draws glyph outlines and does not use hinting. Without it, Arimo Regular is 36% smaller (ADR 0013).
+- Bundled fonts are static fonts, not variable fonts. So PDF export does not need subsetter's `variable-fonts` feature (ADR 0010).
 - Only the glyphs used are embedded in PDF (subsetting).
 - The same font files are used for the screen, SVG, PDF, and PNG. Text on screen is also drawn from the glyphs produced by the render module, not by loading the font into the browser (9.1).
 

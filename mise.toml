@@ -9,7 +9,8 @@ pnpm = "10.25.0"
 ripgrep = "15.1.0"
 cargo-deny = "0.20.2"
 "github:EmbarkStudios/cargo-about" = "0.9.2"
-# Add wasm-bindgen-cli with the same version as wasm-bindgen when it is added to Cargo.toml.
+# Add these with the wasm build (docs/roadmap.md M2): wasm-bindgen-cli with the same version
+# as the wasm-bindgen crate (0.2.129 in ADR 0013), and binaryen for wasm-opt (133 in ADR 0013).
 
 [tasks.check]
 description = "Checks to pass before opening a PR"
@@ -17,11 +18,12 @@ depends = ["check:rust", "check:lang", "check:english", "check:deps", "check:web
 
 [tasks."check:rust"]
 description = "Rust format check, clippy, tests, and a wasm build check"
+# The pattern 'figlab-wasm*' matches every boundary package of the wasm modules (docs/development.md Section 2).
 run = [
     "cargo fmt --all --check",
     "cargo clippy --workspace --all-targets --locked -- -D warnings",
     "cargo test --workspace --locked",
-    "cargo check -p figlab-wasm --target wasm32-unknown-unknown --locked",
+    "cargo check -p 'figlab-wasm*' --target wasm32-unknown-unknown --locked",
 ]
 
 [tasks."check:lang"]
