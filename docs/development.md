@@ -507,6 +507,7 @@ While designing this process, some places were found where spec.md did not fit. 
     - font loading and subsetting: ttf-parser, subsetter
     - PDF export: krilla or pdf-writer
     - PNG export: tiny-skia
+  - ADR 0010 chose harfrust with skrifa for text shaping and fonts, and pdf-writer with subsetter for PDF
   - Making PNGs with tiny-skia instead of Canvas gives the same images in the browser and on the command line
 - **Location of documents**: the documents are in `docs/`. `commands.json` and `errors.json` are in `spec/`, with their JSON Schemas in `spec/schema/`.
 

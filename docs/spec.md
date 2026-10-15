@@ -142,8 +142,8 @@ flowchart LR
 | Command line and editor | CodeMirror 6 (lightweight and easy to extend with a custom language. Monaco, used by VS Code, is several MB and conflicts with the 2-second startup target) |
 | Language service protocol | Follows LSP (Language Server Protocol). In the browser, it is used through worker messages. External editors use it through `figlab lsp` |
 | Numerics | Math functions: the `libm` crate (so the browser and command-line versions give identical results). Fitting: Levenberg–Marquardt (the Rust `levenberg-marquardt` crate with bounds added, or the C implementation cmpfit compiled to wasm) |
-| Text shaping | rustybuzz (a Rust port of HarfBuzz), ttf-parser |
-| Export | PDF: krilla or pdf-writer (font subsetting with subsetter). SVG: written by figlab. PNG: tiny-skia. All are pure Rust and work both in wasm and natively |
+| Text shaping | harfrust (the HarfBuzz project's Rust port), with skrifa for font data and glyph outlines (ADR 0010) |
+| Export | PDF: pdf-writer, with font subsetting by subsetter (ADR 0010). SVG: written by figlab. PNG: tiny-skia. All are pure Rust and work both in wasm and natively |
 | Import | CSV: the `csv` crate + `encoding_rs` (Shift_JIS support). Parquet: the `parquet` crate or a JavaScript reader |
 
 ## 5. Data model
@@ -531,6 +531,7 @@ Graph model → layout (in pt) → draw data (a list of lines, markers, text, an
 
 - Screen display and SVG/PDF/PNG export are produced from the same draw data, so exports look exactly as on screen.
 - Text on screen is drawn from the glyph positions and outlines made by the render module. The browser's own text rendering is not used. So text on screen sits exactly where it does in exported figures.
+- Text in the draw data is a list of glyph runs: per run, the font, the size, the text of the run, the glyph ids and their positions in pt, and for each glyph the range of the text it shows (its cluster). PDF ToUnicode and SVG `<text>` need the text and the ranges. Each glyph outline is included once, in font units (ADR 0010).
 - The draw data also contains hit-test information (where each element is on screen), used for tooltips and for selecting elements (12.3).
 - The compute worker copies decimated points out of its wasm memory into an ArrayBuffer and transfers it to the main thread. The render module copies them into its own wasm memory. TypeScript reads the draw data from the render module's memory without copying, because both are on the main thread. The main thread cannot read the compute worker's memory (ADR 0012).
 - The draw data format is versioned and documented as the contract between Rust and TypeScript.
@@ -547,7 +548,7 @@ The screen has three layers:
 
 - Measuring text exactly and embedding fonts in PDF requires the font files themselves. Browsers normally cannot read the files of fonts installed in the OS, so fonts are handled in two ways:
   - [Proposal] Bundle freely redistributable fonts with the app, such as Arimo (metric-compatible with Arial/Helvetica, from the Liberation Sans family) and Tinos (metric-compatible with Times). Both use the SIL Open Font License 1.1, and their license files are shipped with them
-  - [Proposal] Bundle a fallback font for symbols that the main font does not have (for example, Arimo has no "∝"). A candidate is Noto Sans Math (SIL Open Font License 1.1). A glyph missing from the chosen font is taken from the fallback font
+  - Bundle a fallback font for symbols that the main font does not have (for example, Arimo has no "∝"): Noto Sans Math (SIL Open Font License 1.1, ADR 0010). A glyph missing from the chosen font is taken from the fallback font. It is shipped as a subset of its symbol blocks and loaded the first time a label needs it. [To confirm] The build-time subsetting tool (it must keep the cmap, OS/2, GSUB, GPOS, and GDEF tables) and the list of Unicode blocks in the subset
   - The user loads font files they have. [To confirm] Also consider using installed fonts through Chrome's Local Font Access API
 - Only the glyphs used are embedded in PDF (subsetting).
 - The same font files are used for the screen, SVG, PDF, and PNG. Text on screen is also drawn from the glyphs produced by the render module, not by loading the font into the browser (9.1).

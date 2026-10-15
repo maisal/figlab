@@ -1,0 +1,19 @@
+== features: rb
+== features: hr
+== features: hr08
+== features: rb,krilla
+== features: hr,krilla
+font-types v0.11.3
+
+font-types v0.12.6
+
+read-fonts v0.39.2
+
+read-fonts v0.45.0
+
+skrifa v0.42.1
+
+skrifa v0.48.0
+== features: hr08,krilla
+== features: rb,pdfw
+== features: hr,pdfw

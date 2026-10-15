@@ -1,0 +1,11 @@
+[package]
+name = "s1-hr08"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+s1-core.workspace = true
+harfrust08.workspace = true
+skrifa042.workspace = true

@@ -1,0 +1,34 @@
+# Checks of the S1 Rust dependencies with cargo-deny. A copy of the root deny.toml
+# (docs/development.md 6.6). Run: mise exec -- cargo deny --locked check licenses bans sources
+
+[graph]
+all-features = true
+
+[licenses]
+# The allow list in docs/development.md 6.6. Adding a license needs a reason,
+# written as a comment here. OFL-1.1 is allowed for fonts only, and fonts are
+# not crates, so it is not listed.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Zlib",
+    "Unicode-3.0",
+]
+confidence-threshold = 0.93
+# The list is a policy, so licenses that no crate uses yet are fine.
+unused-allowed-license = "allow"
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+# The crates in this workspace depend on each other by path only.
+allow-wildcard-paths = true
+
+[sources]
+# Crates come only from crates.io (docs/development.md 5.2).
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

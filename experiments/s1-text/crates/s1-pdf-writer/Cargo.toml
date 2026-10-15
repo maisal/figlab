@@ -1,0 +1,14 @@
+[package]
+name = "s1-pdf-writer"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+s1-core.workspace = true
+pdf-writer.workspace = true
+subsetter.workspace = true
+miniz_oxide.workspace = true
+# Font metrics for the PDF font dictionaries. Same skrifa as the harfrust shaper.
+skrifa.workspace = true

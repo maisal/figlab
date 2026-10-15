@@ -1,0 +1,83 @@
+poppler 26.10.0, ghostscript 10.08.0
+
+== krilla-fira.pdf (30525 bytes, sha256 223f3c9055c42cc5)
+Pages:           1
+Page size:       300 x 330 pts
+PDF version:     1.7
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+OPQWOW+Arimo-Regular                 CID TrueType      Identity-H       yes yes yes      3  0
+KSCZWZ+Arimo-Italic                  CID TrueType      Identity-H       yes yes yes      6  0
+WVDSOW+FiraMath-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0
+FRTKHZ+Arimo-Bold                    CID TrueType      Identity-H       yes yes yes     12  0
+GVMJWW+Tinos-Regular                 CID TrueType      Identity-H       yes yes yes     15  0
+ghostscript render (192 and 768 dpi): ok
+
+== krilla-noto.pdf (33292 bytes, sha256 ac1ce0abb8808347)
+Pages:           1
+Page size:       300 x 330 pts
+PDF version:     1.7
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+OPQWOW+Arimo-Regular                 CID TrueType      Identity-H       yes yes yes      3  0
+KSCZWZ+Arimo-Italic                  CID TrueType      Identity-H       yes yes yes      6  0
+RIBCQM+NotoSansMath-Regular          CID TrueType      Identity-H       yes yes yes      9  0
+FRTKHZ+Arimo-Bold                    CID TrueType      Identity-H       yes yes yes     12  0
+GVMJWW+Tinos-Regular                 CID TrueType      Identity-H       yes yes yes     15  0
+ghostscript render (192 and 768 dpi): ok
+
+== pdfwriter-fira.pdf (30150 bytes, sha256 891e3e8de7bfffad)
+Pages:           1
+Page size:       300 x 330 pts
+PDF version:     1.7
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+UGNDUF+Arimo-Regular                 CID TrueType      Identity-H       yes yes yes      5  0
+CKTVTQ+Arimo-Italic                  CID TrueType      Identity-H       yes yes yes      6  0
+UAIDFT+Arimo-Bold                    CID TrueType      Identity-H       yes yes yes      7  0
+QRGFZR+Tinos-Regular                 CID TrueType      Identity-H       yes yes yes      8  0
+TSCXXY+FiraMath-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0
+ghostscript render (192 and 768 dpi): ok
+
+== pdfwriter-noto.pdf (32933 bytes, sha256 448382dcae4bf11d)
+Pages:           1
+Page size:       300 x 330 pts
+PDF version:     1.7
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+UGNDUF+Arimo-Regular                 CID TrueType      Identity-H       yes yes yes      5  0
+CKTVTQ+Arimo-Italic                  CID TrueType      Identity-H       yes yes yes      6  0
+UAIDFT+Arimo-Bold                    CID TrueType      Identity-H       yes yes yes      7  0
+QRGFZR+Tinos-Regular                 CID TrueType      Identity-H       yes yes yes      8  0
+QSXOYS+NotoSansMath-Regular          CID TrueType      Identity-H       yes yes yes      9  0
+ghostscript render (192 and 768 dpi): ok
+
+pdftotext -raw: krilla-noto and pdfwriter-noto give the same text
+pdftotext -raw: krilla-fira and pdfwriter-fira give the same text
+
+Word positions (pdftotext -bbox) versus the layout:
+krilla-noto: 57 words, left edge vs layout: max 0.0000 pt, mean 0.0000 pt, unmatched 0
+pdfwriter-noto: 57 words, left edge vs layout: max 0.0000 pt, mean 0.0000 pt, unmatched 0
+
+Extracted text (pdfwriter-noto, pdftotext -raw):
+−1.0 −0.5 0.0 0.5 1.0
+E (meV)
+Intensity (arb. units)
+Intensity (arb. units)
+E (meV)
+q (Å−1
+)
+q (Å⁻¹)
+−0.5
+103
+10³
+χ2
+red
+α β γ Δ
+Temperature (°C)
+x ∝ y ± 1
+Ordered moment (μB)
+AVATAR To We Yo
+Bold: Fit
+Tinos: Temperature (K)
+≈ ≤ ≥ ∞ ℏ ⟨x⟩ ∂ ∇

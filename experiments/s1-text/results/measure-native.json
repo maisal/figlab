@@ -1,0 +1,10 @@
+{"machine":"aarch64","note":"timing depends on machine load; see README","results":[
+{"name":"layout-200-labels/rustybuzz-0.20","median_ms":0.7940,"p95_ms":0.8795,"runs":200},
+{"name":"layout+drawdata-200-labels/rustybuzz-0.20","median_ms":0.8543,"p95_ms":0.9183,"runs":200},
+{"name":"layout-200-labels/harfrust-0.14","median_ms":0.6618,"p95_ms":0.6890,"runs":200},
+{"name":"layout+drawdata-200-labels/harfrust-0.14","median_ms":0.7427,"p95_ms":0.9090,"runs":200},
+{"name":"layout-200-labels/harfrust-0.8","median_ms":0.7424,"p95_ms":0.7631,"runs":200},
+{"name":"layout+drawdata-200-labels/harfrust-0.8","median_ms":0.8446,"p95_ms":0.9415,"runs":200},
+{"name":"pdf-sample-page/krilla-0.8.2","median_ms":1.2093,"p95_ms":1.3199,"runs":50},
+{"name":"pdf-sample-page/pdf-writer-0.15","median_ms":0.9826,"p95_ms":1.0041,"runs":50}
+]}

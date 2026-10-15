@@ -1,0 +1,11 @@
+[package]
+name = "s1-rb"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+s1-core.workspace = true
+rustybuzz.workspace = true
+ttf-parser.workspace = true

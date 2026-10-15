@@ -1,0 +1,28 @@
+[package]
+name = "s1-wasm"
+description = "wasm module of S1 (plain C ABI, no wasm-bindgen). Features pick the candidates"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = []
+rb = ["dep:s1-rb"]
+hr = ["dep:s1-hr"]
+hr08 = ["dep:s1-hr08"]
+krilla = ["dep:s1-pdf-krilla"]
+pdfw = ["dep:s1-pdf-writer"]
+# The module used in the browser and for the native/wasm comparison.
+all = ["rb", "hr", "krilla", "pdfw"]
+
+[dependencies]
+s1-core.workspace = true
+s1-rb = { workspace = true, optional = true }
+s1-hr = { workspace = true, optional = true }
+s1-hr08 = { workspace = true, optional = true }
+s1-pdf-krilla = { workspace = true, optional = true }
+s1-pdf-writer = { workspace = true, optional = true }

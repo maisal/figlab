@@ -1,0 +1,11 @@
+[package]
+name = "s1-hr"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+s1-core.workspace = true
+harfrust.workspace = true
+skrifa.workspace = true

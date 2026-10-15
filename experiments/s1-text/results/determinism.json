@@ -1,0 +1,48 @@
+{
+ "allSame": true,
+ "node": "v24.14.1",
+ "files": [
+  {
+   "name": "drawdata-rb.bin",
+   "bytes": 16742,
+   "sha256": "7cddbec0679b728354bf708b1e14a3b247c820128b46bbbf720b33430ba83faa",
+   "wasmSameAsNative": true,
+   "wasmRepeatSame": true
+  },
+  {
+   "name": "drawdata-hr.bin",
+   "bytes": 16442,
+   "sha256": "eeee5f010cd3542f26c48d3365d3d9f9fd66793ee4b5dbdc250721ec6e2ff6f3",
+   "wasmSameAsNative": true,
+   "wasmRepeatSame": true
+  },
+  {
+   "name": "krilla-noto.pdf",
+   "bytes": 33292,
+   "sha256": "ac1ce0abb8808347ae8f39c4f47ac083dab85df5e1628eb084184864f21184e6",
+   "wasmSameAsNative": true,
+   "wasmRepeatSame": true
+  },
+  {
+   "name": "pdfwriter-noto.pdf",
+   "bytes": 32933,
+   "sha256": "448382dcae4bf11d3221278ce7d0d8aa30c20a623566652df20255d93ab0459c",
+   "wasmSameAsNative": true,
+   "wasmRepeatSame": true
+  },
+  {
+   "name": "krilla-fira.pdf",
+   "bytes": 30525,
+   "sha256": "223f3c9055c42cc56d7a1bc6868879ecb8791bc7beddcf57cbd88b2991859e17",
+   "wasmSameAsNative": true,
+   "wasmRepeatSame": true
+  },
+  {
+   "name": "pdfwriter-fira.pdf",
+   "bytes": 30150,
+   "sha256": "891e3e8de7bfffad98b4c7ddd947a5dc8cc0b00145186ca4b41802a6885ed768",
+   "wasmSameAsNative": true,
+   "wasmRepeatSame": true
+  }
+ ]
+}
