@@ -42,10 +42,13 @@ figlab/
 │   ├── figlab-core/       arrays, coordinates, arithmetic, fitting (no I/O)
 │   ├── figlab-lang/       lexing, parsing, checking, canonical formatting (reads spec/commands.json at build time)
 │   ├── figlab-io/         CSV detection and import, .npy, project storage format
-│   ├── figlab-render/     layout, text measurement, draw data, SVG/PDF/PNG export (spec.md 9.1)
-│   ├── figlab-wasm/       boundary with the browser (compute worker, language service, render module)
+│   ├── figlab-draw/       draw data types, shared by render and export (no font libraries)
+│   ├── figlab-render/     layout, text measurement, building the draw data, SVG export (spec.md 9.1)
+│   ├── figlab-export-pdf/ PDF export from the draw data and the font bytes
+│   ├── figlab-export-png/ PNG export: rasterizing and PNG encoding
+│   ├── figlab-wasm-*/     boundaries with the browser, one package per wasm module (see below)
 │   ├── figlab-lsp/        LSP language server (v1)
-│   └── figlab-cli/        the `figlab` command
+│   └── figlab-cli/        the `figlab` command (links all of the above into one native binary)
 ├── web/                   TypeScript + Vite (UI, screen drawing, file I/O)
 │   ├── src/
 │   └── e2e/               Playwright tests
@@ -70,7 +73,19 @@ figlab/
 └── .gitignore             ignores local/ (personal, untracked files) and mise.local.toml
 ```
 
-- The cores of computation, language, and rendering all live in Rust crates; `figlab-wasm` (browser) and `figlab-cli` (command line) are thin entry points. This makes it possible to verify with Rust tests alone that the browser and the command line give the same results.
+- The cores of computation, language, and rendering all live in Rust crates; the `figlab-wasm-*` packages (browser) and `figlab-cli` (command line) are thin entry points. This makes it possible to verify with Rust tests alone that the browser and the command line give the same results.
+- The browser loads five wasm modules (spec.md 4.1, ADR 0013). One Cargo package builds one wasm module (a `cdylib`), so each module has its own boundary package. A package links only the crates its module needs:
+
+  | wasm module | Loaded | Boundary package | Links |
+  |---|---|---|---|
+  | compute | at startup, in the compute worker | `figlab-wasm-compute` | `figlab-core`, `figlab-io`, `figlab-lang` |
+  | render | at startup, on the main thread | `figlab-wasm-render` | `figlab-render`, `figlab-draw` |
+  | language service | at startup, in the language service worker | `figlab-wasm-lang` | `figlab-lang` |
+  | export-pdf | the first time the user exports PDF | `figlab-wasm-export-pdf` | `figlab-export-pdf`, `figlab-draw` |
+  | export-png | the first time the user exports PNG | `figlab-wasm-export-png` | `figlab-export-png`, `figlab-draw` |
+
+  - The draw data types are in `figlab-draw`, which has no font libraries. So the export modules do not link the shaping libraries.
+  - Today there is one placeholder package, `figlab-wasm`. The boundary packages replace it when the wasm build is added (roadmap.md M2). Each crate and package is added when it is first needed.
 - The JSON files in `spec/` are read by the parser, completion, help, and the web reference. Changing them updates everything.
 
 ## 3. Development environment
@@ -95,7 +110,8 @@ pnpm = "10.25.0"
 ripgrep = "15.1.0"     # used by check:english (6.4)
 cargo-deny = "0.20.2"  # used by check:deps (6.6)
 "github:EmbarkStudios/cargo-about" = "0.9.2"   # third-party notices (6.6)
-# wasm-bindgen-cli is added with the same version as wasm-bindgen when it is added to Cargo.toml
+# Added with the wasm build (roadmap.md M2): wasm-bindgen-cli with the same version as the
+# wasm-bindgen crate (0.2.129 in ADR 0013), and binaryen for wasm-opt (133 in ADR 0013)
 ```
 
 ### 3.2 Tasks (mise run)
@@ -125,7 +141,7 @@ run = [
   "cargo fmt --all --check",
   "cargo clippy --workspace --all-targets --locked -- -D warnings",
   "cargo test --workspace --locked",
-  "cargo check -p figlab-wasm --target wasm32-unknown-unknown --locked",
+  "cargo check -p 'figlab-wasm*' --target wasm32-unknown-unknown --locked",   # every boundary package (Section 2)
 ]
 
 [tasks."check:english"]
@@ -137,7 +153,7 @@ description = "Check the licenses and sources of dependencies (6.6)"
 run = "cargo deny --locked check licenses bans sources"
 
 [tasks.wasm]
-run = "wasm-bindgen …"
+run = ["cargo build --profile wasm …", "wasm-bindgen --target web …", "wasm-opt -Oz …"]   # build settings in ADR 0013
 sources = ["crates/**/*.rs", "Cargo.toml", "Cargo.lock"]   # skipped if nothing changed
 outputs = ["web/src/wasm/**"]
 ```
@@ -303,7 +319,7 @@ CI jobs (`ci.yml`):
 | deps | `mise run check:deps`: the licenses of Rust and npm dependencies are on the allow list, and crates come only from crates.io (6.6) |
 | determinism | Runs the same conformance tests and acceptance figures on Linux (x86_64), macOS (arm64), and wasm (on Node). Checks that the result hashes match (spec.md Section 13, "Reproducibility") |
 | numeric | Comparison with the certified values of NIST StRD |
-| web | Type check, lint, unit tests, check of the initial download size limit |
+| web | Type check, lint, unit tests, and the check of the download size. The check sums the gzip -9 sizes of the files in the Pages build and compares them with the budgets in ADR 0013: each startup module, the startup JS, the startup fonts, the whole startup download, and each export module. It needs a stable way to find these files among Vite's hashed file names, for example the Vite manifest (`build.manifest`), which lists the entry, its static imports, and its dynamic imports |
 | e2e | Playwright. All features in Chromium; Quick Plot and export in Firefox and WebKit. Includes graph interactions (zoom, tooltips, showing/hiding series from the legend, the view-state export dialog) |
 | figures | Exports the acceptance figures and compares them with the expected SVG/PNG. On differences, diff images are kept as artifacts |
 
@@ -501,7 +517,8 @@ Third-party notices:
 While designing this process, some places were found where spec.md did not fit. Both changes below have been applied.
 
 - **Move rendering and export to Rust.** spec.md Section 4 originally placed layout, draw data, and export on the main thread in TypeScript. That would make it impossible for `figlab run` to export figures, or to verify that the browser and the command line produce the same figures. The change:
-  - Layout, text measurement, draw data, and SVG/PDF/PNG export live in `figlab-render` (Rust) and run as wasm in the browser
+  - Layout, text measurement, draw data, and SVG/PDF/PNG export are written in Rust and run as wasm in the browser
+  - ADR 0013 split them into crates and wasm modules: `figlab-render` makes the layout and the draw data and writes SVG. PDF and PNG export live in `figlab-export-pdf` and `figlab-export-png`, and their wasm modules load the first time the user exports (Section 2)
   - Screen display (Canvas/WebGL) is drawn by TypeScript from the same draw data
   - Candidate Rust libraries (all pure Rust, and all work in wasm):
     - text shaping: rustybuzz (a Rust port of HarfBuzz)
