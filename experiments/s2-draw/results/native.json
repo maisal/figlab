@@ -1,0 +1,23 @@
+{
+  "n": 10000000, "width": 3200, "runs": 30,
+  "make_ms": 97.9,
+  "check_sorted_ms": { "median": 6.415, "p95": 6.441, "n": 10 },
+  "pyramid_build_ms": { "median": 16.142, "p95": 18.637, "n": 10 },
+  "pyramid_bytes": 30000216,
+  "cases": [
+    { "data": "test trace", "view": "full", "scan_ms": { "median": 31.915, "p95": 32.699, "n": 30 }, "pyramid_ms": { "median": 2.561, "p95": 2.847, "n": 30 }, "points": 12635 },
+    { "data": "test trace", "view": "10%", "scan_ms": { "median": 3.784, "p95": 3.812, "n": 30 }, "pyramid_ms": { "median": 0.992, "p95": 1.061, "n": 30 }, "points": 12366 },
+    { "data": "test trace", "view": "1%", "scan_ms": { "median": 0.559, "p95": 0.569, "n": 30 }, "pyramid_ms": { "median": 0.591, "p95": 0.603, "n": 30 }, "points": 11511 },
+    { "data": "test trace", "view": "0.01%", "scan_ms": { "median": 0.007, "p95": 0.007, "n": 30 }, "pyramid_ms": { "median": 0.010, "p95": 0.010, "n": 30 }, "points": 991 },
+    { "data": "NaN every 1000 points", "view": "full", "scan_ms": { "median": 34.689, "p95": 35.529, "n": 30 }, "pyramid_ms": { "median": 5.916, "p95": 7.570, "n": 30 }, "points": 37254 },
+    { "data": "NaN every 100 points", "view": "full", "scan_ms": { "median": 45.164, "p95": 46.157, "n": 30 }, "pyramid_ms": { "median": 21.245, "p95": 21.876, "n": 30 }, "points": 35185 },
+    { "data": "NaN every 10 points", "view": "full", "scan_ms": { "median": 69.212, "p95": 71.142, "n": 30 }, "pyramid_ms": { "median": 69.307, "p95": 71.909, "n": 30 }, "points": 27830 }
+  ],
+  "check_sorted_unsorted_ms": { "median": 0.000, "p95": 0.000, "n": 10 },
+  "unsorted_full_scan": [
+    { "view": "full", "ms": { "median": 35.029, "p95": 36.056, "n": 30 }, "points": 13804 },
+    { "view": "10%", "ms": { "median": 15.070, "p95": 15.419, "n": 30 }, "points": 12808 },
+    { "view": "1%", "ms": { "median": 11.794, "p95": 12.097, "n": 30 }, "points": 12793 },
+    { "view": "0.01%", "ms": { "median": 11.050, "p95": 11.218, "n": 30 }, "points": 1580 }
+  ]
+}

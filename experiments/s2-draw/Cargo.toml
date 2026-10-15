@@ -1,0 +1,28 @@
+[workspace]
+
+[package]
+name = "s2-draw"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT OR Apache-2.0"
+publish = false
+description = "M1 experiment S2: decimation of a 10-million-point trace (experiments/README.md)"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "bench"
+path = "src/bin/bench.rs"
+
+# No dependencies. The random numbers come from a small splitmix64 in src/lib.rs.
+[dependencies]
+
+# The release profile used for the wasm build and for the native bench.
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+debug = false

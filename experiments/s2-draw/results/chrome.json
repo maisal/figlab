@@ -1,0 +1,1238 @@
+{
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "devicePixelRatio": 2,
+  "plot": {
+    "cssWidth": 1600,
+    "cssHeight": 600,
+    "deviceWidth": 3200,
+    "deviceHeight": 1200
+  },
+  "data": {
+    "n": 10000000,
+    "sorted": true,
+    "simd": false,
+    "nanEvery": 0,
+    "makeMs": 366.1949999332428,
+    "checkSortedMs": 21.16000008583069,
+    "pyramidBase": 16,
+    "pyramidBuildMs": 77.60500001907349,
+    "pyramidBytes": 30000216,
+    "pyramidLevels": 21,
+    "memoryBytes": 191168512,
+    "xMin": 1000000.0010665616,
+    "xMax": 1010000.7522378644,
+    "yMin": -12.54606580836095,
+    "yMax": 12.166118728676011,
+    "fixedOrigin": 1000000.0010665616,
+    "fixedStep": 9.095630204049362e-9
+  },
+  "decimate": [
+    {
+      "view": "full",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 53.200000047683716,
+      "p95Ms": 58.27500009536743,
+      "points": 12635
+    },
+    {
+      "view": "full",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 3.31499981880188,
+      "p95Ms": 5.319999933242798,
+      "points": 12635
+    },
+    {
+      "view": "10%",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 6.1000001430511475,
+      "p95Ms": 6.3999998569488525,
+      "points": 12366
+    },
+    {
+      "view": "10%",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 1.1449999809265137,
+      "p95Ms": 1.2799999713897705,
+      "points": 12366
+    },
+    {
+      "view": "1%",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 0.875,
+      "p95Ms": 0.9600000381469727,
+      "points": 11511
+    },
+    {
+      "view": "1%",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 0.6599998474121094,
+      "p95Ms": 0.940000057220459,
+      "points": 11511
+    },
+    {
+      "view": "0.01%",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 0.015000104904174805,
+      "p95Ms": 0.020000219345092773,
+      "points": 991
+    },
+    {
+      "view": "0.01%",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 0.019999980926513672,
+      "p95Ms": 0.029999971389770508,
+      "points": 991
+    }
+  ],
+  "decimateSimd": [
+    {
+      "view": "full",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 53.21999979019165,
+      "p95Ms": 59.49000000953674,
+      "points": 12635
+    },
+    {
+      "view": "full",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 3.2199997901916504,
+      "p95Ms": 5.31499981880188,
+      "points": 12635
+    },
+    {
+      "view": "10%",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 6.065000057220459,
+      "p95Ms": 6.199999809265137,
+      "points": 12366
+    },
+    {
+      "view": "10%",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 1.1150000095367432,
+      "p95Ms": 1.3849999904632568,
+      "points": 12366
+    },
+    {
+      "view": "1%",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 0.8849999904632568,
+      "p95Ms": 0.8949999809265137,
+      "points": 11511
+    },
+    {
+      "view": "1%",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 0.6649999618530273,
+      "p95Ms": 0.690000057220459,
+      "points": 11511
+    },
+    {
+      "view": "0.01%",
+      "method": "scan",
+      "runs": 20,
+      "medianMs": 0.015000104904174805,
+      "p95Ms": 0.019999980926513672,
+      "points": 991
+    },
+    {
+      "view": "0.01%",
+      "method": "pyramid",
+      "runs": 20,
+      "medianMs": 0.015000104904174805,
+      "p95Ms": 0.019999980926513672,
+      "points": 991
+    }
+  ],
+  "decimateNanDense": [
+    {
+      "nanEvery": 1000,
+      "data": {
+        "n": 10000000,
+        "sorted": true,
+        "simd": false,
+        "nanEvery": 1000,
+        "makeMs": 358.52999997138977,
+        "checkSortedMs": 21.550000190734863,
+        "pyramidBase": 16,
+        "pyramidBuildMs": 78.92499995231628,
+        "pyramidBytes": 30000216,
+        "pyramidLevels": 21,
+        "memoryBytes": 191168512,
+        "xMin": 1000000.0010665616,
+        "xMax": 1010000.7522378644,
+        "yMin": -12.54606580836095,
+        "yMax": 12.166118728676011,
+        "fixedOrigin": 1000000.0010665616,
+        "fixedStep": 9.095630204049362e-9
+      },
+      "results": [
+        {
+          "view": "full",
+          "method": "scan",
+          "runs": 20,
+          "medianMs": 56.9300000667572,
+          "p95Ms": 64.42499995231628,
+          "points": 37254
+        },
+        {
+          "view": "full",
+          "method": "pyramid",
+          "runs": 20,
+          "medianMs": 7.299999952316284,
+          "p95Ms": 9.400000095367432,
+          "points": 37254
+        },
+        {
+          "view": "10%",
+          "method": "scan",
+          "runs": 20,
+          "medianMs": 6.170000076293945,
+          "p95Ms": 6.199999809265137,
+          "points": 16946
+        },
+        {
+          "view": "10%",
+          "method": "pyramid",
+          "runs": 20,
+          "medianMs": 1.2999999523162842,
+          "p95Ms": 1.4900000095367432,
+          "points": 16946
+        }
+      ]
+    },
+    {
+      "nanEvery": 100,
+      "data": {
+        "n": 10000000,
+        "sorted": true,
+        "simd": false,
+        "nanEvery": 100,
+        "makeMs": 153.7850000858307,
+        "checkSortedMs": 6.409999847412109,
+        "pyramidBase": 16,
+        "pyramidBuildMs": 20.894999980926514,
+        "pyramidBytes": 30000216,
+        "pyramidLevels": 21,
+        "memoryBytes": 193331200,
+        "xMin": 1000000.0010665616,
+        "xMax": 1010000.7522378644,
+        "yMin": -12.54606580836095,
+        "yMax": 12.166118728676011,
+        "fixedOrigin": 1000000.0010665616,
+        "fixedStep": 9.095630204049362e-9
+      },
+      "results": [
+        {
+          "view": "full",
+          "method": "scan",
+          "runs": 20,
+          "medianMs": 69.80000019073486,
+          "p95Ms": 71.5849997997284,
+          "points": 35185
+        },
+        {
+          "view": "full",
+          "method": "pyramid",
+          "runs": 20,
+          "medianMs": 23.47499990463257,
+          "p95Ms": 24.384999990463257,
+          "points": 35185
+        },
+        {
+          "view": "10%",
+          "method": "scan",
+          "runs": 20,
+          "medianMs": 7.269999980926514,
+          "p95Ms": 7.495000123977661,
+          "points": 35300
+        },
+        {
+          "view": "10%",
+          "method": "pyramid",
+          "runs": 20,
+          "medianMs": 2.7850000858306885,
+          "p95Ms": 2.9000000953674316,
+          "points": 35300
+        }
+      ]
+    },
+    {
+      "nanEvery": 10,
+      "data": {
+        "n": 10000000,
+        "sorted": true,
+        "simd": false,
+        "nanEvery": 10,
+        "makeMs": 154.71000003814697,
+        "checkSortedMs": 6.305000066757202,
+        "pyramidBase": 16,
+        "pyramidBuildMs": 7.940000057220459,
+        "pyramidBytes": 30000216,
+        "pyramidLevels": 21,
+        "memoryBytes": 193331200,
+        "xMin": 1000000.0010665616,
+        "xMax": 1010000.7522378644,
+        "yMin": -12.54606580836095,
+        "yMax": 12.166118728676011,
+        "fixedOrigin": 1000000.0010665616,
+        "fixedStep": 9.095630204049362e-9
+      },
+      "results": [
+        {
+          "view": "full",
+          "method": "scan",
+          "runs": 20,
+          "medianMs": 95.79500007629395,
+          "p95Ms": 102.24499988555908,
+          "points": 27830
+        },
+        {
+          "view": "full",
+          "method": "pyramid",
+          "runs": 20,
+          "medianMs": 95.75,
+          "p95Ms": 104.63499999046326,
+          "points": 27830
+        },
+        {
+          "view": "10%",
+          "method": "scan",
+          "runs": 20,
+          "medianMs": 9.929999828338623,
+          "p95Ms": 10.105000019073486,
+          "points": 27983
+        },
+        {
+          "view": "10%",
+          "method": "pyramid",
+          "runs": 20,
+          "medianMs": 10.170000076293945,
+          "p95Ms": 10.390000104904175,
+          "points": 27983
+        }
+      ]
+    }
+  ],
+  "decimateUnsorted": [
+    {
+      "view": "full",
+      "method": "unsorted full scan",
+      "runs": 20,
+      "medianMs": 51.234999895095825,
+      "p95Ms": 52.204999923706055,
+      "points": 13804
+    },
+    {
+      "view": "10%",
+      "method": "unsorted full scan",
+      "runs": 20,
+      "medianMs": 17.875,
+      "p95Ms": 18.180000066757202,
+      "points": 12808
+    },
+    {
+      "view": "1%",
+      "method": "unsorted full scan",
+      "runs": 20,
+      "medianMs": 12.134999990463257,
+      "p95Ms": 12.629999876022339,
+      "points": 12793
+    },
+    {
+      "view": "0.01%",
+      "method": "unsorted full scan",
+      "runs": 20,
+      "medianMs": 11.429999828338623,
+      "p95Ms": 11.609999895095825,
+      "points": 1580
+    }
+  ],
+  "dataUnsorted": {
+    "n": 10000000,
+    "sorted": false,
+    "simd": false,
+    "nanEvery": 0,
+    "makeMs": 150.67499995231628,
+    "checkSortedMs": 0,
+    "pyramidBase": 16,
+    "pyramidBuildMs": 0,
+    "pyramidBytes": 0,
+    "pyramidLevels": 0,
+    "memoryBytes": 193331200,
+    "xMin": 999996.1251992066,
+    "xMax": 1000007.8285829837,
+    "yMin": -12.54606580836095,
+    "yMax": 12.166118728676011,
+    "fixedOrigin": 999996.1251992066,
+    "fixedStep": 1.0644165538049267e-11
+  },
+  "draw2d": {
+    "points": 12635,
+    "pathMs": {
+      "median": 0.17499995231628418,
+      "p95": 0.19000005722045898,
+      "n": 30
+    },
+    "pathAndFlushMs": {
+      "median": 2.7850000858306885,
+      "p95": 5.805000066757202,
+      "n": 30
+    }
+  },
+  "draw2dUnsorted": {
+    "points": 13804,
+    "pathMs": {
+      "median": 0.1700000762939453,
+      "p95": 0.17500019073486328,
+      "n": 30
+    },
+    "pathAndFlushMs": {
+      "median": 13.71500015258789,
+      "p95": 14.324999809265137,
+      "n": 30
+    }
+  },
+  "interaction": [
+    {
+      "strategy": "every-frame",
+      "method": "scan",
+      "frames": 571,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.664999999999964,
+      "frameInterval": {
+        "median": 16.664999999999964,
+        "p95": 16.670000000000073,
+        "n": 571
+      },
+      "droppedFrames": 0,
+      "longestFrame": {
+        "ms": 16.670000000000073,
+        "at": 0.03333500000000004
+      },
+      "mainThreadWorkMs": {
+        "median": 0.7250001430511475,
+        "p95": 1.7000000476837158,
+        "n": 571
+      },
+      "imageAgeMs": {
+        "median": 16.664999999999928,
+        "p95": 66.65999999999883,
+        "n": 571
+      },
+      "dataAgeMs": {
+        "median": 16.664999999999928,
+        "p95": 66.65999999999883,
+        "n": 571
+      },
+      "stopLatencyMs": [
+        11.596666580836427,
+        11.381666666666206,
+        8.991666561762031,
+        9.811666495004829,
+        16.8416664663946,
+        88.38666654269036
+      ],
+      "stopLatency": {
+        "median": 11.596666580836427,
+        "p95": 88.38666654269036,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 1.9800000190734863,
+        "p95": 25.43500018119812,
+        "n": 373
+      },
+      "decimateMs": {
+        "median": 0.9700000286102295,
+        "p95": 25.240000009536743,
+        "n": 373
+      },
+      "exactDrawMs": {
+        "median": 0.15000009536743164,
+        "p95": 0.2049999237060547,
+        "n": 373
+      },
+      "layerFlushMs": {
+        "median": 0.9250001907348633,
+        "p95": 1.5250000953674316,
+        "n": 373
+      },
+      "transformDrawMs": {
+        "median": null,
+        "p95": null,
+        "n": 0
+      },
+      "lateReplies": 0,
+      "requests": 373
+    },
+    {
+      "strategy": "every-frame",
+      "method": "pyramid",
+      "frames": 571,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.665000000000873,
+      "frameInterval": {
+        "median": 16.665000000000873,
+        "p95": 16.67000000000189,
+        "n": 571
+      },
+      "droppedFrames": 0,
+      "longestFrame": {
+        "ms": 16.67000000000189,
+        "at": 4.499825
+      },
+      "mainThreadWorkMs": {
+        "median": 0.9750001430511475,
+        "p95": 1.7899999618530273,
+        "n": 571
+      },
+      "imageAgeMs": {
+        "median": 16.664999999999154,
+        "p95": 16.670000000001295,
+        "n": 571
+      },
+      "dataAgeMs": {
+        "median": 16.664999999999154,
+        "p95": 16.670000000001295,
+        "n": 571
+      },
+      "stopLatencyMs": [
+        11.36666660944502,
+        10.606666618981762,
+        14.576666647590173,
+        13.096666628516687,
+        14.876666599906457,
+        15.701666647593811
+      ],
+      "stopLatency": {
+        "median": 14.576666647590173,
+        "p95": 15.701666647593811,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 2.369999885559082,
+        "p95": 6.009999990463257,
+        "n": 396
+      },
+      "decimateMs": {
+        "median": 1.0099999904632568,
+        "p95": 5.184999942779541,
+        "n": 396
+      },
+      "exactDrawMs": {
+        "median": 0.1549999713897705,
+        "p95": 0.22499990463256836,
+        "n": 396
+      },
+      "layerFlushMs": {
+        "median": 0.9700000286102295,
+        "p95": 1.6800000667572021,
+        "n": 396
+      },
+      "transformDrawMs": {
+        "median": null,
+        "p95": null,
+        "n": 0
+      },
+      "lateReplies": 0,
+      "requests": 396
+    },
+    {
+      "strategy": "transform",
+      "method": "scan",
+      "frames": 571,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.665000000000873,
+      "frameInterval": {
+        "median": 16.665000000000873,
+        "p95": 16.67000000000189,
+        "n": 571
+      },
+      "droppedFrames": 0,
+      "longestFrame": {
+        "ms": 16.67000000000189,
+        "at": 0.2833250000000007
+      },
+      "mainThreadWorkMs": {
+        "median": 0.05499982833862305,
+        "p95": 0.1100001335144043,
+        "n": 571
+      },
+      "imageAgeMs": {
+        "median": 0,
+        "p95": 0,
+        "n": 571
+      },
+      "dataAgeMs": {
+        "median": 733.3000000000031,
+        "p95": 1449.939999999999,
+        "n": 571
+      },
+      "stopLatencyMs": [
+        28.321666618983727,
+        31.69166650454281,
+        28.601666590373497,
+        27.94166650454281,
+        38.31166662852047,
+        85.08666648546932
+      ],
+      "stopLatency": {
+        "median": 31.69166650454281,
+        "p95": 85.08666648546932,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 3.2750000953674316,
+        "p95": 57.3199999332428,
+        "n": 6
+      },
+      "decimateMs": {
+        "median": 2.559999942779541,
+        "p95": 56.769999980926514,
+        "n": 6
+      },
+      "exactDrawMs": {
+        "median": 0.1700000762939453,
+        "p95": 0.690000057220459,
+        "n": 6
+      },
+      "layerFlushMs": {
+        "median": 1.5199999809265137,
+        "p95": 1.6050000190734863,
+        "n": 6
+      },
+      "transformDrawMs": {
+        "median": 0.04500007629394531,
+        "p95": 0.09499979019165039,
+        "n": 396
+      },
+      "lateReplies": 0,
+      "requests": 6
+    },
+    {
+      "strategy": "transform",
+      "method": "pyramid",
+      "frames": 571,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.665000000000873,
+      "frameInterval": {
+        "median": 16.665000000000873,
+        "p95": 16.67000000000553,
+        "n": 571
+      },
+      "droppedFrames": 0,
+      "longestFrame": {
+        "ms": 16.67000000000553,
+        "at": 1.9832550000000047
+      },
+      "mainThreadWorkMs": {
+        "median": 0.04999995231628418,
+        "p95": 0.11500000953674316,
+        "n": 571
+      },
+      "imageAgeMs": {
+        "median": 0,
+        "p95": 0,
+        "n": 571
+      },
+      "dataAgeMs": {
+        "median": 716.6399999999995,
+        "p95": 1433.275000000001,
+        "n": 571
+      },
+      "stopLatencyMs": [
+        31.786666456860985,
+        30.946666542688035,
+        27.99666649500432,
+        28.80166656176152,
+        33.84166652361455,
+        34.53666645685735
+      ],
+      "stopLatency": {
+        "median": 31.786666456860985,
+        "p95": 34.53666645685735,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 4.25,
+        "p95": 7.765000104904175,
+        "n": 6
+      },
+      "decimateMs": {
+        "median": 3.179999828338623,
+        "p95": 7.115000009536743,
+        "n": 6
+      },
+      "exactDrawMs": {
+        "median": 0.1699998378753662,
+        "p95": 0.4199998378753662,
+        "n": 6
+      },
+      "layerFlushMs": {
+        "median": 1.5199999809265137,
+        "p95": 2.18500018119812,
+        "n": 6
+      },
+      "transformDrawMs": {
+        "median": 0.04500007629394531,
+        "p95": 0.08000016212463379,
+        "n": 396
+      },
+      "lateReplies": 0,
+      "requests": 6
+    },
+    {
+      "strategy": "hybrid",
+      "method": "scan",
+      "frames": 571,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.665000000000873,
+      "frameInterval": {
+        "median": 16.665000000000873,
+        "p95": 16.67000000000553,
+        "n": 571
+      },
+      "droppedFrames": 0,
+      "longestFrame": {
+        "ms": 16.67000000000553,
+        "at": 0.06666500000000088
+      },
+      "mainThreadWorkMs": {
+        "median": 0.7699997425079346,
+        "p95": 1.6949999332427979,
+        "n": 571
+      },
+      "imageAgeMs": {
+        "median": 0,
+        "p95": 0,
+        "n": 571
+      },
+      "dataAgeMs": {
+        "median": 16.665000000000596,
+        "p95": 66.6599999999962,
+        "n": 571
+      },
+      "stopLatencyMs": [
+        15.666666657125461,
+        10.901666552221286,
+        12.791666657125461,
+        9.626666456853854,
+        16.911666542684543,
+        101.07666650453757
+      ],
+      "stopLatency": {
+        "median": 15.666666657125461,
+        "p95": 101.07666650453757,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 2.569999933242798,
+        "p95": 24.890000104904175,
+        "n": 374
+      },
+      "decimateMs": {
+        "median": 1.0850000381469727,
+        "p95": 24.68499994277954,
+        "n": 374
+      },
+      "exactDrawMs": {
+        "median": 0.14999985694885254,
+        "p95": 0.18000006675720215,
+        "n": 374
+      },
+      "layerFlushMs": {
+        "median": 0.9200000762939453,
+        "p95": 1.5199999809265137,
+        "n": 374
+      },
+      "transformDrawMs": {
+        "median": 0.015000104904174805,
+        "p95": 0.04999995231628418,
+        "n": 433
+      },
+      "lateReplies": 37,
+      "requests": 374
+    },
+    {
+      "strategy": "hybrid",
+      "method": "pyramid",
+      "frames": 571,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.665000000000873,
+      "frameInterval": {
+        "median": 16.665000000000873,
+        "p95": 16.67000000000553,
+        "n": 571
+      },
+      "droppedFrames": 0,
+      "longestFrame": {
+        "ms": 16.67000000000553,
+        "at": 0.2166600000000035
+      },
+      "mainThreadWorkMs": {
+        "median": 0.9300000667572021,
+        "p95": 1.7699997425079346,
+        "n": 571
+      },
+      "imageAgeMs": {
+        "median": 0,
+        "p95": 0,
+        "n": 571
+      },
+      "dataAgeMs": {
+        "median": 16.665000000000596,
+        "p95": 16.67000000000529,
+        "n": 571
+      },
+      "stopLatencyMs": [
+        11.356666523613967,
+        16.326666552224196,
+        9.91166659037117,
+        9.926666456856765,
+        11.656666475930251,
+        15.361666638054885
+      ],
+      "stopLatency": {
+        "median": 11.656666475930251,
+        "p95": 16.326666552224196,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 1.7350001335144043,
+        "p95": 5.3500001430511475,
+        "n": 396
+      },
+      "decimateMs": {
+        "median": 0.8449997901916504,
+        "p95": 4.960000038146973,
+        "n": 396
+      },
+      "exactDrawMs": {
+        "median": 0.15000009536743164,
+        "p95": 0.2049999237060547,
+        "n": 396
+      },
+      "layerFlushMs": {
+        "median": 0.9549999237060547,
+        "p95": 1.880000114440918,
+        "n": 396
+      },
+      "transformDrawMs": {
+        "median": 0.015000104904174805,
+        "p95": 0.04500007629394531,
+        "n": 396
+      },
+      "lateReplies": 0,
+      "requests": 396
+    },
+    {
+      "strategy": "hybrid",
+      "method": "unsorted full scan",
+      "frames": 392,
+      "seconds": 9.5,
+      "nominalFrameMs": 16.66500000000815,
+      "frameInterval": {
+        "median": 16.66500000000815,
+        "p95": 66.65999999998894,
+        "n": 392
+      },
+      "droppedFrames": 179,
+      "longestFrame": {
+        "ms": 99.9950000000099,
+        "at": 2.1499100000000033
+      },
+      "mainThreadWorkMs": {
+        "median": 3.874999761581421,
+        "p95": 57.72000002861023,
+        "n": 392
+      },
+      "imageAgeMs": {
+        "median": 0,
+        "p95": 0,
+        "n": 392
+      },
+      "dataAgeMs": {
+        "median": 16.66500000000859,
+        "p95": 116.66499999999358,
+        "n": 392
+      },
+      "stopLatencyMs": [
+        196.56166654269327,
+        199.60666661898722,
+        24.6716664377891,
+        24.3516665045463,
+        212.44666653315653,
+        110.51166659037699
+      ],
+      "stopLatency": {
+        "median": 196.56166654269327,
+        "p95": 212.44666653315653,
+        "n": 6
+      },
+      "roundTripMs": {
+        "median": 25.15499997138977,
+        "p95": 59.27499985694885,
+        "n": 217
+      },
+      "decimateMs": {
+        "median": 11.525000095367432,
+        "p95": 38.38499999046326,
+        "n": 217
+      },
+      "exactDrawMs": {
+        "median": 0.12000012397766113,
+        "p95": 0.17499995231628418,
+        "n": 217
+      },
+      "layerFlushMs": {
+        "median": 19.289999961853027,
+        "p95": 58.50500011444092,
+        "n": 217
+      },
+      "transformDrawMs": {
+        "median": 0.009999990463256836,
+        "p95": 0.019999980926513672,
+        "n": 372
+      },
+      "lateReplies": 130,
+      "requests": 217
+    }
+  ],
+  "gl": {
+    "renderer": {
+      "vendor": "Google Inc. (Apple)",
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Max, Unspecified Version)"
+    },
+    "points": 10000000,
+    "upload": {
+      "bytes": 120000000,
+      "chunks": 10,
+      "wallMs": 69.70499992370605,
+      "buildMs": 44.1850004196167,
+      "copyMs": 11.089999914169312,
+      "bufferSubDataMs": 12.174999713897705,
+      "wasmMemoryAfter": 203685888
+    },
+    "wasmMemoryBefore": 191168512,
+    "firstDrawSyncMs": 29.87000012397766,
+    "drawSyncByView": [
+      {
+        "view": "full",
+        "ms": {
+          "median": 4.860000133514404,
+          "p95": 5.164999961853027,
+          "n": 30
+        }
+      },
+      {
+        "view": "10%",
+        "ms": {
+          "median": 1.9900000095367432,
+          "p95": 2.6700000762939453,
+          "n": 30
+        }
+      },
+      {
+        "view": "1%",
+        "ms": {
+          "median": 1.6600000858306885,
+          "p95": 2.380000114440918,
+          "n": 30
+        }
+      },
+      {
+        "view": "0.01%",
+        "ms": {
+          "median": 1.6599998474121094,
+          "p95": 1.9800000190734863,
+          "n": 30
+        }
+      }
+    ],
+    "frames": 551,
+    "nominalFrameMs": 16.665000000000873,
+    "frameInterval": {
+      "median": 16.665000000000873,
+      "p95": 16.67000000000553,
+      "n": 551
+    },
+    "droppedFrames": 20,
+    "longestFrame": {
+      "ms": 349.9850000000006,
+      "at": 0.3499850000000006
+    },
+    "mainThreadWorkMs": {
+      "median": 0.04499983787536621,
+      "p95": 0.07999992370605469,
+      "n": 551
+    }
+  },
+  "precision": [
+    {
+      "mode": "fixed",
+      "view": "start, 64 points",
+      "points": 67,
+      "maxErrorPx": 0.0003805240430665435,
+      "meanErrorPx": 0.00013835174319726335,
+      "wrongColumns": 0,
+      "rasterMissing": 0,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "fixed",
+      "view": "middle, 64 points",
+      "points": 69,
+      "maxErrorPx": 0.0004552371685804246,
+      "meanErrorPx": 0.00019269804948667,
+      "wrongColumns": 0,
+      "rasterMissing": 0,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "fixed",
+      "view": "end, 64 points",
+      "points": 69,
+      "maxErrorPx": 0.0004258091141764453,
+      "meanErrorPx": 0.00016869060378157258,
+      "wrongColumns": 0,
+      "rasterMissing": 0,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "fixed",
+      "view": "middle, 8 points",
+      "points": 10,
+      "maxErrorPx": 0.00269304944868054,
+      "meanErrorPx": 0.001145728244206623,
+      "wrongColumns": 0,
+      "rasterMissing": 0,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "fixed",
+      "view": "end, 8 points",
+      "points": 10,
+      "maxErrorPx": 0.003156686270813225,
+      "meanErrorPx": 0.0017275694255943109,
+      "wrongColumns": 0,
+      "rasterMissing": 0,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "fixed",
+      "view": "end, 1% of the span",
+      "points": 99967,
+      "maxErrorPx": 0.00025306378802270046,
+      "meanErrorPx": 0.0000506638605251021,
+      "wrongColumns": 0,
+      "rasterMissing": null,
+      "rasterExtra": null
+    },
+    {
+      "mode": "naive",
+      "view": "start, 64 points",
+      "points": 67,
+      "maxErrorPx": 3058.9465143185057,
+      "meanErrorPx": 1454.7639370665274,
+      "wrongColumns": 67,
+      "rasterMissing": 62,
+      "rasterExtra": 1
+    },
+    {
+      "mode": "naive",
+      "view": "middle, 64 points",
+      "points": 69,
+      "maxErrorPx": 2998.996288747681,
+      "meanErrorPx": 1359.3355955363593,
+      "wrongColumns": 68,
+      "rasterMissing": 65,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "naive",
+      "view": "end, 64 points",
+      "points": 69,
+      "maxErrorPx": 3034.0106854388937,
+      "meanErrorPx": 1407.7552596185162,
+      "wrongColumns": 68,
+      "rasterMissing": 59,
+      "rasterExtra": 1
+    },
+    {
+      "mode": "naive",
+      "view": "middle, 8 points",
+      "points": 10,
+      "maxErrorPx": 3386.867133517137,
+      "meanErrorPx": 1660.8027856556728,
+      "wrongColumns": 10,
+      "rasterMissing": 8,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "naive",
+      "view": "end, 8 points",
+      "points": 10,
+      "maxErrorPx": 3466.4526725972514,
+      "meanErrorPx": 1671.6792377511847,
+      "wrongColumns": 10,
+      "rasterMissing": 8,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "naive",
+      "view": "end, 1% of the span",
+      "points": 99967,
+      "maxErrorPx": 1.1808124887520748,
+      "meanErrorPx": 0.5162709655197704,
+      "wrongColumns": 53237,
+      "rasterMissing": null,
+      "rasterExtra": null
+    },
+    {
+      "mode": "offset",
+      "view": "start, 64 points",
+      "points": 67,
+      "maxErrorPx": 0.003960010745231557,
+      "meanErrorPx": 0.0013505332911127445,
+      "wrongColumns": 0,
+      "rasterMissing": 0,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "offset",
+      "view": "middle, 64 points",
+      "points": 69,
+      "maxErrorPx": 22.35017106178657,
+      "meanErrorPx": 9.160066741036493,
+      "wrongColumns": 64,
+      "rasterMissing": 62,
+      "rasterExtra": 63
+    },
+    {
+      "mode": "offset",
+      "view": "end, 64 points",
+      "points": 69,
+      "maxErrorPx": 35.78176130319048,
+      "meanErrorPx": 13.811822855301621,
+      "wrongColumns": 68,
+      "rasterMissing": 59,
+      "rasterExtra": 61
+    },
+    {
+      "mode": "offset",
+      "view": "middle, 8 points",
+      "points": 10,
+      "maxErrorPx": 135.8297712034655,
+      "meanErrorPx": 70.78951942832744,
+      "wrongColumns": 10,
+      "rasterMissing": 8,
+      "rasterExtra": 7
+    },
+    {
+      "mode": "offset",
+      "view": "end, 8 points",
+      "points": 10,
+      "maxErrorPx": 252.65588708889095,
+      "meanErrorPx": 136.53226040633965,
+      "wrongColumns": 10,
+      "rasterMissing": 8,
+      "rasterExtra": 8
+    },
+    {
+      "mode": "offset",
+      "view": "end, 1% of the span",
+      "points": 99967,
+      "maxErrorPx": 0.019419153962644486,
+      "meanErrorPx": 0.008247875003667844,
+      "wrongColumns": 675,
+      "rasterMissing": null,
+      "rasterExtra": null
+    },
+    {
+      "mode": "hilo",
+      "view": "start, 64 points",
+      "points": 67,
+      "maxErrorPx": 3058.9465143185057,
+      "meanErrorPx": 1454.7639370665274,
+      "wrongColumns": 67,
+      "rasterMissing": 62,
+      "rasterExtra": 1
+    },
+    {
+      "mode": "hilo",
+      "view": "middle, 64 points",
+      "points": 69,
+      "maxErrorPx": 2998.996288747681,
+      "meanErrorPx": 1359.3355955363593,
+      "wrongColumns": 68,
+      "rasterMissing": 65,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "hilo",
+      "view": "end, 64 points",
+      "points": 69,
+      "maxErrorPx": 3034.0106854388937,
+      "meanErrorPx": 1407.7552596185162,
+      "wrongColumns": 68,
+      "rasterMissing": 59,
+      "rasterExtra": 1
+    },
+    {
+      "mode": "hilo",
+      "view": "middle, 8 points",
+      "points": 10,
+      "maxErrorPx": 3386.867133517137,
+      "meanErrorPx": 1660.8027856556728,
+      "wrongColumns": 10,
+      "rasterMissing": 8,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "hilo",
+      "view": "end, 8 points",
+      "points": 10,
+      "maxErrorPx": 3466.4526725972514,
+      "meanErrorPx": 1671.6792377511847,
+      "wrongColumns": 10,
+      "rasterMissing": 8,
+      "rasterExtra": 0
+    },
+    {
+      "mode": "hilo",
+      "view": "end, 1% of the span",
+      "points": 99967,
+      "maxErrorPx": 1.1808124887520748,
+      "meanErrorPx": 0.5162709655197704,
+      "wrongColumns": 53237,
+      "rasterMissing": null,
+      "rasterExtra": null
+    }
+  ],
+  "hiloLo": {
+    "view": "middle, 64 points",
+    "maxLoCpu": 0.031014426960609853,
+    "maxLoGpu": 0.031014425177763705
+  },
+  "browser": "chrome",
+  "browserVersion": "155.0.8059.79",
+  "playwright": "1.64.0",
+  "headless": true,
+  "date": "2026-10-15T00:37:00.921Z",
+  "timerResolutionUs": 10
+}

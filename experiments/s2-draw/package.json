@@ -1,0 +1,22 @@
+{
+  "name": "s2-draw",
+  "version": "0.0.0",
+  "private": true,
+  "description": "M1 experiment S2: decimate, pan, and zoom 10 million points",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "build:wasm": "node scripts/build-wasm.mjs",
+    "build": "pnpm run build:wasm && vite build",
+    "dev": "vite",
+    "preview": "vite preview --port 4273 --strictPort",
+    "measure": "node scripts/measure.mjs",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "playwright": "1.64.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.4"
+  }
+}
