@@ -74,10 +74,10 @@ About Decision 5: WebAssembly (32-bit) can use at most 4 GB of memory, and less 
 flowchart LR
   subgraph Main["Main thread"]
     UI["UI (TypeScript)<br/>data browser, tables, graphs, command line"]
-    Ops["Graph operations"]
     Model["Graph model (JSON)"]
     View["View state<br/>(zoom range, temporarily hidden series)"]
     subgraph Render["Render module (Rust → wasm)"]
+      Ops["Graph operations<br/>(check, apply, inverse)"]
       Layout["Layout<br/>(pt units, text placement)"]
       Scene["Draw data<br/>(list of lines, text, etc. and hit-test data)"]
       SVG["SVG export"]
@@ -127,6 +127,10 @@ flowchart LR
   - GUI operations can be recorded in the history as matching commands
   - Undo/Redo can be built from inverse operations
   - Graphs can be edited while calculations run
+- **Graph operations are applied by Rust code on the main thread** (ADR 0016).
+  - The crate `figlab-graph` defines the graph model, the graph operations, their checks, and their inverses. The render module links it, and `figlab run` links the same crate, so the browser and the command line change graphs the same way
+  - The compute worker does not keep graphs. A graph command (such as `plot` or `style`) becomes a graph operation, which the worker sends to the main thread. The worker waits for the result before it runs the next statement, so an error (for example an unknown trace, E3001) belongs to the command that caused it
+  - A GUI operation is applied at once on the main thread. The compute worker then formats it as a command and records it in the history (6.6)
 - Operations that change data (import, calculation, table edits) are all executed as commands in the compute worker. When done from the GUI, the generated command is recorded in the history.
 - **Drawing is split between the Rust render module and TypeScript** (9.1).
   - The Rust render module (wasm) decides what to draw and where: layout, text placement, and building the draw data. It also writes SVG
