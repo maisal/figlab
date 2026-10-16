@@ -42,6 +42,7 @@ figlab/
 │   ├── figlab-core/       arrays, coordinates, arithmetic, fitting (no I/O)
 │   ├── figlab-lang/       lexing, parsing, checking, canonical formatting (reads spec/commands.json at build time)
 │   ├── figlab-io/         CSV detection and import, .npy, project storage format
+│   ├── figlab-graph/      graph model and graph operations: check, apply, inverse (ADR 0016)
 │   ├── figlab-draw/       draw data types, shared by render and export (no font libraries)
 │   ├── figlab-render/     layout, text measurement, building the draw data, SVG export (spec.md 9.1)
 │   ├── figlab-export-pdf/ PDF export from the draw data and the font bytes
@@ -78,8 +79,8 @@ figlab/
 
   | wasm module | Loaded | Boundary package | Links |
   |---|---|---|---|
-  | compute | at startup, in the compute worker | `figlab-wasm-compute` | `figlab-core`, `figlab-io`, `figlab-lang` |
-  | render | at startup, on the main thread | `figlab-wasm-render` | `figlab-render`, `figlab-draw` |
+  | compute | at startup, in the compute worker | `figlab-wasm-compute` | `figlab-core`, `figlab-io`, `figlab-lang`, `figlab-graph` (the operation types it sends) |
+  | render | at startup, on the main thread | `figlab-wasm-render` | `figlab-render`, `figlab-graph`, `figlab-draw` |
   | language service | at startup, in the language service worker | `figlab-wasm-lang` | `figlab-lang` |
   | export-pdf | the first time the user exports PDF | `figlab-wasm-export-pdf` | `figlab-export-pdf`, `figlab-draw` |
   | export-png | the first time the user exports PNG | `figlab-wasm-export-png` | `figlab-export-png`, `figlab-draw` |

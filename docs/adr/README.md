@@ -30,6 +30,7 @@ The repository is public, so anyone can later see why things are the way they ar
 | [0013](0013-wasm-size-and-startup.md) | Three wasm modules at startup, export modules loaded on first use, and size budgets for the startup download | Accepted |
 | [0014](0014-ui-framework.md) | The web UI uses Preact with signals | Accepted |
 | [0015](0015-fitting-library.md) | Fitting uses a fork of the `levenberg-marquardt` crate with cmpfit-style bounds | Accepted |
+| [0016](0016-graph-operations-in-rust.md) | Graph operations are applied in Rust (`figlab-graph`), on the main thread | Accepted |
 
 ## Template
 

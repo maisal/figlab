@@ -53,7 +53,7 @@ The code of the experiments is in `experiments/`. It is not part of the product 
 - core: 1D arrays with coordinates and units, folders
 - io: simple CSV (UTF-8, comma-separated, one header row)
 - lang: lexer and parser for the whole grammar. Only `load`, `plot`, and `export` run
-- Graph model and graph operations (see D1)
+- Graph model and graph operations in `figlab-graph` ([ADR 0016](adr/0016-graph-operations-in-rust.md)), with a JSON Schema for the graph model
 - render: xy lines, linear axes, ticks, labels, and SVG export. Labels need the first part of the text path (ADR 0010):
   - Arimo Regular, bundled without hinting (ADR 0013)
   - shaping with harfrust and skrifa, both with default features off and `libm` on
@@ -120,7 +120,7 @@ M0 → M1 → M2 → M3 (v0.1)
 
 | # | Question | Proposal | When |
 |---|---|---|---|
-| D1 | Where graph operations are applied | In Rust, so that the browser and `figlab run` share them. The graph model (JSON) stays on the main thread. Update spec.md Section 4 when this is decided | Before M2 |
+| D1 | Where graph operations are applied | Decided: in Rust (`figlab-graph`), applied on the main thread; the compute worker sends graph commands there and waits for the result ([ADR 0016](adr/0016-graph-operations-in-rust.md)) | Before M2 |
 | D2 | UI framework | Decided by S5: Preact with `@preact/signals` ([ADR 0014](adr/0014-ui-framework.md)) | M1 |
 | D3 | PDF library and fallback font | Decided by S1: pdf-writer with subsetter, and Noto Sans Math. Text shaping uses harfrust with skrifa ([ADR 0010](adr/0010-text-shaping-pdf-and-fallback-font.md)) | M1 |
 | D4 | Fitting library | Decided by S6: a fork of the `levenberg-marquardt` crate with cmpfit-style bounds ([ADR 0015](adr/0015-fitting-library.md)) | M1 |
