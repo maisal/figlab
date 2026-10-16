@@ -54,10 +54,16 @@ The code of the experiments is in `experiments/`. It is not part of the product 
 - io: simple CSV (UTF-8, comma-separated, one header row)
 - lang: lexer and parser for the whole grammar. Only `load`, `plot`, and `export` run
 - Graph model and graph operations (see D1)
-- render: xy lines, linear axes, ticks, labels, and SVG export
+- render: xy lines, linear axes, ticks, labels, and SVG export. Labels need the first part of the text path (ADR 0010):
+  - Arimo Regular, bundled without hinting (ADR 0013)
+  - shaping with harfrust and skrifa, both with default features off and `libm` on
+  - glyph runs in the draw data, and `<text>` in SVG
+  - the fallback font and the text notation (spec.md 8.4) come in M5
 - web: drop a file, draw it, and save it as SVG
+  - set up Preact with `@preact/signals` (ADR 0014): `@preact/preset-vite`, the hooks lint rules `rules-of-hooks` and `exhaustive-deps`, and lint and format checks for `web/**/*.tsx`
+  - draw the text on Canvas from the glyph outlines, with one cached `Path2D` per glyph (ADR 0010)
 - cli: `figlab run` writes the same SVG
-- CI: the first determinism test and the first figure comparison test. Publish the web app on Pages
+- CI: the first determinism test and the first figure comparison test. Publish the web app on Pages (the owner turns on Pages in the repository settings)
 - wasm build: the compute and render modules, each in its own boundary package (development.md Section 2). Use the build settings of [ADR 0013](adr/0013-wasm-size-and-startup.md): a wasm-only Cargo profile (the native `figlab` command keeps opt-level 3), `wasm-bindgen --target web`, and `wasm-opt -Oz`. Pin wasm-bindgen-cli and binaryen in `mise.toml`
 - Measure the speed of fitting and decimation in the compute module with opt-level "z" and with 3, and fix its level (ADR 0013)
 
